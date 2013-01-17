@@ -8,25 +8,35 @@
 
 #import "PhotographyViewController.h"
 
+
 @interface PhotographyViewController ()
 
 @end
 
 @implementation PhotographyViewController
 
-- (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
-{
-    self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
-    if (self) {
-        // Custom initialization
-    }
-    return self;
-}
+
 
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-	// Do any additional setup after loading the view.
+    // Do any additional setup after loading the view from its nib.
+    
+    //NSString *imageLink = [[machine getPictureElementsAtIndex:self.index] valueForKey:@"linkImg"];
+    //UIImage *image = [UIImage imageWithData:[NSData dataWithContentsOfURL:[NSURL URLWithString: imageLink]]];
+    
+    NSString *appendLink = @"http://phq.cdnl.me/api/fr/pictures/";
+    appendLink = [appendLink stringByAppendingString:[NSString stringWithFormat:@"%d", self.idPicture]];
+    appendLink = [appendLink stringByAppendingString:@".json"];
+    
+    NSInteger idPicture = [[[appdelegate getElementsFromJSON:appendLink] valueForKeyPath:@"picture.id"] integerValue];
+    NSString *linkImg = [[appdelegate getElementsFromJSON:appendLink] valueForKeyPath:@"picture.link_iphone"];
+    
+    ImageZoomable *picture = [[ImageZoomable alloc] initWithImageView:image];
+    
+    [self.view addSubview:picture];
+    
+    NSLog(@"%i", self.idPicture);
 }
 
 - (void)didReceiveMemoryWarning

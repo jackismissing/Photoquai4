@@ -12,7 +12,7 @@
 
 @interface ViewController : UIViewController <UIScrollViewDelegate>
 {
-    id delegate;
+    //  id delegate;
     UIImageView *imageWall;
     ImageWall *imageWallElement;
     UIScrollView *myScrollView;
@@ -27,7 +27,7 @@
 
 @property(nonatomic, strong) NavigationViewController *navTest;
 
-@property (nonatomic, strong) id delegate;
+//@property (nonatomic, strong) id delegate;
 
 //-(void)changeViewToAgenda;
 - (void)showMenu;

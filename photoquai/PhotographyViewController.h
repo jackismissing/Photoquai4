@@ -7,7 +7,13 @@
 //
 
 #import "ViewController.h"
+#import "DescriptionImageView.h"
+#import "ImageZoomable.h"
 
-@interface PhotographyViewController : ViewController
+@interface PhotographyViewController : UIViewController{
+    DescriptionImageView *descriptionImage;
+}
+
+@property (nonatomic, assign) int idPicture;
 
 @end
