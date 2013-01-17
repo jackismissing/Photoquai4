@@ -10,7 +10,7 @@
 #import "NavigationViewController.h"
 #import "ImageWall.h"
 
-@interface ViewController : UIViewController <UIScrollViewDelegate>//<NavigationViewControllerDelegate>
+@interface ViewController : UIViewController <UIScrollViewDelegate>
 {
     id delegate;
     UIImageView *imageWall;

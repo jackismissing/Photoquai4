@@ -31,7 +31,7 @@
     thumbsContainer.userInteractionEnabled = YES;
     
     //penser à recalculer la hauteur quand il y aura la navigation bar
-    myScrollView = [[UIScrollView alloc] initWithFrame:CGRectMake(0, 20, 320, 440)];
+    myScrollView = [[UIScrollView alloc] initWithFrame:CGRectMake(0, 0, 320, 440)];
     myScrollView.showsHorizontalScrollIndicator = NO;
     myScrollView.showsVerticalScrollIndicator = NO;
     myScrollView.delegate = self;
@@ -209,6 +209,12 @@
     //[myScrollView setContentOffset:offset animated:NO];
 }
 
+//Gère le pinch to zoom gesture
+- (UIView *)viewForZoomingInScrollView:(UIScrollView *)scrollView {
+    
+    return thumbsContainer;
+}
+
 - (void)didReceiveMemoryWarning
 {
     [super didReceiveMemoryWarning];
@@ -232,7 +238,42 @@
     
     
    // [self presentModalViewController:mainMenu animated:YES];
+}
+
+- (void)accessPicture:(UIGestureRecognizer *)gesture{
     
+    UIView *index = gesture.view;
+    NSLog(@"%i", index.tag);
+}
+
+- (void)scrollViewWillBeginDragging:(UIScrollView *)scrollView{
+    
+    for (UIImageView *img in thumbsContainer.subviews){
+        if(img.frame.origin.y < myScrollView.contentOffset.y || img.frame.origin.y > (myScrollView.contentOffset.y + myScrollView.frame.size.height) || img.frame.origin.x < myScrollView.contentOffset.x || img.frame.origin.x > (myScrollView.contentOffset.x + myScrollView.frame.size.width))
+        {
+            //[img removeFromSuperview];
+            //img.hidden = YES;
+            //img.opaque = NO;
+            
+            img.alpha = .3;
+        }
+    }
+}
+
+- (void)scrollViewDidEndDragging:(UIScrollView *)scrollView willDecelerate:(BOOL)decelerate{
+    for (UIImageView *img in thumbsContainer.subviews){
+        if(img.frame.origin.y > myScrollView.contentOffset.y || img.frame.origin.y < (myScrollView.contentOffset.y + myScrollView.frame.size.height) || img.frame.origin.x > myScrollView.contentOffset.x || img.frame.origin.x < (myScrollView.contentOffset.x + myScrollView.frame.size.width))
+        {
+            
+            //[myScrollView bringSubviewToFront:img];
+            img.hidden = NO;
+            img.opaque = YES;
+            [UIImageView beginAnimations:@"fadeIn" context:NULL];
+            [UIImageView setAnimationDuration:0.5];
+            img.alpha = 1.0;
+            [UIImageView commitAnimations];
+        }
+    }
 }
 
 /*-(void)changeViewToAgenda{
