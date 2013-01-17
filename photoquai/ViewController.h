@@ -7,7 +7,10 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "NavigationViewController.h"
 
 @interface ViewController : UIViewController
+
+- (void)showMenu;
 
 @end

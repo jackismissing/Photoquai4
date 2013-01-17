@@ -34,6 +34,11 @@
 		1ACACF3716A804050060DA49 /* Parisine-BoldItalic.otf in Resources */ = {isa = PBXBuildFile; fileRef = 1ACACF3316A804050060DA49 /* Parisine-BoldItalic.otf */; };
 		1ACACF3816A804050060DA49 /* Parisine-Italic.otf in Resources */ = {isa = PBXBuildFile; fileRef = 1ACACF3416A804050060DA49 /* Parisine-Italic.otf */; };
 		1ACACF3916A804050060DA49 /* Parisine-Regular.otf in Resources */ = {isa = PBXBuildFile; fileRef = 1ACACF3516A804050060DA49 /* Parisine-Regular.otf */; };
+		375F932216A8216D00EC3523 /* rotaryWheel.h in Sources */ = {isa = PBXBuildFile; fileRef = 37FA709916A81FAA0039E9C3 /* rotaryWheel.h */; };
+		375F932516A8218500EC3523 /* rotaryWheel.m in Sources */ = {isa = PBXBuildFile; fileRef = 375F932416A8218500EC3523 /* rotaryWheel.m */; };
+		37FA709D16A81FAA0039E9C3 /* NavigationViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 37FA709716A81FAA0039E9C3 /* NavigationViewController.m */; };
+		37FA709E16A81FAA0039E9C3 /* segment.png in Resources */ = {isa = PBXBuildFile; fileRef = 37FA709A16A81FAA0039E9C3 /* segment.png */; };
+		37FA709F16A81FAA0039E9C3 /* wheelSector.m in Sources */ = {isa = PBXBuildFile; fileRef = 37FA709C16A81FAA0039E9C3 /* wheelSector.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -81,6 +86,14 @@
 		1ACACF3316A804050060DA49 /* Parisine-BoldItalic.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Parisine-BoldItalic.otf"; sourceTree = "<group>"; };
 		1ACACF3416A804050060DA49 /* Parisine-Italic.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Parisine-Italic.otf"; sourceTree = "<group>"; };
 		1ACACF3516A804050060DA49 /* Parisine-Regular.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Parisine-Regular.otf"; sourceTree = "<group>"; };
+		375F932416A8218500EC3523 /* rotaryWheel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = rotaryWheel.m; sourceTree = "<group>"; };
+		37FA709616A81FAA0039E9C3 /* NavigationViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NavigationViewController.h; sourceTree = "<group>"; };
+		37FA709716A81FAA0039E9C3 /* NavigationViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NavigationViewController.m; sourceTree = "<group>"; };
+		37FA709816A81FAA0039E9C3 /* NavigationViewProtocol.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NavigationViewProtocol.h; sourceTree = "<group>"; };
+		37FA709916A81FAA0039E9C3 /* rotaryWheel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = rotaryWheel.h; sourceTree = "<group>"; };
+		37FA709A16A81FAA0039E9C3 /* segment.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = segment.png; sourceTree = "<group>"; };
+		37FA709B16A81FAA0039E9C3 /* wheelSector.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = wheelSector.h; sourceTree = "<group>"; };
+		37FA709C16A81FAA0039E9C3 /* wheelSector.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = wheelSector.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -129,6 +142,7 @@
 		1ABEACAB16A5C34E0034D316 /* photoquai */ = {
 			isa = PBXGroup;
 			children = (
+				37FA709416A81F5C0039E9C3 /* NavigationViewController */,
 				1ABEACB416A5C34E0034D316 /* AppDelegate.h */,
 				1ABEACB516A5C34E0034D316 /* AppDelegate.m */,
 				1ABEACBD16A5C34E0034D316 /* ViewController.h */,
@@ -248,8 +262,31 @@
 		1ACACF3C16A804210060DA49 /* Images */ = {
 			isa = PBXGroup;
 			children = (
+				37FA70A016A81FB50039E9C3 /* MainMenu */,
 			);
 			name = Images;
+			sourceTree = "<group>";
+		};
+		37FA709416A81F5C0039E9C3 /* NavigationViewController */ = {
+			isa = PBXGroup;
+			children = (
+				375F932416A8218500EC3523 /* rotaryWheel.m */,
+				37FA709616A81FAA0039E9C3 /* NavigationViewController.h */,
+				37FA709716A81FAA0039E9C3 /* NavigationViewController.m */,
+				37FA709816A81FAA0039E9C3 /* NavigationViewProtocol.h */,
+				37FA709916A81FAA0039E9C3 /* rotaryWheel.h */,
+				37FA709A16A81FAA0039E9C3 /* segment.png */,
+				37FA709B16A81FAA0039E9C3 /* wheelSector.h */,
+				37FA709C16A81FAA0039E9C3 /* wheelSector.m */,
+			);
+			name = NavigationViewController;
+			sourceTree = "<group>";
+		};
+		37FA70A016A81FB50039E9C3 /* MainMenu */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = MainMenu;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -312,6 +349,7 @@
 				1ACACF3716A804050060DA49 /* Parisine-BoldItalic.otf in Resources */,
 				1ACACF3816A804050060DA49 /* Parisine-Italic.otf in Resources */,
 				1ACACF3916A804050060DA49 /* Parisine-Regular.otf in Resources */,
+				37FA709E16A81FAA0039E9C3 /* segment.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -322,6 +360,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				375F932216A8216D00EC3523 /* rotaryWheel.h in Sources */,
 				1ABEACB216A5C34E0034D316 /* main.m in Sources */,
 				1ABEACB616A5C34E0034D316 /* AppDelegate.m in Sources */,
 				1ABEACBF16A5C34E0034D316 /* ViewController.m in Sources */,
@@ -336,6 +375,9 @@
 				1ABEACED16A5CA500034D316 /* UIImageView+AFNetworking.m in Sources */,
 				1ACACF2716A7F5AB0060DA49 /* UIColor+RVB255.m in Sources */,
 				1ACACF2E16A7FC110060DA49 /* Reachability.m in Sources */,
+				37FA709D16A81FAA0039E9C3 /* NavigationViewController.m in Sources */,
+				37FA709F16A81FAA0039E9C3 /* wheelSector.m in Sources */,
+				375F932516A8218500EC3523 /* rotaryWheel.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
