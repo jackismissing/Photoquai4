@@ -24,6 +24,7 @@
     navigationController.navigationBarHidden = NO;
     
     self.window.rootViewController = navigationController;
+    
     [self.window makeKeyAndVisible];
     return YES;
 }

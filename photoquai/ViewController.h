@@ -9,8 +9,17 @@
 #import <UIKit/UIKit.h>
 #import "NavigationViewController.h"
 
-@interface ViewController : UIViewController
+@interface ViewController : UIViewController//<NavigationViewControllerDelegate>
+{
+    id delegate;
+}
 
+
+@property(nonatomic, strong) NavigationViewController *navTest;
+
+@property (nonatomic, strong) id delegate;
+
+//-(void)changeViewToAgenda;
 - (void)showMenu;
 
 @end
