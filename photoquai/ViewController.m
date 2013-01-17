@@ -12,6 +12,8 @@
 #import "AppDelegate.h"
 #import "Reachability.h"
 #import "UIColor+RVB255.h"
+#import "PhotographyViewController.h"
+
 
 @interface ViewController ()
 
@@ -19,17 +21,20 @@
 
 @implementation ViewController
 
-@synthesize delegate;
 
 - (void)viewDidLoad
 {
     [super viewDidLoad];
 	// Do any additional setup after loading the view, typically from a nib.
     
-    UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, 125, 123)];
-    label.text = @"Kayne West, test, test";
-    label.font = [UIFont fontWithName:@"Parisine-Bold" size:14.0f];
-    [self.view addSubview:label];
+
+    
+    
+    //Réinstancie la navigation bar, une fois le menu disparu
+    [self.navigationController setNavigationBarHidden:NO animated:NO];
+    self.navigationItem.hidesBackButton = YES;
+    
+    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemBookmarks target:self action:@selector(showMenu)];
 
     
     thumbsContainer = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 320, 480)];
@@ -44,6 +49,7 @@
     myScrollView.minimumZoomScale = 0.5;
     myScrollView.maximumZoomScale = 5.0;
     [self.view addSubview:myScrollView];
+
     
     Reachability *reachabilityInfo;
     [[NSNotificationCenter defaultCenter] addObserver:self
@@ -68,6 +74,7 @@
     self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemBookmarks target:self action:@selector(showMenu)];
 
    
+
 }
 
 //Détecte la connexion d'un utilisateur
@@ -149,25 +156,6 @@
     imageWallElement.frame = CGRectMake(((width + 5) * xPosition + 5), yPosition, width, height);
     imageWallElement.clipsToBounds = YES;
     imageWallElement.tag = idPicture;
-    //imageWallElement.layer.borderColor = (__bridge CGColorRef)([UIColor purpleColor]);
-    //imageWallElement.layer.borderWidth = 3.0f;
-    
-    //    CALayer *bottomBorder = [CALayer layer];
-    //
-    //    bottomBorder.frame = CGRectMake(0.0f, imageWallElement.frame.size.height - 1, 50, 50.0f);
-    //
-    //    bottomBorder.backgroundColor = (__bridge CGColorRef)([UIImage imageNamed:@"coeur"]);
-    //[UIColor colorWithRed:.9 green:.1 blue:.9 alpha:1.0f].CGColor;
-    
-//    UIImage*    backgroundImage = [UIImage imageNamed:@"coeur"];
-//    CALayer*    aLayer = [CALayer layer];
-//    CGFloat nativeWidth = CGImageGetWidth(backgroundImage.CGImage);
-//    CGFloat nativeHeight = CGImageGetHeight(backgroundImage.CGImage);
-//    CGRect      startFrame = CGRectMake(width - nativeWidth, 0.0, nativeWidth, nativeHeight);
-//    aLayer.contents = (id)backgroundImage.CGImage;
-//    aLayer.frame = startFrame;
-    
-    //[imageWallElement.layer addSublayer:aLayer];
     
     [heights addObject: [NSNumber numberWithInt: imageWallElement.frame.size.height]];
     [ys addObject: [NSNumber numberWithInt: imageWallElement.frame.origin.y]];
@@ -181,13 +169,6 @@
     
     UITapGestureRecognizer *accessPicture = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(accessPicture:)];
     [imageWallElement addGestureRecognizer:accessPicture];
-    
-    UILongPressGestureRecognizer *longPressRecognizer = [[UILongPressGestureRecognizer alloc] initWithTarget:self action:@selector(handleSwipeAndHoldFrom:)];
-    longPressRecognizer.delegate = self;
-    longPressRecognizer.cancelsTouchesInView = NO;
-    [longPressRecognizer setMinimumPressDuration:0.5];
-    //[longPressRecognizer setEnabled:NO];
-    [imageWallElement addGestureRecognizer:longPressRecognizer];
     
     [thumbsContainer addSubview:imageWallElement];
     i++;
@@ -228,7 +209,6 @@
     CGPoint offset;
     offset.x = randNumX;
     offset.y = randNumY;
-    //[myScrollView setContentOffset:offset animated:NO];
 }
 
 //Gère le pinch to zoom gesture
@@ -267,7 +247,13 @@
 - (void)accessPicture:(UIGestureRecognizer *)gesture{
     
     UIView *index = gesture.view;
-    NSLog(@"%i", index.tag);
+
+    
+    PhotographyViewController *imageViewController = [[PhotographyViewController alloc] initWithNibName:@"PhotographyViewController" bundle:nil];
+    //imageViewController.name = img;
+    imageViewController.idPicture = index.tag;
+    [self.navigationController pushViewController:imageViewController animated:YES];
+    
 }
 
 - (void)scrollViewWillBeginDragging:(UIScrollView *)scrollView{
