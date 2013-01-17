@@ -9,6 +9,7 @@
 #import "ViewController.h"
 #import "DescriptionImageView.h"
 #import "ImageZoomable.h"
+#import "AppDelegate.h"
 
 @interface PhotographyViewController : UIViewController{
     DescriptionImageView *descriptionImage;

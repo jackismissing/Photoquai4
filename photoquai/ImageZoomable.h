@@ -18,6 +18,6 @@
 @property(nonatomic, readonly) UINavigationController *navigationController;
 
 - (CGRect)zoomRectForScale:(float)scale withCenter:(CGPoint)center;
-- (id)initWithImageView:(UIImage*)anImage;
+- (id)initWithImageView:(UIImage*)anImageURL;
 
 @end

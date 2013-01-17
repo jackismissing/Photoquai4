@@ -10,10 +10,11 @@
 #define ZOOM_STEP 3
 
 #import "ImageZoomable.h"
+#import "UIImageView+AFNetworking.h"
 
 @implementation ImageZoomable
 
-- (id)initWithImageView:(UIImage*)anImage
+- (id)initWithImageView:(NSURL*)anImageURL
 {
     self = [super init];
     if (self) {
@@ -21,19 +22,13 @@
         CGFloat screenWidth = screenRect.size.width;
         CGFloat screenHeight = screenRect.size.height;
         
-        UIImage *PortraitImage = [[UIImage alloc] initWithCGImage: anImage.CGImage scale: 1.0 orientation: UIImageOrientationUp];
+        //UIImage *PortraitImage = [[UIImage alloc] initWithCGImage: anImage.CGImage scale: 1.0 orientation: UIImageOrientationUp];
         
-        imageBig = [[UIImageView alloc] initWithImage: PortraitImage];
+        imageBig = [[UIImageView alloc] init];
+        [imageBig setImageWithURL:anImageURL placeholderImage:[UIImage imageNamed:@"stewie"]];
         imageBig.frame = CGRectMake(0, 0, screenWidth, screenHeight); //-43
         
-        /*if (anImage.size.width > anImage.size.height) { //Pivote l'image si elle est au format paysage
-            PortraitImage = [[UIImage alloc] initWithCGImage: anImage.CGImage scale: 1.0 orientation: UIImageOrientationLeft];
-            imageBig = [[UIImageView alloc] initWithImage: PortraitImage];
-            imageBig.frame = CGRectMake(-81, 0, screenHeight, screenHeight); //-43
-        }*/
-        
         imageBig.contentMode = UIViewContentModeScaleAspectFit;
-        //imageBig.contentMode = UIViewContentModeScaleAspectFill;
 
         imageBig.opaque = YES; //Performance
         

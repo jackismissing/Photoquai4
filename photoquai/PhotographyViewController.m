@@ -21,6 +21,7 @@
 {
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
+    AppDelegate *appdelegate = [[UIApplication sharedApplication] delegate];
     
     //NSString *imageLink = [[machine getPictureElementsAtIndex:self.index] valueForKey:@"linkImg"];
     //UIImage *image = [UIImage imageWithData:[NSData dataWithContentsOfURL:[NSURL URLWithString: imageLink]]];
@@ -32,9 +33,9 @@
     NSInteger idPicture = [[[appdelegate getElementsFromJSON:appendLink] valueForKeyPath:@"picture.id"] integerValue];
     NSString *linkImg = [[appdelegate getElementsFromJSON:appendLink] valueForKeyPath:@"picture.link_iphone"];
     
-    ImageZoomable *picture = [[ImageZoomable alloc] initWithImageView:image];
+    //ImageZoomable *picture = [[ImageZoomable alloc] initWithImageView:image];
     
-    [self.view addSubview:picture];
+    //[self.view addSubview:picture];
     
     NSLog(@"%i", self.idPicture);
 }
