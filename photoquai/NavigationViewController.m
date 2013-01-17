@@ -9,6 +9,7 @@
 #import "NavigationViewController.h"
 #import "rotaryWheel.h"
 #import "InfoViewController.h"
+#import "ViewController.h"
 
 @interface NavigationViewController ()
 
@@ -90,7 +91,8 @@
         [self.navigationController pushViewController:infoView animated:YES];
         */
         
-        
+        ViewController *catalogueView = [[ViewController alloc] init];
+        [self.navigationController pushViewController:catalogueView animated:YES];
     }
     
     if(selectedSection == 2) {
@@ -99,7 +101,7 @@
         
         
         
-        InfoViewController *infoView = [[InfoViewController alloc] init] ;
+        InfoViewController *infoView = [[InfoViewController alloc] init];
         
         //UINavigationController *agendaNavigationController = [[UINavigationController alloc] initWithRootViewController:agendaView];
         

@@ -8,10 +8,20 @@
 
 #import <UIKit/UIKit.h>
 #import "NavigationViewController.h"
+#import "ImageWall.h"
 
-@interface ViewController : UIViewController//<NavigationViewControllerDelegate>
+@interface ViewController : UIViewController <UIScrollViewDelegate>
 {
     id delegate;
+    UIImageView *imageWall;
+    ImageWall *imageWallElement;
+    UIScrollView *myScrollView;
+    
+    UIView *thumbsContainer;
+    
+    NSMutableArray *heights;
+    NSMutableArray *ys;
+    int imgIterate, nbrPictures, xPosition, yPosition, nbrColumns, totalWidth, widthThumb, i;
 }
 
 
