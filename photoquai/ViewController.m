@@ -23,6 +23,8 @@
     label.text = @"Kayne West, test, test";
     label.font = [UIFont fontWithName:@"Parisine-Bold" size:14.0f];
     [self.view addSubview:label];
+    
+    // Commentaire motherfucker
 }
 
 - (void)didReceiveMemoryWarning
