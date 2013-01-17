@@ -411,8 +411,19 @@
 {
     
     NavigationViewController *mainMenu = [[NavigationViewController alloc] init];
-    [self presentModalViewController:mainMenu animated:YES];
+    mainMenu.delegate = self;
     
+    // This is where you wrap the view up nicely in a navigation controller
+    UINavigationController *navigationController = [[UINavigationController alloc] initWithRootViewController:mainMenu];
+    
+    // You can even set the style of stuff before you show it
+    //navigationController.navigationBar.barStyle = UIBarStyleBlackTranslucent;
+    
+    // And now you want to present the view in a modal fashion all nice and animated
+    [self presentModalViewController:navigationController animated:YES];
+    
+    
+    // [self presentModalViewController:mainMenu animated:YES];
 }
 
 
