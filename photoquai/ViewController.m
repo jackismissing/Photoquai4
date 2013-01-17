@@ -1,0 +1,34 @@
+//
+//  ViewController.m
+//  photoquai
+//
+//  Created by Jean-Louis Danielo on 15/01/13.
+//  Copyright (c) 2013 Groupe 5 PHQ Gobelins CDNL. All rights reserved.
+//
+
+#import "ViewController.h"
+
+@interface ViewController ()
+
+@end
+
+@implementation ViewController
+
+- (void)viewDidLoad
+{
+    [super viewDidLoad];
+	// Do any additional setup after loading the view, typically from a nib.
+    
+    UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, 125, 123)];
+    label.text = @"Kayne West, test, test";
+    label.font = [UIFont fontWithName:@"Parisine-Bold" size:14.0f];
+    [self.view addSubview:label];
+}
+
+- (void)didReceiveMemoryWarning
+{
+    [super didReceiveMemoryWarning];
+    // Dispose of any resources that can be recreated.
+}
+
+@end
