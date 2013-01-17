@@ -37,6 +37,7 @@
 		375F932216A8216D00EC3523 /* rotaryWheel.h in Sources */ = {isa = PBXBuildFile; fileRef = 37FA709916A81FAA0039E9C3 /* rotaryWheel.h */; };
 		375F932516A8218500EC3523 /* rotaryWheel.m in Sources */ = {isa = PBXBuildFile; fileRef = 375F932416A8218500EC3523 /* rotaryWheel.m */; };
 		375F933B16A8327F00EC3523 /* AgendaController.m in Sources */ = {isa = PBXBuildFile; fileRef = 375F933A16A8323D00EC3523 /* AgendaController.m */; };
+		3784D01116A852EF00C75804 /* InfoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3784D01016A851FF00C75804 /* InfoViewController.m */; };
 		37FA709D16A81FAA0039E9C3 /* NavigationViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 37FA709716A81FAA0039E9C3 /* NavigationViewController.m */; };
 		37FA709F16A81FAA0039E9C3 /* wheelSector.m in Sources */ = {isa = PBXBuildFile; fileRef = 37FA709C16A81FAA0039E9C3 /* wheelSector.m */; };
 /* End PBXBuildFile section */
@@ -103,6 +104,8 @@
 		375F933416A822F800EC3523 /* segment.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = segment.png; sourceTree = "<group>"; };
 		375F933916A8323D00EC3523 /* AgendaController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AgendaController.h; sourceTree = "<group>"; };
 		375F933A16A8323D00EC3523 /* AgendaController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AgendaController.m; sourceTree = "<group>"; };
+		3784D00F16A851FF00C75804 /* InfoViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = InfoViewController.h; sourceTree = "<group>"; };
+		3784D01016A851FF00C75804 /* InfoViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = InfoViewController.m; sourceTree = "<group>"; };
 		37FA709616A81FAA0039E9C3 /* NavigationViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NavigationViewController.h; sourceTree = "<group>"; };
 		37FA709716A81FAA0039E9C3 /* NavigationViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NavigationViewController.m; sourceTree = "<group>"; };
 		37FA709816A81FAA0039E9C3 /* NavigationViewProtocol.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NavigationViewProtocol.h; sourceTree = "<group>"; };
@@ -157,6 +160,7 @@
 		1ABEACAB16A5C34E0034D316 /* photoquai */ = {
 			isa = PBXGroup;
 			children = (
+				3784D00E16A8515600C75804 /* InformationsViewController */,
 				3784D00C16A8362D00C75804 /* AgendaViewController */,
 				37FA709416A81F5C0039E9C3 /* NavigationViewController */,
 				1ABEACB416A5C34E0034D316 /* AppDelegate.h */,
@@ -292,6 +296,15 @@
 			name = AgendaViewController;
 			sourceTree = "<group>";
 		};
+		3784D00E16A8515600C75804 /* InformationsViewController */ = {
+			isa = PBXGroup;
+			children = (
+				3784D00F16A851FF00C75804 /* InfoViewController.h */,
+				3784D01016A851FF00C75804 /* InfoViewController.m */,
+			);
+			name = InformationsViewController;
+			sourceTree = "<group>";
+		};
 		37FA709416A81F5C0039E9C3 /* NavigationViewController */ = {
 			isa = PBXGroup;
 			children = (
@@ -397,6 +410,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				3784D01116A852EF00C75804 /* InfoViewController.m in Sources */,
 				375F933B16A8327F00EC3523 /* AgendaController.m in Sources */,
 				375F932216A8216D00EC3523 /* rotaryWheel.h in Sources */,
 				1ABEACB216A5C34E0034D316 /* main.m in Sources */,

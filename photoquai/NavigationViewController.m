@@ -8,6 +8,7 @@
 
 #import "NavigationViewController.h"
 #import "rotaryWheel.h"
+#import "InfoViewController.h"
 
 @interface NavigationViewController ()
 
@@ -98,7 +99,7 @@
         
         
         
-        AgendaController *agendaView = [[AgendaController alloc] init] ;
+        InfoViewController *infoView = [[InfoViewController alloc] init] ;
         
         //UINavigationController *agendaNavigationController = [[UINavigationController alloc] initWithRootViewController:agendaView];
         
@@ -108,7 +109,9 @@
         
         
         
-        [self.navigationController pushViewController:agendaView animated:YES];
+        [self.navigationController pushViewController:infoView animated:YES];
+        
+        
 
         
         
