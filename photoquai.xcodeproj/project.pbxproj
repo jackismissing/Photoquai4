@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		1A0B2D2916A852290060234E /* ImageWall.m in Sources */ = {isa = PBXBuildFile; fileRef = 1A0B2D2816A852290060234E /* ImageWall.m */; };
 		1A0B2D3016A859020060234E /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1A0B2D2F16A859010060234E /* QuartzCore.framework */; };
+		1A0B2D3816A85FFA0060234E /* PhotographyViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1A0B2D3716A85FFA0060234E /* PhotographyViewController.m */; };
 		1ABEACA616A5C34E0034D316 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1ABEACA516A5C34E0034D316 /* UIKit.framework */; };
 		1ABEACA816A5C34E0034D316 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1ABEACA716A5C34E0034D316 /* Foundation.framework */; };
 		1ABEACAA16A5C34E0034D316 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1ABEACA916A5C34E0034D316 /* CoreGraphics.framework */; };
@@ -39,6 +40,7 @@
 		375F932216A8216D00EC3523 /* rotaryWheel.h in Sources */ = {isa = PBXBuildFile; fileRef = 37FA709916A81FAA0039E9C3 /* rotaryWheel.h */; };
 		375F932516A8218500EC3523 /* rotaryWheel.m in Sources */ = {isa = PBXBuildFile; fileRef = 375F932416A8218500EC3523 /* rotaryWheel.m */; };
 		375F933B16A8327F00EC3523 /* AgendaController.m in Sources */ = {isa = PBXBuildFile; fileRef = 375F933A16A8323D00EC3523 /* AgendaController.m */; };
+		3784D01116A852EF00C75804 /* InfoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3784D01016A851FF00C75804 /* InfoViewController.m */; };
 		37FA709D16A81FAA0039E9C3 /* NavigationViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 37FA709716A81FAA0039E9C3 /* NavigationViewController.m */; };
 		37FA709F16A81FAA0039E9C3 /* wheelSector.m in Sources */ = {isa = PBXBuildFile; fileRef = 37FA709C16A81FAA0039E9C3 /* wheelSector.m */; };
 /* End PBXBuildFile section */
@@ -47,6 +49,8 @@
 		1A0B2D2716A852290060234E /* ImageWall.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ImageWall.h; path = AFNetworking/ImageWall.h; sourceTree = "<group>"; };
 		1A0B2D2816A852290060234E /* ImageWall.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ImageWall.m; path = AFNetworking/ImageWall.m; sourceTree = "<group>"; };
 		1A0B2D2F16A859010060234E /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
+		1A0B2D3616A85FFA0060234E /* PhotographyViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PhotographyViewController.h; sourceTree = "<group>"; };
+		1A0B2D3716A85FFA0060234E /* PhotographyViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PhotographyViewController.m; sourceTree = "<group>"; };
 		1ABEACA116A5C34E0034D316 /* photoquai.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = photoquai.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		1ABEACA516A5C34E0034D316 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		1ABEACA716A5C34E0034D316 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -108,6 +112,8 @@
 		375F933416A822F800EC3523 /* segment.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = segment.png; sourceTree = "<group>"; };
 		375F933916A8323D00EC3523 /* AgendaController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AgendaController.h; sourceTree = "<group>"; };
 		375F933A16A8323D00EC3523 /* AgendaController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AgendaController.m; sourceTree = "<group>"; };
+		3784D00F16A851FF00C75804 /* InfoViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = InfoViewController.h; sourceTree = "<group>"; };
+		3784D01016A851FF00C75804 /* InfoViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = InfoViewController.m; sourceTree = "<group>"; };
 		37FA709616A81FAA0039E9C3 /* NavigationViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NavigationViewController.h; sourceTree = "<group>"; };
 		37FA709716A81FAA0039E9C3 /* NavigationViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NavigationViewController.m; sourceTree = "<group>"; };
 		37FA709816A81FAA0039E9C3 /* NavigationViewProtocol.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NavigationViewProtocol.h; sourceTree = "<group>"; };
@@ -139,6 +145,15 @@
 				1A0B2D2816A852290060234E /* ImageWall.m */,
 			);
 			name = ImageWall;
+			sourceTree = "<group>";
+		};
+		1A0B2D3916A85FFF0060234E /* PhotographyViewController */ = {
+			isa = PBXGroup;
+			children = (
+				1A0B2D3616A85FFA0060234E /* PhotographyViewController.h */,
+				1A0B2D3716A85FFA0060234E /* PhotographyViewController.m */,
+			);
+			name = PhotographyViewController;
 			sourceTree = "<group>";
 		};
 		1ABEAC9616A5C34E0034D316 = {
@@ -173,9 +188,13 @@
 		1ABEACAB16A5C34E0034D316 /* photoquai */ = {
 			isa = PBXGroup;
 			children = (
+				3784D00E16A8515600C75804 /* InformationsViewController */,
+				3784D00C16A8362D00C75804 /* AgendaViewController */,
+				37FA709416A81F5C0039E9C3 /* NavigationViewController */,
 				1ABEACB416A5C34E0034D316 /* AppDelegate.h */,
 				1ABEACB516A5C34E0034D316 /* AppDelegate.m */,
 				3784D00C16A8362D00C75804 /* AgendaViewController */,
+				1A0B2D3916A85FFF0060234E /* PhotographyViewController */,
 				37FA709416A81F5C0039E9C3 /* NavigationViewController */,
 				1ABEACBD16A5C34E0034D316 /* ViewController.h */,
 				1ABEACBE16A5C34E0034D316 /* ViewController.m */,
@@ -215,6 +234,7 @@
 		1ABEACCF16A5C9EF0034D316 /* Classes */ = {
 			isa = PBXGroup;
 			children = (
+				1A0B2D2A16A852340060234E /* ImageWall */,
 			);
 			name = Classes;
 			sourceTree = "<group>";
@@ -222,7 +242,6 @@
 		1ABEACD016A5CA130034D316 /* Vendor */ = {
 			isa = PBXGroup;
 			children = (
-				1A0B2D2A16A852340060234E /* ImageWall */,
 				1ACACF2F16A7FC1D0060DA49 /* Reachability */,
 				1ABEACD116A5CA500034D316 /* AFNetworking */,
 			);
@@ -307,6 +326,15 @@
 				375F933A16A8323D00EC3523 /* AgendaController.m */,
 			);
 			name = AgendaViewController;
+			sourceTree = "<group>";
+		};
+		3784D00E16A8515600C75804 /* InformationsViewController */ = {
+			isa = PBXGroup;
+			children = (
+				3784D00F16A851FF00C75804 /* InfoViewController.h */,
+				3784D01016A851FF00C75804 /* InfoViewController.m */,
+			);
+			name = InformationsViewController;
 			sourceTree = "<group>";
 		};
 		37FA709416A81F5C0039E9C3 /* NavigationViewController */ = {
@@ -414,6 +442,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				3784D01116A852EF00C75804 /* InfoViewController.m in Sources */,
 				375F933B16A8327F00EC3523 /* AgendaController.m in Sources */,
 				375F932216A8216D00EC3523 /* rotaryWheel.h in Sources */,
 				1ABEACB216A5C34E0034D316 /* main.m in Sources */,
@@ -434,6 +463,7 @@
 				37FA709F16A81FAA0039E9C3 /* wheelSector.m in Sources */,
 				375F932516A8218500EC3523 /* rotaryWheel.m in Sources */,
 				1A0B2D2916A852290060234E /* ImageWall.m in Sources */,
+				1A0B2D3816A85FFA0060234E /* PhotographyViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -25,6 +25,10 @@
     [super viewDidLoad];
 	// Do any additional setup after loading the view, typically from a nib.
     
+    //Réinstancie la navigation bar, une fois le menu disparu
+    [self.navigationController setNavigationBarHidden:NO animated:NO];
+    self.navigationItem.hidesBackButton = YES;
+    
     self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemBookmarks target:self action:@selector(showMenu)];
     
     thumbsContainer = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 320, 480)];
@@ -229,6 +233,8 @@
     
     // This is where you wrap the view up nicely in a navigation controller
     UINavigationController *navigationController = [[UINavigationController alloc] initWithRootViewController:mainMenu];
+    
+    [navigationController setNavigationBarHidden:YES animated:NO];
     
     // You can even set the style of stuff before you show it
     //navigationController.navigationBar.barStyle = UIBarStyleBlackTranslucent;
