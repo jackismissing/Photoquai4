@@ -26,7 +26,7 @@
     label.font = [UIFont fontWithName:@"Parisine-Bold" size:14.0f];
     [self.view addSubview:label];
     
-    
+
 }
 
 - (void)didReceiveMemoryWarning
