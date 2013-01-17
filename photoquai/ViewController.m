@@ -22,7 +22,7 @@
 	// Do any additional setup after loading the view, typically from a nib.
     
     self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemBookmarks target:self action:@selector(showMenu)];
-    
+  
     UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, 125, 123)];
     label.text = @"Kayne West, test, test";
     label.font = [UIFont fontWithName:@"Parisine-Bold" size:14.0f];
