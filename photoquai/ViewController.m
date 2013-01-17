@@ -11,6 +11,7 @@
 #import "ImageWall.h"
 #import "AppDelegate.h"
 #import "Reachability.h"
+#import "UIColor+RVB255.h"
 
 @interface ViewController ()
 
@@ -25,13 +26,6 @@
     [super viewDidLoad];
 	// Do any additional setup after loading the view, typically from a nib.
     
-    //Réinstancie la navigation bar, une fois le menu disparu
-    [self.navigationController setNavigationBarHidden:NO animated:NO];
-    self.navigationItem.hidesBackButton = YES;
-    
-    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemBookmarks target:self action:@selector(showMenu)];
-
-  
     UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, 125, 123)];
     label.text = @"Kayne West, test, test";
     label.font = [UIFont fontWithName:@"Parisine-Bold" size:14.0f];
@@ -58,6 +52,22 @@
     
     // Post a notification to loginComplete
     [[NSNotificationCenter defaultCenter] postNotificationName:@"loginComplete" object:reachabilityInfo];
+    
+    [self.navigationController setNavigationBarHidden:NO animated:NO];
+    self.navigationItem.hidesBackButton = YES;
+    
+}
+
+- (void)viewWillAppear:(BOOL)animated
+{
+    //Réinstancie la navigation bar, une fois le menu disparu
+    //self.navigationController.navigationBar.tintColor = [UIColor r:219 g:25 b:23 alpha:1];
+    [super viewWillAppear:animated];
+    [self.navigationController.navigationBar setBackgroundImage:[UIImage imageNamed:@"navigationBar.png"] forBarMetrics:UIBarMetricsDefault];
+     
+    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemBookmarks target:self action:@selector(showMenu)];
+
+   
 }
 
 //Détecte la connexion d'un utilisateur

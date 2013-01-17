@@ -21,9 +21,9 @@
     self.viewController = [[ViewController alloc] initWithNibName:@"ViewController" bundle:nil];
     UINavigationController *navigationController = [[UINavigationController alloc]
                                                     initWithRootViewController:self.viewController];
-    navigationController.navigationBar.tintColor = [UIColor r:219 g:25 b:23 alpha:1];
-    
-    navigationController.navigationBarHidden = NO;
+    //navigationController.navigationBar.tintColor = [UIColor r:219 g:25 b:23 alpha:1];
+
+    //navigationController.navigationBarHidden = NO;
     
     
     self.window.rootViewController = navigationController;
