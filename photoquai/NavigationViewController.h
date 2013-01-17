@@ -8,9 +8,20 @@
 
 #import <UIKit/UIKit.h>
 #import "NavigationViewProtocol.h"
+#import "AgendaController.h"
+
+/*
+@protocol NavigationViewControllerDelegate <NSObject>
+
+-(void)changeViewToAgenda;
+
+@end
+ 
+ */
+
 
 @interface NavigationViewController : UIViewController
 
 @property (nonatomic, strong) UILabel *sectorLabel;
-
+@property (nonatomic, assign) id delegate;
 @end

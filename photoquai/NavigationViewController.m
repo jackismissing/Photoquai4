@@ -94,21 +94,27 @@
     
     if(selectedSection == 2) {
         
-        //NSLog(@"test");
+        NSLog(@"2");
         
-        /*
+        
         
         AgendaController *agendaView = [[AgendaController alloc] init] ;
         
-        UINavigationController *navigationController = [[UINavigationController alloc] initWithRootViewController:agendaView];
+        //UINavigationController *agendaNavigationController = [[UINavigationController alloc] initWithRootViewController:agendaView];
         
-        [navigationController setNavigationBarHidden:YES];
+        //[agendaNavigationController setNavigationBarHidden:YES];
         
         // [self presentViewController:navigationController animated:YES completion:nil];
         
-        [self.navigationController pushViewController:agendaView animated:YES];
         
-        */
+        
+        [self.navigationController pushViewController:agendaView animated:YES];
+
+        
+        
+
+        
+        
         
     }
     
