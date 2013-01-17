@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		1A0B2D2916A852290060234E /* ImageWall.m in Sources */ = {isa = PBXBuildFile; fileRef = 1A0B2D2816A852290060234E /* ImageWall.m */; };
 		1ABEACA616A5C34E0034D316 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1ABEACA516A5C34E0034D316 /* UIKit.framework */; };
 		1ABEACA816A5C34E0034D316 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1ABEACA716A5C34E0034D316 /* Foundation.framework */; };
 		1ABEACAA16A5C34E0034D316 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1ABEACA916A5C34E0034D316 /* CoreGraphics.framework */; };
@@ -42,6 +43,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		1A0B2D2716A852290060234E /* ImageWall.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ImageWall.h; path = AFNetworking/ImageWall.h; sourceTree = "<group>"; };
+		1A0B2D2816A852290060234E /* ImageWall.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ImageWall.m; path = AFNetworking/ImageWall.m; sourceTree = "<group>"; };
 		1ABEACA116A5C34E0034D316 /* photoquai.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = photoquai.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		1ABEACA516A5C34E0034D316 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		1ABEACA716A5C34E0034D316 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -126,6 +129,15 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		1A0B2D2A16A852340060234E /* ImageWall */ = {
+			isa = PBXGroup;
+			children = (
+				1A0B2D2716A852290060234E /* ImageWall.h */,
+				1A0B2D2816A852290060234E /* ImageWall.m */,
+			);
+			name = ImageWall;
+			sourceTree = "<group>";
+		};
 		1ABEAC9616A5C34E0034D316 = {
 			isa = PBXGroup;
 			children = (
@@ -157,10 +169,10 @@
 		1ABEACAB16A5C34E0034D316 /* photoquai */ = {
 			isa = PBXGroup;
 			children = (
-				3784D00C16A8362D00C75804 /* AgendaViewController */,
-				37FA709416A81F5C0039E9C3 /* NavigationViewController */,
 				1ABEACB416A5C34E0034D316 /* AppDelegate.h */,
 				1ABEACB516A5C34E0034D316 /* AppDelegate.m */,
+				3784D00C16A8362D00C75804 /* AgendaViewController */,
+				37FA709416A81F5C0039E9C3 /* NavigationViewController */,
 				1ABEACBD16A5C34E0034D316 /* ViewController.h */,
 				1ABEACBE16A5C34E0034D316 /* ViewController.m */,
 				1ABEACC016A5C34E0034D316 /* ViewController.xib */,
@@ -206,6 +218,7 @@
 		1ABEACD016A5CA130034D316 /* Vendor */ = {
 			isa = PBXGroup;
 			children = (
+				1A0B2D2A16A852340060234E /* ImageWall */,
 				1ACACF2F16A7FC1D0060DA49 /* Reachability */,
 				1ABEACD116A5CA500034D316 /* AFNetworking */,
 			);
@@ -416,6 +429,7 @@
 				37FA709D16A81FAA0039E9C3 /* NavigationViewController.m in Sources */,
 				37FA709F16A81FAA0039E9C3 /* wheelSector.m in Sources */,
 				375F932516A8218500EC3523 /* rotaryWheel.m in Sources */,
+				1A0B2D2916A852290060234E /* ImageWall.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

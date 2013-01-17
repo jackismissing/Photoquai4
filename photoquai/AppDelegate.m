@@ -56,4 +56,32 @@
     // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
 }
 
+- (NSDictionary*) getElementsFromJSON:(NSString*)anURL{
+    NSError *errorData;
+    
+    NSError *errorJsonParsing;
+    
+    NSURLRequest *request = [NSURLRequest requestWithURL:[NSURL URLWithString:anURL]];
+    NSDictionary *arrayJson = nil;
+    NSData* dataJson = [NSURLConnection sendSynchronousRequest:request returningResponse:nil error:&errorData];
+    
+    if (errorData == nil) {
+        
+        arrayJson = [NSJSONSerialization JSONObjectWithData:dataJson options:0 error:&errorJsonParsing];
+        
+        if (errorJsonParsing != nil) {
+            
+            NSLog(@"Error Parse Json");
+            //[self popUpErrorWithString:@"Erreur du serveur. Données erronées."];
+        }
+        
+    }else{
+        NSLog(@"Error Recuperation du Json");
+        //[self popUpErrorWithString:@"Impossible de se connecter au serveur"];
+        
+    }
+    
+    return arrayJson;
+}
+
 @end
