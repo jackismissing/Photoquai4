@@ -14,22 +14,20 @@
 
 @implementation ImageZoomable
 
-- (id)initWithImageView:(NSURL*)anImageURL
+- (id)initWithImageURL:(NSURL*)anImageURL
 {
     self = [super init];
     if (self) {
         CGRect screenRect = [[UIScreen mainScreen] bounds];
         CGFloat screenWidth = screenRect.size.width;
-        CGFloat screenHeight = screenRect.size.height;
+        CGFloat screenHeight = screenRect.size.height - 44;
         
         //UIImage *PortraitImage = [[UIImage alloc] initWithCGImage: anImage.CGImage scale: 1.0 orientation: UIImageOrientationUp];
         
         imageBig = [[UIImageView alloc] init];
-        [imageBig setImageWithURL:anImageURL placeholderImage:[UIImage imageNamed:@"stewie"]];
+        [imageBig setImageWithURL:anImageURL placeholderImage:[UIImage imageNamed:@"navigationBar"]];
         imageBig.frame = CGRectMake(0, 0, screenWidth, screenHeight); //-43
-        
         imageBig.contentMode = UIViewContentModeScaleAspectFit;
-
         imageBig.opaque = YES; //Performance
         
         self.frame = CGRectMake(0, 0, screenWidth, screenHeight);
@@ -38,7 +36,7 @@
         self.maximumZoomScale = 3.0;
         
        // self.contentSize = CGSizeMake(anImage.size.width, anImage.size.width);
-        self.delegate = self;
+       self.delegate = self;
         
         [self setUserInteractionEnabled:YES];
         
@@ -51,8 +49,8 @@
         [doubleTap setNumberOfTapsRequired:2];
         [singleTap requireGestureRecognizerToFail:doubleTap]; //Fait échouer le single tap si on double tap
         
-        [self addGestureRecognizer:singleTap];
-        [self addGestureRecognizer:doubleTap];
+        //[self addGestureRecognizer:singleTap];
+        //[self addGestureRecognizer:doubleTap];
         
         // calculate minimum scale to perfectly fit image width, and begin at that scale
         float minimumScale = [self frame].size.width  / [self frame].size.width;

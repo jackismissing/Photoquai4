@@ -26,9 +26,8 @@
 {
     [super viewDidLoad];
 	// Do any additional setup after loading the view, typically from a nib.
-    
-
-    
+    [self setTitle:@"Photographies"];
+    self.view.backgroundColor = [UIColor whiteColor];
     
     //Réinstancie la navigation bar, une fois le menu disparu
     [self.navigationController setNavigationBarHidden:NO animated:NO];
@@ -65,7 +64,8 @@
     //self.navigationController.navigationBar.tintColor = [UIColor r:219 g:25 b:23 alpha:1];
     [super viewWillAppear:animated];
     [self.navigationController.navigationBar setBackgroundImage:[UIImage imageNamed:@"navigationBar.png"] forBarMetrics:UIBarMetricsDefault];
-     
+    
+
     UIImage* image = [UIImage imageNamed:@"menu.png"];
     CGRect frame = CGRectMake(0, 0, image.size.width, image.size.height);
     UIButton *menuButton = [[UIButton alloc] initWithFrame:frame];
@@ -79,6 +79,7 @@
 
 
    
+
 
 }
 
@@ -252,24 +253,36 @@
 - (void)accessPicture:(UIGestureRecognizer *)gesture{
     
     UIView *index = gesture.view;
-
     
-    PhotographyViewController *imageViewController = [[PhotographyViewController alloc] initWithNibName:@"PhotographyViewController" bundle:nil];
-    //imageViewController.name = img;
-    imageViewController.idPicture = index.tag;
-    [self.navigationController pushViewController:imageViewController animated:YES];
+    index.alpha = .3;
+    index.backgroundColor = [UIColor redColor];
     
+    [UIView animateWithDuration:0.42
+                          delay:0
+                        options: UIViewAnimationCurveEaseOut
+                     animations:^{
+                         index.alpha = 1.0;
+                         index.backgroundColor = [UIColor clearColor];
+                     }
+                     completion:^(BOOL finished){
+                     
+                         PhotographyViewController *imageViewController = [[PhotographyViewController alloc] initWithNibName:@"PhotographyViewController" bundle:nil];
+                         imageViewController.idPicture = index.tag;
+                         [self.navigationController pushViewController:imageViewController animated:YES];
+                     }];
+    
+    //UIBarButtonItem *backButton = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"backButton"] style:UIBarButtonItemStylePlain target:nil action:nil];
+    //UIBarButtonItem *backButton = [[UIBarButtonItem alloc] initWithCustomView:v];
+    //backButton.image = [UIImage imageNamed:@"backButton"];
+    
+    //[self.navigationItem setBackBarButtonItem: backButton];
 }
 
 - (void)scrollViewWillBeginDragging:(UIScrollView *)scrollView{
     
     for (UIImageView *img in thumbsContainer.subviews){
         if(img.frame.origin.y < myScrollView.contentOffset.y || img.frame.origin.y > (myScrollView.contentOffset.y + myScrollView.frame.size.height) || img.frame.origin.x < myScrollView.contentOffset.x || img.frame.origin.x > (myScrollView.contentOffset.x + myScrollView.frame.size.width))
-        {
-            //[img removeFromSuperview];
-            //img.hidden = YES;
-            //img.opaque = NO;
-            
+        {            
             img.alpha = .3;
         }
     }
@@ -279,7 +292,6 @@
     for (UIImageView *img in thumbsContainer.subviews){
         if(img.frame.origin.y > myScrollView.contentOffset.y || img.frame.origin.y < (myScrollView.contentOffset.y + myScrollView.frame.size.height) || img.frame.origin.x > myScrollView.contentOffset.x || img.frame.origin.x < (myScrollView.contentOffset.x + myScrollView.frame.size.width))
         {
-            
             //[myScrollView bringSubviewToFront:img];
             img.hidden = NO;
             img.opaque = YES;

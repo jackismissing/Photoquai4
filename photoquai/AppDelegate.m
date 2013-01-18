@@ -25,6 +25,24 @@
 
     //navigationController.navigationBarHidden = NO;
     
+    [application setStatusBarStyle:UIStatusBarStyleBlackOpaque];
+    
+    //Permet d'éditer le style du texte du navigation controller
+    [[UINavigationBar appearance] setTitleTextAttributes:
+     [NSDictionary dictionaryWithObjectsAndKeys:
+      [UIColor whiteColor],
+      UITextAttributeTextColor,
+      [UIColor colorWithRed:0.0 green:0.0 blue:0.0 alpha:0.8],
+      UITextAttributeTextShadowColor,
+      [NSValue valueWithUIOffset:UIOffsetMake(0, -1)],
+      UITextAttributeTextShadowOffset,
+      [UIFont fontWithName:@"Parisine-Bold" size:0.0],
+      UITextAttributeFont,
+      nil]];
+    
+    
+    //UIImage *backButtonImage = [[UIImage imageNamed:@"backButton"] resizableImageWithCapInsets:UIEdgeInsetsMake(, 13, 0, 6)];
+    //[[UIBarButtonItem appearance] setBackButtonBackgroundImage:backButtonImage forState:UIControlStateNormal barMetrics:UIBarMetricsDefault];
     
     self.window.rootViewController = navigationController;
     

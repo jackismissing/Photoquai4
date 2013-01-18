@@ -8,6 +8,7 @@
 
 #import "ImageWall.h"
 #import "UIImageView+AFNetworking.h"
+#import <QuartzCore/QuartzCore.h>
 
 
 @implementation ImageWall
@@ -68,6 +69,7 @@
     x = self.frame.origin.x;
     return x;
 }
+
 
 
 @end

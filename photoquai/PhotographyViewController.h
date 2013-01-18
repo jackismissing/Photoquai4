@@ -10,11 +10,14 @@
 #import "DescriptionImageView.h"
 #import "ImageZoomable.h"
 #import "AppDelegate.h"
+#import "UIColor+RVB255.h"
 
-@interface PhotographyViewController : UIViewController{
-    DescriptionImageView *descriptionImage;
+@interface PhotographyViewController : UIViewController <UIScrollViewDelegate>{
+    DescriptionImageView *descriptionPhotography;
+    ImageZoomable *picture;
 }
 
 @property (nonatomic, assign) int idPicture;
+
 
 @end

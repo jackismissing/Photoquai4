@@ -7,85 +7,98 @@
 //
 
 #import "DescriptionImageView.h"
-//#import "PhotographerVignette.h"
+#import <QuartzCore/QuartzCore.h>
+#import "UIColor+RVB255.h"
+#import "PhotographerVignette.h"
 
 @implementation DescriptionImageView
 
-- (id)initWithFrame:(CGRect)frame description:(NSString*)aDescription title:(NSString*)aTitle date:(NSDate*)aDate place:(NSString*)aPlace{
+- (id)initWithFrame:(CGRect)frame description:(NSString*)aDescription title:(NSString*)aTitle place:(NSString*)aPlace{
     
     self = [super initWithFrame:frame];
     if (self) {
-        //self.userInteractionEnabled = YES;
-        
         CGRect screenRect = [[UIScreen mainScreen] bounds];
         CGFloat screenWidth = screenRect.size.width;
         CGFloat screenHeight = screenRect.size.height;
         
+        self.clipsToBounds = YES;
+        self.frame = CGRectMake(0, screenHeight, 320, self.frame.size.height);
+        
+        
+        
         UIView *container = [[UIView alloc] initWithFrame:CGRectMake(0, 100, screenWidth, screenHeight)];
-        container.backgroundColor = [UIColor purpleColor];
-        container.alpha = .9;
+        container.backgroundColor = [UIColor whiteColor];
+        container.alpha = 1;
         container.opaque = YES;
+        CALayer *topBorder = [CALayer layer];
         
-        UILabel *titre = [[UILabel alloc] initWithFrame:CGRectMake(25, 15, 90, 42)];
-        //titre.font = [UIFont fontWithName:@"Helvetica Neue" size:31.0];
+        _photographyDatas = [[UIScrollView alloc] initWithFrame:CGRectMake(0, 0, screenWidth, screenHeight)];
+        
+        topBorder.frame = CGRectMake(0.0f, 0.0f, container.frame.size.width, 1.0f);
+        
+        topBorder.backgroundColor = [UIColor r:215 g:26 b:33 alpha:1.0f].CGColor;
+        
+        [container.layer addSublayer:topBorder];
+        
+        UILabel *titre = [[UILabel alloc] initWithFrame:CGRectMake(25, 25, 90, 42)];
+        titre.font = [UIFont fontWithName:@"Parisine-Bold" size:15.0];
         titre.text = aTitle;
-        titre.adjustsFontSizeToFitWidth = YES;
+        [titre sizeToFit];
+        //titre.adjustsFontSizeToFitWidth = YES;
         titre.backgroundColor = [UIColor clearColor];
-        [container addSubview:titre];
+        [_photographyDatas addSubview:titre];
         
-        UITextView *descripcion = [[UITextView alloc] initWithFrame:CGRectMake(20, titre.frame.size.height + 30, 300, 300)];
-        descripcion.text = aDescription;
-        //Permet de fitter l'UITextView au contenu
-        CGRect frame = descripcion.frame;
-        frame.size.height = descripcion.contentSize.height;
-        frame.size.width = 300;
-//        frame.origin.x = 25;
-//        frame.origin.y = titre.frame.size.height;
-        //WithFrame:CGRectMake(25, titre.frame.size.height + 30, 300, 300)
-        //Permet de fitter l'UITextView au contenu
-        titre.font = [UIFont fontWithName:@"Helvetica Neue" size:11.0];
-        descripcion.frame = frame;
-        descripcion.editable = NO;
-        descripcion.textAlignment = 3;
-        descripcion.backgroundColor = [UIColor clearColor];
-        [container addSubview:descripcion];
-        
-        NSString *theDate = @"string";
-        NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
-        [dateFormatter setDateFormat:@"dd/MM/yyyy"];
-        theDate = [dateFormatter stringFromDate:aDate];
-        
-        UILabel *jour = [[UILabel alloc] initWithFrame:CGRectMake(25, titre.frame.size.height + 15, 90, 15)];
-        jour.text = theDate;
-        jour.font = [UIFont fontWithName:@"Helvetica Neue" size:11.0];
-        jour.backgroundColor = [UIColor clearColor];
-        [container addSubview:jour];
-        
-        UILabel *endroit = [[UILabel alloc] initWithFrame:CGRectMake(25, titre.frame.size.height + 15, 90, 15)];
+        float endroitY = titre.frame.origin.y + titre.frame.size.height;
+        UILabel *endroit = [[UILabel alloc] initWithFrame:CGRectMake(25, endroitY, 90, 15)];
         endroit.text = aPlace;
-        endroit.font = [UIFont fontWithName:@"Helvetica Neue" size:11.0];
+        endroit.font = [UIFont fontWithName:@"Parisine-Regular" size:11.0];
+        [endroit sizeToFit];
         endroit.backgroundColor = [UIColor clearColor];
-        //[container addSubview:endroit];
+        [_photographyDatas addSubview:endroit];
         
-      //  PhotographerVignette *test = [[PhotographerVignette alloc] initWithFrame:CGRectMake(0, 0, 250, 50) withId:4];
+        UITextView *descripcion = [[UITextView alloc] initWithFrame:CGRectMake(18, titre.frame.size.height + 35, 260, 300)];
+        descripcion.text = aDescription;
+        descripcion.font = [UIFont fontWithName:@"Parisine-Regular" size:11.0];
+        [descripcion sizeToFit];
+        descripcion.editable = NO;
+        //descripcion.textAlignment = 3;
+        descripcion.backgroundColor = [UIColor clearColor];
+        [_photographyDatas addSubview:descripcion];
         
-     //   [container addSubview:test];
         
+        
+        float greyLineY = descripcion.frame.origin.y + descripcion.frame.size.height + 10;
+        UIView *greyLine = [[UIView alloc] initWithFrame:CGRectMake(25, greyLineY, descripcion.frame.size.width, 1.0f)];
+        greyLine.backgroundColor = [UIColor r:233 g:233 b:233 alpha:1];
+        [_photographyDatas addSubview:greyLine];
+        
+
+        PhotographerVignette *photographerVignette = [[PhotographerVignette alloc] initWithFrame:CGRectMake(25, greyLineY + 20, greyLine.frame.size.width, 90) withId:5];
+        photographerVignette.userInteractionEnabled = YES;
+        [_photographyDatas addSubview:photographerVignette];
+        
+        float phographyDatasContentSize = photographerVignette.frame.size.height + photographerVignette.frame.origin.y + descripcion.frame.size.height + descripcion.frame.origin.y + endroit.frame.size.height + endroit.frame.origin.y + titre.frame.size.height + titre.frame.origin.y - 30;
+        
+        [_photographyDatas setContentSize:CGSizeMake(self.frame.size.width, phographyDatasContentSize)];
+
+        _photographyDatas.delegate = self;
+        _photographyDatas.userInteractionEnabled = YES;
+        
+        [container addSubview:_photographyDatas];
         [self addSubview:container];
         
-        [self setTitle:@"Pas de titre"];
-        [self setDescription:@"Pas de description"];
-        [self setDate:@"Holden Caulfield"];
-        [self setPlace:@"windows8_ios"];
         
-        //        UITapGestureRecognizer* singleTap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(handleSingleTap:)];
-        //        singleTap.numberOfTapsRequired = 1;
-        //        singleTap.numberOfTouchesRequired = 1;
-        //        [self addGestureRecognizer: singleTap];
-        //        self.userInteractionEnabled = YES;
-        //        self.clipsToBounds = YES;
+        
+        UITapGestureRecognizer *singleTap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(accessPhotographer:)];
+        [photographerVignette addGestureRecognizer:singleTap];
+
     }
     return self;
+}
+
+- (void)accessPhotographer:(UIGestureRecognizer *)gesture{
+
+    [[NSNotificationCenter defaultCenter] postNotificationName:@"showArtistPage" object:[NSNumber numberWithInt:5]];
 }
 
 //Place le nom de la photo
