@@ -40,6 +40,15 @@
 		1ACACF3716A804050060DA49 /* Parisine-BoldItalic.otf in Resources */ = {isa = PBXBuildFile; fileRef = 1ACACF3316A804050060DA49 /* Parisine-BoldItalic.otf */; };
 		1ACACF3816A804050060DA49 /* Parisine-Italic.otf in Resources */ = {isa = PBXBuildFile; fileRef = 1ACACF3416A804050060DA49 /* Parisine-Italic.otf */; };
 		1ACACF3916A804050060DA49 /* Parisine-Regular.otf in Resources */ = {isa = PBXBuildFile; fileRef = 1ACACF3516A804050060DA49 /* Parisine-Regular.otf */; };
+		375E21E916A93C9A00F012AF /* navigationBar@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 375E21E816A93C9A00F012AF /* navigationBar@2x.png */; };
+		375E21EC16A93EB200F012AF /* menu@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 375E21EB16A93EB200F012AF /* menu@2x.png */; };
+		375E21EE16A93EC100F012AF /* menu.png in Resources */ = {isa = PBXBuildFile; fileRef = 375E21ED16A93EC100F012AF /* menu.png */; };
+		375E21F216A9439600F012AF /* back.png in Resources */ = {isa = PBXBuildFile; fileRef = 375E21F116A9439600F012AF /* back.png */; };
+		375E21F416A9458800F012AF /* back@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 375E21F316A9458800F012AF /* back@2x.png */; };
+		375E21F716A945DB00F012AF /* MapPhqViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 375E21F616A945DA00F012AF /* MapPhqViewController.m */; };
+		375E21FC16A9462000F012AF /* SMCalloutView.m in Sources */ = {isa = PBXBuildFile; fileRef = 375E21FB16A9462000F012AF /* SMCalloutView.m */; };
+		375E21FF16A9469400F012AF /* MAP_ok.png in Resources */ = {isa = PBXBuildFile; fileRef = 375E21FE16A9469400F012AF /* MAP_ok.png */; };
+		375E220516A948E000F012AF /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 375E220416A948E000F012AF /* MapKit.framework */; };
 		375F932216A8216D00EC3523 /* rotaryWheel.h in Sources */ = {isa = PBXBuildFile; fileRef = 37FA709916A81FAA0039E9C3 /* rotaryWheel.h */; };
 		375F932516A8218500EC3523 /* rotaryWheel.m in Sources */ = {isa = PBXBuildFile; fileRef = 375F932416A8218500EC3523 /* rotaryWheel.m */; };
 		375F933B16A8327F00EC3523 /* AgendaController.m in Sources */ = {isa = PBXBuildFile; fileRef = 375F933A16A8323D00EC3523 /* AgendaController.m */; };
@@ -104,6 +113,17 @@
 		1ACACF3316A804050060DA49 /* Parisine-BoldItalic.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Parisine-BoldItalic.otf"; sourceTree = "<group>"; };
 		1ACACF3416A804050060DA49 /* Parisine-Italic.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Parisine-Italic.otf"; sourceTree = "<group>"; };
 		1ACACF3516A804050060DA49 /* Parisine-Regular.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Parisine-Regular.otf"; sourceTree = "<group>"; };
+		375E21E816A93C9A00F012AF /* navigationBar@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "navigationBar@2x.png"; sourceTree = "<group>"; };
+		375E21EB16A93EB200F012AF /* menu@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "menu@2x.png"; sourceTree = "<group>"; };
+		375E21ED16A93EC100F012AF /* menu.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = menu.png; sourceTree = "<group>"; };
+		375E21F116A9439600F012AF /* back.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = back.png; sourceTree = "<group>"; };
+		375E21F316A9458800F012AF /* back@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "back@2x.png"; sourceTree = "<group>"; };
+		375E21F516A945DA00F012AF /* MapPhqViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MapPhqViewController.h; sourceTree = "<group>"; };
+		375E21F616A945DA00F012AF /* MapPhqViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MapPhqViewController.m; sourceTree = "<group>"; };
+		375E21FA16A9462000F012AF /* SMCalloutView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SMCalloutView.h; sourceTree = "<group>"; };
+		375E21FB16A9462000F012AF /* SMCalloutView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SMCalloutView.m; sourceTree = "<group>"; };
+		375E21FE16A9469400F012AF /* MAP_ok.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = MAP_ok.png; sourceTree = "<group>"; };
+		375E220416A948E000F012AF /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
 		375F932416A8218500EC3523 /* rotaryWheel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = rotaryWheel.m; sourceTree = "<group>"; };
 		375F932616A822C800EC3523 /* bg.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = bg.png; sourceTree = "<group>"; };
 		375F932716A822C800EC3523 /* centerButton.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = centerButton.png; sourceTree = "<group>"; };
@@ -137,6 +157,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				375E220516A948E000F012AF /* MapKit.framework in Frameworks */,
 				1A0B2D3016A859020060234E /* QuartzCore.framework in Frameworks */,
 				1ACACF3116A7FC320060DA49 /* SystemConfiguration.framework in Frameworks */,
 				1ABEACA616A5C34E0034D316 /* UIKit.framework in Frameworks */,
@@ -198,6 +219,7 @@
 		1ABEAC9616A5C34E0034D316 = {
 			isa = PBXGroup;
 			children = (
+				375E220416A948E000F012AF /* MapKit.framework */,
 				1ABEACAB16A5C34E0034D316 /* photoquai */,
 				1ABEACA416A5C34E0034D316 /* Frameworks */,
 				1ABEACA216A5C34E0034D316 /* Products */,
@@ -227,6 +249,7 @@
 		1ABEACAB16A5C34E0034D316 /* photoquai */ = {
 			isa = PBXGroup;
 			children = (
+				375E21F816A945DF00F012AF /* MapViewController */,
 				1ABEACB416A5C34E0034D316 /* AppDelegate.h */,
 				1ABEACB516A5C34E0034D316 /* AppDelegate.m */,
 				3784D00E16A8515600C75804 /* InformationsViewController */,
@@ -281,6 +304,7 @@
 		1ABEACD016A5CA130034D316 /* Vendor */ = {
 			isa = PBXGroup;
 			children = (
+				375E21F916A9460A00F012AF /* SMCalloutView */,
 				1ACACF2F16A7FC1D0060DA49 /* Reachability */,
 				1ABEACD116A5CA500034D316 /* AFNetworking */,
 			);
@@ -353,10 +377,38 @@
 		1ACACF3C16A804210060DA49 /* Images */ = {
 			isa = PBXGroup;
 			children = (
+				375E21FD16A9465500F012AF /* Map */,
 				3784D01816A8649D00C75804 /* NavigationBar */,
 				37FA70A016A81FB50039E9C3 /* MainMenu */,
 			);
 			name = Images;
+			sourceTree = "<group>";
+		};
+		375E21F816A945DF00F012AF /* MapViewController */ = {
+			isa = PBXGroup;
+			children = (
+				375E21F616A945DA00F012AF /* MapPhqViewController.m */,
+				375E21F516A945DA00F012AF /* MapPhqViewController.h */,
+			);
+			name = MapViewController;
+			sourceTree = "<group>";
+		};
+		375E21F916A9460A00F012AF /* SMCalloutView */ = {
+			isa = PBXGroup;
+			children = (
+				375E21FA16A9462000F012AF /* SMCalloutView.h */,
+				375E21FB16A9462000F012AF /* SMCalloutView.m */,
+			);
+			name = SMCalloutView;
+			path = AFNetworking;
+			sourceTree = "<group>";
+		};
+		375E21FD16A9465500F012AF /* Map */ = {
+			isa = PBXGroup;
+			children = (
+				375E21FE16A9469400F012AF /* MAP_ok.png */,
+			);
+			name = Map;
 			sourceTree = "<group>";
 		};
 		3784D00C16A8362D00C75804 /* AgendaViewController */ = {
@@ -380,6 +432,11 @@
 		3784D01816A8649D00C75804 /* NavigationBar */ = {
 			isa = PBXGroup;
 			children = (
+				375E21F316A9458800F012AF /* back@2x.png */,
+				375E21F116A9439600F012AF /* back.png */,
+				375E21ED16A93EC100F012AF /* menu.png */,
+				375E21EB16A93EB200F012AF /* menu@2x.png */,
+				375E21E816A93C9A00F012AF /* navigationBar@2x.png */,
 				3784D02D16A87BA800C75804 /* navigationBar.png */,
 			);
 			name = NavigationBar;
@@ -480,11 +537,14 @@
 				1ACACF3716A804050060DA49 /* Parisine-BoldItalic.otf in Resources */,
 				1ACACF3816A804050060DA49 /* Parisine-Italic.otf in Resources */,
 				1ACACF3916A804050060DA49 /* Parisine-Regular.otf in Resources */,
-
 				3784D02E16A87BA800C75804 /* navigationBar.png in Resources */,
-
 				1A0B2D3E16A861E50060234E /* PhotographyViewController.xib in Resources */,
-
+				375E21E916A93C9A00F012AF /* navigationBar@2x.png in Resources */,
+				375E21EC16A93EB200F012AF /* menu@2x.png in Resources */,
+				375E21EE16A93EC100F012AF /* menu.png in Resources */,
+				375E21F216A9439600F012AF /* back.png in Resources */,
+				375E21F416A9458800F012AF /* back@2x.png in Resources */,
+				375E21FF16A9469400F012AF /* MAP_ok.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -519,6 +579,8 @@
 				1A0B2D3D16A861E50060234E /* PhotographyViewController.m in Sources */,
 				1A0B2D4D16A877330060234E /* ImageZoomable.m in Sources */,
 				1A0B2D5116A877EE0060234E /* DescriptionImageView.m in Sources */,
+				375E21F716A945DB00F012AF /* MapPhqViewController.m in Sources */,
+				375E21FC16A9462000F012AF /* SMCalloutView.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
