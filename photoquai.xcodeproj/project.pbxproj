@@ -39,6 +39,7 @@
 		1ACA0CD116A9FC720070EFB5 /* windwaker.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 1ACA0CD016A9FC720070EFB5 /* windwaker.mp3 */; };
 		1ACA0CD416A9FE080070EFB5 /* playrouge@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 1ACA0CD316A9FE080070EFB5 /* playrouge@2x.png */; };
 		1ACA0CD616A9FE1F0070EFB5 /* playrouge.png in Resources */ = {isa = PBXBuildFile; fileRef = 1ACA0CD516A9FE1F0070EFB5 /* playrouge.png */; };
+		1ACA0CDB16AA0CDE0070EFB5 /* DrawCircle.m in Sources */ = {isa = PBXBuildFile; fileRef = 1ACA0CDA16AA0CDE0070EFB5 /* DrawCircle.m */; };
 		1ACACF2716A7F5AB0060DA49 /* UIColor+RVB255.m in Sources */ = {isa = PBXBuildFile; fileRef = 1ACACF2616A7F5AB0060DA49 /* UIColor+RVB255.m */; };
 		1ACACF2E16A7FC110060DA49 /* Reachability.m in Sources */ = {isa = PBXBuildFile; fileRef = 1ACACF2D16A7FC110060DA49 /* Reachability.m */; };
 		1ACACF3116A7FC320060DA49 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1ACACF3016A7FC320060DA49 /* SystemConfiguration.framework */; };
@@ -127,6 +128,8 @@
 		1ACA0CD016A9FC720070EFB5 /* windwaker.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = windwaker.mp3; sourceTree = "<group>"; };
 		1ACA0CD316A9FE080070EFB5 /* playrouge@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "playrouge@2x.png"; sourceTree = "<group>"; };
 		1ACA0CD516A9FE1F0070EFB5 /* playrouge.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = playrouge.png; sourceTree = "<group>"; };
+		1ACA0CD916AA0CDE0070EFB5 /* DrawCircle.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DrawCircle.h; sourceTree = "<group>"; };
+		1ACA0CDA16AA0CDE0070EFB5 /* DrawCircle.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DrawCircle.m; sourceTree = "<group>"; };
 		1ACACF2516A7F5AB0060DA49 /* UIColor+RVB255.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIColor+RVB255.h"; sourceTree = "<group>"; };
 		1ACACF2616A7F5AB0060DA49 /* UIColor+RVB255.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIColor+RVB255.m"; sourceTree = "<group>"; };
 		1ACACF2C16A7FC110060DA49 /* Reachability.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Reachability.h; sourceTree = "<group>"; };
@@ -343,6 +346,7 @@
 		1ABEACCF16A5C9EF0034D316 /* Classes */ = {
 			isa = PBXGroup;
 			children = (
+				1ACA0CD816AA0CCB0070EFB5 /* DrawCircle */,
 				1A0D725616A9B99900A4DD4A /* Audiofiles */,
 				37C782EC16A9A724001D6295 /* PhotographerVignette */,
 				37C782ED16A9A734001D6295 /* ToolBarPhotography */,
@@ -404,6 +408,15 @@
 				1ACA0CD516A9FE1F0070EFB5 /* playrouge.png */,
 			);
 			name = AudioPlayer;
+			sourceTree = "<group>";
+		};
+		1ACA0CD816AA0CCB0070EFB5 /* DrawCircle */ = {
+			isa = PBXGroup;
+			children = (
+				1ACA0CD916AA0CDE0070EFB5 /* DrawCircle.h */,
+				1ACA0CDA16AA0CDE0070EFB5 /* DrawCircle.m */,
+			);
+			name = DrawCircle;
 			sourceTree = "<group>";
 		};
 		1ACACF2316A7F58B0060DA49 /* Categories */ = {
@@ -707,6 +720,7 @@
 				37C782E916A9A6A3001D6295 /* PhotographerVignette.m in Sources */,
 				37C782EA16A9A6A3001D6295 /* ToolBarPhotography.m in Sources */,
 				1ACA0CC316A9F7160070EFB5 /* AudioImageView.m in Sources */,
+				1ACA0CDB16AA0CDE0070EFB5 /* DrawCircle.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

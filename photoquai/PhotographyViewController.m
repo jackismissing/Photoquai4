@@ -186,7 +186,7 @@
                          animations:^{
                              toolBar.frame = CGRectMake(0, screenHeight - 118, toolBar.frame.size.width, toolBar.frame.size.height);
                              picture.transform=CGAffineTransformMakeScale(1, 1);
-                             picture.frame = CGRectMake(0, 10, screenWidth, screenHeight-100);
+                             picture.frame = CGRectMake(0, 0, screenWidth, screenHeight-100);
                          }completion:^(BOOL finished){}];
     }
     
@@ -249,7 +249,7 @@
             
         case 1: //Audio volet
         {
-            if (audioDescription.frame.origin.y == 150) {
+            if (audioDescription.frame.origin.y == 132) {
                 [UIView animateWithDuration:0.5
                                       delay:0
                                     options: UIViewAnimationCurveEaseOut
@@ -268,7 +268,7 @@
                                  animations:^{
                                      picture.transform=CGAffineTransformMakeScale(1.2, 1.2);
                                      descriptionPhotography.frame = CGRectMake(0, 500, descriptionPhotography.frame.size.width, descriptionPhotography.frame.size.height);
-                                     audioDescription.frame = CGRectMake(0, 150, audioDescription.frame.size.width, audioDescription.frame.size.height);
+                                     audioDescription.frame = CGRectMake(0, 132, audioDescription.frame.size.width, audioDescription.frame.size.height);
                                  }
                                  completion:^(BOOL finished){}];
                 
@@ -283,40 +283,20 @@
         }
             break;
             
+        case 2:
+        {
+            
+            
+            toolBar.infosImage.image = [UIImage imageNamed:@"informations"];
+            toolBar.infosLabel.textColor = [UIColor r:109 g:109 b:109 alpha:1];
+            toolBar.audioguideImage.image = [UIImage imageNamed:@"audioguide"];
+            toolBar.audioguideLabel.textColor = [UIColor r:109 g:109 b:109 alpha:1];
+        }
+            break;
+            
         default:
             break;
     } //Fin switch
-    
-    /*
-     //Cache la description
-     if (descriptionPhotography.frame.origin.y == 50) {
-     [UIView animateWithDuration:0.5
-     delay:0
-     options: UIViewAnimationCurveEaseOut
-     animations:^{
-     picture.transform=CGAffineTransformMakeScale(1, 1);
-     descriptionPhotography.frame = CGRectMake(0, 500, descriptionPhotography.frame.size.width, descriptionPhotography.frame.size.height);
-     descriptionPhotography.photographyDatas.contentOffset = CGPointMake(0, 0); //La description est cachée, on remet le scroll à l'endroit initial
-     }
-     completion:^(BOOL finished){}];
-     toolBar.infosImage.image = [UIImage imageNamed:@"informations"];
-     toolBar.infosLabel.textColor = [UIColor r:109 g:109 b:109 alpha:1];
-     }else if (descriptionPhotography.frame.origin.y == 500){
-     [UIView animateWithDuration:0.5
-     delay:0
-     options: UIViewAnimationCurveEaseOut
-     animations:^{
-     
-     picture.transform=CGAffineTransformMakeScale(1.2, 1.2);
-     descriptionPhotography.frame = CGRectMake(0, 50, descriptionPhotography.frame.size.width, descriptionPhotography.frame.size.height);
-     
-     }
-     completion:^(BOOL finished){}];
-     toolBar.infosImage.image = [UIImage imageNamed:@"informations-blanc"];
-     toolBar.infosLabel.textColor = [UIColor whiteColor];
-     //toolBar.locationImage.image = [UIImage imageNamed:@"geoloc-RO"];
-     */
-    
 }
 
 - (void)scrollViewDidScroll:(UIScrollView *)scrollView{

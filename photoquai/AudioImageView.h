@@ -7,14 +7,18 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "UIColor+RVB255.h"
 #import <QuartzCore/QuartzCore.h>
 #import <AVFoundation/AVFoundation.h>
 #import <AudioToolbox/AudioToolbox.h>
 
-@interface AudioImageView : UIView{
-    UIImageView *playPauseButton;
-    BOOL playPauseToggle;
+#import "UIColor+RVB255.h"
+#import "DrawCircle.h"
+
+@interface AudioImageView : UIView <AVAudioPlayerDelegate>{
+    DrawCircle *playPauseButton;
+    UIImageView *playPauseButtonImage;
+    NSTimer* playbackTimer;
+    BOOL soundIsPlayed;
 }
 
 - (id)initWithFrame:(CGRect)frame title:(NSString*)aTitle;

@@ -36,29 +36,53 @@
         [self addSubview:title];
         
         float soundY = title.frame.size.height + title.frame.origin.y + 15;
-        UIView *sound = [[UIView alloc] initWithFrame:CGRectMake(0, soundY, screenWidth, 200)];
+        UIView *sound = [[UIView alloc] initWithFrame:CGRectMake(0, soundY, screenWidth, 150)];
         CALayer *soundBottomBorder = [CALayer layer];
         soundBottomBorder.frame = CGRectMake(0.0f, sound.frame.size.height, self.frame.size.width, 1.0f);
         soundBottomBorder.backgroundColor = [UIColor r:233 g:233 b:233 alpha:1].CGColor;
         [self.layer addSublayer:soundBottomBorder];
+        [self addSubview:sound];
         
 #pragma mark - Audio Player
         NSString *soundFilePath = [[NSBundle mainBundle] pathForResource:@"windwaker" ofType:@"mp3"];
         NSURL *soundFileURL = [NSURL fileURLWithPath:soundFilePath];
         
         _audioPlayer = [[AVAudioPlayer alloc] initWithContentsOfURL:soundFileURL error:nil];
-        playPauseButton = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"pause"]];
+        
+        float playPauseButtonY = sound.frame.size.height + 15;
+        
+        playPauseButton = [[DrawCircle alloc] initWithFrame:CGRectMake(10, playPauseButtonY, 50, 50)];
+        [self addSubview:playPauseButton];
+        
+        playPauseButtonImage = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"playrouge"]];
+        playPauseButtonImage.frame = CGRectMake(25, playPauseButtonY + 13, 25, 25);
+        //playPauseButtonImage.backgroundColor = [UIColor redColor];
+        playPauseButtonImage.contentMode = UIViewContentModeScaleAspectFit;
+        
+        UITapGestureRecognizer *singleTap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(playPausePlayer)];
+        [playPauseButtonImage addGestureRecognizer:singleTap];
+        
+        [self addSubview:playPauseButtonImage];
+        
+        
+        // playPauseButton.backgroundColor = [UIColor cyanColor];
+        //playPauseButton.layer.borderColor = [UIColor redColor].CGColor;
+        
+    
+        
+        
+        soundIsPlayed = NO; //L'audio n'est pas joué par défaut;
     }
     return self;
 }
 
-/*
-// Only override drawRect: if you perform custom drawing.
-// An empty implementation adversely affects performance during animation.
-- (void)drawRect:(CGRect)rect
-{
-    // Drawing code
+
+- (void) playPausePlayer {
+    if(soundIsPlayed){
+        soundIsPlayed = NO;
+    }else{
+        soundIsPlayed = YES;
+    }
 }
-*/
 
 @end
