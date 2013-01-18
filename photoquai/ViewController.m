@@ -26,18 +26,23 @@
 {
     [super viewDidLoad];
 	// Do any additional setup after loading the view, typically from a nib.
+    
     [self setTitle:@"Photographies"];
     self.view.backgroundColor = [UIColor whiteColor];
+    
+    CGRect screenRect = [[UIScreen mainScreen] bounds];
+    CGFloat screenWidth = screenRect.size.width;
+    CGFloat screenHeight = screenRect.size.height;
     
     //Réinstancie la navigation bar, une fois le menu disparu
     [self.navigationController setNavigationBarHidden:NO animated:NO];
     self.navigationItem.hidesBackButton = YES;
     
-    thumbsContainer = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 320, 480)];
+    thumbsContainer = [[UIView alloc] initWithFrame:CGRectMake(0, 0, screenWidth, screenHeight)];
     thumbsContainer.userInteractionEnabled = YES;
     
     //penser à recalculer la hauteur quand il y aura la navigation bar
-    myScrollView = [[UIScrollView alloc] initWithFrame:CGRectMake(0, 0, 320, 440)];
+    myScrollView = [[UIScrollView alloc] initWithFrame:CGRectMake(0, 0, screenWidth, screenHeight-40)];
     myScrollView.showsHorizontalScrollIndicator = NO;
     myScrollView.showsVerticalScrollIndicator = NO;
     myScrollView.delegate = self;

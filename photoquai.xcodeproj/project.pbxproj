@@ -33,6 +33,12 @@
 		1ABEACEB16A5CA500034D316 /* AFURLConnectionOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = 1ABEACE016A5CA500034D316 /* AFURLConnectionOperation.m */; };
 		1ABEACEC16A5CA500034D316 /* AFXMLRequestOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = 1ABEACE216A5CA500034D316 /* AFXMLRequestOperation.m */; };
 		1ABEACED16A5CA500034D316 /* UIImageView+AFNetworking.m in Sources */ = {isa = PBXBuildFile; fileRef = 1ABEACE416A5CA500034D316 /* UIImageView+AFNetworking.m */; };
+		1ACA0CC316A9F7160070EFB5 /* AudioImageView.m in Sources */ = {isa = PBXBuildFile; fileRef = 1ACA0CC216A9F7160070EFB5 /* AudioImageView.m */; };
+		1ACA0CCD16A9FC0A0070EFB5 /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1ACA0CCC16A9FC0A0070EFB5 /* AudioToolbox.framework */; };
+		1ACA0CCF16A9FC140070EFB5 /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1ACA0CCE16A9FC140070EFB5 /* AVFoundation.framework */; };
+		1ACA0CD116A9FC720070EFB5 /* windwaker.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 1ACA0CD016A9FC720070EFB5 /* windwaker.mp3 */; };
+		1ACA0CD416A9FE080070EFB5 /* playrouge@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 1ACA0CD316A9FE080070EFB5 /* playrouge@2x.png */; };
+		1ACA0CD616A9FE1F0070EFB5 /* playrouge.png in Resources */ = {isa = PBXBuildFile; fileRef = 1ACA0CD516A9FE1F0070EFB5 /* playrouge.png */; };
 		1ACACF2716A7F5AB0060DA49 /* UIColor+RVB255.m in Sources */ = {isa = PBXBuildFile; fileRef = 1ACACF2616A7F5AB0060DA49 /* UIColor+RVB255.m */; };
 		1ACACF2E16A7FC110060DA49 /* Reachability.m in Sources */ = {isa = PBXBuildFile; fileRef = 1ACACF2D16A7FC110060DA49 /* Reachability.m */; };
 		1ACACF3116A7FC320060DA49 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1ACACF3016A7FC320060DA49 /* SystemConfiguration.framework */; };
@@ -114,6 +120,13 @@
 		1ABEACE216A5CA500034D316 /* AFXMLRequestOperation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AFXMLRequestOperation.m; sourceTree = "<group>"; };
 		1ABEACE316A5CA500034D316 /* UIImageView+AFNetworking.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImageView+AFNetworking.h"; sourceTree = "<group>"; };
 		1ABEACE416A5CA500034D316 /* UIImageView+AFNetworking.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImageView+AFNetworking.m"; sourceTree = "<group>"; };
+		1ACA0CC116A9F7160070EFB5 /* AudioImageView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AudioImageView.h; sourceTree = "<group>"; };
+		1ACA0CC216A9F7160070EFB5 /* AudioImageView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AudioImageView.m; sourceTree = "<group>"; };
+		1ACA0CCC16A9FC0A0070EFB5 /* AudioToolbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioToolbox.framework; path = System/Library/Frameworks/AudioToolbox.framework; sourceTree = SDKROOT; };
+		1ACA0CCE16A9FC140070EFB5 /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
+		1ACA0CD016A9FC720070EFB5 /* windwaker.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = windwaker.mp3; sourceTree = "<group>"; };
+		1ACA0CD316A9FE080070EFB5 /* playrouge@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "playrouge@2x.png"; sourceTree = "<group>"; };
+		1ACA0CD516A9FE1F0070EFB5 /* playrouge.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = playrouge.png; sourceTree = "<group>"; };
 		1ACACF2516A7F5AB0060DA49 /* UIColor+RVB255.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIColor+RVB255.h"; sourceTree = "<group>"; };
 		1ACACF2616A7F5AB0060DA49 /* UIColor+RVB255.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIColor+RVB255.m"; sourceTree = "<group>"; };
 		1ACACF2C16A7FC110060DA49 /* Reachability.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Reachability.h; sourceTree = "<group>"; };
@@ -179,6 +192,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				1ACA0CCF16A9FC140070EFB5 /* AVFoundation.framework in Frameworks */,
+				1ACA0CCD16A9FC0A0070EFB5 /* AudioToolbox.framework in Frameworks */,
 				375E220516A948E000F012AF /* MapKit.framework in Frameworks */,
 				1A0B2D3016A859020060234E /* QuartzCore.framework in Frameworks */,
 				1ACACF3116A7FC320060DA49 /* SystemConfiguration.framework in Frameworks */,
@@ -241,6 +256,8 @@
 		1A0D725616A9B99900A4DD4A /* Audiofiles */ = {
 			isa = PBXGroup;
 			children = (
+				1ACA0CC116A9F7160070EFB5 /* AudioImageView.h */,
+				1ACA0CC216A9F7160070EFB5 /* AudioImageView.m */,
 			);
 			name = Audiofiles;
 			sourceTree = "<group>";
@@ -248,6 +265,8 @@
 		1ABEAC9616A5C34E0034D316 = {
 			isa = PBXGroup;
 			children = (
+				1ACA0CCE16A9FC140070EFB5 /* AVFoundation.framework */,
+				1ACA0CCC16A9FC0A0070EFB5 /* AudioToolbox.framework */,
 				375E220416A948E000F012AF /* MapKit.framework */,
 				1ABEACAB16A5C34E0034D316 /* photoquai */,
 				1ABEACA416A5C34E0034D316 /* Frameworks */,
@@ -314,6 +333,7 @@
 		1ABEACCC16A5C9420034D316 /* Ressources */ = {
 			isa = PBXGroup;
 			children = (
+				1ACA0CD216A9FC770070EFB5 /* Sons */,
 				1ACACF3C16A804210060DA49 /* Images */,
 				1ACACF3B16A8041B0060DA49 /* Fonts */,
 			);
@@ -323,14 +343,9 @@
 		1ABEACCF16A5C9EF0034D316 /* Classes */ = {
 			isa = PBXGroup;
 			children = (
-
 				1A0D725616A9B99900A4DD4A /* Audiofiles */,
-				1AFB25F316A9528B00BFEE43 /* ToolBarPhotography */,
-				1AF33FB816A8A32200778037 /* PhotographerVignette */,
-
 				37C782EC16A9A724001D6295 /* PhotographerVignette */,
 				37C782ED16A9A734001D6295 /* ToolBarPhotography */,
-
 				1A0B2D5216A877F70060234E /* DescriptionImageView */,
 				1A0B2D4E16A877420060234E /* ImageZoomable */,
 				1A0B2D2A16A852340060234E /* ImageWall */,
@@ -374,6 +389,23 @@
 			path = AFNetworking;
 			sourceTree = "<group>";
 		};
+		1ACA0CD216A9FC770070EFB5 /* Sons */ = {
+			isa = PBXGroup;
+			children = (
+				1ACA0CD016A9FC720070EFB5 /* windwaker.mp3 */,
+			);
+			name = Sons;
+			sourceTree = "<group>";
+		};
+		1ACA0CD716A9FE240070EFB5 /* AudioPlayer */ = {
+			isa = PBXGroup;
+			children = (
+				1ACA0CD316A9FE080070EFB5 /* playrouge@2x.png */,
+				1ACA0CD516A9FE1F0070EFB5 /* playrouge.png */,
+			);
+			name = AudioPlayer;
+			sourceTree = "<group>";
+		};
 		1ACACF2316A7F58B0060DA49 /* Categories */ = {
 			isa = PBXGroup;
 			children = (
@@ -414,6 +446,7 @@
 		1ACACF3C16A804210060DA49 /* Images */ = {
 			isa = PBXGroup;
 			children = (
+				1ACA0CD716A9FE240070EFB5 /* AudioPlayer */,
 				37C7831716A9B7CF001D6295 /* Share */,
 				37C7830616A9AD0D001D6295 /* Favorites */,
 				375E21FD16A9465500F012AF /* Map */,
@@ -632,6 +665,9 @@
 				37C7831616A9B5AC001D6295 /* etoilepush.png in Resources */,
 				37C7831916A9B841001D6295 /* share@2X.png in Resources */,
 				37C7831B16A9B851001D6295 /* share.png in Resources */,
+				1ACA0CD116A9FC720070EFB5 /* windwaker.mp3 in Resources */,
+				1ACA0CD416A9FE080070EFB5 /* playrouge@2x.png in Resources */,
+				1ACA0CD616A9FE1F0070EFB5 /* playrouge.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -670,6 +706,7 @@
 				375E21FC16A9462000F012AF /* SMCalloutView.m in Sources */,
 				37C782E916A9A6A3001D6295 /* PhotographerVignette.m in Sources */,
 				37C782EA16A9A6A3001D6295 /* ToolBarPhotography.m in Sources */,
+				1ACA0CC316A9F7160070EFB5 /* AudioImageView.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

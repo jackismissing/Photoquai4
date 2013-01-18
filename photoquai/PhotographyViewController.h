@@ -12,11 +12,16 @@
 #import "AppDelegate.h"
 #import "UIColor+RVB255.h"
 #import "ToolBarPhotography.h"
+#import "AudioImageView.h"
 
 @interface PhotographyViewController : UIViewController <UIScrollViewDelegate>{
     DescriptionImageView *descriptionPhotography;
+    AudioImageView *audioDescription;
+    
     ImageZoomable *picture;
     ToolBarPhotography *toolBar;
+    BOOL elementsNavigationAreHidden;
+    
 }
 
 @property (nonatomic, assign) int idPicture;
