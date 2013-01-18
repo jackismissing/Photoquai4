@@ -8,11 +8,11 @@
 
 #import <UIKit/UIKit.h>
 
-@interface DescriptionImageView : UIView{
+@interface DescriptionImageView : UIView <UIScrollViewDelegate>{
     
     NSString *title;
     NSString *description;
-    NSDate   *date;
+
     NSString *place;
     
     CGFloat start;
@@ -20,7 +20,7 @@
 }
 
 //Constructeur
-- (id)initWithFrame:(CGRect)frame description:(NSString*)description title:(NSString*)title date:(NSDate*)date place:(NSString*)place;
+- (id)initWithFrame:(CGRect)frame description:(NSString*)aDescription title:(NSString*)aTitle place:(NSString*)aPlace;
 
 //Getters
 - (NSString *) title;

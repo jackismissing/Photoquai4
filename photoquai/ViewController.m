@@ -26,9 +26,8 @@
 {
     [super viewDidLoad];
 	// Do any additional setup after loading the view, typically from a nib.
-    
-
-    
+    [self setTitle:@"Photographies"];
+    self.view.backgroundColor = [UIColor whiteColor];
     
     //Réinstancie la navigation bar, une fois le menu disparu
     [self.navigationController setNavigationBarHidden:NO animated:NO];
@@ -247,7 +246,13 @@
 - (void)accessPicture:(UIGestureRecognizer *)gesture{
     
     UIView *index = gesture.view;
-
+    
+    
+    //UIBarButtonItem *backButton = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"backButton"] style:UIBarButtonItemStylePlain target:nil action:nil];
+    //UIBarButtonItem *backButton = [[UIBarButtonItem alloc] initWithCustomView:v];
+    //backButton.image = [UIImage imageNamed:@"backButton"];
+    
+    //[self.navigationItem setBackBarButtonItem: backButton];
     
     PhotographyViewController *imageViewController = [[PhotographyViewController alloc] initWithNibName:@"PhotographyViewController" bundle:nil];
     //imageViewController.name = img;

@@ -40,6 +40,11 @@
 		1ACACF3716A804050060DA49 /* Parisine-BoldItalic.otf in Resources */ = {isa = PBXBuildFile; fileRef = 1ACACF3316A804050060DA49 /* Parisine-BoldItalic.otf */; };
 		1ACACF3816A804050060DA49 /* Parisine-Italic.otf in Resources */ = {isa = PBXBuildFile; fileRef = 1ACACF3416A804050060DA49 /* Parisine-Italic.otf */; };
 		1ACACF3916A804050060DA49 /* Parisine-Regular.otf in Resources */ = {isa = PBXBuildFile; fileRef = 1ACACF3516A804050060DA49 /* Parisine-Regular.otf */; };
+		1AF33FB616A8A31C00778037 /* PhotographerVignette.m in Sources */ = {isa = PBXBuildFile; fileRef = 1AF33FB516A8A31C00778037 /* PhotographerVignette.m */; };
+		1AF33FC416A8BAC300778037 /* arrowArtistVignette.png in Resources */ = {isa = PBXBuildFile; fileRef = 1AF33FC216A8BAC300778037 /* arrowArtistVignette.png */; };
+		1AF33FC516A8BAC300778037 /* arrowArtistVignette@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 1AF33FC316A8BAC300778037 /* arrowArtistVignette@2x.png */; };
+		1AF33FCC16A8C63E00778037 /* backButton@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 1AF33FCA16A8C63E00778037 /* backButton@2x.png */; };
+		1AF33FCD16A8C63E00778037 /* backButton.png in Resources */ = {isa = PBXBuildFile; fileRef = 1AF33FCB16A8C63E00778037 /* backButton.png */; };
 		375F932216A8216D00EC3523 /* rotaryWheel.h in Sources */ = {isa = PBXBuildFile; fileRef = 37FA709916A81FAA0039E9C3 /* rotaryWheel.h */; };
 		375F932516A8218500EC3523 /* rotaryWheel.m in Sources */ = {isa = PBXBuildFile; fileRef = 375F932416A8218500EC3523 /* rotaryWheel.m */; };
 		375F933B16A8327F00EC3523 /* AgendaController.m in Sources */ = {isa = PBXBuildFile; fileRef = 375F933A16A8323D00EC3523 /* AgendaController.m */; };
@@ -104,6 +109,12 @@
 		1ACACF3316A804050060DA49 /* Parisine-BoldItalic.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Parisine-BoldItalic.otf"; sourceTree = "<group>"; };
 		1ACACF3416A804050060DA49 /* Parisine-Italic.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Parisine-Italic.otf"; sourceTree = "<group>"; };
 		1ACACF3516A804050060DA49 /* Parisine-Regular.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Parisine-Regular.otf"; sourceTree = "<group>"; };
+		1AF33FB416A8A31C00778037 /* PhotographerVignette.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PhotographerVignette.h; sourceTree = "<group>"; };
+		1AF33FB516A8A31C00778037 /* PhotographerVignette.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PhotographerVignette.m; sourceTree = "<group>"; };
+		1AF33FC216A8BAC300778037 /* arrowArtistVignette.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = arrowArtistVignette.png; sourceTree = "<group>"; };
+		1AF33FC316A8BAC300778037 /* arrowArtistVignette@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "arrowArtistVignette@2x.png"; sourceTree = "<group>"; };
+		1AF33FCA16A8C63E00778037 /* backButton@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "backButton@2x.png"; sourceTree = "<group>"; };
+		1AF33FCB16A8C63E00778037 /* backButton.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = backButton.png; sourceTree = "<group>"; };
 		375F932416A8218500EC3523 /* rotaryWheel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = rotaryWheel.m; sourceTree = "<group>"; };
 		375F932616A822C800EC3523 /* bg.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = bg.png; sourceTree = "<group>"; };
 		375F932716A822C800EC3523 /* centerButton.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = centerButton.png; sourceTree = "<group>"; };
@@ -271,6 +282,7 @@
 		1ABEACCF16A5C9EF0034D316 /* Classes */ = {
 			isa = PBXGroup;
 			children = (
+				1AF33FB816A8A32200778037 /* PhotographerVignette */,
 				1A0B2D5216A877F70060234E /* DescriptionImageView */,
 				1A0B2D4E16A877420060234E /* ImageZoomable */,
 				1A0B2D2A16A852340060234E /* ImageWall */,
@@ -353,10 +365,29 @@
 		1ACACF3C16A804210060DA49 /* Images */ = {
 			isa = PBXGroup;
 			children = (
+				1AF33FC116A8BA7F00778037 /* Vignette photographer */,
 				3784D01816A8649D00C75804 /* NavigationBar */,
 				37FA70A016A81FB50039E9C3 /* MainMenu */,
 			);
 			name = Images;
+			sourceTree = "<group>";
+		};
+		1AF33FB816A8A32200778037 /* PhotographerVignette */ = {
+			isa = PBXGroup;
+			children = (
+				1AF33FB416A8A31C00778037 /* PhotographerVignette.h */,
+				1AF33FB516A8A31C00778037 /* PhotographerVignette.m */,
+			);
+			name = PhotographerVignette;
+			sourceTree = "<group>";
+		};
+		1AF33FC116A8BA7F00778037 /* Vignette photographer */ = {
+			isa = PBXGroup;
+			children = (
+				1AF33FC216A8BAC300778037 /* arrowArtistVignette.png */,
+				1AF33FC316A8BAC300778037 /* arrowArtistVignette@2x.png */,
+			);
+			name = "Vignette photographer";
 			sourceTree = "<group>";
 		};
 		3784D00C16A8362D00C75804 /* AgendaViewController */ = {
@@ -381,6 +412,8 @@
 			isa = PBXGroup;
 			children = (
 				3784D02D16A87BA800C75804 /* navigationBar.png */,
+				1AF33FCA16A8C63E00778037 /* backButton@2x.png */,
+				1AF33FCB16A8C63E00778037 /* backButton.png */,
 			);
 			name = NavigationBar;
 			sourceTree = "<group>";
@@ -480,11 +513,12 @@
 				1ACACF3716A804050060DA49 /* Parisine-BoldItalic.otf in Resources */,
 				1ACACF3816A804050060DA49 /* Parisine-Italic.otf in Resources */,
 				1ACACF3916A804050060DA49 /* Parisine-Regular.otf in Resources */,
-
 				3784D02E16A87BA800C75804 /* navigationBar.png in Resources */,
-
 				1A0B2D3E16A861E50060234E /* PhotographyViewController.xib in Resources */,
-
+				1AF33FC416A8BAC300778037 /* arrowArtistVignette.png in Resources */,
+				1AF33FC516A8BAC300778037 /* arrowArtistVignette@2x.png in Resources */,
+				1AF33FCC16A8C63E00778037 /* backButton@2x.png in Resources */,
+				1AF33FCD16A8C63E00778037 /* backButton.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -519,6 +553,7 @@
 				1A0B2D3D16A861E50060234E /* PhotographyViewController.m in Sources */,
 				1A0B2D4D16A877330060234E /* ImageZoomable.m in Sources */,
 				1A0B2D5116A877EE0060234E /* DescriptionImageView.m in Sources */,
+				1AF33FB616A8A31C00778037 /* PhotographerVignette.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

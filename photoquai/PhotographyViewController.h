@@ -10,11 +10,13 @@
 #import "DescriptionImageView.h"
 #import "ImageZoomable.h"
 #import "AppDelegate.h"
+#import "UIColor+RVB255.h"
 
 @interface PhotographyViewController : UIViewController{
-    DescriptionImageView *descriptionImage;
+    DescriptionImageView *descriptionPhotography;
 }
 
 @property (nonatomic, assign) int idPicture;
+
 
 @end
