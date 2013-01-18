@@ -54,9 +54,29 @@
     self.navigationItem.title = @"Informations";
     //self.navigationItem.tintColor = [UIColor whiteColor];
     
-    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemBookmarks target:self action:@selector(showMenu)];
 
+}
 
+- (void)viewWillAppear:(BOOL)animated
+{
+    //Réinstancie la navigation bar, une fois le menu disparu
+    //self.navigationController.navigationBar.tintColor = [UIColor r:219 g:25 b:23 alpha:1];
+    [super viewWillAppear:animated];
+    [self.navigationController.navigationBar setBackgroundImage:[UIImage imageNamed:@"navigationBar.png"] forBarMetrics:UIBarMetricsDefault];
+    
+    UIImage* image = [UIImage imageNamed:@"menu.png"];
+    CGRect frame = CGRectMake(0, 0, image.size.width, image.size.height);
+    UIButton *menuButton = [[UIButton alloc] initWithFrame:frame];
+    [menuButton setBackgroundImage:image forState:UIControlStateNormal];
+    //[menuButton setShowsTouchWhenHighlighted:YES];
+    
+    [menuButton addTarget:self action:@selector(showMenu) forControlEvents:UIControlEventTouchUpInside];
+    
+    UIBarButtonItem* menuBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:menuButton];
+    [self.navigationItem setLeftBarButtonItem:menuBarButtonItem];
+    
+    
+    
 }
 
 - (void)didReceiveMemoryWarning

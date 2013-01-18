@@ -33,9 +33,6 @@
     [self.navigationController setNavigationBarHidden:NO animated:NO];
     self.navigationItem.hidesBackButton = YES;
     
-    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemBookmarks target:self action:@selector(showMenu)];
-
-    
     thumbsContainer = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 320, 480)];
     thumbsContainer.userInteractionEnabled = YES;
     
@@ -58,8 +55,6 @@
     // Post a notification to loginComplete
     [[NSNotificationCenter defaultCenter] postNotificationName:@"loginComplete" object:reachabilityInfo];
     
-    [self.navigationController setNavigationBarHidden:NO animated:NO];
-    self.navigationItem.hidesBackButton = YES;
     
 }
 
@@ -69,8 +64,23 @@
     //self.navigationController.navigationBar.tintColor = [UIColor r:219 g:25 b:23 alpha:1];
     [super viewWillAppear:animated];
     [self.navigationController.navigationBar setBackgroundImage:[UIImage imageNamed:@"navigationBar.png"] forBarMetrics:UIBarMetricsDefault];
-     
-    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemBookmarks target:self action:@selector(showMenu)];
+    
+
+    UIImage* image = [UIImage imageNamed:@"menu.png"];
+    CGRect frame = CGRectMake(0, 0, image.size.width, image.size.height);
+    UIButton *menuButton = [[UIButton alloc] initWithFrame:frame];
+    [menuButton setBackgroundImage:image forState:UIControlStateNormal];
+    //[menuButton setShowsTouchWhenHighlighted:YES];
+    
+    [menuButton addTarget:self action:@selector(showMenu) forControlEvents:UIControlEventTouchUpInside];
+    
+    UIBarButtonItem* menuBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:menuButton];
+    [self.navigationItem setLeftBarButtonItem:menuBarButtonItem];
+
+
+   
+
+
 }
 
 //Détecte la connexion d'un utilisateur

@@ -68,7 +68,16 @@
 
 @property int index;
 
+@property UILabel *dateLabel;
+@property UILabel *headerTitle;
+
+@property BOOL didLoad;
+
 - (void)showMenu;
+
+- (void)showTable;
+
+- (void)back;
 
 
 

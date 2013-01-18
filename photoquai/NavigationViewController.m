@@ -10,6 +10,7 @@
 #import "rotaryWheel.h"
 #import "InfoViewController.h"
 #import "ViewController.h"
+#import "MapPhqViewController.h"
 
 @interface NavigationViewController ()
 
@@ -97,7 +98,7 @@
     
     if(selectedSection == 2) {
         
-        NSLog(@"2");
+        //NSLog(@"2");
         
         
         
@@ -125,21 +126,18 @@
     
     if(selectedSection == 3) {
         
-        //NSLog(@"test");
+        MapPhqViewController *mapView = [[MapPhqViewController alloc] init];
         
-        /*
+        //UINavigationController *agendaNavigationController = [[UINavigationController alloc] initWithRootViewController:agendaView];
         
-        MapPhqViewController *mapView = [[MapPhqViewController alloc] init] ;
-        
-        UINavigationController *navigationController = [[UINavigationController alloc] initWithRootViewController:mapView];
-        
-        [navigationController setNavigationBarHidden:YES];
+        //[agendaNavigationController setNavigationBarHidden:YES];
         
         // [self presentViewController:navigationController animated:YES completion:nil];
         
-        [self.navigationController pushViewController:mapView animated:YES];
         
-        */
+        
+        [self.navigationController pushViewController:mapView animated:YES];
+
         
     }
     

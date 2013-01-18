@@ -16,12 +16,86 @@
 
 @implementation PhotographyViewController
 
-- (void)viewWillAppear:(BOOL)animated {
-    
+- (void)viewWillAppear:(BOOL)animated
+{
+    //Réinstancie la navigation bar, une fois le menu disparu
+    //self.navigationController.navigationBar.tintColor = [UIColor r:219 g:25 b:23 alpha:1];
     [super viewWillAppear:animated];
     
+    [self.navigationController.navigationBar setBackgroundImage:[UIImage imageNamed:@"navigationBar-photographie.png"] forBarMetrics:UIBarMetricsDefault];
     
-    //NSLog(@"1 %f",descriptionPhotography.frame.size.height);
+    UIImage *buttonImage = [UIImage imageNamed:@"back.png"];
+    
+    UIButton *button = [UIButton buttonWithType:UIButtonTypeCustom];
+    
+    [button setImage:buttonImage forState:UIControlStateNormal];
+    
+    button.frame = CGRectMake(0, 0, buttonImage.size.width, buttonImage.size.height);
+    
+    [button addTarget:self action:@selector(back) forControlEvents:UIControlEventTouchUpInside];
+    
+    UIBarButtonItem *customBarItem = [[UIBarButtonItem alloc] initWithCustomView:button];
+    
+    self.navigationItem.leftBarButtonItem = customBarItem;
+    
+    
+    
+    
+    
+    // Boutton favoris
+    
+    UIImage *favouriteButtonImage = [UIImage imageNamed:@"etoilepush.png"];
+    
+    
+    
+    
+    // Boutton shared
+    
+    UIImage *shareButtonImage = [UIImage imageNamed:@"share.png"];
+    
+        
+    // rightNavigationButtons
+    
+    UIView *rightNavigationButtons = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 84, shareButtonImage.size.height)];
+    
+    //rightNavigationButtons.clipsToBounds = YES;
+    
+    //rightNavigationButtons.backgroundColor =  [UIColor grayColor];
+    
+    //rightNavigationButtons.center = CGPointMake(-30, 0);
+    
+    //
+    
+    UIButton *shareButton = [UIButton buttonWithType:UIButtonTypeCustom];
+    
+    [shareButton setImage:shareButtonImage forState:UIControlStateNormal];
+    
+    shareButton.frame = CGRectMake(favouriteButtonImage.size.width, 0, shareButtonImage.size.width, shareButtonImage.size.height);
+    
+    [shareButton addTarget:self action:@selector(addToFavorite) forControlEvents:UIControlEventTouchUpInside];
+    
+    //UIBarButtonItem *shareCustomBarItem = [[UIBarButtonItem alloc] initWithCustomView:shareButton];
+    
+    //
+    
+    UIButton *favouriteButton = [UIButton buttonWithType:UIButtonTypeCustom];
+    
+    [favouriteButton setImage:favouriteButtonImage forState:UIControlStateNormal];
+    
+    favouriteButton.frame = CGRectMake(0, rightNavigationButtons.frame.size.height/2 - favouriteButtonImage.size.height/2, favouriteButtonImage.size.width, favouriteButtonImage.size.height);
+    
+    [favouriteButton addTarget:self action:@selector(addToFavorite) forControlEvents:UIControlEventTouchUpInside];
+    
+    //UIBarButtonItem *favouriteCustomBarItem = [[UIBarButtonItem alloc] initWithCustomView:favouriteButton];
+    
+    [rightNavigationButtons addSubview:favouriteButton];
+    
+    [rightNavigationButtons addSubview:shareButton];
+    
+    UIBarButtonItem *rightNavigationBarItems = [[UIBarButtonItem alloc] initWithCustomView:rightNavigationButtons];
+    
+    self.navigationItem.rightBarButtonItem = rightNavigationBarItems;
+
     [UIView animateWithDuration:0.5
                           delay:0.5
                         options: UIViewAnimationCurveEaseOut
@@ -29,13 +103,6 @@
                          descriptionPhotography.frame = CGRectMake(0, 500, descriptionPhotography.frame.size.width, descriptionPhotography.frame.size.height);
                      }
                      completion:^(BOOL finished){}];
-    
-    UIBarButtonItem *barButton = [[UIBarButtonItem alloc] initWithTitle:@"title"
-                                                                  style:UIBarButtonItemStyleBordered
-                                                                 target:self
-                                                                 action:@selector(someMethod)];
-    
-    self.navigationController.navigationItem.rightBarButtonItem = barButton;
 }
 
 - (void)viewDidLoad
@@ -44,6 +111,8 @@
     // Do any additional setup after loading the view from its nib.
     AppDelegate *appdelegate = [[UIApplication sharedApplication] delegate];
     self.view.backgroundColor = [UIColor r:9 g:9 b:9 alpha:1];
+    
+    self.navigationItem.hidesBackButton = YES;
     
     [self setTitle:@"Title"];
     
@@ -68,6 +137,7 @@
     CGFloat screenHeight = screenRect.size.height;
     
     picture = [[ImageZoomable alloc] initWithImageURL:[NSURL URLWithString:linkImg]];
+
     picture.transform = CGAffineTransformMakeScale(1, 1);
     picture.userInteractionEnabled = YES;
     
@@ -89,6 +159,16 @@
     [self.view addSubview:toolBar];
 }
 
+- (void)addToFavorite
+{
+    
+}
+
+-(void)back {
+    
+    [self.navigationController popViewControllerAnimated:YES];
+}
+
 - (void) accessPhotographerView:(NSNotification *)notification{
 
     NSLog(@"%@", [notification object]);
@@ -96,6 +176,16 @@
 
 - (void) showImageDescription{
     
+    [UIView animateWithDuration:0.5
+                          delay:0
+                        options:UIViewAnimationOptionBeginFromCurrentState
+                     animations:(void (^)(void)) ^{
+                         
+                         
+                     }
+                     completion:^(BOOL finished){
+                         
+                     }];
     //Cache la description
     if (descriptionPhotography.frame.origin.y == 50) {
         [UIView animateWithDuration:0.5
@@ -114,8 +204,10 @@
                               delay:0
                             options: UIViewAnimationCurveEaseOut
                          animations:^{
+
                              picture.transform=CGAffineTransformMakeScale(1.2, 1.2);
                              descriptionPhotography.frame = CGRectMake(0, 50, descriptionPhotography.frame.size.width, descriptionPhotography.frame.size.height);
+
                          }
                          completion:^(BOOL finished){}];
         toolBar.infosImage.image = [UIImage imageNamed:@"informations-blanc"];
@@ -123,6 +215,12 @@
         //toolBar.locationImage.image = [UIImage imageNamed:@"geoloc-RO"];
     }
 }
+
+- (void)scrollViewDidScroll:(UIScrollView *)scrollView{
+    NSLog(@"ok");
+    
+}
+
 
 - (void)didReceiveMemoryWarning
 {
