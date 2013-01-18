@@ -50,62 +50,62 @@
     
     //informations.backgroundColor = [UIColor redColor];
     
-    UIImageView *infosImage = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, 23, 23)];
-    infosImage.frame = CGRectMake(((informationsView.frame.size.width - infosImage.frame.size.width) / 2), -5, 25, 25);
-    infosImage.image = [UIImage imageNamed:@"informations"];
-    infosImage.contentMode = UIViewContentModeScaleAspectFit;
+    _infosImage = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, 23, 23)];
+    _infosImage.frame = CGRectMake(((informationsView.frame.size.width - _infosImage.frame.size.width) / 2), -5, 25, 25);
+    _infosImage.image = [UIImage imageNamed:@"informations"];
+    _infosImage.contentMode = UIViewContentModeScaleAspectFit;
     
     NSString * myText = @"Informations";
     
-    CGRect labelFrame = CGRectMake(0, infosImage.frame.origin.y + infosImage.frame.size.height, 55, 15);
-    UILabel *infosLabel = [[UILabel alloc] initWithFrame:labelFrame];
-    infosLabel.text = myText;
+    CGRect labelFrame = CGRectMake(0, _infosImage.frame.origin.y + _infosImage.frame.size.height, 55, 15);
+    _infosLabel = [[UILabel alloc] initWithFrame:labelFrame];
+    _infosLabel.text = myText;
     //infosLabel.backgroundColor = [UIColor whiteColor];
-    [infosLabel setFrame:CGRectMake(((informationsView.frame.size.width - infosLabel.frame.size.width) / 2), infosImage.frame.origin.y + infosImage.frame.size.height, CGRectGetWidth(infosLabel.frame), CGRectGetHeight(infosLabel.frame))];
-    infosLabel.font = formatLabels;
-    infosLabel.backgroundColor = [UIColor clearColor];
-    infosLabel.textColor = [UIColor r:109 g:109 b:109 alpha:1];
-    infosLabel.shadowColor = [UIColor blackColor];
-    infosLabel.shadowOffset = CGSizeMake(0, -1);
+    [_infosLabel setFrame:CGRectMake(((informationsView.frame.size.width - _infosLabel.frame.size.width) / 2), _infosImage.frame.origin.y + _infosImage.frame.size.height, CGRectGetWidth(_infosLabel.frame), CGRectGetHeight(_infosLabel.frame))];
+    _infosLabel.font = formatLabels;
+    _infosLabel.backgroundColor = [UIColor clearColor];
+    _infosLabel.textColor = [UIColor r:109 g:109 b:109 alpha:1];
+    _infosLabel.shadowColor = [UIColor blackColor];
+    _infosLabel.shadowOffset = CGSizeMake(0, -1);
     
     UITapGestureRecognizer *informationsAction = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(informationsAction:)];
     [informationsView addGestureRecognizer:informationsAction];
 
     [informationsView sizeToFit];
-    [informationsView addSubview:infosLabel];
-    [informationsView addSubview:infosImage];
+    [informationsView addSubview:_infosLabel];
+    [informationsView addSubview:_infosImage];
     [self addSubview:informationsView];
     
 #pragma mark - audioguide tab
     UIView *audioguideView = [[UIView alloc] initWithFrame:CGRectMake(informationsView.frame.origin.x + informationsView.frame.size.width + 7, marginTop - 2, viewWidth, 35)];
     //audioguideView.backgroundColor = [UIColor whiteColor];
     
-    UIImageView *audioguideImage = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, 25, 25)];
-    audioguideImage.frame = CGRectMake(((audioguideView.frame.size.width - audioguideImage.frame.size.width) / 2), -5, 25, 25);
-    audioguideImage.image = [UIImage imageNamed:@"audioguide"];
-    audioguideImage.contentMode = UIViewContentModeScaleAspectFit;
+    _audioguideImage = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, 25, 25)];
+    _audioguideImage.frame = CGRectMake(((audioguideView.frame.size.width - _audioguideImage.frame.size.width) / 2), -5, 25, 25);
+    _audioguideImage.image = [UIImage imageNamed:@"audioguide"];
+    _audioguideImage.contentMode = UIViewContentModeScaleAspectFit;
     
     NSString * audioguideText = @"Audio Description";
     
-    CGRect labelAudioGuideFrame = CGRectMake(7, audioguideImage.frame.origin.y + audioguideImage.frame.size.height + 2, 73, 15);
+    CGRect labelAudioGuideFrame = CGRectMake(7, _audioguideImage.frame.origin.y + _audioguideImage.frame.size.height + 2, 73, 15);
     
-    UILabel *audioguideLabel = [[UILabel alloc] initWithFrame:labelAudioGuideFrame];
-    audioguideLabel.text = audioguideText;
-    audioguideLabel.textColor = [UIColor r:109 g:109 b:109 alpha:1];
-    audioguideLabel.shadowColor = [UIColor blackColor];
-    audioguideLabel.shadowOffset = CGSizeMake(0, -1);
+    _audioguideLabel = [[UILabel alloc] initWithFrame:labelAudioGuideFrame];
+    _audioguideLabel.text = audioguideText;
+    _audioguideLabel.textColor = [UIColor r:109 g:109 b:109 alpha:1];
+    _audioguideLabel.shadowColor = [UIColor blackColor];
+    _audioguideLabel.shadowOffset = CGSizeMake(0, -1);
 
     //[audioguideLabel setFrame:CGRectMake(((audioguideView.frame.size.width - audioguideLabel.frame.size.width) / 2), infosImage.frame.origin.y + infosImage.frame.size.height, CGRectGetWidth(infosLabel.frame), CGRectGetHeight(audioguideLabel.frame))];
-    audioguideLabel.font = formatLabels;
-    audioguideLabel.backgroundColor = [UIColor clearColor];
+    _audioguideLabel.font = formatLabels;
+    _audioguideLabel.backgroundColor = [UIColor clearColor];
     
     UITapGestureRecognizer *audioguideAction = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(audioguideAction:)];
     [audioguideView addGestureRecognizer:audioguideAction];
     
     //[audioguideLabel sizeToFit];
     [audioguideView sizeToFit];
-    [audioguideView addSubview:audioguideLabel];
-    [audioguideView addSubview:audioguideImage];
+    [audioguideView addSubview:_audioguideLabel];
+    [audioguideView addSubview:_audioguideImage];
     [self addSubview:audioguideView];
     
 
@@ -113,21 +113,21 @@
     UIView *locationView = [[UIView alloc] initWithFrame:CGRectMake(audioguideView.frame.origin.x + audioguideView.frame.size.width + 10, marginTop, viewWidth, 35)];
     //locationView.backgroundColor = [UIColor whiteColor];
     
-    UIImageView *locationImage = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, 25, 25)];
-    locationImage.frame = CGRectMake(((locationView.frame.size.width - locationImage.frame.size.width) / 2), -5, 25, 25);
-    locationImage.image = [UIImage imageNamed:@"geoloc"];
-    locationImage.contentMode = UIViewContentModeScaleAspectFit;
+    _locationImage = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, 25, 25)];
+    _locationImage.frame = CGRectMake(((locationView.frame.size.width - _locationImage.frame.size.width) / 2), -5, 25, 25);
+    _locationImage.image = [UIImage imageNamed:@"geoloc"];
+    _locationImage.contentMode = UIViewContentModeScaleAspectFit;
     
     NSString * locationText = @"Localisation";
     
-    CGRect labelLocationFrame = CGRectMake(25, locationImage.frame.origin.y + locationImage.frame.size.height, 50, 15);
-    UILabel *locationLabel = [[UILabel alloc] initWithFrame:labelLocationFrame];
-    locationLabel.text = locationText;
-    locationLabel.font = formatLabels;
-    locationLabel.textColor = [UIColor r:109 g:109 b:109 alpha:1];
-    locationLabel.backgroundColor = [UIColor clearColor];
-    locationLabel.shadowColor = [UIColor blackColor];
-    locationLabel.shadowOffset = CGSizeMake(0, -1);
+    CGRect labelLocationFrame = CGRectMake(25, _locationImage.frame.origin.y + _locationImage.frame.size.height, 50, 15);
+    _locationLabel = [[UILabel alloc] initWithFrame:labelLocationFrame];
+    _locationLabel.text = locationText;
+    _locationLabel.font = formatLabels;
+    _locationLabel.textColor = [UIColor r:109 g:109 b:109 alpha:1];
+    _locationLabel.backgroundColor = [UIColor clearColor];
+    _locationLabel.shadowColor = [UIColor blackColor];
+    _locationLabel.shadowOffset = CGSizeMake(0, -1);
 
     //[locationLabel setFrame:CGRectMake(((audioguideView.frame.size.width - audioguideLabel.frame.size.width) / 2), infosImage.frame.origin.y + infosImage.frame.size.height, CGRectGetWidth(infosLabel.frame), CGRectGetHeight(audioguideLabel.frame))];
     
@@ -136,8 +136,8 @@
     
     //[locationLabel sizeToFit];
     [locationView sizeToFit];
-    [locationView addSubview:locationLabel];
-    [locationView addSubview:locationImage];
+    [locationView addSubview:_locationLabel];
+    [locationView addSubview:_locationImage];
     
     [self addSubview:locationView];
 }

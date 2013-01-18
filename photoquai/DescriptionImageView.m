@@ -18,12 +18,14 @@
     self = [super initWithFrame:frame];
     if (self) {
         //self.userInteractionEnabled = YES;
+        self.clipsToBounds = YES;
+        self.backgroundColor = [UIColor redColor];
         
         CGRect screenRect = [[UIScreen mainScreen] bounds];
         CGFloat screenWidth = screenRect.size.width;
         CGFloat screenHeight = screenRect.size.height;
         
-        UIView *container = [[UIView alloc] initWithFrame:CGRectMake(0, 100, screenWidth, screenHeight)];
+        UIView *container = [[UIView alloc] initWithFrame:CGRectMake(0, 0, screenWidth, screenHeight)];
         container.backgroundColor = [UIColor whiteColor];
         container.alpha = 1;
         container.opaque = YES;

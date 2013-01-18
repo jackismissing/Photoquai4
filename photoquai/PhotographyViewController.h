@@ -11,9 +11,12 @@
 #import "ImageZoomable.h"
 #import "AppDelegate.h"
 #import "UIColor+RVB255.h"
+#import "ToolBarPhotography.h"
 
 @interface PhotographyViewController : UIViewController{
     DescriptionImageView *descriptionPhotography;
+    ImageZoomable *picture;
+    ToolBarPhotography *toolBar;
 }
 
 @property (nonatomic, assign) int idPicture;

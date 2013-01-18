@@ -32,9 +32,9 @@
      [NSDictionary dictionaryWithObjectsAndKeys:
       [UIColor whiteColor],
       UITextAttributeTextColor,
-      [UIColor colorWithRed:0.0 green:0.0 blue:0.0 alpha:0.8],
+      [UIColor colorWithRed:0.0 green:0.0 blue:0.0 alpha:.8],
       UITextAttributeTextShadowColor,
-      [NSValue valueWithUIOffset:UIOffsetMake(0, -1)],
+      [NSValue valueWithUIOffset:UIOffsetMake(0, 1)],
       UITextAttributeTextShadowOffset,
       [UIFont fontWithName:@"Parisine-Bold" size:0.0],
       UITextAttributeFont,

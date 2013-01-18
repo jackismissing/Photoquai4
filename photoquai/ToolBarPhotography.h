@@ -10,4 +10,12 @@
 
 @interface ToolBarPhotography : UIToolbar
 
+@property (nonatomic, strong) UIImageView *locationImage;
+@property (nonatomic, strong) UIImageView *infosImage;
+@property (nonatomic, strong) UIImageView *audioguideImage;
+
+@property (nonatomic, strong) UILabel *audioguideLabel;
+@property (nonatomic, strong) UILabel *locationLabel;
+@property (nonatomic, strong) UILabel *infosLabel;
+
 @end
