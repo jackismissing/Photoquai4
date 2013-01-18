@@ -19,5 +19,6 @@
 
 @property (nonatomic, assign) int idPicture;
 
+- (void)addToFavorite;
 
 @end

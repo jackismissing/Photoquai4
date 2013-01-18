@@ -16,16 +16,91 @@
 
 @implementation PhotographyViewController
 
-- (void)viewWillAppear:(BOOL)animated {
-    
+- (void)viewWillAppear:(BOOL)animated
+{
+    //Réinstancie la navigation bar, une fois le menu disparu
+    //self.navigationController.navigationBar.tintColor = [UIColor r:219 g:25 b:23 alpha:1];
     [super viewWillAppear:animated];
     
-    UIBarButtonItem *barButton = [[UIBarButtonItem alloc] initWithTitle:@"title"
-                                                                  style:UIBarButtonItemStyleBordered
-                                                                 target:self
-                                                                 action:@selector(someMethod)];
+    [self.navigationController.navigationBar setBackgroundImage:[UIImage imageNamed:@"navigationBar-photographie.png"] forBarMetrics:UIBarMetricsDefault];
     
-    self.navigationController.navigationItem.rightBarButtonItem = barButton;
+    UIImage *buttonImage = [UIImage imageNamed:@"back.png"];
+    
+    UIButton *button = [UIButton buttonWithType:UIButtonTypeCustom];
+    
+    [button setImage:buttonImage forState:UIControlStateNormal];
+    
+    button.frame = CGRectMake(0, 0, buttonImage.size.width, buttonImage.size.height);
+    
+    [button addTarget:self action:@selector(back) forControlEvents:UIControlEventTouchUpInside];
+    
+    UIBarButtonItem *customBarItem = [[UIBarButtonItem alloc] initWithCustomView:button];
+    
+    self.navigationItem.leftBarButtonItem = customBarItem;
+    
+    
+    
+    
+    
+    // Boutton favoris
+    
+    UIImage *favouriteButtonImage = [UIImage imageNamed:@"etoilepush.png"];
+    
+    
+    
+    
+    // Boutton shared
+    
+    UIImage *shareButtonImage = [UIImage imageNamed:@"share.png"];
+    
+        
+    // rightNavigationButtons
+    
+    UIView *rightNavigationButtons = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 84, shareButtonImage.size.height)];
+    
+    //rightNavigationButtons.clipsToBounds = YES;
+    
+    //rightNavigationButtons.backgroundColor =  [UIColor grayColor];
+    
+    //rightNavigationButtons.center = CGPointMake(-30, 0);
+    
+    //
+    
+    UIButton *shareButton = [UIButton buttonWithType:UIButtonTypeCustom];
+    
+    [shareButton setImage:shareButtonImage forState:UIControlStateNormal];
+    
+    shareButton.frame = CGRectMake(favouriteButtonImage.size.width, 0, shareButtonImage.size.width, shareButtonImage.size.height);
+    
+    [shareButton addTarget:self action:@selector(addToFavorite) forControlEvents:UIControlEventTouchUpInside];
+    
+    //UIBarButtonItem *shareCustomBarItem = [[UIBarButtonItem alloc] initWithCustomView:shareButton];
+    
+    //
+    
+    UIButton *favouriteButton = [UIButton buttonWithType:UIButtonTypeCustom];
+    
+    [favouriteButton setImage:favouriteButtonImage forState:UIControlStateNormal];
+    
+    favouriteButton.frame = CGRectMake(0, rightNavigationButtons.frame.size.height/2 - favouriteButtonImage.size.height/2, favouriteButtonImage.size.width, favouriteButtonImage.size.height);
+    
+    [favouriteButton addTarget:self action:@selector(addToFavorite) forControlEvents:UIControlEventTouchUpInside];
+    
+    //UIBarButtonItem *favouriteCustomBarItem = [[UIBarButtonItem alloc] initWithCustomView:favouriteButton];
+    
+    [rightNavigationButtons addSubview:favouriteButton];
+    
+    [rightNavigationButtons addSubview:shareButton];
+    
+    UIBarButtonItem *rightNavigationBarItems = [[UIBarButtonItem alloc] initWithCustomView:rightNavigationButtons];
+    
+    self.navigationItem.rightBarButtonItem = rightNavigationBarItems;
+
+    
+    
+    
+    
+    
 }
 
 - (void)viewDidLoad
@@ -34,6 +109,8 @@
     // Do any additional setup after loading the view from its nib.
     AppDelegate *appdelegate = [[UIApplication sharedApplication] delegate];
     self.view.backgroundColor = [UIColor r:9 g:9 b:9 alpha:1];
+    
+    self.navigationItem.hidesBackButton = YES;
     
     [self setTitle:@"Title"];
     
@@ -71,6 +148,16 @@
     
     ToolBarPhotography *toolBar = [[ToolBarPhotography alloc] initWithFrame:CGRectMake(0, screenHeight - 118, 320, 55)];
     [self.view addSubview:toolBar];
+}
+
+- (void)addToFavorite
+{
+    
+}
+
+-(void)back {
+    
+    [self.navigationController popViewControllerAnimated:YES];
 }
 
 - (void) accessPhotographerView:(NSNotification *)notification{
