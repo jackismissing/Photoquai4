@@ -20,16 +20,6 @@
     
     [super viewWillAppear:animated];
     
-    
-    //NSLog(@"1 %f",descriptionPhotography.frame.size.height);
-    [UIView animateWithDuration:0.5
-                          delay:0.5
-                        options: UIViewAnimationCurveEaseOut
-                     animations:^{
-                         descriptionPhotography.frame = CGRectMake(0, 0, descriptionPhotography.frame.size.width, descriptionPhotography.frame.size.height);
-                     }
-                     completion:^(BOOL finished){}];
-    
     UIBarButtonItem *barButton = [[UIBarButtonItem alloc] initWithTitle:@"title"
                                                                   style:UIBarButtonItemStyleBordered
                                                                  target:self
@@ -67,7 +57,7 @@
     CGFloat screenWidth = screenRect.size.width;
     CGFloat screenHeight = screenRect.size.height;
     
-    ImageZoomable *picture = [[ImageZoomable alloc] initWithImageURL:[NSURL URLWithString:linkImg]];
+    picture = [[ImageZoomable alloc] initWithImageURL:[NSURL URLWithString:linkImg]];
     
     [self.view addSubview:picture];
     
@@ -90,6 +80,16 @@
 
 - (void) showImageDescription:(NSNotification *)notification{
     
+    [UIView animateWithDuration:0.5
+                          delay:0
+                        options:UIViewAnimationOptionBeginFromCurrentState
+                     animations:(void (^)(void)) ^{
+                         
+                         
+                     }
+                     completion:^(BOOL finished){
+                         
+                     }];
     //Cache la description
     if (descriptionPhotography.frame.origin.y == 0) {
         [UIView animateWithDuration:0.5
@@ -98,6 +98,7 @@
                          animations:^{
                              descriptionPhotography.frame = CGRectMake(0, 300, descriptionPhotography.frame.size.width, descriptionPhotography.frame.size.height);
                              descriptionPhotography.photographyDatas.contentOffset = CGPointMake(0, 0); //La description est cachée, on remet le scroll à l'endroit initial
+                             picture.transform=CGAffineTransformMakeScale(.5, .5);
                          }
                          completion:^(BOOL finished){}];
     }else if (descriptionPhotography.frame.origin.y == 300){
@@ -106,10 +107,17 @@
                             options: UIViewAnimationCurveEaseOut
                          animations:^{
                              descriptionPhotography.frame = CGRectMake(0, 0, descriptionPhotography.frame.size.width, descriptionPhotography.frame.size.height);
+                             picture.transform=CGAffineTransformIdentity;
                          }
                          completion:^(BOOL finished){}];
     }
 }
+
+- (void)scrollViewDidScroll:(UIScrollView *)scrollView{
+    NSLog(@"ok");
+    
+}
+
 
 - (void)didReceiveMemoryWarning
 {

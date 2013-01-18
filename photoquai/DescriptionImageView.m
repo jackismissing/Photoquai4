@@ -17,11 +17,14 @@
     
     self = [super initWithFrame:frame];
     if (self) {
-        //self.userInteractionEnabled = YES;
-        
         CGRect screenRect = [[UIScreen mainScreen] bounds];
         CGFloat screenWidth = screenRect.size.width;
         CGFloat screenHeight = screenRect.size.height;
+        
+        self.clipsToBounds = YES;
+        self.frame = CGRectMake(0, screenHeight, 320, self.frame.size.height);
+        
+        
         
         UIView *container = [[UIView alloc] initWithFrame:CGRectMake(0, 100, screenWidth, screenHeight)];
         container.backgroundColor = [UIColor whiteColor];
@@ -75,7 +78,8 @@
         [_photographyDatas addSubview:photographerVignette];
         
         float phographyDatasContentSize = photographerVignette.frame.size.height + photographerVignette.frame.origin.y + descripcion.frame.size.height + descripcion.frame.origin.y + endroit.frame.size.height + endroit.frame.origin.y + titre.frame.size.height + titre.frame.origin.y - 30;
-        [_photographyDatas setContentSize:CGSizeMake(200, phographyDatasContentSize)];
+        
+        [_photographyDatas setContentSize:CGSizeMake(self.frame.size.width, phographyDatasContentSize)];
 
         _photographyDatas.delegate = self;
         _photographyDatas.userInteractionEnabled = YES;
@@ -83,7 +87,7 @@
         [container addSubview:_photographyDatas];
         [self addSubview:container];
         
-        self.frame = CGRectMake(0, screenHeight, 320, frame.size.height);
+        
         
         UITapGestureRecognizer *singleTap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(accessPhotographer:)];
         [photographerVignette addGestureRecognizer:singleTap];

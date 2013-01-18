@@ -313,6 +313,7 @@
 		1ABEACCF16A5C9EF0034D316 /* Classes */ = {
 			isa = PBXGroup;
 			children = (
+				1AFB263516A993B100BFEE43 /* AudioDescriptionPhotography */,
 				1AFB25F316A9528B00BFEE43 /* ToolBarPhotography */,
 				1AF33FB816A8A32200778037 /* PhotographerVignette */,
 				1A0B2D5216A877F70060234E /* DescriptionImageView */,
@@ -451,6 +452,13 @@
 				1AFB25FF16A95A2A00BFEE43 /* toolbar-photographie@2X.png */,
 			);
 			name = Toolbar;
+			sourceTree = "<group>";
+		};
+		1AFB263516A993B100BFEE43 /* AudioDescriptionPhotography */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = AudioDescriptionPhotography;
 			sourceTree = "<group>";
 		};
 		3784D00C16A8362D00C75804 /* AgendaViewController */ = {
