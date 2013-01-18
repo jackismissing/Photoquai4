@@ -92,20 +92,13 @@
 //        [longPressRecognizer setMinimumPressDuration:0.5];
 //        [self addGestureRecognizer:longPressRecognizer];
         
-        UITapGestureRecognizer *singleTap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(handleSingleTap:)];
-        [self addGestureRecognizer:singleTap];
+        //UITapGestureRecognizer *singleTap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(handleSingleTap:)];
+        //[self addGestureRecognizer:singleTap];
         
     }
     return self;
 }
 
-- (void)handleSingleTap:(UIGestureRecognizer *)gestureRecognizer {
-    NSLog(@"touch");
-}
-
-- (void)handleSwipeAndHoldFrom:(UIGestureRecognizer *)gesture{
-    NSLog(@"ok");
-}
 
 - (void) setClippingPath:(UIBezierPath *)clippingPath clippingPath:(UIImageView *)imgView{
     

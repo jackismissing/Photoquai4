@@ -71,9 +71,6 @@
     [self.navigationController.navigationBar setBackgroundImage:[UIImage imageNamed:@"navigationBar.png"] forBarMetrics:UIBarMetricsDefault];
      
     self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemBookmarks target:self action:@selector(showMenu)];
-
-   
-
 }
 
 //Détecte la connexion d'un utilisateur
@@ -247,29 +244,35 @@
     
     UIView *index = gesture.view;
     
+    index.alpha = .3;
+    index.backgroundColor = [UIColor redColor];
+    
+    [UIView animateWithDuration:0.42
+                          delay:0
+                        options: UIViewAnimationCurveEaseOut
+                     animations:^{
+                         index.alpha = 1.0;
+                         index.backgroundColor = [UIColor clearColor];
+                     }
+                     completion:^(BOOL finished){
+                     
+                         PhotographyViewController *imageViewController = [[PhotographyViewController alloc] initWithNibName:@"PhotographyViewController" bundle:nil];
+                         imageViewController.idPicture = index.tag;
+                         [self.navigationController pushViewController:imageViewController animated:YES];
+                     }];
     
     //UIBarButtonItem *backButton = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"backButton"] style:UIBarButtonItemStylePlain target:nil action:nil];
     //UIBarButtonItem *backButton = [[UIBarButtonItem alloc] initWithCustomView:v];
     //backButton.image = [UIImage imageNamed:@"backButton"];
     
     //[self.navigationItem setBackBarButtonItem: backButton];
-    
-    PhotographyViewController *imageViewController = [[PhotographyViewController alloc] initWithNibName:@"PhotographyViewController" bundle:nil];
-    //imageViewController.name = img;
-    imageViewController.idPicture = index.tag;
-    [self.navigationController pushViewController:imageViewController animated:YES];
-    
 }
 
 - (void)scrollViewWillBeginDragging:(UIScrollView *)scrollView{
     
     for (UIImageView *img in thumbsContainer.subviews){
         if(img.frame.origin.y < myScrollView.contentOffset.y || img.frame.origin.y > (myScrollView.contentOffset.y + myScrollView.frame.size.height) || img.frame.origin.x < myScrollView.contentOffset.x || img.frame.origin.x > (myScrollView.contentOffset.x + myScrollView.frame.size.width))
-        {
-            //[img removeFromSuperview];
-            //img.hidden = YES;
-            //img.opaque = NO;
-            
+        {            
             img.alpha = .3;
         }
     }
@@ -279,7 +282,6 @@
     for (UIImageView *img in thumbsContainer.subviews){
         if(img.frame.origin.y > myScrollView.contentOffset.y || img.frame.origin.y < (myScrollView.contentOffset.y + myScrollView.frame.size.height) || img.frame.origin.x > myScrollView.contentOffset.x || img.frame.origin.x < (myScrollView.contentOffset.x + myScrollView.frame.size.width))
         {
-            
             //[myScrollView bringSubviewToFront:img];
             img.hidden = NO;
             img.opaque = YES;

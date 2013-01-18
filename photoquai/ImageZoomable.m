@@ -36,7 +36,7 @@
         self.maximumZoomScale = 3.0;
         
        // self.contentSize = CGSizeMake(anImage.size.width, anImage.size.width);
-        self.delegate = self;
+       self.delegate = self;
         
         [self setUserInteractionEnabled:YES];
         

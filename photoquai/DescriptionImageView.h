@@ -19,6 +19,8 @@
     BOOL directionUp;
 }
 
+@property (nonatomic, strong) UIScrollView *photographyDatas;
+
 //Constructeur
 - (id)initWithFrame:(CGRect)frame description:(NSString*)aDescription title:(NSString*)aTitle place:(NSString*)aPlace;
 
