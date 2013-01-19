@@ -14,10 +14,12 @@
 
 #import "UIColor+RVB255.h"
 #import "DrawCircle.h"
+#import "DrawRect.h"
 #import "AppDelegate.h"
 
-@interface AudioImageView : UIView <AVAudioPlayerDelegate>{
+@interface AudioImageView : UIView <AVAudioPlayerDelegate, UIGestureRecognizerDelegate>{
     DrawCircle *playPauseButton;
+    DrawRect *progressSound;
     UIImageView *playPauseButtonImage;
     NSTimer* playbackTimer;
     BOOL soundIsPlayed;

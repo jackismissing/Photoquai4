@@ -38,15 +38,46 @@
         
         float soundY = title.frame.size.height + title.frame.origin.y + 15;
         UIView *sound = [[UIView alloc] initWithFrame:CGRectMake(0, soundY, screenWidth, 150)];
+        sound.userInteractionEnabled = YES;
+        sound.clipsToBounds = YES;
+        sound.backgroundColor = [UIColor clearColor];
         CALayer *soundBottomBorder = [CALayer layer];
         soundBottomBorder.frame = CGRectMake(0.0f, sound.frame.size.height, self.frame.size.width, 1.0f);
         soundBottomBorder.backgroundColor = [UIColor r:233 g:233 b:233 alpha:1].CGColor;
         [self.layer addSublayer:soundBottomBorder];
+        
+        
+        progressSound = [[DrawRect alloc] initWithFrame:CGRectMake(0, 4, screenWidth, 66)];
+        progressSound.backgroundColor = [UIColor redColor];
+        
+        //Background color noir des ondes sonores
+        DrawRect *blackBackgroundSound = [[DrawRect alloc] initWithFrame:CGRectMake(0, 4, screenWidth, 66)];
+        blackBackgroundSound.backgroundColor = [UIColor blackColor];
+        [sound addSubview:blackBackgroundSound];
+        
+        
+        UIImageView *soundWaves = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"ondesSonores"]];
+        soundWaves.frame = CGRectMake(0, 0, screenWidth, 75);
+        soundWaves.contentMode = UIViewContentModeScaleAspectFit;
+        soundWaves.backgroundColor = [UIColor clearColor];
+        soundWaves.userInteractionEnabled = YES;
+        
+        //        UILongPressGestureRecognizer *longPressRecognizer = [[UILongPressGestureRecognizer alloc] initWithTarget:self action:@selector(handleLongPress:)];
+        //        longPressRecognizer.minimumPressDuration = 1.5;
+        //        longPressRecognizer.numberOfTouchesRequired = 1;
+        //        [soundWaves addGestureRecognizer:longPressRecognizer];
+        
+        UIPanGestureRecognizer *panRecognizer = [[UIPanGestureRecognizer alloc] initWithTarget:self action:@selector(directionPan:)];
+        [soundWaves addGestureRecognizer:panRecognizer];
+        
+        [sound addSubview:progressSound]; //Le background rouge de progression est derrière le .png
+        [sound addSubview:soundWaves];
+        
+        
         [self addSubview:sound];
         
 #pragma mark - Audio Player
         AudioSessionInitialize (NULL, NULL, NULL, (__bridge void *)self);
-        
         UInt32 sessionCategory = kAudioSessionCategory_MediaPlayback;
         AudioSessionSetProperty (kAudioSessionProperty_AudioCategory, sizeof (sessionCategory), &sessionCategory);
         
@@ -55,15 +86,16 @@
         _audioPlayer = [[AVAudioPlayer alloc] initWithData:soundFileData error:NULL];
         _audioPlayer.delegate = self;
         
-
         float playPauseButtonY = sound.frame.size.height + 15;
         
+        //Cercle du bouton
         playPauseButton = [[DrawCircle alloc] initWithFrame:CGRectMake(20, playPauseButtonY, 50, 50)];
         playPauseButton.userInteractionEnabled = YES;
         UITapGestureRecognizer *oneTap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(playPausePlayer)];
         [playPauseButton addGestureRecognizer:oneTap];
         [self addSubview:playPauseButton];
         
+        //Image Play/pause
         playPauseButtonImage = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"playrouge"]];
         playPauseButtonImage.frame = CGRectMake(35, playPauseButtonY + 13, 25, 25);
         playPauseButtonImage.userInteractionEnabled = YES;
@@ -75,20 +107,23 @@
         
         [self addSubview:playPauseButtonImage];
         
-        playbackTimer = [NSTimer scheduledTimerWithTimeInterval:1 target:self selector:@selector(miseAJour:) userInfo:nil repeats:YES];
+        playbackTimer = [NSTimer scheduledTimerWithTimeInterval:1 target:self selector:@selector(updateTimeLeft:) userInfo:nil repeats:YES];
         
         volumeSlider = [[UISlider alloc] initWithFrame:CGRectMake(playPauseButton.frame.size.width + 55, playPauseButtonY + 13, 180, 10)];
         [volumeSlider addTarget:self action:@selector(soundLevel:) forControlEvents:UIControlEventValueChanged];
         volumeSlider.maximumTrackTintColor = [UIColor purpleColor];
         volumeSlider.thumbTintColor = [UIColor grayColor];
-        volumeSlider.continuous = YES;
+        volumeSlider.continuous = NO;
         volumeSlider.minimumValue = 0.0;
         volumeSlider.maximumValue = 1;
         
+        
+        //On change le bouton du slider
         UIImage *sliderThumb = [UIImage imageNamed:@"sliderButton"];
         [volumeSlider setThumbImage:sliderThumb forState:UIControlStateNormal];
         [volumeSlider setThumbImage:sliderThumb forState:UIControlStateHighlighted];
         
+        //On change de background
         UIImage *sliderMinimum = [[UIImage imageNamed:@"sliderBackground"] stretchableImageWithLeftCapWidth:4 topCapHeight:0];
         [volumeSlider setMinimumTrackImage:sliderMinimum forState:UIControlStateNormal];
         UIImage *sliderMaximum = [[UIImage imageNamed:@"sliderBackground"] stretchableImageWithLeftCapWidth:4 topCapHeight:0];
@@ -117,7 +152,7 @@
         [sound addSubview:currentTime];
         
         
-        totalTime = [[UILabel alloc] initWithFrame:CGRectMake(280, sound.frame.size.height - sound.frame.origin.y - 20, 120, 30)];
+        totalTime = [[UILabel alloc] initWithFrame:CGRectMake(265, sound.frame.size.height - sound.frame.origin.y - 20, 120, 30)];
         totalTime.font = [UIFont fontWithName:@"Parisine-Regular" size:15];
         totalTime.textColor = [UIColor r:102 g:102 b:102 alpha:1];
         totalTime.backgroundColor = [UIColor clearColor];
@@ -131,8 +166,38 @@
     return self;
 }
 
+//Détecte la direction scroll
+- (void)directionPan:(UIPanGestureRecognizer *)gestureRecognizer
+{
+    CGPoint velocity = [gestureRecognizer velocityInView: self];
+    CGPoint point = [gestureRecognizer locationInView:self];
+    
+    float progressSoundScaleX = point.x / 320;
+
+        
+    progressSound.frame = CGRectMake(0, 4, point.x, progressSound.frame.size.height);
+    _audioPlayer.currentTime = (point.x * _audioPlayer.duration) / 320;
+    
+    NSLog(@"%f", _audioPlayer.duration);
+}
+
+- (void) moveRight{
+    NSLog(@"pk");
+}
+
+-  (void)handleLongPress:(UILongPressGestureRecognizer*)sender {
+    if (sender.state == UIGestureRecognizerStateChanged) {
+        NSLog(@"UIGestureRecognizerStateEnded");
+        //Do Whatever You want on End of Gesture
+    }
+//    else if (sender.state == UIGestureRecognizerStateBegan){
+//        NSLog(@"UIGestureRecognizerStateBegan.");
+//        //Do Whatever You want on Began of Gesture
+//    }
+}
+
 //Met à jour en temps réel le temps restant
-- (void)updateTimeLeft
+- (void)updateTimeLeft:(NSTimer*)timer
 {
     NSTimeInterval timeLeft = self.audioPlayer.currentTime;
     NSTimeInterval totalTimeSound = self.audioPlayer.duration;
@@ -144,18 +209,17 @@
     
     // update your UI with timeLeft
     currentTime.text = [NSString stringWithFormat:@"%02.0f:%02.0f", min, sec];
-    totalTime.text = [NSString stringWithFormat:@"%d:%d", minTotal, secTotal];
+    totalTime.text = [NSString stringWithFormat:@"%02d:%d", minTotal, secTotal];
     [currentTime sizeToFit];
     [totalTime sizeToFit];
     
-    //[self updateTimeLeft];
+    float progressSoundWidth = (320 * _audioPlayer.currentTime) / _audioPlayer.duration;
+    
+    progressSound.frame = CGRectMake(0, 4, progressSoundWidth, progressSound.frame.size.height);
+    //NSLog(@"%@", NSStringFromCGRect(progressSound.frame));
+    
 }
 
--(void)miseAJour:(NSTimer*)timer{
-    
-    float currentPosition = _audioPlayer.currentTime;
-    [self updateTimeLeft];
-}
 
 - (void)soundLevel:(UIControlEvents *)gesture{
     
@@ -168,7 +232,6 @@
 
     [volumeSlider setValue: volume];
 }
-
 
 
 - (void) playPausePlayer {

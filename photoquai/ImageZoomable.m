@@ -29,14 +29,16 @@
         imageBig.frame = CGRectMake(0, 0, frame.size.width, frame.size.height); //-43
         imageBig.contentMode = UIViewContentModeScaleAspectFit;
         imageBig.opaque = YES; //Performance
+        imageBig.clipsToBounds = YES;
         
         
         [self addSubview:imageBig];
         //self.minimumZoomScale = 1;
         self.maximumZoomScale = 3.0;
         
-       // self.contentSize = CGSizeMake(anImage.size.width, anImage.size.width);
-       self.delegate = self;
+        // self.contentSize = CGSizeMake(anImage.size.width, anImage.size.width);
+        self.delegate = self;
+        self.clipsToBounds = YES;
         
         [self setUserInteractionEnabled:YES];
         
