@@ -31,4 +31,5 @@
 - (id)initWithFrame:(CGRect)frame title:(NSString*)aTitle;
 
 @property (nonatomic, strong) AVAudioPlayer *audioPlayer;
+@property (nonatomic, strong) UILabel *truc;
 @end

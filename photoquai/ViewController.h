@@ -22,6 +22,9 @@
     NSMutableArray *heights;
     NSMutableArray *ys;
     int imgIterate, nbrPictures, xPosition, yPosition, nbrColumns, totalWidth, widthThumb, i;
+    
+    NSUserDefaults *preferencesUser;
+    NSArray *oldFavorites;
 }
 
 

@@ -45,7 +45,6 @@
         favouriteButtonImage = [UIImage imageNamed:@"etoilepush"];
     }
     
-    
     // Boutton shared
     UIImage *shareButtonImage = [UIImage imageNamed:@"share.png"];
 
@@ -150,6 +149,8 @@
     [self.view addSubview:audioDescription];
     
     
+    
+    
 #pragma mark - Favoris
     
     preferencesUser = [NSUserDefaults standardUserDefaults];
@@ -164,12 +165,9 @@
 
 - (void)addToFavorites
 {
-    
-    
     NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
-    
-    NSLog(@"%@", favoritesImages);
-    if (![oldFavorites containsObject:idPicture] || ![favoritesImages containsObject:idPicture]){
+
+    if (![favoritesImages containsObject:idPicture]){
         [favoritesImages addObject:idPicture];
         [defaults setObject:favoritesImages forKey:@"favorisImages"];
         [defaults synchronize];
@@ -184,24 +182,20 @@
         
         [alert show];
     }else{
-        NSLog(@"suppresion");
-        
         [favoritesImages removeObject:idPicture];
         [defaults setObject:favoritesImages forKey:@"favorisImages"];
         [defaults synchronize];
         
-       UIAlertView *alert = [[UIAlertView alloc]
-                 initWithTitle:nil
-                 message:@"L'image a bien été supprimée de vos favoris"
-                 delegate:self
-                 cancelButtonTitle:@"OK" otherButtonTitles:nil];
+        UIAlertView *alert = [[UIAlertView alloc]
+                              initWithTitle:nil
+                              message:@"L'image a bien été supprimée de vos favoris"
+                              delegate:self
+                              cancelButtonTitle:@"OK" otherButtonTitles:nil];
         
         [favouriteButton setImage:[UIImage imageNamed:@"etoilepush"] forState:UIControlStateNormal];
         
         [alert show];
     }
-    
-    
 }
 
 - (void) sharePicture{
@@ -224,7 +218,7 @@
                              audioDescription.frame = CGRectMake(0, 500, audioDescription.frame.size.width, audioDescription.frame.size.height);
                              descriptionPhotography.frame = CGRectMake(0, 500, descriptionPhotography.frame.size.width, descriptionPhotography.frame.size.height);
                              
-                             //picture.transform=CGAffineTransformMakeScale(1.2, 1.2);
+                             picture.transform = CGAffineTransformMakeScale(1, 1);
                         }completion:^(BOOL finished){}];
         picture.frame = CGRectMake(0, 50, screenWidth, screenHeight-100);
         elementsNavigationAreHidden = YES;
@@ -255,6 +249,8 @@
 -(void)back {
     
     [self.navigationController popViewControllerAnimated:YES];
+    [audioDescription.audioPlayer stop];
+    
 }
 
 - (void) accessPhotographerView:(NSNotification *)notification{

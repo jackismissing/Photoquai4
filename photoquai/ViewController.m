@@ -27,6 +27,10 @@
     [super viewDidLoad];
 	// Do any additional setup after loading the view, typically from a nib.
     
+    preferencesUser = [NSUserDefaults standardUserDefaults];
+    oldFavorites = [[NSArray alloc] initWithArray: [preferencesUser objectForKey:@"favorisImages"]];
+    [preferencesUser synchronize];
+    
     [self setTitle:@"Photographies"];
     self.view.backgroundColor = [UIColor whiteColor];
     
@@ -163,6 +167,17 @@
     imageWallElement.clipsToBounds = YES;
     imageWallElement.tag = idPicture;
     
+    
+    if ([oldFavorites containsObject:[NSNumber numberWithInt:idPicture]]){
+        UIImage*    backgroundImage = [UIImage imageNamed:@"etoilejaune"];
+        CALayer*    aLayer = [CALayer layer];
+        CGRect startFrame = CGRectMake(width - 25, 0.0, 25, 25);
+        aLayer.contents = (id)backgroundImage.CGImage;
+        aLayer.frame = startFrame;
+        
+        [imageWallElement.layer addSublayer:aLayer];
+    }
+    
     [heights addObject: [NSNumber numberWithInt: imageWallElement.frame.size.height]];
     [ys addObject: [NSNumber numberWithInt: imageWallElement.frame.origin.y]];
     
@@ -219,7 +234,7 @@
 
 //Gère le pinch to zoom gesture
 - (UIView *)viewForZoomingInScrollView:(UIScrollView *)scrollView {
-    
+
     return thumbsContainer;
 }
 
@@ -278,7 +293,7 @@
     //[self.navigationItem setBackBarButtonItem: backButton];
 }
 
-- (void)scrollViewWillBeginDragging:(UIScrollView *)scrollView{
+/*- (void)scrollViewWillBeginDragging:(UIScrollView *)scrollView{
     
     for (UIImageView *img in thumbsContainer.subviews){
         if(img.frame.origin.y < myScrollView.contentOffset.y || img.frame.origin.y > (myScrollView.contentOffset.y + myScrollView.frame.size.height) || img.frame.origin.x < myScrollView.contentOffset.x || img.frame.origin.x > (myScrollView.contentOffset.x + myScrollView.frame.size.width))
@@ -301,7 +316,8 @@
             [UIImageView commitAnimations];
         }
     }
-}
+}*/
+
 
 /*-(void)changeViewToAgenda{
 

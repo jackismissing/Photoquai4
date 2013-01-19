@@ -110,7 +110,6 @@
         musicPlayer.volume = .1;
         volumeSlider.value = musicPlayer.volume;
         
-        //NSString *totalTimeSound = [NSString stringWithFormat:@"%f", _audioPlayer.duration];
         currentTime = [[UILabel alloc] initWithFrame:CGRectMake(15, sound.frame.size.height - sound.frame.origin.y - 20, 120, 30)];
         currentTime.font = [UIFont fontWithName:@"Parisine-Regular" size:15];
         currentTime.textColor =  [UIColor r:214 g:41 b:48 alpha:1];
@@ -169,6 +168,7 @@
 
     [volumeSlider setValue: volume];
 }
+
 
 
 - (void) playPausePlayer {
