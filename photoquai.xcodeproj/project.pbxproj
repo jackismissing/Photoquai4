@@ -242,6 +242,13 @@
 			name = DescriptionImageView;
 			sourceTree = "<group>";
 		};
+		1A0D725616A9B99900A4DD4A /* Audiofiles */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Audiofiles;
+			sourceTree = "<group>";
+		};
 		1ABEAC9616A5C34E0034D316 = {
 			isa = PBXGroup;
 			children = (
@@ -320,8 +327,14 @@
 		1ABEACCF16A5C9EF0034D316 /* Classes */ = {
 			isa = PBXGroup;
 			children = (
+
+				1A0D725616A9B99900A4DD4A /* Audiofiles */,
+				1AFB25F316A9528B00BFEE43 /* ToolBarPhotography */,
+				1AF33FB816A8A32200778037 /* PhotographerVignette */,
+
 				37C782EC16A9A724001D6295 /* PhotographerVignette */,
 				37C782ED16A9A734001D6295 /* ToolBarPhotography */,
+
 				1A0B2D5216A877F70060234E /* DescriptionImageView */,
 				1A0B2D4E16A877420060234E /* ImageZoomable */,
 				1A0B2D2A16A852340060234E /* ImageWall */,

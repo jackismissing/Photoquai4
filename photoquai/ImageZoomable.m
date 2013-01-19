@@ -20,7 +20,9 @@
     if (self) {
         CGRect screenRect = [[UIScreen mainScreen] bounds];
         CGFloat screenWidth = screenRect.size.width;
-        CGFloat screenHeight = screenRect.size.height - 44;
+        CGFloat screenHeight = screenRect.size.height - 100;
+        
+        self.clipsToBounds = YES;
         
         //UIImage *PortraitImage = [[UIImage alloc] initWithCGImage: anImage.CGImage scale: 1.0 orientation: UIImageOrientationUp];
         
@@ -43,11 +45,9 @@
         [self setMultipleTouchEnabled:YES];
         
         // add gesture recognizers to the image view
-        UITapGestureRecognizer *singleTap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(handleSingleTap:)];
         UITapGestureRecognizer *doubleTap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(handleDoubleTap:)];
         
         [doubleTap setNumberOfTapsRequired:2];
-        [singleTap requireGestureRecognizerToFail:doubleTap]; //Fait échouer le single tap si on double tap
         
         //[self addGestureRecognizer:singleTap];
         //[self addGestureRecognizer:doubleTap];
@@ -75,11 +75,6 @@
 
 - (BOOL)gestureRecognizer:(UIGestureRecognizer *)gestureRecognizer shouldRecognizeSimultaneouslyWithGestureRecognizer:(UIGestureRecognizer *)otherGestureRecognizer {
     return YES;
-}
-
-
-- (void)handleSingleTap:(UIGestureRecognizer *)gestureRecognizer {
-    //NSLog(@"touch");
 }
 
 - (void)handleDoubleTap:(UIGestureRecognizer *)gestureRecognizer {
