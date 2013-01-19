@@ -33,9 +33,6 @@
     
 	// Place le contour
 	CGContextSetRGBStrokeColor(contextRef, 204.0/255.0, 204.0/255.0, 204.0/255.0, 1.0);
-    
-    //CGContextSetShadow(contextRef, CGSizeMake(1, 1), 3);
-    //CGContextSetShadowWithColor(contextRef, CGSizeMake(1, 0), 1, [UIColor blackColor].CGColor);
 	
 	// Fill the circle with the fill color
 	CGContextFillEllipseInRect(contextRef, rect);

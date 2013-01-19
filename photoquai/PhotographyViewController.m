@@ -89,8 +89,6 @@
                          descriptionPhotography.frame = CGRectMake(0, 500, descriptionPhotography.frame.size.width, descriptionPhotography.frame.size.height);
                      }
                      completion:^(BOOL finished){}];
-    
-    
 }
 
 - (void)viewDidLoad
@@ -103,10 +101,15 @@
     self.navigationItem.hidesBackButton = YES;
     
     [self setTitle:@"Title"];
-    
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(accessPhotographerView:) name:@"showArtistPage" object:nil];
+#pragma mark - Notifications
+    //Permet de renvoyer vers la fiche artiste
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(accessPhotographerPage:) name:@"showArtistPage" object:nil];
+    //Permet la gestion des toolbar item, changement des volets
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(showImageVolet:) name:@"showImageVolet" object:nil];
-
+    //Permet l'envoi de mail
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(sendMailImage:) name:@"sendMailImage" object:nil];
+    //[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(sendFBImage:) name:@"sendFBImage" object:nil];
+    
     
     //NSString *imageLink = [[machine getPictureElementsAtIndex:self.index] valueForKey:@"linkImg"];
     //UIImage *image = [UIImage imageWithData:[NSData dataWithContentsOfURL:[NSURL URLWithString: imageLink]]];
@@ -116,7 +119,7 @@
     appendLink = [appendLink stringByAppendingString:@".json"];
     
     NSInteger idPicture = [[[appdelegate getElementsFromJSON:appendLink] valueForKeyPath:@"picture.id"] integerValue];
-    NSString *linkImg = [[appdelegate getElementsFromJSON:appendLink] valueForKeyPath:@"picture.link_iphone"];
+    linkImg = [[appdelegate getElementsFromJSON:appendLink] valueForKeyPath:@"picture.link_iphone"];
     
     NSLog(@"%@", linkImg);
     
@@ -149,14 +152,25 @@
     [self.view addSubview:audioDescription];
     
     
-    
-    
-#pragma mark - Favoris
+#pragma mark - Favoris 
     
     preferencesUser = [NSUserDefaults standardUserDefaults];
     oldFavorites = [[NSArray alloc] initWithArray: [preferencesUser objectForKey:@"favorisImages"]];
     favoritesImages = [[NSMutableArray alloc] initWithArray:oldFavorites];
+
+#pragma mark - Partage
+    shareIsHidden = YES; //Par défaut les options de partage sont cachées
+    popOver = [[CustomPopOver alloc] init];
+    popOver.layer.anchorPoint = CGPointMake(1.0, 0.0);
+    popOver.frame = CGRectMake(210, 0, 100, 100);
+    //popOver.center = CGPointMake(CGRectGetWidth(popOver.bounds), 0.0);
     
+    // Rotate 90 degrees to hide it off screen
+    CGAffineTransform rotationTransform = CGAffineTransformIdentity;
+    rotationTransform = CGAffineTransformRotate(rotationTransform, 90);
+    popOver.transform = rotationTransform;
+    
+    [self.view addSubview:popOver];
 
     //Laisser en bas pour la que la toolbar passe devant les volets
     toolBar = [[ToolBarPhotography alloc] initWithFrame:CGRectMake(0, screenHeight - 118, 320, 55)];
@@ -199,6 +213,26 @@
 }
 
 - (void) sharePicture{
+    
+    if(shareIsHidden){ //Les options de partage ne sont pas là... on les affiche
+        [UIView animateWithDuration:0.5
+                              delay:0
+                            options: UIViewAnimationCurveEaseOut
+                         animations:^{
+                             popOver.transform = CGAffineTransformRotate(CGAffineTransformIdentity, 0);
+                         }
+                         completion:^(BOOL finished){}];
+        shareIsHidden = NO;
+    }else{
+        [UIView animateWithDuration:0.5
+                              delay:0
+                            options: UIViewAnimationCurveEaseOut
+                         animations:^{
+                             popOver.transform = CGAffineTransformRotate(CGAffineTransformIdentity, 3);
+                         }
+                         completion:^(BOOL finished){}];
+        shareIsHidden = YES;
+    }
     
 }
 
@@ -257,7 +291,33 @@
     
 }
 
-- (void) accessPhotographerView:(NSNotification *)notification{
+// Gestion des mails
+
+- (void) sendMailImage:(NSNotification *)notification{
+    MFMailComposeViewController *mailer = [[MFMailComposeViewController alloc] init];
+    mailer.mailComposeDelegate = self;
+    [mailer setSubject:@"Regarde ce qu'il y a à  PHQ"];
+    NSArray *toRecipients = [NSArray arrayWithObjects:@"fisrtMail@example.com", @"secondMail@example.com", nil];
+    //[mailer setToRecipients:toRecipients];
+    //UIImage *myImage = [UIImage im][UIImage imageNamed:@"img0"];
+    UIImage *picturePHQMail = [UIImage imageWithData:[NSData dataWithContentsOfURL:[NSURL URLWithString:linkImg]]];
+    NSData *imageData = UIImagePNGRepresentation(picturePHQMail);
+    [mailer addAttachmentData:imageData mimeType:@"image/png" fileName:@"mobiletutsImage"];
+    NSString *emailBody = @"J'apprécie cette photo de l'exposition PHQ";
+    [mailer setMessageBody:emailBody isHTML:NO];
+    [self presentModalViewController:mailer animated:YES];
+}
+
+//Annulation du mail
+- (void)mailComposeController:(MFMailComposeViewController*)controller
+          didFinishWithResult:(MFMailComposeResult)result
+                        error:(NSError*)error{
+    
+    [self dismissModalViewControllerAnimated:YES];
+    return;
+}
+
+- (void) accessPhotographerPage:(NSNotification *)notification{
 
     NSLog(@"%@", [notification object]);
 }

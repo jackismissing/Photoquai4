@@ -101,7 +101,8 @@
 }
 
 - (void)accessPhotographer:(UIGestureRecognizer *)gesture{
-
+    
+    //On définit la méthode à appeler dans la vue l'appelant
     [[NSNotificationCenter defaultCenter] postNotificationName:@"showArtistPage" object:[NSNumber numberWithInt:5]];
 }
 

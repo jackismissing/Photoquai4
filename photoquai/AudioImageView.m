@@ -46,9 +46,9 @@
         soundBottomBorder.backgroundColor = [UIColor r:233 g:233 b:233 alpha:1].CGColor;
         [self.layer addSublayer:soundBottomBorder];
         
-        
-        progressSound = [[DrawRect alloc] initWithFrame:CGRectMake(0, 4, screenWidth, 66)];
-        progressSound.backgroundColor = [UIColor redColor];
+        //Progression rouge du son
+        progressSound = [[DrawRect alloc] initWithFrame:CGRectMake(0, 4, screenWidth-2, 66)];
+        progressSound.backgroundColor = [UIColor r:215 g:26 b:33 alpha:1];
         
         //Background color noir des ondes sonores
         DrawRect *blackBackgroundSound = [[DrawRect alloc] initWithFrame:CGRectMake(0, 4, screenWidth, 66)];
@@ -117,7 +117,6 @@
         volumeSlider.minimumValue = 0.0;
         volumeSlider.maximumValue = 1;
         
-        
         //On change le bouton du slider
         UIImage *sliderThumb = [UIImage imageNamed:@"sliderButton"];
         [volumeSlider setThumbImage:sliderThumb forState:UIControlStateNormal];
@@ -169,16 +168,9 @@
 //Détecte la direction scroll
 - (void)directionPan:(UIPanGestureRecognizer *)gestureRecognizer
 {
-    CGPoint velocity = [gestureRecognizer velocityInView: self];
-    CGPoint point = [gestureRecognizer locationInView:self];
-    
-    float progressSoundScaleX = point.x / 320;
-
-        
+    CGPoint point = [gestureRecognizer locationInView:self];        
     progressSound.frame = CGRectMake(0, 4, point.x, progressSound.frame.size.height);
-    _audioPlayer.currentTime = (point.x * _audioPlayer.duration) / 320;
-    
-    NSLog(@"%f", _audioPlayer.duration);
+    _audioPlayer.currentTime = (point.x * _audioPlayer.duration) / 318;
 }
 
 - (void) moveRight{

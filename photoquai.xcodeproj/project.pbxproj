@@ -19,6 +19,8 @@
 		1A579EE716AACAE200AE79D2 /* icon_mail_50@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 1A579EE516AACAE200AE79D2 /* icon_mail_50@2x.png */; };
 		1ABA01C216AAB5CA00EF09CC /* ondesSonores@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 1ABA01C016AAB5CA00EF09CC /* ondesSonores@2x.png */; };
 		1ABA01C316AAB5CA00EF09CC /* ondesSonores.png in Resources */ = {isa = PBXBuildFile; fileRef = 1ABA01C116AAB5CA00EF09CC /* ondesSonores.png */; };
+		1ABDFCD816AB3204004C95C8 /* CustomPopOver.m in Sources */ = {isa = PBXBuildFile; fileRef = 1ABDFCD716AB3204004C95C8 /* CustomPopOver.m */; };
+		1ABDFCDF16AB57B3004C95C8 /* MessageUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1ABDFCDE16AB57B3004C95C8 /* MessageUI.framework */; };
 		1ABEACA616A5C34E0034D316 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1ABEACA516A5C34E0034D316 /* UIKit.framework */; };
 		1ABEACA816A5C34E0034D316 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1ABEACA716A5C34E0034D316 /* Foundation.framework */; };
 		1ABEACAA16A5C34E0034D316 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1ABEACA916A5C34E0034D316 /* CoreGraphics.framework */; };
@@ -108,6 +110,9 @@
 		1A579EE516AACAE200AE79D2 /* icon_mail_50@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icon_mail_50@2x.png"; sourceTree = "<group>"; };
 		1ABA01C016AAB5CA00EF09CC /* ondesSonores@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "ondesSonores@2x.png"; sourceTree = "<group>"; };
 		1ABA01C116AAB5CA00EF09CC /* ondesSonores.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = ondesSonores.png; sourceTree = "<group>"; };
+		1ABDFCD616AB3204004C95C8 /* CustomPopOver.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CustomPopOver.h; sourceTree = "<group>"; };
+		1ABDFCD716AB3204004C95C8 /* CustomPopOver.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CustomPopOver.m; sourceTree = "<group>"; };
+		1ABDFCDE16AB57B3004C95C8 /* MessageUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MessageUI.framework; path = System/Library/Frameworks/MessageUI.framework; sourceTree = SDKROOT; };
 		1ABEACA116A5C34E0034D316 /* photoquai.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = photoquai.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		1ABEACA516A5C34E0034D316 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		1ABEACA716A5C34E0034D316 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -228,6 +233,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				1ABDFCDF16AB57B3004C95C8 /* MessageUI.framework in Frameworks */,
 				1ACA0CE516AA23F40070EFB5 /* MediaPlayer.framework in Frameworks */,
 				1ACA0CCF16A9FC140070EFB5 /* AVFoundation.framework in Frameworks */,
 				1ACA0CCD16A9FC0A0070EFB5 /* AudioToolbox.framework in Frameworks */,
@@ -302,6 +308,7 @@
 		1ABEAC9616A5C34E0034D316 = {
 			isa = PBXGroup;
 			children = (
+				1ABDFCDE16AB57B3004C95C8 /* MessageUI.framework */,
 				1ACA0CE416AA23F30070EFB5 /* MediaPlayer.framework */,
 				1ACA0CCE16A9FC140070EFB5 /* AVFoundation.framework */,
 				1ACA0CCC16A9FC0A0070EFB5 /* AudioToolbox.framework */,
@@ -458,6 +465,8 @@
 		1ACA0CD816AA0CCB0070EFB5 /* Draws */ = {
 			isa = PBXGroup;
 			children = (
+				1ABDFCD616AB3204004C95C8 /* CustomPopOver.h */,
+				1ABDFCD716AB3204004C95C8 /* CustomPopOver.m */,
 				1ACA0CD916AA0CDE0070EFB5 /* DrawCircle.h */,
 				1ACA0CDA16AA0CDE0070EFB5 /* DrawCircle.m */,
 				1ADF100B16AAF0B700C2ADD2 /* DrawRect.h */,
@@ -787,6 +796,7 @@
 				1ACA0CC316A9F7160070EFB5 /* AudioImageView.m in Sources */,
 				1ACA0CDB16AA0CDE0070EFB5 /* DrawCircle.m in Sources */,
 				1ADF100D16AAF0B700C2ADD2 /* DrawRect.m in Sources */,
+				1ABDFCD816AB3204004C95C8 /* CustomPopOver.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
