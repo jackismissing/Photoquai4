@@ -40,14 +40,22 @@
       UITextAttributeFont,
       nil]];
     
-    
-    //UIImage *backButtonImage = [[UIImage imageNamed:@"backButton"] resizableImageWithCapInsets:UIEdgeInsetsMake(, 13, 0, 6)];
-    //[[UIBarButtonItem appearance] setBackButtonBackgroundImage:backButtonImage forState:UIControlStateNormal barMetrics:UIBarMetricsDefault];
-    
+    [[NSNotificationCenter defaultCenter]
+     addObserver:self
+     selector:@selector(volumeChanged:)
+     name:@"AVSystemController_SystemVolumeDidChangeNotification"
+     object:nil];
+
     self.window.rootViewController = navigationController;
     
     [self.window makeKeyAndVisible];
     return YES;
+}
+
+//Informe le changement du volume par le biais des boutons
+- (void)volumeChanged:(NSNotification *)notification
+{
+    float volume = [[[notification userInfo] objectForKey:@"AVSystemController_AudioVolumeNotificationParameter"] floatValue];
 }
 
 - (void)applicationWillResignActive:(UIApplication *)application

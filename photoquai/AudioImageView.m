@@ -9,6 +9,7 @@
 #import "AudioImageView.h"
 
 
+
 @implementation AudioImageView
 
 - (id)initWithFrame:(CGRect)frame title:(NSString*)aTitle
@@ -44,18 +45,25 @@
         [self addSubview:sound];
         
 #pragma mark - Audio Player
-        NSString *soundFilePath = [[NSBundle mainBundle] pathForResource:@"windwaker" ofType:@"mp3"];
-        NSURL *soundFileURL = [NSURL fileURLWithPath:soundFilePath];
+        AudioSessionInitialize (NULL, NULL, NULL, (__bridge void *)self);
         
-        _audioPlayer = [[AVAudioPlayer alloc] initWithContentsOfURL:soundFileURL error:nil];
+        UInt32 sessionCategory = kAudioSessionCategory_MediaPlayback;
+        AudioSessionSetProperty (kAudioSessionProperty_AudioCategory, sizeof (sessionCategory), &sessionCategory);
         
+        NSData *soundFileData;
+        soundFileData = [NSData dataWithContentsOfURL:[NSURL fileURLWithPath:[[NSBundle mainBundle] pathForResource:@"windwaker.mp3" ofType:NULL]]];
+        _audioPlayer = [[AVAudioPlayer alloc] initWithData:soundFileData error:NULL];
+        _audioPlayer.delegate = self;
+        
+
         float playPauseButtonY = sound.frame.size.height + 15;
         
-        playPauseButton = [[DrawCircle alloc] initWithFrame:CGRectMake(10, playPauseButtonY, 50, 50)];
+        playPauseButton = [[DrawCircle alloc] initWithFrame:CGRectMake(20, playPauseButtonY, 50, 50)];
         [self addSubview:playPauseButton];
         
         playPauseButtonImage = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"playrouge"]];
-        playPauseButtonImage.frame = CGRectMake(25, playPauseButtonY + 13, 25, 25);
+        playPauseButtonImage.frame = CGRectMake(35, playPauseButtonY + 13, 25, 25);
+        playPauseButtonImage.userInteractionEnabled = YES;
         //playPauseButtonImage.backgroundColor = [UIColor redColor];
         playPauseButtonImage.contentMode = UIViewContentModeScaleAspectFit;
         
@@ -64,24 +72,114 @@
         
         [self addSubview:playPauseButtonImage];
         
+        playbackTimer = [NSTimer scheduledTimerWithTimeInterval:1 target:self selector:@selector(miseAJour:) userInfo:nil repeats:YES];
         
-        // playPauseButton.backgroundColor = [UIColor cyanColor];
-        //playPauseButton.layer.borderColor = [UIColor redColor].CGColor;
+        volumeSlider = [[UISlider alloc] initWithFrame:CGRectMake(playPauseButton.frame.size.width + 55, playPauseButtonY + 13, 180, 10)];
+        [volumeSlider addTarget:self action:@selector(soundLevel:) forControlEvents:UIControlEventValueChanged];
+        volumeSlider.maximumTrackTintColor = [UIColor purpleColor];
+        volumeSlider.thumbTintColor = [UIColor grayColor];
+        volumeSlider.continuous = YES;
+        volumeSlider.minimumValue = 0.0;
+        volumeSlider.maximumValue = 1;
         
-    
+        UIImage *sliderThumb = [UIImage imageNamed:@"sliderButton"];
+        [volumeSlider setThumbImage:sliderThumb forState:UIControlStateNormal];
+        [volumeSlider setThumbImage:sliderThumb forState:UIControlStateHighlighted];
+        
+        UIImage *sliderMinimum = [[UIImage imageNamed:@"sliderBackground"] stretchableImageWithLeftCapWidth:4 topCapHeight:0];
+        [volumeSlider setMinimumTrackImage:sliderMinimum forState:UIControlStateNormal];
+        UIImage *sliderMaximum = [[UIImage imageNamed:@"sliderBackground"] stretchableImageWithLeftCapWidth:4 topCapHeight:0];
+        [volumeSlider setMaximumTrackImage:sliderMaximum forState:UIControlStateNormal];
+        
+        [self addSubview:volumeSlider];
+        
+        UIImageView *hautParleurs = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"hautparleurs"]];
+        hautParleurs.frame = CGRectMake(volumeSlider.frame.origin.x - 20, playPauseButtonY + 15, 15, 15);
+        hautParleurs.contentMode = UIViewContentModeScaleAspectFit;
+        [self addSubview:hautParleurs];
+        
+        UIImageView *hautParleursForts = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"hautparleursforts"]];
+        hautParleursForts.frame = CGRectMake(volumeSlider.frame.origin.x + volumeSlider.frame.size.width + 10, playPauseButtonY + 15, 15, 15);
+        hautParleursForts.contentMode = UIViewContentModeScaleAspectFit;
+        [self addSubview:hautParleursForts];
+        
+        musicPlayer = [MPMusicPlayerController applicationMusicPlayer];
+        musicPlayer.volume = .1;
+        volumeSlider.value = musicPlayer.volume;
+        
+        //NSString *totalTimeSound = [NSString stringWithFormat:@"%f", _audioPlayer.duration];
+        currentTime = [[UILabel alloc] initWithFrame:CGRectMake(15, sound.frame.size.height - sound.frame.origin.y - 20, 120, 30)];
+        currentTime.font = [UIFont fontWithName:@"Parisine-Regular" size:15];
+        currentTime.textColor =  [UIColor r:214 g:41 b:48 alpha:1];
+        currentTime.backgroundColor = [UIColor clearColor];
+        [sound addSubview:currentTime];
+        
+        
+        totalTime = [[UILabel alloc] initWithFrame:CGRectMake(280, sound.frame.size.height - sound.frame.origin.y - 20, 120, 30)];
+        totalTime.font = [UIFont fontWithName:@"Parisine-Regular" size:15];
+        totalTime.textColor = [UIColor r:102 g:102 b:102 alpha:1];
+        totalTime.backgroundColor = [UIColor clearColor];
+        [sound addSubview:totalTime];
         
         
         soundIsPlayed = NO; //L'audio n'est pas joué par défaut;
+        
+        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(volumeChanged:) name:@"AVSystemController_SystemVolumeDidChangeNotification" object:nil];
     }
     return self;
 }
 
+//Met à jour en temps réel le temps restant
+- (void)updateTimeLeft
+{
+    NSTimeInterval timeLeft = self.audioPlayer.currentTime;
+    NSTimeInterval totalTimeSound = self.audioPlayer.duration;
+    float min = (int) timeLeft/60;
+    float sec = lroundf(timeLeft) % 60;
+    
+    int minTotal = (int) totalTimeSound/60;
+    int secTotal = (int) totalTimeSound % 60;
+    
+    // update your UI with timeLeft
+    currentTime.text = [NSString stringWithFormat:@"%02.0f:%02.0f", min, sec];
+    totalTime.text = [NSString stringWithFormat:@"%d:%d", minTotal, secTotal];
+    [currentTime sizeToFit];
+    [totalTime sizeToFit];
+    
+    //[self updateTimeLeft];
+}
+
+-(void)miseAJour:(NSTimer*)timer{
+    
+    float currentPosition = _audioPlayer.currentTime;
+    [self updateTimeLeft];
+}
+
+- (void)soundLevel:(UIControlEvents *)gesture{
+    
+    [musicPlayer setVolume: volumeSlider.value];
+}
+
+- (void)volumeChanged:(NSNotification *)notification
+{
+    float volume = [[[notification userInfo] objectForKey:@"AVSystemController_AudioVolumeNotificationParameter"] floatValue];
+
+    [volumeSlider setValue: volume];
+}
+
 
 - (void) playPausePlayer {
+    
     if(soundIsPlayed){
         soundIsPlayed = NO;
+        [_audioPlayer pause];
+        playPauseButtonImage.alpha = 1.0f;
+
     }else{
+        
+        playPauseButtonImage.alpha = .5f;
         soundIsPlayed = YES;
+        [_audioPlayer play];
     }
 }
 

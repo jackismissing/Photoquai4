@@ -173,7 +173,7 @@
                              toolBar.frame = CGRectMake(0, 500, toolBar.frame.size.width, toolBar.frame.size.height);
                              audioDescription.frame = CGRectMake(0, 500, audioDescription.frame.size.width, audioDescription.frame.size.height);
                              descriptionPhotography.frame = CGRectMake(0, 500, descriptionPhotography.frame.size.width, descriptionPhotography.frame.size.height);
-                             picture.frame = CGRectMake(0, 50, screenWidth, screenHeight);
+                             //picture.frame = CGRectMake(0, 50, screenWidth, screenHeight-100);
                              picture.transform=CGAffineTransformMakeScale(1.2, 1.2);
                         }completion:^(BOOL finished){}];
         
@@ -186,7 +186,7 @@
                          animations:^{
                              toolBar.frame = CGRectMake(0, screenHeight - 118, toolBar.frame.size.width, toolBar.frame.size.height);
                              picture.transform=CGAffineTransformMakeScale(1, 1);
-                             picture.frame = CGRectMake(0, 0, screenWidth, screenHeight-100);
+                             //picture.frame = CGRectMake(0, 0, screenWidth, screenHeight-100);
                          }completion:^(BOOL finished){}];
     }
     
@@ -285,8 +285,6 @@
             
         case 2:
         {
-            
-            
             toolBar.infosImage.image = [UIImage imageNamed:@"informations"];
             toolBar.infosLabel.textColor = [UIColor r:109 g:109 b:109 alpha:1];
             toolBar.audioguideImage.image = [UIImage imageNamed:@"audioguide"];

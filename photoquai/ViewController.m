@@ -81,11 +81,6 @@
     
     UIBarButtonItem* menuBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:menuButton];
     [self.navigationItem setLeftBarButtonItem:menuBarButtonItem];
-
-
-   
-
-
 }
 
 //Détecte la connexion d'un utilisateur
