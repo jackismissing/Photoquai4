@@ -10,11 +10,6 @@
 #import "NavigationViewController.h"
 #import <QuartzCore/QuartzCore.h>
 
-#define FONT_SIZE 12.0f
-#define CELL_CONTENT_WIDTH 320.0f
-#define CELL_CONTENT_MARGIN 0.0f
-
-
 @interface AgendaController ()
 
 @end
@@ -73,8 +68,9 @@
 
 @synthesize dateLabel;
 @synthesize headerTitle;
+@synthesize headerText;
 
-@synthesize didLoad;
+
 
 
 /*
@@ -101,9 +97,9 @@
     [super viewDidLoad];
 	// Do any additional setup after loading the view.
     
-    // Not loaded yet
+
     
-    didLoad = NO;
+
     
     // Set selectedMonth to 0;
     
@@ -111,7 +107,12 @@
     
     // Init table
     
-    self.infosTableView = [[UITableView alloc] init];
+    self.infosTableView = [[UITableView alloc] initWithFrame:CGRectMake(self.view.frame.origin.x, 40, self.view.frame.size.width, self.view.frame.size.height) style:UITableViewStylePlain];
+    
+    UIView *v = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 320, 10)];
+    v.backgroundColor = [UIColor clearColor];
+
+    [self.infosTableView setTableFooterView:v];
     
     // Set width and height
     
@@ -128,7 +129,7 @@
     
     // Creating the scrollview
     
-    agendaScroll = [[UIScrollView alloc] initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, 40)];
+    agendaScroll = [[UIScrollView alloc] initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, 50)];
     
     [agendaScroll setScrollEnabled:YES];
     
@@ -145,56 +146,56 @@
     // Creating one view per button
     
     octobreLastView = [[UIView alloc] initWithFrame:CGRectMake(10, 0, 50, 40)];
-    octobreLastView.backgroundColor = [UIColor colorWithWhite:255 alpha:0];
+    octobreLastView.backgroundColor = [UIColor colorWithWhite:0 alpha:100];
     [agendaScroll addSubview:octobreLastView];
     
     novembreLastView = [[UIView alloc] initWithFrame:CGRectMake(70, 0, 50, 40)];
-    novembreLastView.backgroundColor = [UIColor colorWithWhite:255 alpha:0];
+    novembreLastView.backgroundColor = [UIColor colorWithWhite:0 alpha:100];
     [agendaScroll addSubview:novembreLastView];
     
     decembreLastView = [[UIView alloc] initWithFrame:CGRectMake(130, 0, 50, 40)];
-    decembreLastView.backgroundColor = [UIColor colorWithWhite:255 alpha:0];
+    decembreLastView.backgroundColor = [UIColor colorWithWhite:0 alpha:100];
     [agendaScroll addSubview:decembreLastView];
     
     
     juinView = [[UIView alloc] initWithFrame:CGRectMake(190, 0, 50, 40)];
-    juinView.backgroundColor = [UIColor colorWithWhite:255 alpha:0];
+    juinView.backgroundColor = [UIColor colorWithWhite:0 alpha:100];
     [agendaScroll addSubview:juinView];
     
     juilletView = [[UIView alloc] initWithFrame:CGRectMake(250, 0, 50, 40)];
-    juilletView.backgroundColor = [UIColor colorWithWhite:255 alpha:0];
+    juilletView.backgroundColor = [UIColor colorWithWhite:0 alpha:100];
     [agendaScroll addSubview:juilletView];
     
     aoutView = [[UIView alloc] initWithFrame:CGRectMake(310, 0, 50, 40)];
-    aoutView.backgroundColor = [UIColor colorWithWhite:255 alpha:0];
+    aoutView.backgroundColor = [UIColor colorWithWhite:0 alpha:100];
     [agendaScroll addSubview:aoutView];
     
     septembreView = [[UIView alloc] initWithFrame:CGRectMake(370, 0, 50, 40)];
-    septembreView.backgroundColor = [UIColor colorWithWhite:255 alpha:0];
+    septembreView.backgroundColor = [UIColor colorWithWhite:0 alpha:100];
     [agendaScroll addSubview:septembreView];
     
     octobreView = [[UIView alloc] initWithFrame:CGRectMake(430, 0, 50, 40)];
-    octobreView.backgroundColor = [UIColor colorWithWhite:255 alpha:0];
+    octobreView.backgroundColor = [UIColor colorWithWhite:0 alpha:100];
     [agendaScroll addSubview:octobreView];
     
     novembreView = [[UIView alloc] initWithFrame:CGRectMake(490, 0, 50, 40)];
-    novembreView.backgroundColor = [UIColor colorWithWhite:255 alpha:0];
+    novembreView.backgroundColor = [UIColor colorWithWhite:0 alpha:100];
     [agendaScroll addSubview:novembreView];
     
     decembreView = [[UIView alloc] initWithFrame:CGRectMake(550, 0, 50, 40)];
-    decembreView.backgroundColor = [UIColor colorWithWhite:255 alpha:0];
+    decembreView.backgroundColor = [UIColor colorWithWhite:0 alpha:100];
     [agendaScroll addSubview:decembreView];
     
     juinFirstView = [[UIView alloc] initWithFrame:CGRectMake(610, 0, 50, 40)];
-    juinFirstView.backgroundColor = [UIColor colorWithWhite:255 alpha:0];
+    juinFirstView.backgroundColor = [UIColor colorWithWhite:0 alpha:100];
     [agendaScroll addSubview:juinFirstView];
     
     juilletFirstView = [[UIView alloc] initWithFrame:CGRectMake(670, 0, 50, 40)];
-    juilletFirstView.backgroundColor = [UIColor colorWithWhite:255 alpha:0];
+    juilletFirstView.backgroundColor = [UIColor colorWithWhite:0 alpha:100];
     [agendaScroll addSubview:juilletFirstView];
     
     aoutFirstView = [[UIView alloc] initWithFrame:CGRectMake(730, 0, 50, 40)];
-    aoutFirstView.backgroundColor = [UIColor colorWithWhite:255 alpha:0];
+    aoutFirstView.backgroundColor = [UIColor colorWithWhite:0 alpha:100];
     [agendaScroll addSubview:aoutFirstView];
     
     
@@ -210,9 +211,9 @@
     
     [agendaButtonJuin setTitle:@"Jun." forState:UIControlStateNormal];
     
-    agendaButtonJuin.titleLabel.font = [UIFont fontWithName:@"Parisine-Bold" size:12];
+    agendaButtonJuin.titleLabel.font = [UIFont fontWithName:@"Parisine-Bold" size:13];
     
-    //[agendaButtonJuin setBackgroundColor:[UIColor redColor]];
+    [agendaButtonJuin setBackgroundColor:[UIColor colorWithWhite:255 alpha:0]];
     
     [juinView addSubview:agendaButtonJuin];
     
@@ -226,9 +227,9 @@
     
     [agendaFirstButtonJuin setTitle:@"Jun." forState:UIControlStateNormal];
     
-    agendaFirstButtonJuin.titleLabel.font = [UIFont fontWithName:@"Parisine-Bold" size:12];
+    agendaFirstButtonJuin.titleLabel.font = [UIFont fontWithName:@"Parisine-Bold" size:13];
     
-    //[agendaFirstButtonJuin setBackgroundColor:[UIColor redColor]];
+    [agendaFirstButtonJuin setBackgroundColor:[UIColor colorWithWhite:255 alpha:0]];
     
     [juinFirstView addSubview:agendaFirstButtonJuin];
     
@@ -242,11 +243,11 @@
     // Passing parameter to button
     agendaButtonJuillet.tag = 1;
     
-    [agendaButtonJuillet setTitle:@"Jui." forState:UIControlStateNormal];
+    [agendaButtonJuillet setTitle:@"Jul." forState:UIControlStateNormal];
     
-    agendaButtonJuillet.titleLabel.font = [UIFont fontWithName:@"Parisine-Bold" size:12];
+    agendaButtonJuillet.titleLabel.font = [UIFont fontWithName:@"Parisine-Bold" size:13];
     
-    //[agendaButtonJuillet setBackgroundColor:[UIColor redColor]];
+    [agendaButtonJuillet setBackgroundColor:[UIColor colorWithWhite:255 alpha:0]];
     
     [juilletView addSubview:agendaButtonJuillet];
     
@@ -257,11 +258,11 @@
     // Passing parameter to button
     agendaFirstButtonJuillet.tag = 1;
     
-    [agendaFirstButtonJuillet setTitle:@"Jui." forState:UIControlStateNormal];
+    [agendaFirstButtonJuillet setTitle:@"Jul." forState:UIControlStateNormal];
     
-    agendaFirstButtonJuillet.titleLabel.font = [UIFont fontWithName:@"Parisine-Bold" size:12];
+    agendaFirstButtonJuillet.titleLabel.font = [UIFont fontWithName:@"Parisine-Bold" size:13];
     
-    //[agendaFirstButtonJuillet setBackgroundColor:[UIColor redColor]];
+    [agendaFirstButtonJuillet setBackgroundColor:[UIColor colorWithWhite:255 alpha:0]];
     
     [juilletFirstView addSubview:agendaFirstButtonJuillet];
     
@@ -279,9 +280,9 @@
     
     [agendaButtonAout setTitle:@"Aoû." forState:UIControlStateNormal];
     
-    agendaButtonAout.titleLabel.font = [UIFont fontWithName:@"Parisine-Bold" size:12];
+    agendaButtonAout.titleLabel.font = [UIFont fontWithName:@"Parisine-Bold" size:13];
     
-    //[agendaButtonAout setBackgroundColor:[UIColor redColor]];
+    [agendaButtonAout setBackgroundColor:[UIColor colorWithWhite:255 alpha:0]];
     
     [aoutView addSubview:agendaButtonAout];
     
@@ -294,9 +295,9 @@
     
     [agendaFirstButtonAout setTitle:@"Aoû." forState:UIControlStateNormal];
     
-    agendaFirstButtonAout.titleLabel.font = [UIFont fontWithName:@"Parisine-Bold" size:12];
+    agendaFirstButtonAout.titleLabel.font = [UIFont fontWithName:@"Parisine-Bold" size:13];
     
-    // [agendaFirstButtonAout setBackgroundColor:[UIColor redColor]];
+    [agendaFirstButtonAout setBackgroundColor:[UIColor colorWithWhite:255 alpha:0]];
     
     [aoutFirstView addSubview:agendaFirstButtonAout];
     
@@ -315,9 +316,9 @@
     
     [agendaButtonSeptembre setTitle:@"Sep." forState:UIControlStateNormal];
     
-    agendaButtonSeptembre.titleLabel.font = [UIFont fontWithName:@"Parisine-Bold" size:12];
+    agendaButtonSeptembre.titleLabel.font = [UIFont fontWithName:@"Parisine-Bold" size:13];
     
-    //[agendaButtonSeptembre setBackgroundColor:[UIColor redColor]];
+    [agendaButtonSeptembre setBackgroundColor:[UIColor colorWithWhite:255 alpha:0]];
     
     [septembreView addSubview:agendaButtonSeptembre];
     
@@ -335,9 +336,9 @@
     
     [agendaButtonOctobre setTitle:@"Oct." forState:UIControlStateNormal];
     
-    agendaButtonOctobre.titleLabel.font = [UIFont fontWithName:@"Parisine-Bold" size:12];
+    agendaButtonOctobre.titleLabel.font = [UIFont fontWithName:@"Parisine-Bold" size:13];
     
-    //[agendaButtonOctobre setBackgroundColor:[UIColor redColor]];
+    [agendaButtonOctobre setBackgroundColor:[UIColor colorWithWhite:255 alpha:0]];
     
     [octobreView addSubview:agendaButtonOctobre];
     
@@ -350,9 +351,9 @@
     
     [agendaLastButtonOctobre setTitle:@"Oct." forState:UIControlStateNormal];
     
-    agendaLastButtonOctobre.titleLabel.font = [UIFont fontWithName:@"Parisine-Bold" size:12];
+    agendaLastButtonOctobre.titleLabel.font = [UIFont fontWithName:@"Parisine-Bold" size:13];
     
-    //[agendaLastButtonOctobre setBackgroundColor:[UIColor redColor]];
+    [agendaLastButtonOctobre setBackgroundColor:[UIColor colorWithWhite:255 alpha:0]];
     
     [octobreLastView addSubview:agendaLastButtonOctobre];
     
@@ -363,13 +364,13 @@
     [agendaButtonNovembre addTarget:self action:@selector(showTable:) forControlEvents:UIControlEventTouchUpInside];
     
     // Passing parameter to button
-    agendaButtonNovembre.tag = 2;
+    agendaButtonNovembre.tag = 1;
     
     [agendaButtonNovembre setTitle:@"Nov." forState:UIControlStateNormal];
     
-    agendaButtonNovembre.titleLabel.font = [UIFont fontWithName:@"Parisine-Bold" size:12];
+    agendaButtonNovembre.titleLabel.font = [UIFont fontWithName:@"Parisine-Bold" size:13];
     
-    //[agendaButtonNovembre setBackgroundColor:[UIColor redColor]];
+    [agendaButtonNovembre setBackgroundColor:[UIColor colorWithWhite:255 alpha:0]];
     
     [novembreView addSubview:agendaButtonNovembre];
     
@@ -378,13 +379,13 @@
     [agendaLastButtonNovembre addTarget:self action:@selector(showTable:) forControlEvents:UIControlEventTouchUpInside];
     
     // Passing parameter to button
-    agendaLastButtonNovembre.tag = 2;
+    agendaLastButtonNovembre.tag = 1;
     
     [agendaLastButtonNovembre setTitle:@"Nov." forState:UIControlStateNormal];
     
-    agendaLastButtonNovembre.titleLabel.font = [UIFont fontWithName:@"Parisine-Bold" size:12];
+    agendaLastButtonNovembre.titleLabel.font = [UIFont fontWithName:@"Parisine-Bold" size:13];
     
-    //[agendaLastButtonNovembre setBackgroundColor:[UIColor redColor]];
+    [agendaLastButtonNovembre setBackgroundColor:[UIColor colorWithWhite:255 alpha:0]];
     
     [novembreLastView addSubview:agendaLastButtonNovembre];
     
@@ -396,13 +397,13 @@
     [agendaButtonDecembre addTarget:self action:@selector(showTable:) forControlEvents:UIControlEventTouchUpInside];
     
     // Passing parameter to button
-    agendaButtonDecembre.tag = 3;
+    agendaButtonDecembre.tag = 1;
     
     [agendaButtonDecembre setTitle:@"Dec." forState:UIControlStateNormal];
     
-    agendaButtonDecembre.titleLabel.font = [UIFont fontWithName:@"Parisine-Bold" size:12];
+    agendaButtonDecembre.titleLabel.font = [UIFont fontWithName:@"Parisine-Bold" size:13];
     
-    //[agendaButtonDecembre setBackgroundColor:[UIColor redColor]];
+    [agendaButtonDecembre setBackgroundColor:[UIColor colorWithWhite:255 alpha:0]];
     
     [decembreView addSubview:agendaButtonDecembre];
     
@@ -415,9 +416,9 @@
     
     [agendaLastButtonDecembre setTitle:@"Dec." forState:UIControlStateNormal];
     
-    agendaLastButtonDecembre.titleLabel.font = [UIFont fontWithName:@"Parisine-Bold" size:12];
+    agendaLastButtonDecembre.titleLabel.font = [UIFont fontWithName:@"Parisine-Bold" size:13];
     
-    //[agendaLastButtonDecembre setBackgroundColor:[UIColor redColor]];
+    [agendaLastButtonDecembre setBackgroundColor:[UIColor colorWithWhite:255 alpha:0]];
     
     [decembreLastView addSubview:agendaLastButtonDecembre];
 
@@ -438,8 +439,29 @@
     
     // By default, press october
     
-    [agendaButtonOctobre sendActionsForControlEvents:UIControlEventTouchUpInside];
+   // [agendaButtonOctobre sendActionsForControlEvents:UIControlEventTouchUpInside];
     
+    // Init table
+    
+    
+    [self.view addSubview:infosTableView];
+    
+    items = [[NSArray alloc] initWithObjects:@"", nil];
+    
+    self.infosTableView.delegate = self;
+    self.infosTableView.dataSource = self;
+    
+    /////////////////
+    //// EXPANDABLE SECTIONS ///
+    ///////////////////////////
+    
+    if (!expandedSections)
+    {
+        
+        expandedSections = [[NSMutableIndexSet alloc] init];
+        
+    }
+
     
     
     
@@ -500,7 +522,8 @@
 }
 
 - (void)showTable : (id)sender;
-{
+{/*
+    
     
     NSLog(@"agendaBtn");
     
@@ -526,32 +549,29 @@
         
         // Set opacity for buttons
         
-        /*
-         [agendaButtonOctober setAlpha:1];
-         [agendaButtonNovember setAlpha:0.7];
-         [agendaButtonDecember setAlpha:0.3];
-         */
+        
         
         
         
         // Reloading table properties in casse where another button was already selected before
         
-        [infosTableView reloadData];
+        
         
         NSLog(@"test");
         
-        [infosTableView setFrame:CGRectMake(350, 40, self.view.frame.size.width, self.view.frame.size.height)];
+        
         //Add the tableview as sa subview of our view ---> making "view" our superview.
         
         // Animate add sub view
         
-        [UIView beginAnimations:@"animateTableView" context:nil];
-        [UIView setAnimationDuration:0.4];
+
+
         [infosTableView setFrame:CGRectMake(self.view.frame.origin.x, 40, self.view.frame.size.width, self.view.frame.size.height)];
-        [UIView commitAnimations];
+
+        
         [self.view addSubview:infosTableView];
         
-        items = [[NSArray alloc] initWithObjects:@"Expo 1", @"Expo 2", @"Expo 3", @"Expo 4", nil];
+        items = [[NSArray alloc] initWithObjects:@"", nil];
         
         self.infosTableView.delegate = self;
         self.infosTableView.dataSource = self;
@@ -568,106 +588,11 @@
         }
         
     }
+   
     
-    // If november
+
     
-    if(monthId == 2 && selectedMonth != 2)
-    {
-        // Set month to 2
-        selectedMonth = 2;
-        
-        // Reloading table head section data
-        [infosTableView reloadData];
-        
-        // Set opacity for buttons
-        
-        
-        /*
-         [agendaButtonOctober setAlpha:1];
-         [agendaButtonNovember setAlpha:0.7];
-         [agendaButtonDecember setAlpha:0.3];
-         */
-        
-        NSLog(@"november");
-        [infosTableView setFrame:CGRectMake(350, 40, self.view.frame.size.width, self.view.frame.size.height)];
-        //Add the tableview as sa subview of our view ---> making "view" our superview.
-        
-        // Animate add sub view
-        
-        [UIView beginAnimations:@"animateTableView" context:nil];
-        [UIView setAnimationDuration:0.4];
-        [infosTableView setFrame:CGRectMake(self.view.frame.origin.x, 40, self.view.frame.size.width, self.view.frame.size.height)];
-        [UIView commitAnimations];
-        [self.view addSubview:infosTableView];
-        
-        items = [[NSArray alloc] initWithObjects:@"Expo 1", @"Expo 2", @"Expo 3", @"Expo 4", nil];
-        self.infosTableView.delegate = self;
-        self.infosTableView.dataSource = self;
-        
-        /////////////////
-        //// EXPANDABLE SECTIONS ///
-        ///////////////////////////
-        
-        if (!expandedSections)
-        {
-            
-            expandedSections = [[NSMutableIndexSet alloc] init];
-            
-        }
-        
-    }
-    
-    // If december
-    
-    if(monthId == 3 && selectedMonth != 3)
-    {
-        // Set month to 2
-        selectedMonth = 3;
-        
-        // Reloading table head section data
-        [infosTableView reloadData];
-        
-        // Set opacity for buttons
-        
-        
-        /*
-         [agendaButtonOctober setAlpha:1];
-         [agendaButtonNovember setAlpha:0.7];
-         [agendaButtonDecember setAlpha:0.3];
-         */
-        
-        NSLog(@"december");
-        [infosTableView setFrame:CGRectMake(350, 40, self.view.frame.size.width, self.view.frame.size.height)];
-        //Add the tableview as sa subview of our view ---> making "view" our superview.
-        
-        // Animate add sub view
-        
-        [UIView beginAnimations:@"animateTableView" context:nil];
-        [UIView setAnimationDuration:0.4];
-        [infosTableView setFrame:CGRectMake(self.view.frame.origin.x, 40, self.view.frame.size.width, self.view.frame.size.height)];
-        [UIView commitAnimations];
-        [self.view addSubview:infosTableView];
-        
-        items = [[NSArray alloc] initWithObjects:@"Expo 1", @"Expo 2", @"Expo 3", @"Expo 4", nil];
-        self.infosTableView.delegate = self;
-        self.infosTableView.dataSource = self;
-        
-        /////////////////
-        //// EXPANDABLE SECTIONS ///
-        ///////////////////////////
-        
-        if (!expandedSections)
-        {
-            
-            expandedSections = [[NSMutableIndexSet alloc] init];
-            
-        }
-        
-    }
-    
-    didLoad = YES;
-    
-}
+*/}
 
 
 
@@ -677,7 +602,7 @@
 #pragma mark - Table view data source
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
     // Return the number of sections.
-    return 3;
+    return 2;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
@@ -688,7 +613,7 @@
     {
         if([expandedSections containsIndex:section])
         {
-            return [items count];
+            return 2;
         }
         
         return 1;
@@ -702,25 +627,19 @@
 {
     if (!indexPath.row)
     {
-        if(selectedMonth == 1) {
-            
-            return 100;
-            
-            
-        } else if (selectedMonth == 2) {
-            
-            return 100;
-            
-            
-        } else return 50;
+        return 120;
         
-    } else return 50;
+    } else return 490;
+    
+
 }
 
 
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
     //Where we configure the cell in each row
+    
+    
     
     // Remove dateLabel and headerTitle
     
@@ -729,9 +648,11 @@
     static NSString *CellIdentifier = @"Cell";
     UITableViewCell *cell;
     
+    cell.selectionStyle = UITableViewCellSelectionStyleNone;
+    
     cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
     if (cell == nil) {
-        cell = [[UITableViewCell alloc] initWithFrame:CGRectZero reuseIdentifier:@"Cell"];
+        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];
     }
     // Configure the cell... setting the text of our cell's label
     
@@ -742,11 +663,11 @@
             
             // Set data according to month
             
-            if(selectedMonth == 1) {
+            
                 
                 // Date label
           
-                dateLabel = [[UILabel alloc] initWithFrame:CGRectMake(15, 25, 41, 35)];
+                dateLabel = [[UILabel alloc] initWithFrame:CGRectMake(15, 23, 41, 35)];
                       
                 dateLabel.text = @"13.10.13 17.12.13";
                 
@@ -754,9 +675,8 @@
                 
                 dateLabel.font = [UIFont fontWithName:@"Parisine-Italic" size:10];
                 
-                //[dateLabel sizeT
                 
-                                        [cell addSubview:dateLabel];   
+                [cell addSubview:dateLabel];   
 
                 
                 // Header title
@@ -772,55 +692,94 @@
                 
                 [headerTitle sizeToFit];
                 
-                         [cell addSubview:headerTitle];
+                [cell addSubview:headerTitle];
+                
+                // Header content
+                
+                headerText = [[UILabel alloc] initWithFrame:CGRectMake(70, 50, 200, 42)];
+                
+                headerText.text = @"Minutes to Midnight et Coming Soon de Trent Parke et Between Worlds de Polixeni Papapetrou";
+                
+                headerText.numberOfLines = 3;
+                
+                headerText.font = [UIFont fontWithName:@"Parisine" size:12];
+                
+                [cell addSubview:headerText];
+                
+                
                 
                
                 
-            } else if (selectedMonth == 2) {
-                
-
-                // Date                 
-                dateLabel = [[UILabel alloc] initWithFrame:CGRectMake(15, 25, 41, 35)];      
-                
-                dateLabel.text = @"13.10.13 17.12.13";
-                
-                dateLabel.numberOfLines = 2;
-                
-                dateLabel.font = [UIFont fontWithName:@"Parisine-Italic" size:10];
-                
-                //[dateLabel sizeToFit];
-
-                
-                // Header
-                
-                headerTitle = [[UILabel alloc] initWithFrame:CGRectMake(70, 25, 164, 70)];
-                
-                headerTitle.text = @"Ambassade de France";
-                
-                headerTitle.numberOfLines = 1;
-                
-                headerTitle.font = [UIFont fontWithName:@"Parisine-Bold" size:14];
-                
-                [headerTitle sizeToFit];
-                
-                         [cell addSubview:headerTitle];
-
-
-
-            }
-            
-            else if (selectedMonth == 3) {
-    
-                
-                cell.textLabel.text = @"Jour Decembre";
-                
-            }
-            
+          
         }
-        else
+        else if (indexPath.row == 1)
         {
-            cell.textLabel.text = [items objectAtIndex:indexPath.row];
-            cell.textLabel.textAlignment = UITextAlignmentCenter;
+            
+            
+            UILabel *contentIntro = [[UILabel alloc] initWithFrame:CGRectMake(22, 15, 250, 85)];
+            
+            contentIntro.text = @"Dans le cadre de Photoquai 2011, l'Ambassade d'Australie à Paris est heureuse de présenter l'exposition « Minutes to Midnight » et « Coming Soon » de Trent Parke et « Between Worlds » de Polixeni Papapetrou.";
+            
+            contentIntro.numberOfLines = 5;
+            
+            contentIntro.font = [UIFont fontWithName:@"Parisine-Italic" size:12];
+            
+            contentIntro.textColor = [UIColor whiteColor];
+            
+            contentIntro.backgroundColor = [UIColor colorWithWhite:255 alpha:0];
+            
+            [cell addSubview:contentIntro];
+            
+            UIImageView *contentImage = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"agendaPhoto.png"]];
+            
+            UIView *contentImageView = [[UIView alloc] initWithFrame:CGRectMake(22, 145, contentImage.frame.size.width, contentImage.frame.size.height)];
+            
+            [contentImageView addSubview:contentImage];
+            
+            [cell addSubview:contentImageView];
+            
+            UILabel *contentImageLegend = [[UILabel alloc] initWithFrame:CGRectMake(22, 150 + contentImage.frame.size.height , 290, 10)];
+            
+            contentImageLegend.text = @"Trent Parke, Pacific Highway Motel, 2006 © Trent Parke/Magnum";
+            
+            contentImageLegend.font = [UIFont fontWithName:@"Parisine-Italic" size:10];
+            
+            contentImageLegend.textColor = [UIColor whiteColor];
+            
+            contentImageLegend.backgroundColor = [UIColor colorWithWhite:255 alpha:0];
+            
+            [cell addSubview:contentImageLegend];
+            
+            UILabel *contentTitle = [[UILabel alloc] initWithFrame:CGRectMake(22, 170 + contentImage.frame.size.height , 290, 20)];
+            
+            contentTitle.text = @"Minutes to Midnight";
+            
+            contentTitle.font = [UIFont fontWithName:@"Parisine-bold" size:14];
+            
+            contentTitle.textColor = [UIColor whiteColor];
+            
+            contentTitle.backgroundColor = [UIColor colorWithWhite:255 alpha:0];
+            
+            [cell addSubview:contentTitle];
+            
+            UILabel *contentContent = [[UILabel alloc] initWithFrame:CGRectMake(22, 184 + contentImage.frame.size.height , 290, 170)];
+            
+            contentContent.text =  @"Nous sommes en 2003. Le sort de la plus grande île du monde est dans la balance. Alors que le pays est assoiffé après la plus grande sècheresse de ces dernières décennies et que les incendies dévorent son territoire, que des invasion de pourceaux, de chats et de crapauds sauvages envahissent les campagnes détruisant tout sur leur passage, dans les grandes villes, les gens vivent dans l’ombre du terrorisme.";
+            
+            contentContent.numberOfLines = 9;
+            
+            
+            contentContent.font = [UIFont fontWithName:@"Parisine" size:12];
+            
+            contentContent.textColor = [UIColor whiteColor];
+            
+            contentContent.backgroundColor = [UIColor colorWithWhite:255 alpha:0];
+            
+            [cell addSubview:contentContent];
+
+            cell.contentView.backgroundColor = [UIColor blackColor];
+            
+            
         }
         
                
@@ -837,52 +796,15 @@
     
     // Set the background color when selected (default blue)
     
-    cell.selectionStyle = UITableViewCellSelectionStyleGray;
+    cell.selectionStyle = UITableViewCellSelectionStyleNone;
+    
+
     
     
     return cell;
 }
 
 
-
-
-
-/*
- // Override to support conditional editing of the table view.
- - (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath{
- // Return NO if you do not want the specified item to be editable.
- return YES;
- }
- */
-
-/*
- // Override to support editing the table view.
- - (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath{
- if (editingStyle == UITableViewCellEditingStyleDelete) {
- // Delete the row from the data source
- [tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationFade];
- }
- else if (editingStyle == UITableViewCellEditingStyleInsert) {
- // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
- }
- }
- */
-
-/*
- // Override to support rearranging the table view.
- - (void)tableView:(UITableView *)tableView moveRowAtIndexPath:(NSIndexPath *)fromIndexPath toIndexPath:(NSIndexPath *)toIndexPath
- {
- }
- */
-
-/*
- // Override to support conditional rearranging of the table view.
- - (BOOL)tableView:(UITableView *)tableView canMoveRowAtIndexPath:(NSIndexPath *)indexPath
- {
- // Return NO if you do not want the item to be re-orderable.
- return YES;
- }
- */
 
 #pragma mark - Expandable sections
 
@@ -910,9 +832,6 @@
     
     
     
-    
-    
-    NSLog(@"%@",expandedSections);
     
     if ([self tableView:tableView canCollapseSection:indexPath.section])
     {
@@ -971,7 +890,7 @@
                 [tableView insertRowsAtIndexPaths:tmpArray withRowAnimation:UITableViewRowAnimationTop];
             }
             
-            rowsInTmpArray = tmpArray;
+            
             
         }
         
@@ -981,18 +900,13 @@
     
     [self.infosTableView deselectRowAtIndexPath:[self.infosTableView indexPathForSelectedRow] animated:YES];
     
-    // set index
+
     
     index = indexPath.section;
 }
 
 - (void)scrollViewDidEndDragging:(UIScrollView *)scrollView willDecelerate:(BOOL)decelerate
 {
-    
-    
-    
-    
-    
     
     CGFloat centerXBoundNegative = centerX - 20;
     
