@@ -59,6 +59,9 @@
         float playPauseButtonY = sound.frame.size.height + 15;
         
         playPauseButton = [[DrawCircle alloc] initWithFrame:CGRectMake(20, playPauseButtonY, 50, 50)];
+        playPauseButton.userInteractionEnabled = YES;
+        UITapGestureRecognizer *oneTap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(playPausePlayer)];
+        [playPauseButton addGestureRecognizer:oneTap];
         [self addSubview:playPauseButton];
         
         playPauseButtonImage = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"playrouge"]];
@@ -170,16 +173,16 @@
 
 - (void) playPausePlayer {
     
-    if(soundIsPlayed){
+    if(soundIsPlayed == YES){
         soundIsPlayed = NO;
         [_audioPlayer pause];
         playPauseButtonImage.alpha = 1.0f;
 
     }else{
         
-        playPauseButtonImage.alpha = .5f;
         soundIsPlayed = YES;
         [_audioPlayer play];
+        playPauseButtonImage.alpha = .5f;
     }
 }
 

@@ -33,7 +33,7 @@
     
     CGGradientRef myGradient;
     
-    CGColorSpaceRef myColorspace;
+    CGColorSpaceRef myColorspace = NULL;
     
     size_t num_locations = 2;
     
@@ -43,9 +43,7 @@
         
         0.8, 0.8, 0.3, 1.0 }; // End color
     
-    
-    
-    myColorspace = CGColorSpaceCreateWithName(kCGColorSpaceGenericRGB);
+    //myColorspace = CGColorSpaceCreateWithName(kCGColorSpaceGenericRGB);
     
     myGradient = CGGradientCreateWithColorComponents (myColorspace, components,
                                                       

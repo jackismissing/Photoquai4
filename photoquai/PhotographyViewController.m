@@ -22,6 +22,8 @@
     //self.navigationController.navigationBar.tintColor = [UIColor r:219 g:25 b:23 alpha:1];
     [super viewWillAppear:animated];
     
+    
+    
     [self.navigationController.navigationBar setBackgroundImage:[UIImage imageNamed:@"navigationBar-photographie.png"] forBarMetrics:UIBarMetricsDefault];
     
     UIImage *buttonImage = [UIImage imageNamed:@"back.png"];
@@ -34,14 +36,19 @@
     UIBarButtonItem *customBarItem = [[UIBarButtonItem alloc] initWithCustomView:button];
     self.navigationItem.leftBarButtonItem = customBarItem;
     
+    UIImage *favouriteButtonImage;
+    idPicture = [NSNumber numberWithInt:self.idPicture];
     // Bouton favoris
-    UIImage *favouriteButtonImage = [UIImage imageNamed:@"etoilepush.png"];
+    if ([oldFavorites containsObject:idPicture] || [favoritesImages containsObject:idPicture]){
+        favouriteButtonImage = [UIImage imageNamed:@"etoilejaune"];
+    }else{
+        favouriteButtonImage = [UIImage imageNamed:@"etoilepush"];
+    }
+    
     
     // Boutton shared
     UIImage *shareButtonImage = [UIImage imageNamed:@"share.png"];
-    
-        
-    // rightNavigationButtons
+
     
     UIView *rightNavigationButtons = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 84, shareButtonImage.size.height)];
     
@@ -56,16 +63,17 @@
     UIButton *shareButton = [UIButton buttonWithType:UIButtonTypeCustom];
     [shareButton setImage:shareButtonImage forState:UIControlStateNormal];
     shareButton.frame = CGRectMake(favouriteButtonImage.size.width, 0, shareButtonImage.size.width, shareButtonImage.size.height);
-    [shareButton addTarget:self action:@selector(addToFavorite) forControlEvents:UIControlEventTouchUpInside];
+    [shareButton addTarget:self action:@selector(sharePicture) forControlEvents:UIControlEventTouchUpInside];
     
     //UIBarButtonItem *shareCustomBarItem = [[UIBarButtonItem alloc] initWithCustomView:shareButton];
     
     //
     
-    UIButton *favouriteButton = [UIButton buttonWithType:UIButtonTypeCustom];
+    favouriteButton = [UIButton buttonWithType:UIButtonTypeCustom];
+    
     [favouriteButton setImage:favouriteButtonImage forState:UIControlStateNormal];
     favouriteButton.frame = CGRectMake(0, rightNavigationButtons.frame.size.height/2 - favouriteButtonImage.size.height/2, favouriteButtonImage.size.width, favouriteButtonImage.size.height);
-    [favouriteButton addTarget:self action:@selector(addToFavorite) forControlEvents:UIControlEventTouchUpInside];
+    [favouriteButton addTarget:self action:@selector(addToFavorites) forControlEvents:UIControlEventTouchUpInside];
     
     //UIBarButtonItem *favouriteCustomBarItem = [[UIBarButtonItem alloc] initWithCustomView:favouriteButton];
     
@@ -76,12 +84,14 @@
     self.navigationItem.rightBarButtonItem = rightNavigationBarItems;
 
     [UIView animateWithDuration:0.5
-                          delay:0.5
+                          delay:0
                         options: UIViewAnimationCurveEaseOut
                      animations:^{
                          descriptionPhotography.frame = CGRectMake(0, 500, descriptionPhotography.frame.size.width, descriptionPhotography.frame.size.height);
                      }
                      completion:^(BOOL finished){}];
+    
+    
 }
 
 - (void)viewDidLoad
@@ -140,14 +150,61 @@
     [self.view addSubview:audioDescription];
     
     
+#pragma mark - Favoris
+    
+    preferencesUser = [NSUserDefaults standardUserDefaults];
+    oldFavorites = [[NSArray alloc] initWithArray: [preferencesUser objectForKey:@"favorisImages"]];
+    favoritesImages = [[NSMutableArray alloc] initWithArray:oldFavorites];
+    
 
     //Laisser en bas pour la que la toolbar passe devant les volets
     toolBar = [[ToolBarPhotography alloc] initWithFrame:CGRectMake(0, screenHeight - 118, 320, 55)];
     [self.view addSubview:toolBar];
 }
 
-- (void)addToFavorite
+- (void)addToFavorites
 {
+    
+    
+    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+    
+    NSLog(@"%@", favoritesImages);
+    if (![oldFavorites containsObject:idPicture] || ![favoritesImages containsObject:idPicture]){
+        [favoritesImages addObject:idPicture];
+        [defaults setObject:favoritesImages forKey:@"favorisImages"];
+        [defaults synchronize];
+        
+        UIAlertView *alert = [[UIAlertView alloc]
+                              initWithTitle:nil
+                              message:@"L'image a bien été ajoutée à vos favoris"
+                              delegate:self
+                              cancelButtonTitle:@"OK" otherButtonTitles:nil];
+        
+        [favouriteButton setImage:[UIImage imageNamed:@"etoilejaune"] forState:UIControlStateNormal];
+        
+        [alert show];
+    }else{
+        NSLog(@"suppresion");
+        
+        [favoritesImages removeObject:idPicture];
+        [defaults setObject:favoritesImages forKey:@"favorisImages"];
+        [defaults synchronize];
+        
+       UIAlertView *alert = [[UIAlertView alloc]
+                 initWithTitle:nil
+                 message:@"L'image a bien été supprimée de vos favoris"
+                 delegate:self
+                 cancelButtonTitle:@"OK" otherButtonTitles:nil];
+        
+        [favouriteButton setImage:[UIImage imageNamed:@"etoilepush"] forState:UIControlStateNormal];
+        
+        [alert show];
+    }
+    
+    
+}
+
+- (void) sharePicture{
     
 }
 
@@ -158,6 +215,18 @@
     
     if(elementsNavigationAreHidden == NO){
         self.navigationController.navigationBarHidden = YES;
+        
+        [UIView animateWithDuration:0.5
+                              delay:0
+                            options: UIViewAnimationCurveEaseOut
+                         animations:^{
+                             toolBar.frame = CGRectMake(0, screenHeight, toolBar.frame.size.width, toolBar.frame.size.height);
+                             audioDescription.frame = CGRectMake(0, 500, audioDescription.frame.size.width, audioDescription.frame.size.height);
+                             descriptionPhotography.frame = CGRectMake(0, 500, descriptionPhotography.frame.size.width, descriptionPhotography.frame.size.height);
+                             
+                             //picture.transform=CGAffineTransformMakeScale(1.2, 1.2);
+                        }completion:^(BOOL finished){}];
+        picture.frame = CGRectMake(0, 50, screenWidth, screenHeight-100);
         elementsNavigationAreHidden = YES;
         toolBar.infosImage.image = [UIImage imageNamed:@"informations"];
         toolBar.infosLabel.textColor = [UIColor r:109 g:109 b:109 alpha:1];
@@ -165,17 +234,6 @@
         toolBar.audioguideLabel.textColor = [UIColor r:109 g:109 b:109 alpha:1];
         toolBar.locationImage.image = [UIImage imageNamed:@"geoloc"];
         toolBar.locationLabel.textColor = [UIColor r:109 g:109 b:109 alpha:1];
-        
-        [UIView animateWithDuration:0.5
-                              delay:0
-                            options: UIViewAnimationCurveEaseOut
-                         animations:^{
-                             toolBar.frame = CGRectMake(0, 500, toolBar.frame.size.width, toolBar.frame.size.height);
-                             audioDescription.frame = CGRectMake(0, 500, audioDescription.frame.size.width, audioDescription.frame.size.height);
-                             descriptionPhotography.frame = CGRectMake(0, 500, descriptionPhotography.frame.size.width, descriptionPhotography.frame.size.height);
-                             //picture.frame = CGRectMake(0, 50, screenWidth, screenHeight-100);
-                             picture.transform=CGAffineTransformMakeScale(1.2, 1.2);
-                        }completion:^(BOOL finished){}];
         
     }else{
         self.navigationController.navigationBarHidden = NO;
@@ -185,9 +243,10 @@
                             options: UIViewAnimationCurveEaseOut
                          animations:^{
                              toolBar.frame = CGRectMake(0, screenHeight - 118, toolBar.frame.size.width, toolBar.frame.size.height);
-                             picture.transform=CGAffineTransformMakeScale(1, 1);
-                             //picture.frame = CGRectMake(0, 0, screenWidth, screenHeight-100);
+                             //picture.transform=CGAffineTransformMakeScale(1, 1);
+                             
                          }completion:^(BOOL finished){}];
+        picture.frame = CGRectMake(0, 0, screenWidth, screenHeight-100);
     }
     
     

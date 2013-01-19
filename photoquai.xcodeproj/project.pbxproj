@@ -240,8 +240,8 @@
 		1A0B2D3F16A861EA0060234E /* PhotographyViewController */ = {
 			isa = PBXGroup;
 			children = (
-				1A0B2D3A16A861E50060234E /* PhotographyViewController.h */,
 				1A0B2D3B16A861E50060234E /* PhotographyViewController.m */,
+				1A0B2D3A16A861E50060234E /* PhotographyViewController.h */,
 				1A0B2D3C16A861E50060234E /* PhotographyViewController.xib */,
 			);
 			name = PhotographyViewController;

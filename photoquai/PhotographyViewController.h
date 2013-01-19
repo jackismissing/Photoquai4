@@ -22,6 +22,13 @@
     ToolBarPhotography *toolBar;
     BOOL elementsNavigationAreHidden;
     
+    NSUserDefaults *preferencesUser;
+    NSMutableArray *favoritesImages;
+    NSArray *oldFavorites;
+    
+    UIButton *favouriteButton;
+    NSNumber *idPicture;
+    
 }
 
 @property (nonatomic, assign) int idPicture;
