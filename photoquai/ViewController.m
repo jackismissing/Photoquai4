@@ -28,6 +28,7 @@
 	// Do any additional setup after loading the view, typically from a nib.
     
     preferencesUser = [NSUserDefaults standardUserDefaults];
+    //[preferencesUser removeObjectForKey:@"favorisImages"]; Supprime tous les éléments d'un index bien précis
     oldFavorites = [[NSArray alloc] initWithArray: [preferencesUser objectForKey:@"favorisImages"]];
     [preferencesUser synchronize];
     

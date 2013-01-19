@@ -11,6 +11,7 @@
 #import "InfoViewController.h"
 #import "ViewController.h"
 #import "MapPhqViewController.h"
+#import "FavoritesPicturesViewController.h"
 
 @interface NavigationViewController ()
 
@@ -113,15 +114,6 @@
         
         
         [self.navigationController pushViewController:infoView animated:YES];
-        
-        
-
-        
-        
-
-        
-        
-        
     }
     
     if(selectedSection == 3) {
@@ -137,11 +129,14 @@
         
         
         [self.navigationController pushViewController:mapView animated:YES];
-
-        
     }
     
-    
+    if (selectedSection == 4) {
+        FavoritesPicturesViewController *favoritesPictures = [[FavoritesPicturesViewController alloc] init];
+        [self.navigationController pushViewController:favoritesPictures animated:YES];
+    }
+
+
 }
 
 - (void)dismissPage

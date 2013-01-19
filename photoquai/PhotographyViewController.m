@@ -197,6 +197,7 @@
         [alert show];
     }else{
         [favoritesImages removeObject:idPicture];
+        NSLog(@"%@", favoritesImages);
         [defaults setObject:favoritesImages forKey:@"favorisImages"];
         [defaults synchronize];
         
@@ -297,9 +298,7 @@
     MFMailComposeViewController *mailer = [[MFMailComposeViewController alloc] init];
     mailer.mailComposeDelegate = self;
     [mailer setSubject:@"Regarde ce qu'il y a à  PHQ"];
-    NSArray *toRecipients = [NSArray arrayWithObjects:@"fisrtMail@example.com", @"secondMail@example.com", nil];
-    //[mailer setToRecipients:toRecipients];
-    //UIImage *myImage = [UIImage im][UIImage imageNamed:@"img0"];
+    
     UIImage *picturePHQMail = [UIImage imageWithData:[NSData dataWithContentsOfURL:[NSURL URLWithString:linkImg]]];
     NSData *imageData = UIImagePNGRepresentation(picturePHQMail);
     [mailer addAttachmentData:imageData mimeType:@"image/png" fileName:@"mobiletutsImage"];
