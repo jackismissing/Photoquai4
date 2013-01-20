@@ -45,6 +45,7 @@
      selector:@selector(volumeChanged:)
      name:@"AVSystemController_SystemVolumeDidChangeNotification"
      object:nil];
+    
 
     self.window.rootViewController = navigationController;
     

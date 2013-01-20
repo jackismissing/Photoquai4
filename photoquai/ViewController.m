@@ -196,7 +196,7 @@
     i++;
     [self performSelectorInBackground:@selector(loadImageWall) withObject:nil];
     
-    //Calcul de la hauteur
+    //Calcul de la hauteur de la scrollview
     int heightMax = 0;
     //heightColumn récupère la hauteur de chaque colonne
     for (int heightColumn = 0; heightColumn < nbrColumns ; heightColumn++) {
@@ -239,11 +239,7 @@
     return thumbsContainer;
 }
 
-- (void)didReceiveMemoryWarning
-{
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
-}
+
 
 - (void)showMenu
 {
@@ -325,6 +321,12 @@
     AgendaController *agenda = [[AgendaController alloc] init] ;
     [self.navigationController pushViewController:agenda animated:YES];
 }*/
+
+- (void)didReceiveMemoryWarning
+{
+    [super didReceiveMemoryWarning];
+    // Dispose of any resources that can be recreated.
+}
 
 
 @end

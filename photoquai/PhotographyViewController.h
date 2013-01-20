@@ -17,10 +17,12 @@
 #import "AudioImageView.h"
 #import "CustomPopOver.h"
 
+@class AudioImageView;
+
 @interface PhotographyViewController : UIViewController <UIScrollViewDelegate, MFMailComposeViewControllerDelegate>{
     DescriptionImageView *descriptionPhotography;
     AudioImageView *audioDescription;
-    
+
     ImageZoomable *picture;
     ToolBarPhotography *toolBar;
     BOOL elementsNavigationAreHidden;

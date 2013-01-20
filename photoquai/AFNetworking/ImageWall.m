@@ -27,7 +27,7 @@
         normalImageNewHeight = (int) ((normalImageOriginalHeight * ratio) / 100);
         
         UIImageView *photograhyView = [[UIImageView alloc] init];
-        [photograhyView setImageWithURL:[NSURL URLWithString:aImageURL] placeholderImage:[UIImage imageNamed:@"stewie"]];
+        [photograhyView setImageWithURL:[NSURL URLWithString:aImageURL] placeholderImage:[UIImage imageNamed:@"etoilejaune"]];
         photograhyView.alpha = 1;
         photograhyView.opaque = YES;
         photograhyView.frame = CGRectMake(0, 0, self.frame.size.width, normalImageNewHeight);

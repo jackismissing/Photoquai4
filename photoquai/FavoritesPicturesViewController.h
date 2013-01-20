@@ -7,9 +7,14 @@
 //
 
 #import <UIKit/UIKit.h>
+
 #import "FavoriteElement.h"
 #import "AppDelegate.h"
+#import "NavigationViewController.h"
+#import "PhotographyViewController.h"
 
-@interface FavoritesPicturesViewController : UIViewController
+@interface FavoritesPicturesViewController : UIViewController <UIScrollViewDelegate>{
+    NSArray *favoritesPictures;
+}
 
 @end

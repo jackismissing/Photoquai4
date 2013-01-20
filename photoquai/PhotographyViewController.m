@@ -163,6 +163,7 @@
     popOver = [[CustomPopOver alloc] init];
     popOver.layer.anchorPoint = CGPointMake(1.0, 0.0);
     popOver.frame = CGRectMake(210, 0, 100, 100);
+    popOver.alpha = 0;
     //popOver.center = CGPointMake(CGRectGetWidth(popOver.bounds), 0.0);
     
     // Rotate 90 degrees to hide it off screen
@@ -221,6 +222,7 @@
                             options: UIViewAnimationCurveEaseOut
                          animations:^{
                              popOver.transform = CGAffineTransformRotate(CGAffineTransformIdentity, 0);
+                             popOver.alpha = 1;
                          }
                          completion:^(BOOL finished){}];
         shareIsHidden = NO;
@@ -230,6 +232,7 @@
                             options: UIViewAnimationCurveEaseOut
                          animations:^{
                              popOver.transform = CGAffineTransformRotate(CGAffineTransformIdentity, 3);
+                             popOver.alpha = 0;
                          }
                          completion:^(BOOL finished){}];
         shareIsHidden = YES;
@@ -256,6 +259,10 @@
                              //picture.transform = CGAffineTransformMakeScale(1.2, 1.2);
                              picture.frame = CGRectMake(0, 35, screenWidth, screenHeight);
                              self.navigationController.navigationBarHidden = YES;
+                             
+                             popOver.transform = CGAffineTransformRotate(CGAffineTransformIdentity, 3);
+                             popOver.alpha = 0;
+                             shareIsHidden = YES;
                         }completion:^(BOOL finished){}];
         
         
@@ -281,7 +288,6 @@
                          }completion:^(BOOL finished){}];
         
         elementsNavigationAreHidden = NO;
-        
     }
 }
 
@@ -297,11 +303,11 @@
 - (void) sendMailImage:(NSNotification *)notification{
     MFMailComposeViewController *mailer = [[MFMailComposeViewController alloc] init];
     mailer.mailComposeDelegate = self;
-    [mailer setSubject:@"Regarde ce qu'il y a à  PHQ"];
+    [mailer setSubject:@"Regarde ce qu'il y a à PHQ"];
     
     UIImage *picturePHQMail = [UIImage imageWithData:[NSData dataWithContentsOfURL:[NSURL URLWithString:linkImg]]];
     NSData *imageData = UIImagePNGRepresentation(picturePHQMail);
-    [mailer addAttachmentData:imageData mimeType:@"image/png" fileName:@"mobiletutsImage"];
+    [mailer addAttachmentData:imageData mimeType:@"image/png" fileName:@"PHQPhotography"];
     NSString *emailBody = @"J'apprécie cette photo de l'exposition PHQ";
     [mailer setMessageBody:emailBody isHTML:NO];
     [self presentModalViewController:mailer animated:YES];

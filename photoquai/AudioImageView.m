@@ -165,12 +165,18 @@
     return self;
 }
 
-//Détecte la direction scroll
+//Gestion du seek personnalisé
 - (void)directionPan:(UIPanGestureRecognizer *)gestureRecognizer
 {
     CGPoint point = [gestureRecognizer locationInView:self];        
     progressSound.frame = CGRectMake(0, 4, point.x, progressSound.frame.size.height);
     _audioPlayer.currentTime = (point.x * _audioPlayer.duration) / 318;
+    
+    NSTimeInterval timeLeft = self.audioPlayer.currentTime;
+    float min = (int) timeLeft/60;
+    float sec = (int) timeLeft % 60;
+    
+    currentTime.text = [NSString stringWithFormat:@"%02.0f:%02.0f", min, sec];
 }
 
 - (void) moveRight{
@@ -194,7 +200,7 @@
     NSTimeInterval timeLeft = self.audioPlayer.currentTime;
     NSTimeInterval totalTimeSound = self.audioPlayer.duration;
     float min = (int) timeLeft/60;
-    float sec = lroundf(timeLeft) % 60;
+    float sec = (int) timeLeft % 60;
     
     int minTotal = (int) totalTimeSound/60;
     int secTotal = (int) totalTimeSound % 60;
