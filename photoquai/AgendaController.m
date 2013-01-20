@@ -667,18 +667,31 @@
                 
                 // Date label
           
-                dateLabel = [[UILabel alloc] initWithFrame:CGRectMake(15, 23, 41, 35)];
+                dateLabel = [[UILabel alloc] initWithFrame:CGRectMake(15, 23, 45, 40)];
                       
                 dateLabel.text = @"13.10.13 17.12.13";
                 
                 dateLabel.numberOfLines = 2;
                 
-                dateLabel.font = [UIFont fontWithName:@"Parisine-Italic" size:10];
+                dateLabel.font = [UIFont fontWithName:@"Parisine-Italic" size:11];
                 
                 
-                [cell addSubview:dateLabel];   
+                [cell addSubview:dateLabel];
+            
+                // Filet date
+            
+            UIImageView *contentFilet = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"filetRougeAgenda.png"]];
+            
+            [contentFilet sizeToFit];
+            
+            UIView *contentFiletView = [[UIView alloc] initWithFrame:CGRectMake(15, 60, 30, contentFilet.frame.size.height)];
+            
+            [contentFiletView addSubview:contentFilet];
+            
+            [cell addSubview:contentFiletView];
 
-                
+
+            
                 // Header title
                 
                 headerTitle = [[UILabel alloc] initWithFrame:CGRectMake(70, 25, 164, 70)];      
@@ -715,6 +728,7 @@
         else if (indexPath.row == 1)
         {
             
+            // Contenu jour intro
             
             UILabel *contentIntro = [[UILabel alloc] initWithFrame:CGRectMake(22, 15, 250, 85)];
             
@@ -729,6 +743,16 @@
             contentIntro.backgroundColor = [UIColor colorWithWhite:255 alpha:0];
             
             [cell addSubview:contentIntro];
+            
+            // Contenu jour filet
+            
+            UIImageView *contentFilet = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"filetRougeAgenda.png"]];
+            
+            UIView *contentFiletView = [[UIView alloc] initWithFrame:CGRectMake(22, 115, contentFilet.frame.size.width, contentFilet.frame.size.height)];
+            
+            [contentFiletView addSubview:contentFilet];
+            
+            [cell addSubview:contentFiletView];
             
             UIImageView *contentImage = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"agendaPhoto.png"]];
             

@@ -13,6 +13,9 @@
 
 @property (nonatomic, strong) UITableView *infosTableView;
 @property (nonatomic, strong) NSArray *items;
+@property (nonatomic, strong) UIImageView *photoInfos;
+@property (nonatomic, strong) UIImageView *cellBackground;
+@property CGSize screenSize;
 
 -(void)showMenu;
 

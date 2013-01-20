@@ -12,6 +12,12 @@
 
 #import "NavigationViewController.h"
 
+#define MAINLABEL_TAG 1
+
+#define NUMBERLABEL_TAG 1
+
+#define SEPARATORIMAGE_TAG 1
+
 @interface InfoViewController ()
 
 @end
@@ -19,6 +25,9 @@
 @implementation InfoViewController
 @synthesize infosTableView;
 @synthesize items;
+@synthesize photoInfos;
+@synthesize cellBackground;
+@synthesize screenSize;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -33,12 +42,40 @@
 {
     [super viewDidLoad];
 	// Do any additional setup after loading the view.
+    
+    // Informations Image
+    
+    // Detect screen height
+    
+    screenSize = [[UIScreen mainScreen] bounds].size;
+    
+
+    
+    if(screenSize.height == 568){
+    
+        photoInfos = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"photoInfos.png"]];
+    
+    } else photoInfos = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"photoInfos4.png"]];
+    
+    UIView *photoInfosView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, photoInfos.frame.size.width, photoInfos.frame.size.height)];
+    
+    [photoInfosView addSubview:photoInfos];
+    
+    [self.view addSubview:photoInfosView];
+
+    
     //Create a tableView programmatically
-    self.infosTableView = [[UITableView alloc] initWithFrame:CGRectMake(self.view.frame.origin.x, 0, self.view.frame.size.width, self.view.frame.size.height) style:UITableViewStylePlain];
+    self.infosTableView = [[UITableView alloc] initWithFrame:CGRectMake(self.view.frame.origin.x, photoInfos.frame.size.height, self.view.frame.size.width, self.view.frame.size.height - photoInfos.frame.size.height - self.navigationController.navigationBar.frame.size.height) style:UITableViewStylePlain];
+    
+    self.infosTableView.separatorColor = [UIColor blackColor];
+    
+    self.infosTableView.scrollEnabled = NO; 
+    
+    
     //Add the tableview as sa subview of our view ---> making "view" our superview.
     [self.view addSubview:infosTableView];
     
-    items = [[NSArray alloc] initWithObjects:@"Agenda", @"Informations pratiques", @"Directeur artistique", @"Commissaires", @"Partenaires", nil];
+    items = [[NSArray alloc] initWithObjects:@"Agenda", @"Infos pratiques", @"Directeur artistique", @"Commissaires", @"Partenaires", @"Crédits", nil];
     //From the step 8 above, this is how we do that programmatically
     self.infosTableView.delegate = self;
     self.infosTableView.dataSource = self;
@@ -107,6 +144,14 @@
     
 }
 
+#pragma mark - Table view cell height
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    return infosTableView.frame.size.height / 6;
+    
+    
+}
+
 #pragma mark - Table view data source
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
     // Return the number of sections.
@@ -123,14 +168,83 @@
     //Where we configure the cell in each row
     
     static NSString *CellIdentifier = @"Cell";
+    
+    UILabel *mainLabel, *numberLabel;
+    UIImageView *separatorImage;
+    
     UITableViewCell *cell;
     
     cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
+    
     if (cell == nil) {
+        
         cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];
+        
+        // Custon disclosure
+                              
+        
+        cell.accessoryView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"disclosure.png"]];  ;
+        
+        // Création du label principal de chaque cellule
+        
+        mainLabel = [[UILabel alloc] initWithFrame:CGRectMake(65, cell.frame.size.height / 2 - 9, 175, 18)];
+        
+        mainLabel.tag = MAINLABEL_TAG;
+        
+        mainLabel.font = [UIFont fontWithName:@"Parisine-Bold" size:18];
+        
+        mainLabel.textColor = [UIColor whiteColor];
+        
+        mainLabel.backgroundColor = [UIColor colorWithWhite:255 alpha:0];
+        
+        [cell.contentView addSubview:mainLabel];
+        
+        // Image séparant le numéro de cellule du label
+        
+        separatorImage = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"infosLabelSeparator.png"]];
+        
+        separatorImage.frame = CGRectMake(42, cell.frame.size.height / 2 - separatorImage.frame.size.height / 2, separatorImage.frame.size.width, separatorImage.frame.size.height);
+        
+        separatorImage.tag = SEPARATORIMAGE_TAG;
+        
+        [cell.contentView addSubview:separatorImage];
+        
+        // Label numéro de cellule
+        
+        numberLabel = [[UILabel alloc] initWithFrame:CGRectMake(15, cell.frame.size.height / 2 - 9, 20, 18)];
+        
+        numberLabel.tag = NUMBERLABEL_TAG;
+        
+        numberLabel.font = [UIFont fontWithName:@"Parisine-Italic" size:18];
+        
+        numberLabel.textColor = [UIColor whiteColor];
+        
+        numberLabel.backgroundColor = [UIColor colorWithWhite:255 alpha:0];
+        
+        [cell.contentView addSubview:numberLabel];
+        
+    } else {
+        
+        mainLabel = (UILabel *)[cell.contentView viewWithTag:MAINLABEL_TAG];
+        
+        separatorImage = (UIImageView *)[cell.contentView viewWithTag:SEPARATORIMAGE_TAG];
+        
+        numberLabel = (UILabel *)[cell.contentView viewWithTag:NUMBERLABEL_TAG];
+        
     }
+    
     // Configure the cell... setting the text of our cell's label
-    cell.textLabel.text = [items objectAtIndex:indexPath.row];
+    
+    mainLabel.text = [items objectAtIndex:indexPath.row];
+    
+    numberLabel.text = [NSString stringWithFormat:@"%d", indexPath.row + 1];
+
+    
+    
+
+    
+    
+    
     
     // Set the background color when selected (default blue)
     
@@ -139,7 +253,23 @@
     return cell;
 }
 
+#pragma mark - Table willDisplay cell
 
+- (void)tableView:(UITableView *)tableView willDisplayCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    
+    if(screenSize.height == 568){
+        
+        cellBackground = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"pushnoir.png"]];
+    
+    } else cellBackground = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"pushnoir4.png"]];
+    
+    UIView *cellBackgroundView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, cell.frame.size.width, cell.frame.size.height)];
+    
+    [cellBackgroundView addSubview:cellBackground];
+    
+    cell.backgroundView = cellBackgroundView;
+}
 
 
 #pragma mark - Table view delegate
@@ -148,12 +278,7 @@
     // Navigation logic may go here. Create and push another view controller.
     // If you want to push another view upon tapping one of the cells on your table.
     
-    /*
-     <#DetailViewController#> *detailViewController = [[<#DetailViewController#> alloc] initWithNibName:@"<#Nib name#>" bundle:nil];
-     // ...
-     // Pass the selected object to the new view controller.
-     [self.navigationController pushViewController:detailViewController animated:YES];
-     */
+   
     
     if(indexPath.row == 2) {
         
