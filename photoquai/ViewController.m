@@ -155,8 +155,8 @@
     NSInteger idPicture;
     
     if (i == 0) {
-        [linkImg setString:@"http://s1.lemde.fr/image/2013/01/20/534x267/1819705_3_e261_le-toulousain-lionel-beauxis-a-rate-de-nombreux_e5035c9317690820faad5ffaf565ad97.jpg"];
-        NSLog(@"%@", linkImg);
+        [linkImg setString:@"http://nicolasgarnier.fr/phq/firstImgPHQ.png"];
+        
     }else{
         
         NSString *appendLink = @"http://phq.cdnl.me/api/fr/pictures/";
@@ -209,7 +209,6 @@
         [imageWallElement addGestureRecognizer:accessPicture];
     }
     
-    
     [thumbsContainer addSubview:imageWallElement];
     i++;
     [self performSelectorInBackground:@selector(loadImageWall) withObject:nil];
@@ -258,10 +257,8 @@
 }
 
 
-
 - (void)showMenu
-{
-    
+{    
     NavigationViewController *mainMenu = [[NavigationViewController alloc] init];
     mainMenu.delegate = self;
     
@@ -300,6 +297,8 @@
                          imageViewController.idPicture = index.tag;
                          [self.navigationController pushViewController:imageViewController animated:YES];
                      }];
+    
+    NSLog(@"%i", index.tag);
     
     //UIBarButtonItem *backButton = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"backButton"] style:UIBarButtonItemStylePlain target:nil action:nil];
     //UIBarButtonItem *backButton = [[UIBarButtonItem alloc] initWithCustomView:v];
