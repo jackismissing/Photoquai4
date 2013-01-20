@@ -11,6 +11,7 @@
 #import "InfoViewController.h"
 #import "ViewController.h"
 #import "MapPhqViewController.h"
+#import "ArtistsLisViewController.h"
 
 @interface NavigationViewController ()
 
@@ -139,6 +140,12 @@
         [self.navigationController pushViewController:mapView animated:YES];
 
         
+    }
+    
+    if(selectedSection == 4) {
+        
+        ArtistsLisViewController *artistsView = [[ArtistsLisViewController alloc] init];
+        [self.navigationController pushViewController:artistsView animated:YES];
     }
     
     

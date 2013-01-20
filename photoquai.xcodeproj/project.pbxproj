@@ -54,6 +54,7 @@
 		373446A716AB73DB00364732 /* pushnoir4.png in Resources */ = {isa = PBXBuildFile; fileRef = 373446A516AB73DB00364732 /* pushnoir4.png */; };
 		373446AA16AB754900364732 /* photoInfos4@2X.png in Resources */ = {isa = PBXBuildFile; fileRef = 373446A816AB754900364732 /* photoInfos4@2X.png */; };
 		373446AB16AB754900364732 /* photoInfos4.png in Resources */ = {isa = PBXBuildFile; fileRef = 373446A916AB754900364732 /* photoInfos4.png */; };
+		373446AF16AC356C00364732 /* ArtistsLisViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 373446AE16AC356B00364732 /* ArtistsLisViewController.m */; };
 		3751D8FD16AA048E00B677A7 /* agendaPhoto@2X.png in Resources */ = {isa = PBXBuildFile; fileRef = 3751D8FB16AA048E00B677A7 /* agendaPhoto@2X.png */; };
 		3751D8FE16AA048E00B677A7 /* agendaPhoto.png in Resources */ = {isa = PBXBuildFile; fileRef = 3751D8FC16AA048E00B677A7 /* agendaPhoto.png */; };
 		375E21EC16A93EB200F012AF /* menu@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 375E21EB16A93EB200F012AF /* menu@2x.png */; };
@@ -153,6 +154,8 @@
 		373446A516AB73DB00364732 /* pushnoir4.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = pushnoir4.png; sourceTree = "<group>"; };
 		373446A816AB754900364732 /* photoInfos4@2X.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "photoInfos4@2X.png"; sourceTree = "<group>"; };
 		373446A916AB754900364732 /* photoInfos4.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = photoInfos4.png; sourceTree = "<group>"; };
+		373446AD16AC356B00364732 /* ArtistsLisViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ArtistsLisViewController.h; sourceTree = "<group>"; };
+		373446AE16AC356B00364732 /* ArtistsLisViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ArtistsLisViewController.m; sourceTree = "<group>"; };
 		3751D8FB16AA048E00B677A7 /* agendaPhoto@2X.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "agendaPhoto@2X.png"; sourceTree = "<group>"; };
 		3751D8FC16AA048E00B677A7 /* agendaPhoto.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = agendaPhoto.png; sourceTree = "<group>"; };
 		375E21EB16A93EB200F012AF /* menu@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "menu@2x.png"; sourceTree = "<group>"; };
@@ -310,6 +313,7 @@
 		1ABEACAB16A5C34E0034D316 /* photoquai */ = {
 			isa = PBXGroup;
 			children = (
+				373446AC16AC34A300364732 /* ArtistsListViewController */,
 				375E21F816A945DF00F012AF /* MapViewController */,
 				1ABEACB416A5C34E0034D316 /* AppDelegate.h */,
 				1ABEACB516A5C34E0034D316 /* AppDelegate.m */,
@@ -469,6 +473,15 @@
 				3734468616AB29E100364732 /* photoInfos.png */,
 			);
 			name = Informations;
+			sourceTree = "<group>";
+		};
+		373446AC16AC34A300364732 /* ArtistsListViewController */ = {
+			isa = PBXGroup;
+			children = (
+				373446AD16AC356B00364732 /* ArtistsLisViewController.h */,
+				373446AE16AC356B00364732 /* ArtistsLisViewController.m */,
+			);
+			name = ArtistsListViewController;
 			sourceTree = "<group>";
 		};
 		3751D8F916AA046800B677A7 /* Agenda */ = {
@@ -745,6 +758,7 @@
 				375E21FC16A9462000F012AF /* SMCalloutView.m in Sources */,
 				37C782E916A9A6A3001D6295 /* PhotographerVignette.m in Sources */,
 				37C782EA16A9A6A3001D6295 /* ToolBarPhotography.m in Sources */,
+				373446AF16AC356C00364732 /* ArtistsLisViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
