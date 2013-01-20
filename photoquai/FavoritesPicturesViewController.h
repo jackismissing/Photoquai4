@@ -13,7 +13,7 @@
 #import "NavigationViewController.h"
 #import "PhotographyViewController.h"
 
-@interface FavoritesPicturesViewController : UIViewController <UIScrollViewDelegate>{
+@interface FavoritesPicturesViewController : UIViewController <UIScrollViewDelegate, UITabBarControllerDelegate>{
     NSArray *favoritesPictures;
 }
 

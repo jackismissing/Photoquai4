@@ -14,11 +14,15 @@
 
 @interface AppDelegate : UIResponder <UIApplicationDelegate>{
     UITabBarController *tabBarController;
+   
 }
 
 @property (strong, nonatomic) UIWindow *window;
 @property (strong, nonatomic) ViewController *viewController;
 
+
 - (NSDictionary*) getElementsFromJSON:(NSString*)anURL;
+- (void)showTabBar:(UITabBarController *) tabbarcontroller;
+- (void)hideTabBar:(UITabBarController *) tabbarcontroller;
 
 @end

@@ -10,6 +10,7 @@
 
 #import "ViewController.h"
 #import "UIColor+RVB255.h"
+#import "FavoritesPicturesViewController.h"
 
 
 @implementation AppDelegate
@@ -41,23 +42,32 @@
       nil]];
     
     [[NSNotificationCenter defaultCenter]
-     addObserver:self
-     selector:@selector(volumeChanged:)
-     name:@"AVSystemController_SystemVolumeDidChangeNotification"
-     object:nil];
+        addObserver:self
+        selector:@selector(volumeChanged:)
+        name:@"AVSystemController_SystemVolumeDidChangeNotification"
+        object:nil];
     
-
-    self.window.rootViewController = navigationController;
+    tabBarController = [[UITabBarController alloc] init];
+    
+    UIViewController *v1 = [[FavoritesPicturesViewController alloc] initWithNibName:@"FavoritesPicturesViewController" bundle:nil];
+    v1.tabBarItem.image = [UIImage imageNamed:@"favoritesPicturesIcon"];
+    v1.tabBarItem.title = @"Photographies";
+    
+    UIViewController *v2 = [[FavoritesPicturesViewController alloc] initWithNibName:@"FavoritesPicturesViewController" bundle:nil];
+    v2.tabBarItem.image = [UIImage imageNamed:@"favoritesPicturesIcon"];
+    v2.tabBarItem.title = @"Photographes";
+    
+    
+    tabBarController.viewControllers = [NSArray arrayWithObjects:navigationController, v1, v2, nil];
+    
+    self.window.rootViewController = tabBarController;
     
     [self.window makeKeyAndVisible];
     return YES;
 }
 
 //Informe le changement du volume par le biais des boutons
-- (void)volumeChanged:(NSNotification *)notification
-{
-    float volume = [[[notification userInfo] objectForKey:@"AVSystemController_AudioVolumeNotificationParameter"] floatValue];
-}
+
 
 - (void)applicationWillResignActive:(UIApplication *)application
 {
@@ -113,5 +123,50 @@
     
     return arrayJson;
 }
+
+
+// Method implementations
+- (void)hideTabBar:(UITabBarController *) tabbarcontroller
+{
+    [UIView beginAnimations:nil context:NULL];
+    [UIView setAnimationDuration:0];
+    
+    for(UIView *view in tabbarcontroller.view.subviews)
+    {
+        if([view isKindOfClass:[UITabBar class]])
+        {
+            [view setFrame:CGRectMake(view.frame.origin.x, 480, view.frame.size.width, view.frame.size.height)];
+        }
+        else
+        {
+            [view setFrame:CGRectMake(view.frame.origin.x, view.frame.origin.y, view.frame.size.width, 480)];
+        }
+    }
+    
+    [UIView commitAnimations];
+}
+
+- (void)showTabBar:(UITabBarController *) tabbarcontroller
+{
+    [UIView beginAnimations:nil context:NULL];
+    [UIView setAnimationDuration:0.5];
+    for(UIView *view in tabbarcontroller.view.subviews)
+    {
+        
+        if([view isKindOfClass:[UITabBar class]])
+        {
+            [view setFrame:CGRectMake(view.frame.origin.x, 431, view.frame.size.width, view.frame.size.height)];
+            
+        }
+        else
+        {
+            [view setFrame:CGRectMake(view.frame.origin.x, view.frame.origin.y, view.frame.size.width, 431)];
+        }
+    }
+    
+    [UIView commitAnimations];
+}
+
+
 
 @end

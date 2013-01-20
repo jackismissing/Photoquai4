@@ -33,7 +33,7 @@
     
 	// Place le contour
 	CGContextSetRGBStrokeColor(contextRef, 204.0/255.0, 204.0/255.0, 204.0/255.0, 1.0);
-	
+    
 	// Fill the circle with the fill color
 	CGContextFillEllipseInRect(contextRef, rect);
 	

@@ -5,6 +5,7 @@
 //  Created by Jean-Louis Danielo on 17/01/13.
 //  Copyright (c) 2013 Groupe 5 PHQ Gobelins CDNL. All rights reserved.
 //
+#define   DEGREES_TO_RADIANS(degrees)  ((3.14159265359 * degrees)/ 180)
 
 #import "PhotographyViewController.h"
 
@@ -100,6 +101,8 @@
     
     self.navigationItem.hidesBackButton = YES;
     
+    [appdelegate hideTabBar:self.tabBarController];
+    
     [self setTitle:@"Title"];
 #pragma mark - Notifications
     //Permet de renvoyer vers la fiche artiste
@@ -128,11 +131,8 @@
     CGFloat screenHeight = screenRect.size.height;
     
     picture = [[ImageZoomable alloc] initWithImageURL:[NSURL URLWithString:linkImg] andFrame:CGRectMake(0, 0, screenWidth, screenHeight-100)];
-
-
     picture.transform = CGAffineTransformMakeScale(1, 1);
     picture.userInteractionEnabled = YES;
-    
     [self.view addSubview:picture];
     
     NSString *descriptionTextPhotography = @"Lorem ipsum dolor sit amet, consectetur adipiscing elit. In euismod leo at mi posuere mollis. Morbi lacinia, felis ac ultrices auctor, magna sem tempus mi, nec blandit felis purus ut metus. Donec dolor mauris, eleifend id fermentum eu, placerat eget felis. Proin suscipit bibendum tincidunt.";
@@ -150,7 +150,6 @@
     
     audioDescription = [[AudioImageView alloc] initWithFrame:CGRectMake(0, 500, screenWidth, 230) title:titleTextPhotography];
     [self.view addSubview:audioDescription];
-    
     
 #pragma mark - Favoris 
     
@@ -246,8 +245,7 @@
     CGFloat screenHeight = screenRect.size.height;
     
     if(elementsNavigationAreHidden == NO){ //La toolbar ainsi que la navigation bar sont cachés
-        //
-        
+
         [UIView animateWithDuration:0.5
                               delay:0
                             options: UIViewAnimationCurveEaseOut
@@ -264,7 +262,6 @@
                              popOver.alpha = 0;
                              shareIsHidden = YES;
                         }completion:^(BOOL finished){}];
-        
         
         toolBar.infosImage.image = [UIImage imageNamed:@"informations"];
         toolBar.infosLabel.textColor = [UIColor r:109 g:109 b:109 alpha:1];
@@ -317,7 +314,14 @@
 - (void)mailComposeController:(MFMailComposeViewController*)controller
           didFinishWithResult:(MFMailComposeResult)result
                         error:(NSError*)error{
-    
+    [UIView animateWithDuration:0.5
+                          delay:0
+                        options: UIViewAnimationCurveEaseOut
+                     animations:^{
+                         popOver.transform = CGAffineTransformRotate(CGAffineTransformIdentity, 3);
+                         popOver.alpha = 0;
+                         shareIsHidden = YES;
+                    }completion:^(BOOL finished){}];
     [self dismissModalViewControllerAnimated:YES];
     return;
 }

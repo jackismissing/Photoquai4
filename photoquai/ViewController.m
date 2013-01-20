@@ -27,8 +27,11 @@
     [super viewDidLoad];
 	// Do any additional setup after loading the view, typically from a nib.
     
+    [self.navigationController setNavigationBarHidden:YES animated:NO];
+    
+    //récupère les favoris
     preferencesUser = [NSUserDefaults standardUserDefaults];
-    //[preferencesUser removeObjectForKey:@"favorisImages"]; Supprime tous les éléments d'un index bien précis
+    //[preferencesUser removeObjectForKey:@"favorisImages"]; //Supprime tous les éléments d'une clé bien précise
     oldFavorites = [[NSArray alloc] initWithArray: [preferencesUser objectForKey:@"favorisImages"]];
     [preferencesUser synchronize];
     
@@ -65,7 +68,8 @@
     // Post a notification to loginComplete
     [[NSNotificationCenter defaultCenter] postNotificationName:@"loginComplete" object:reachabilityInfo];
     
-    
+    AppDelegate *appdelegate = [[UIApplication sharedApplication] delegate];
+    [appdelegate hideTabBar:self.tabBarController];
 }
 
 - (void)viewWillAppear:(BOOL)animated
@@ -124,7 +128,8 @@
 
 - (void) loadImageWall{
     AppDelegate *appdelegate = [[UIApplication sharedApplication] delegate];
-
+    
+    
     if (i >= nbrPictures) return;
     
     //On vérifie que l'on a pas atteint le nombre maximal de colonnes
@@ -140,23 +145,32 @@
         
         int h = [[heights objectAtIndex: (i - nbrColumns)] integerValue];
         int y = [[ys objectAtIndex: (i - nbrColumns)] integerValue];
-        yPosition =  h + y + 5;
+        yPosition =  h + y + 15;
     }else{
         
         yPosition = 5;
     }
     
-    NSString *appendLink = @"http://phq.cdnl.me/api/fr/pictures/";
-    appendLink = [appendLink stringByAppendingString:[NSString stringWithFormat:@"%d", imgIterate]];
-    appendLink = [appendLink stringByAppendingString:@".json"];
+    NSMutableString *linkImg = [[NSMutableString alloc] init];
+    NSInteger idPicture;
     
-    NSInteger idPicture = [[[appdelegate getElementsFromJSON:appendLink] valueForKeyPath:@"picture.id"] integerValue];
-    NSString *linkImg = [[appdelegate getElementsFromJSON:appendLink] valueForKeyPath:@"picture.link_iphone"];
-    
+    if (i == 0) {
+        [linkImg setString:@"http://s1.lemde.fr/image/2013/01/20/534x267/1819705_3_e261_le-toulousain-lionel-beauxis-a-rate-de-nombreux_e5035c9317690820faad5ffaf565ad97.jpg"];
+        NSLog(@"%@", linkImg);
+    }else{
+        
+        NSString *appendLink = @"http://phq.cdnl.me/api/fr/pictures/";
+        appendLink = [appendLink stringByAppendingString:[NSString stringWithFormat:@"%d", imgIterate]];
+        appendLink = [appendLink stringByAppendingString:@".json"];
+        
+        idPicture = [[[appdelegate getElementsFromJSON:appendLink] valueForKeyPath:@"picture.id"] integerValue];
+        linkImg = [[appdelegate getElementsFromJSON:appendLink] valueForKeyPath:@"picture.link_iphone"];
+    }
     
     imageWallElement = [[ImageWall alloc] initWithFrame:CGRectMake(0, yPosition, widthThumb, 75)
-                                               imageURL:linkImg
-                                                colonne:[NSNumber numberWithInt:xPosition]];
+                                          imageURL:linkImg
+                                          colonne:[NSNumber numberWithInt:xPosition]];
+    
     imageWallElement.alpha = 0;
     imageWallElement.opaque = YES;
     imageWallElement.clipsToBounds = NO;
@@ -164,7 +178,7 @@
     int height = [imageWallElement height];
     int width = [imageWallElement width];
     
-    imageWallElement.frame = CGRectMake(((width + 5) * xPosition + 5), yPosition, width, height);
+    imageWallElement.frame = CGRectMake(((width + 5) * xPosition + 5), yPosition - 10, width, height);
     imageWallElement.clipsToBounds = YES;
     imageWallElement.tag = idPicture;
     
@@ -187,10 +201,14 @@
     [UIView setAnimationDuration:0.75];
     [UIView setAnimationDelegate:imageWallElement];
     imageWallElement.alpha = 1.0;
+    imageWallElement.frame = CGRectMake(((width + 5) * xPosition + 5), yPosition, width, height);
     [UIView commitAnimations];
     
-    UITapGestureRecognizer *accessPicture = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(accessPicture:)];
-    [imageWallElement addGestureRecognizer:accessPicture];
+    if (i != 0) {
+        UITapGestureRecognizer *accessPicture = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(accessPicture:)];
+        [imageWallElement addGestureRecognizer:accessPicture];
+    }
+    
     
     [thumbsContainer addSubview:imageWallElement];
     i++;

@@ -86,7 +86,7 @@
         _audioPlayer = [[AVAudioPlayer alloc] initWithData:soundFileData error:NULL];
         _audioPlayer.delegate = self;
         
-        float playPauseButtonY = sound.frame.size.height + 15;
+        playPauseButtonY = sound.frame.size.height + 15;
         
         //Cercle du bouton
         playPauseButton = [[DrawCircle alloc] initWithFrame:CGRectMake(20, playPauseButtonY, 50, 50)];
@@ -237,13 +237,13 @@
     if(soundIsPlayed == YES){
         soundIsPlayed = NO;
         [_audioPlayer pause];
-        playPauseButtonImage.alpha = 1.0f;
-
+        playPauseButtonImage.image = [UIImage imageNamed:@"playrouge"];
+        playPauseButtonImage.frame = CGRectMake(35, playPauseButtonY + 13, 25, 25);
     }else{
-        
         soundIsPlayed = YES;
         [_audioPlayer play];
-        playPauseButtonImage.alpha = .5f;
+        playPauseButtonImage.image = [UIImage imageNamed:@"pauserouge"];
+        playPauseButtonImage.frame = CGRectMake(33, playPauseButtonY + 13, 25, 25);
     }
 }
 

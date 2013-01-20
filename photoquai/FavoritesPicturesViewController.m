@@ -11,6 +11,7 @@
 @interface FavoritesPicturesViewController (){
     
     UIScrollView *myScrollView;
+    
 }
 
 @end
@@ -34,6 +35,8 @@
     
     UIBarButtonItem* menuBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:menuButton];
     [self.navigationItem setLeftBarButtonItem:menuBarButtonItem];
+    
+    //[self showTabBar:self.tabBarController];
 }
 
 - (void)viewDidLoad
@@ -54,7 +57,7 @@
     CGFloat screenWidth = screenRect.size.width;
     CGFloat screenHeight = screenRect.size.height;
     
-    myScrollView = [[UIScrollView alloc] initWithFrame:CGRectMake(0, 0, screenWidth, screenHeight-40)];
+    myScrollView = [[UIScrollView alloc] initWithFrame:CGRectMake(2, 0, screenWidth, screenHeight-40)];
     myScrollView.showsHorizontalScrollIndicator = NO;
     myScrollView.showsVerticalScrollIndicator = YES;
     myScrollView.delegate = self;
@@ -64,7 +67,13 @@
     
     [self performSelectorInBackground:@selector(loadFavoritesPictures) withObject:nil];
     
+    AppDelegate *appdelegate = [[UIApplication sharedApplication] delegate];
+    [appdelegate showTabBar:self.tabBarController];
+    
+    
 } //Fin du view didload
+
+
 
 - (void) loadFavoritesPictures{
     AppDelegate *appdelegate = [[UIApplication sharedApplication] delegate];
@@ -138,8 +147,6 @@
         }
         
         [myScrollView setContentSize:CGSizeMake(320, heightMax + 21)];
-        
-        NSLog(@"heightMax : %i", heightMax);
     }
 }
 

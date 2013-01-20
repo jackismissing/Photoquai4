@@ -28,6 +28,8 @@
     MPMusicPlayerController *musicPlayer;
     UILabel *currentTime;
     UILabel *totalTime;
+    
+    float playPauseButtonY;
 }
 
 - (id)initWithFrame:(CGRect)frame title:(NSString*)aTitle;
