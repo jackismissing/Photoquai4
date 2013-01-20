@@ -204,7 +204,7 @@
     imageWallElement.frame = CGRectMake(((width + 5) * xPosition + 5), yPosition, width, height);
     [UIView commitAnimations];
     
-    if (i != 0) {
+    if (i != 0) { //Ne place pas l'écouteur d'évènement du clic sur la première image, celle du logo PHQ
         UITapGestureRecognizer *accessPicture = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(accessPicture:)];
         [imageWallElement addGestureRecognizer:accessPicture];
     }
@@ -297,8 +297,6 @@
                          imageViewController.idPicture = index.tag;
                          [self.navigationController pushViewController:imageViewController animated:YES];
                      }];
-    
-    NSLog(@"%i", index.tag);
     
     //UIBarButtonItem *backButton = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"backButton"] style:UIBarButtonItemStylePlain target:nil action:nil];
     //UIBarButtonItem *backButton = [[UIBarButtonItem alloc] initWithCustomView:v];

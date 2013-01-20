@@ -67,7 +67,11 @@
 }
 
 //Informe le changement du volume par le biais des boutons
-
+- (void)volumeChanged:(NSNotification *)notification
+{
+    _volume = [[[notification userInfo] objectForKey:@"AVSystemController_AudioVolumeNotificationParameter"] floatValue];
+    
+}
 
 - (void)applicationWillResignActive:(UIApplication *)application
 {

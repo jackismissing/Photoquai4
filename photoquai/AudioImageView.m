@@ -140,9 +140,11 @@
         hautParleursForts.contentMode = UIViewContentModeScaleAspectFit;
         [self addSubview:hautParleursForts];
         
+        AppDelegate *appdelegate = [[UIApplication sharedApplication] delegate];
+        
         musicPlayer = [MPMusicPlayerController applicationMusicPlayer];
-        musicPlayer.volume = .1;
-        volumeSlider.value = musicPlayer.volume;
+        //musicPlayer.volume = appdelegate.volume;
+        //volumeSlider.value = musicPlayer.volume;
         
         currentTime = [[UILabel alloc] initWithFrame:CGRectMake(15, sound.frame.size.height - sound.frame.origin.y - 20, 120, 30)];
         currentTime.font = [UIFont fontWithName:@"Parisine-Regular" size:15];
@@ -214,8 +216,6 @@
     float progressSoundWidth = (320 * _audioPlayer.currentTime) / _audioPlayer.duration;
     
     progressSound.frame = CGRectMake(0, 4, progressSoundWidth, progressSound.frame.size.height);
-    //NSLog(@"%@", NSStringFromCGRect(progressSound.frame));
-    
 }
 
 

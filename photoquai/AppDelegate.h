@@ -19,6 +19,7 @@
 
 @property (strong, nonatomic) UIWindow *window;
 @property (strong, nonatomic) ViewController *viewController;
+@property (nonatomic, assign) float volume;
 
 
 - (NSDictionary*) getElementsFromJSON:(NSString*)anURL;
