@@ -49,12 +49,12 @@
     
     screenSize = [[UIScreen mainScreen] bounds].size;
     
-
+    
     
     if(screenSize.height == 568){
-    
+        
         photoInfos = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"photoInfos.png"]];
-    
+        
     } else photoInfos = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"photoInfos4.png"]];
     
     UIView *photoInfosView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, photoInfos.frame.size.width, photoInfos.frame.size.height)];
@@ -62,14 +62,14 @@
     [photoInfosView addSubview:photoInfos];
     
     [self.view addSubview:photoInfosView];
-
+    
     
     //Create a tableView programmatically
     self.infosTableView = [[UITableView alloc] initWithFrame:CGRectMake(self.view.frame.origin.x, photoInfos.frame.size.height, self.view.frame.size.width, self.view.frame.size.height - photoInfos.frame.size.height - self.navigationController.navigationBar.frame.size.height) style:UITableViewStylePlain];
     
     self.infosTableView.separatorColor = [UIColor blackColor];
     
-    self.infosTableView.scrollEnabled = NO; 
+    self.infosTableView.scrollEnabled = NO;
     
     
     //Add the tableview as sa subview of our view ---> making "view" our superview.
@@ -91,7 +91,7 @@
     self.navigationItem.title = @"Informations";
     //self.navigationItem.tintColor = [UIColor whiteColor];
     
-
+    
 }
 
 - (void)viewWillAppear:(BOOL)animated
@@ -131,7 +131,7 @@
     // This is where you wrap the view up nicely in a navigation controller
     UINavigationController *navigationController = [[UINavigationController alloc] initWithRootViewController:mainMenu];
     
-        [navigationController setNavigationBarHidden:YES animated:NO];
+    [navigationController setNavigationBarHidden:YES animated:NO];
     
     // You can even set the style of stuff before you show it
     //navigationController.navigationBar.barStyle = UIBarStyleBlackTranslucent;
@@ -181,7 +181,7 @@
         cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];
         
         // Custon disclosure
-                              
+        
         
         cell.accessoryView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"disclosure.png"]];  ;
         
@@ -238,10 +238,10 @@
     mainLabel.text = [items objectAtIndex:indexPath.row];
     
     numberLabel.text = [NSString stringWithFormat:@"%d", indexPath.row + 1];
-
     
     
-
+    
+    
     
     
     
@@ -249,7 +249,7 @@
     // Set the background color when selected (default blue)
     
     cell.selectionStyle = UITableViewCellSelectionStyleGray;
-
+    
     return cell;
 }
 
@@ -261,7 +261,7 @@
     if(screenSize.height == 568){
         
         cellBackground = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"pushnoir.png"]];
-    
+        
     } else cellBackground = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"pushnoir4.png"]];
     
     UIView *cellBackgroundView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, cell.frame.size.width, cell.frame.size.height)];
@@ -278,24 +278,24 @@
     // Navigation logic may go here. Create and push another view controller.
     // If you want to push another view upon tapping one of the cells on your table.
     
-   
+    
     
     if(indexPath.row == 2) {
         
         /*
-        
-        ADViewController *ADView = [[ADViewController alloc] init] ;
-        
-        UINavigationController *navigationController = [[UINavigationController alloc] initWithRootViewController:ADView];
-        
-        [navigationController setNavigationBarHidden:NO];
-        
-        // [self presentViewController:navigationController animated:YES completion:nil];
-        
-        [self.navigationController pushViewController:ADView animated:YES];
+         
+         ADViewController *ADView = [[ADViewController alloc] init] ;
+         
+         UINavigationController *navigationController = [[UINavigationController alloc] initWithRootViewController:ADView];
+         
+         [navigationController setNavigationBarHidden:NO];
+         
+         // [self presentViewController:navigationController animated:YES completion:nil];
+         
+         [self.navigationController pushViewController:ADView animated:YES];
          
          */
-
+        
         
     }
     
@@ -313,7 +313,7 @@
         
         
     }
-
+    
     
     // Deselect the cell when changing page
     

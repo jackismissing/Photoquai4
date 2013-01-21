@@ -9,6 +9,7 @@
 #import <UIKit/UIKit.h>
 #import "NavigationViewController.h"
 #import "ImageWall.h"
+#import "AppDelegate.h"
 
 @interface ViewController : UIViewController <UIScrollViewDelegate>
 {
@@ -22,8 +23,10 @@
     NSMutableArray *heights;
     NSMutableArray *ys;
     int imgIterate, nbrPictures, xPosition, yPosition, nbrColumns, totalWidth, widthThumb, i;
+    
+    NSUserDefaults *preferencesUser;
+    NSArray *oldFavorites;
 }
-
 
 @property(nonatomic, strong) NavigationViewController *navTest;
 

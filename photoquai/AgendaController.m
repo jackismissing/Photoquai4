@@ -97,9 +97,9 @@
     [super viewDidLoad];
 	// Do any additional setup after loading the view.
     
-
     
-
+    
+    
     
     // Set selectedMonth to 0;
     
@@ -111,7 +111,7 @@
     
     UIView *v = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 320, 10)];
     v.backgroundColor = [UIColor clearColor];
-
+    
     [self.infosTableView setTableFooterView:v];
     
     // Set width and height
@@ -421,7 +421,7 @@
     [agendaLastButtonDecembre setBackgroundColor:[UIColor colorWithWhite:255 alpha:0]];
     
     [decembreLastView addSubview:agendaLastButtonDecembre];
-
+    
     
     
 #pragma mark - Navigation Controller
@@ -439,7 +439,7 @@
     
     // By default, press october
     
-   // [agendaButtonOctobre sendActionsForControlEvents:UIControlEventTouchUpInside];
+    // [agendaButtonOctobre sendActionsForControlEvents:UIControlEventTouchUpInside];
     
     // Init table
     
@@ -461,7 +461,7 @@
         expandedSections = [[NSMutableIndexSet alloc] init];
         
     }
-
+    
     
     
     
@@ -523,76 +523,76 @@
 
 - (void)showTable : (id)sender;
 {/*
-    
-    
-    NSLog(@"agendaBtn");
-    
-    
-    //Create a tableView programmatically
-    
-    
-    // Get the parameter
-    
-    NSInteger monthId = ((UIControl *) sender).tag;
-    
-    
-    
-    // If october
-    
-    if(monthId == 1 && selectedMonth != 1)
-    {
-        
-        // Set month to 1
-        selectedMonth = 1;
-        
-        NSLog(@"october");
-        
-        // Set opacity for buttons
-        
-        
-        
-        
-        
-        // Reloading table properties in casse where another button was already selected before
-        
-        
-        
-        NSLog(@"test");
-        
-        
-        //Add the tableview as sa subview of our view ---> making "view" our superview.
-        
-        // Animate add sub view
-        
-
-
-        [infosTableView setFrame:CGRectMake(self.view.frame.origin.x, 40, self.view.frame.size.width, self.view.frame.size.height)];
-
-        
-        [self.view addSubview:infosTableView];
-        
-        items = [[NSArray alloc] initWithObjects:@"", nil];
-        
-        self.infosTableView.delegate = self;
-        self.infosTableView.dataSource = self;
-        
-        /////////////////
-        //// EXPANDABLE SECTIONS ///
-        ///////////////////////////
-        
-        if (!expandedSections)
-        {
-            
-            expandedSections = [[NSMutableIndexSet alloc] init];
-            
-        }
-        
-    }
-   
-    
-
-    
-*/}
+  
+  
+  NSLog(@"agendaBtn");
+  
+  
+  //Create a tableView programmatically
+  
+  
+  // Get the parameter
+  
+  NSInteger monthId = ((UIControl *) sender).tag;
+  
+  
+  
+  // If october
+  
+  if(monthId == 1 && selectedMonth != 1)
+  {
+  
+  // Set month to 1
+  selectedMonth = 1;
+  
+  NSLog(@"october");
+  
+  // Set opacity for buttons
+  
+  
+  
+  
+  
+  // Reloading table properties in casse where another button was already selected before
+  
+  
+  
+  NSLog(@"test");
+  
+  
+  //Add the tableview as sa subview of our view ---> making "view" our superview.
+  
+  // Animate add sub view
+  
+  
+  
+  [infosTableView setFrame:CGRectMake(self.view.frame.origin.x, 40, self.view.frame.size.width, self.view.frame.size.height)];
+  
+  
+  [self.view addSubview:infosTableView];
+  
+  items = [[NSArray alloc] initWithObjects:@"", nil];
+  
+  self.infosTableView.delegate = self;
+  self.infosTableView.dataSource = self;
+  
+  /////////////////
+  //// EXPANDABLE SECTIONS ///
+  ///////////////////////////
+  
+  if (!expandedSections)
+  {
+  
+  expandedSections = [[NSMutableIndexSet alloc] init];
+  
+  }
+  
+  }
+  
+  
+  
+  
+  */}
 
 
 
@@ -631,7 +631,7 @@
         
     } else return 490;
     
-
+    
 }
 
 
@@ -664,21 +664,21 @@
             // Set data according to month
             
             
-                
-                // Date label
-          
-                dateLabel = [[UILabel alloc] initWithFrame:CGRectMake(15, 23, 45, 40)];
-                      
-                dateLabel.text = @"13.10.13 17.12.13";
-                
-                dateLabel.numberOfLines = 2;
-                
-                dateLabel.font = [UIFont fontWithName:@"Parisine-Italic" size:11];
-                
-                
-                [cell addSubview:dateLabel];
             
-                // Filet date
+            // Date label
+            
+            dateLabel = [[UILabel alloc] initWithFrame:CGRectMake(15, 23, 45, 40)];
+            
+            dateLabel.text = @"13.10.13 17.12.13";
+            
+            dateLabel.numberOfLines = 2;
+            
+            dateLabel.font = [UIFont fontWithName:@"Parisine-Italic" size:11];
+            
+            
+            [cell addSubview:dateLabel];
+            
+            // Filet date
             
             UIImageView *contentFilet = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"filetRougeAgenda.png"]];
             
@@ -689,41 +689,41 @@
             [contentFiletView addSubview:contentFilet];
             
             [cell addSubview:contentFiletView];
-
-
             
-                // Header title
-                
-                headerTitle = [[UILabel alloc] initWithFrame:CGRectMake(70, 25, 164, 70)];      
             
-                
-                headerTitle.text = @"Ambassade d'Australie";
-                
-                headerTitle.numberOfLines = 1;
-                
-                headerTitle.font = [UIFont fontWithName:@"Parisine-Bold" size:14];
-                
-                [headerTitle sizeToFit];
-                
-                [cell addSubview:headerTitle];
-                
-                // Header content
-                
-                headerText = [[UILabel alloc] initWithFrame:CGRectMake(70, 50, 200, 42)];
-                
-                headerText.text = @"Minutes to Midnight et Coming Soon de Trent Parke et Between Worlds de Polixeni Papapetrou";
-                
-                headerText.numberOfLines = 3;
-                
-                headerText.font = [UIFont fontWithName:@"Parisine" size:12];
-                
-                [cell addSubview:headerText];
-                
-                
-                
-               
-                
-          
+            
+            // Header title
+            
+            headerTitle = [[UILabel alloc] initWithFrame:CGRectMake(70, 25, 164, 70)];
+            
+            
+            headerTitle.text = @"Ambassade d'Australie";
+            
+            headerTitle.numberOfLines = 1;
+            
+            headerTitle.font = [UIFont fontWithName:@"Parisine-Bold" size:14];
+            
+            [headerTitle sizeToFit];
+            
+            [cell addSubview:headerTitle];
+            
+            // Header content
+            
+            headerText = [[UILabel alloc] initWithFrame:CGRectMake(70, 50, 200, 42)];
+            
+            headerText.text = @"Minutes to Midnight et Coming Soon de Trent Parke et Between Worlds de Polixeni Papapetrou";
+            
+            headerText.numberOfLines = 3;
+            
+            headerText.font = [UIFont fontWithName:@"Parisine" size:12];
+            
+            [cell addSubview:headerText];
+            
+            
+            
+            
+            
+            
         }
         else if (indexPath.row == 1)
         {
@@ -800,17 +800,17 @@
             contentContent.backgroundColor = [UIColor colorWithWhite:255 alpha:0];
             
             [cell addSubview:contentContent];
-
+            
             cell.contentView.backgroundColor = [UIColor blackColor];
             
             
         }
         
-               
-
-
         
-         
+        
+        
+        
+        
     }
     else
     {
@@ -822,7 +822,7 @@
     
     cell.selectionStyle = UITableViewCellSelectionStyleNone;
     
-
+    
     
     
     return cell;
@@ -924,7 +924,7 @@
     
     [self.infosTableView deselectRowAtIndexPath:[self.infosTableView indexPathForSelectedRow] animated:YES];
     
-
+    
     
     index = indexPath.section;
 }

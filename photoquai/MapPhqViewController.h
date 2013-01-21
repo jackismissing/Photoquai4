@@ -22,6 +22,4 @@
 
 - (void)showMenu;
 
-- (void)topPinTapped:(UIGestureRecognizer *)sender;
-
 @end

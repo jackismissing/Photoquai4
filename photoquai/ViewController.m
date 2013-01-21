@@ -26,18 +26,31 @@
 {
     [super viewDidLoad];
 	// Do any additional setup after loading the view, typically from a nib.
+    
+    [self.navigationController setNavigationBarHidden:YES animated:NO];
+    
+    //récupère les favoris
+    preferencesUser = [NSUserDefaults standardUserDefaults];
+    //[preferencesUser removeObjectForKey:@"favorisImages"]; //Supprime tous les éléments d'une clé bien précise
+    oldFavorites = [[NSArray alloc] initWithArray: [preferencesUser objectForKey:@"favorisImages"]];
+    [preferencesUser synchronize];
+    
     [self setTitle:@"Photographies"];
     self.view.backgroundColor = [UIColor whiteColor];
+    
+    CGRect screenRect = [[UIScreen mainScreen] bounds];
+    CGFloat screenWidth = screenRect.size.width;
+    CGFloat screenHeight = screenRect.size.height;
     
     //Réinstancie la navigation bar, une fois le menu disparu
     [self.navigationController setNavigationBarHidden:NO animated:NO];
     self.navigationItem.hidesBackButton = YES;
     
-    thumbsContainer = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 320, 480)];
+    thumbsContainer = [[UIView alloc] initWithFrame:CGRectMake(0, 0, screenWidth, screenHeight)];
     thumbsContainer.userInteractionEnabled = YES;
     
     //penser à recalculer la hauteur quand il y aura la navigation bar
-    myScrollView = [[UIScrollView alloc] initWithFrame:CGRectMake(0, 0, 320, 440)];
+    myScrollView = [[UIScrollView alloc] initWithFrame:CGRectMake(0, 0, screenWidth, screenHeight-40)];
     myScrollView.showsHorizontalScrollIndicator = NO;
     myScrollView.showsVerticalScrollIndicator = NO;
     myScrollView.delegate = self;
@@ -55,7 +68,8 @@
     // Post a notification to loginComplete
     [[NSNotificationCenter defaultCenter] postNotificationName:@"loginComplete" object:reachabilityInfo];
     
-    
+    AppDelegate *appdelegate = [[UIApplication sharedApplication] delegate];
+    [appdelegate hideTabBar:self.tabBarController];
 }
 
 - (void)viewWillAppear:(BOOL)animated
@@ -76,11 +90,6 @@
     
     UIBarButtonItem* menuBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:menuButton];
     [self.navigationItem setLeftBarButtonItem:menuBarButtonItem];
-
-
-   
-
-
 }
 
 //Détecte la connexion d'un utilisateur
@@ -119,7 +128,8 @@
 
 - (void) loadImageWall{
     AppDelegate *appdelegate = [[UIApplication sharedApplication] delegate];
-
+    
+    
     if (i >= nbrPictures) return;
     
     //On vérifie que l'on a pas atteint le nombre maximal de colonnes
@@ -135,23 +145,32 @@
         
         int h = [[heights objectAtIndex: (i - nbrColumns)] integerValue];
         int y = [[ys objectAtIndex: (i - nbrColumns)] integerValue];
-        yPosition =  h + y + 5;
+        yPosition =  h + y + 15;
     }else{
         
         yPosition = 5;
     }
     
-    NSString *appendLink = @"http://phq.cdnl.me/api/fr/pictures/";
-    appendLink = [appendLink stringByAppendingString:[NSString stringWithFormat:@"%d", imgIterate]];
-    appendLink = [appendLink stringByAppendingString:@".json"];
+    NSMutableString *linkImg = [[NSMutableString alloc] init];
+    NSInteger idPicture;
     
-    NSInteger idPicture = [[[appdelegate getElementsFromJSON:appendLink] valueForKeyPath:@"picture.id"] integerValue];
-    NSString *linkImg = [[appdelegate getElementsFromJSON:appendLink] valueForKeyPath:@"picture.link_iphone"];
-    
+    if (i == 0) {
+        [linkImg setString:@"http://nicolasgarnier.fr/phq/firstImgPHQ.png"];
+        
+    }else{
+        
+        NSString *appendLink = @"http://phq.cdnl.me/api/fr/pictures/";
+        appendLink = [appendLink stringByAppendingString:[NSString stringWithFormat:@"%d", imgIterate]];
+        appendLink = [appendLink stringByAppendingString:@".json"];
+        
+        idPicture = [[[appdelegate getElementsFromJSON:appendLink] valueForKeyPath:@"picture.id"] integerValue];
+        linkImg = [[appdelegate getElementsFromJSON:appendLink] valueForKeyPath:@"picture.link_iphone"];
+    }
     
     imageWallElement = [[ImageWall alloc] initWithFrame:CGRectMake(0, yPosition, widthThumb, 75)
-                                               imageURL:linkImg
-                                                colonne:[NSNumber numberWithInt:xPosition]];
+                                          imageURL:linkImg
+                                          colonne:[NSNumber numberWithInt:xPosition]];
+    
     imageWallElement.alpha = 0;
     imageWallElement.opaque = YES;
     imageWallElement.clipsToBounds = NO;
@@ -159,9 +178,20 @@
     int height = [imageWallElement height];
     int width = [imageWallElement width];
     
-    imageWallElement.frame = CGRectMake(((width + 5) * xPosition + 5), yPosition, width, height);
+    imageWallElement.frame = CGRectMake(((width + 5) * xPosition + 5), yPosition - 10, width, height);
     imageWallElement.clipsToBounds = YES;
     imageWallElement.tag = idPicture;
+    
+    
+    if ([oldFavorites containsObject:[NSNumber numberWithInt:idPicture]]){
+        UIImage*    backgroundImage = [UIImage imageNamed:@"etoilejaune"];
+        CALayer*    aLayer = [CALayer layer];
+        CGRect startFrame = CGRectMake(width - 25, 0.0, 25, 25);
+        aLayer.contents = (id)backgroundImage.CGImage;
+        aLayer.frame = startFrame;
+        
+        [imageWallElement.layer addSublayer:aLayer];
+    }
     
     [heights addObject: [NSNumber numberWithInt: imageWallElement.frame.size.height]];
     [ys addObject: [NSNumber numberWithInt: imageWallElement.frame.origin.y]];
@@ -171,16 +201,19 @@
     [UIView setAnimationDuration:0.75];
     [UIView setAnimationDelegate:imageWallElement];
     imageWallElement.alpha = 1.0;
+    imageWallElement.frame = CGRectMake(((width + 5) * xPosition + 5), yPosition, width, height);
     [UIView commitAnimations];
     
-    UITapGestureRecognizer *accessPicture = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(accessPicture:)];
-    [imageWallElement addGestureRecognizer:accessPicture];
+    if (i != 0) { //Ne place pas l'écouteur d'évènement du clic sur la première image, celle du logo PHQ
+        UITapGestureRecognizer *accessPicture = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(accessPicture:)];
+        [imageWallElement addGestureRecognizer:accessPicture];
+    }
     
     [thumbsContainer addSubview:imageWallElement];
     i++;
     [self performSelectorInBackground:@selector(loadImageWall) withObject:nil];
     
-    //Calcul de la hauteur
+    //Calcul de la hauteur de la scrollview
     int heightMax = 0;
     //heightColumn récupère la hauteur de chaque colonne
     for (int heightColumn = 0; heightColumn < nbrColumns ; heightColumn++) {
@@ -219,19 +252,13 @@
 
 //Gère le pinch to zoom gesture
 - (UIView *)viewForZoomingInScrollView:(UIScrollView *)scrollView {
-    
+
     return thumbsContainer;
 }
 
-- (void)didReceiveMemoryWarning
-{
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
-}
 
 - (void)showMenu
-{
-    
+{    
     NavigationViewController *mainMenu = [[NavigationViewController alloc] init];
     mainMenu.delegate = self;
     
@@ -278,7 +305,7 @@
     //[self.navigationItem setBackBarButtonItem: backButton];
 }
 
-- (void)scrollViewWillBeginDragging:(UIScrollView *)scrollView{
+/*- (void)scrollViewWillBeginDragging:(UIScrollView *)scrollView{
     
     for (UIImageView *img in thumbsContainer.subviews){
         if(img.frame.origin.y < myScrollView.contentOffset.y || img.frame.origin.y > (myScrollView.contentOffset.y + myScrollView.frame.size.height) || img.frame.origin.x < myScrollView.contentOffset.x || img.frame.origin.x > (myScrollView.contentOffset.x + myScrollView.frame.size.width))
@@ -301,13 +328,20 @@
             [UIImageView commitAnimations];
         }
     }
-}
+}*/
+
 
 /*-(void)changeViewToAgenda{
 
     AgendaController *agenda = [[AgendaController alloc] init] ;
     [self.navigationController pushViewController:agenda animated:YES];
 }*/
+
+- (void)didReceiveMemoryWarning
+{
+    [super didReceiveMemoryWarning];
+    // Dispose of any resources that can be recreated.
+}
 
 
 @end

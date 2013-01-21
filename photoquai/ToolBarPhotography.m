@@ -14,8 +14,6 @@
 
 - (id)initWithFrame:(CGRect)frame
 {
-    
-    
     self = [super initWithFrame:frame];
     if (self) {
         
@@ -47,7 +45,8 @@
     
 #pragma mark - informations tab
     UIView *informationsView = [[UIView alloc] initWithFrame:CGRectMake(10, marginTop, viewWidth, 35)];
-    
+    informationsView.tag = 0;
+
     //informations.backgroundColor = [UIColor redColor];
     
     _infosImage = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, 23, 23)];
@@ -68,7 +67,7 @@
     _infosLabel.shadowColor = [UIColor blackColor];
     _infosLabel.shadowOffset = CGSizeMake(0, -1);
     
-    UITapGestureRecognizer *informationsAction = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(informationsAction:)];
+    UITapGestureRecognizer *informationsAction = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(voletAction:)];
     [informationsView addGestureRecognizer:informationsAction];
 
     [informationsView sizeToFit];
@@ -78,6 +77,7 @@
     
 #pragma mark - audioguide tab
     UIView *audioguideView = [[UIView alloc] initWithFrame:CGRectMake(informationsView.frame.origin.x + informationsView.frame.size.width + 7, marginTop - 2, viewWidth, 35)];
+    audioguideView.tag = 1;
     //audioguideView.backgroundColor = [UIColor whiteColor];
     
     _audioguideImage = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, 25, 25)];
@@ -99,7 +99,7 @@
     _audioguideLabel.font = formatLabels;
     _audioguideLabel.backgroundColor = [UIColor clearColor];
     
-    UITapGestureRecognizer *audioguideAction = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(audioguideAction:)];
+    UITapGestureRecognizer *audioguideAction = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(voletAction:)];
     [audioguideView addGestureRecognizer:audioguideAction];
     
     //[audioguideLabel sizeToFit];
@@ -112,6 +112,7 @@
 #pragma mark - location tab
     UIView *locationView = [[UIView alloc] initWithFrame:CGRectMake(audioguideView.frame.origin.x + audioguideView.frame.size.width + 10, marginTop, viewWidth, 35)];
     //locationView.backgroundColor = [UIColor whiteColor];
+    locationView.tag = 2;
     
     _locationImage = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, 25, 25)];
     _locationImage.frame = CGRectMake(((locationView.frame.size.width - _locationImage.frame.size.width) / 2), -5, 25, 25);
@@ -131,7 +132,7 @@
 
     //[locationLabel setFrame:CGRectMake(((audioguideView.frame.size.width - audioguideLabel.frame.size.width) / 2), infosImage.frame.origin.y + infosImage.frame.size.height, CGRectGetWidth(infosLabel.frame), CGRectGetHeight(audioguideLabel.frame))];
     
-    UITapGestureRecognizer *locationAction = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(locationAction:)];
+    UITapGestureRecognizer *locationAction = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(voletAction:)];
     [locationView addGestureRecognizer:locationAction];
     
     //[locationLabel sizeToFit];
@@ -142,19 +143,11 @@
     [self addSubview:locationView];
 }
 
-- (void)locationAction:(UIGestureRecognizer *)gesture{
+- (void)voletAction:(UIGestureRecognizer *)gesture{
     
-    //[[NSNotificationCenter defaultCenter] postNotificationName:@"showImageDescription" object:nil];
-}
-
-- (void)audioguideAction:(UIGestureRecognizer *)gesture{
+    UIView *index = gesture.view;
     
-    //[[NSNotificationCenter defaultCenter] postNotificationName:@"showImageDescription" object:nil];
-}
-
-- (void)informationsAction:(UIGestureRecognizer *)gesture{
-    
-    [[NSNotificationCenter defaultCenter] postNotificationName:@"showImageDescription" object:nil];
+    [[NSNotificationCenter defaultCenter] postNotificationName:@"showImageVolet" object:[NSNumber numberWithInt:index.tag]];
 }
 
 

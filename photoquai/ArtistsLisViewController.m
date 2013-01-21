@@ -307,15 +307,15 @@
 - (void)tableView:(UITableView *)tableView willDisplayCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath
 {
     
-    cellBackground = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"pushnoir4.png"]];
+    //cellBackground = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"pushnoir4.png"]];
     
-    UIView *cellBackgroundView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, cellBackground.frame.size.height, cellBackground.frame.size.height)];
+    //UIView *cellBackgroundView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, cellBackground.frame.size.height, cellBackground.frame.size.height)];
     
-    [cellBackgroundView addSubview:cellBackground];
+    //[cellBackgroundView addSubview:cellBackground];
     
-    cell.backgroundView = cellBackgroundView;
+    //cell.backgroundView = cellBackgroundView;
 }
-/*
+
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     
     static NSString *CellIdentifier = @"Cell";
@@ -324,6 +324,7 @@
     if (cell == nil) {
         cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:CellIdentifier];
     }
+        /*
     UILabel *mainLabel, *numberLabel;
     UIImageView *separatorImage;
     
@@ -336,6 +337,8 @@
         cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];
         
         // Custon disclosure
+        
+        
         
         
         cell.accessoryView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"disclosure.png"]];  ;
@@ -394,7 +397,13 @@
     mainLabel.text = [artistInfos objectForKey:@"artistName"];
     artistCountry.text = [artistInfos objectForKey:@"artistFirstName"];
     
-    
+    */
+        
+        NSDictionary *artistInfos = [[self.sections valueForKey:[[[self.sections allKeys] sortedArrayUsingSelector:@selector(localizedCaseInsensitiveCompare:)] objectAtIndex:indexPath.section]] objectAtIndex:indexPath.row];
+        
+        cell.textLabel.text = [artistInfos objectForKey:@"artistName"];
+        cell.detailTextLabel.text = [artistInfos objectForKey:@"artistFirstName"];
+
     
     cell.backgroundView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, cell.frame.size.width, cell.frame.size.height)];
     
@@ -404,7 +413,7 @@
     
     return cell;
 }
-*/
+
 -(void)createTableMenu
 {
     

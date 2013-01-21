@@ -14,31 +14,31 @@
 
 @implementation ImageZoomable
 
-- (id)initWithImageURL:(NSURL*)anImageURL
+- (id)initWithImageURL:(NSURL*)anImageURL andFrame:(CGRect)frame
 {
     self = [super init];
     if (self) {
-        CGRect screenRect = [[UIScreen mainScreen] bounds];
-        CGFloat screenWidth = screenRect.size.width;
-        CGFloat screenHeight = screenRect.size.height - 100;
         
         self.clipsToBounds = YES;
+        self.frame = CGRectMake(frame.origin.x, frame.origin.y, frame.size.width, frame.size.height);
         
         //UIImage *PortraitImage = [[UIImage alloc] initWithCGImage: anImage.CGImage scale: 1.0 orientation: UIImageOrientationUp];
         
         imageBig = [[UIImageView alloc] init];
-        [imageBig setImageWithURL:anImageURL placeholderImage:[UIImage imageNamed:@"navigationBar"]];
-        imageBig.frame = CGRectMake(0, 0, screenWidth, screenHeight); //-43
+        [imageBig setImageWithURL:anImageURL placeholderImage:[UIImage imageNamed:@"back"]];
+        imageBig.frame = CGRectMake(0, 0, frame.size.width, frame.size.height); //-43
         imageBig.contentMode = UIViewContentModeScaleAspectFit;
         imageBig.opaque = YES; //Performance
+        imageBig.clipsToBounds = YES;
         
-        self.frame = CGRectMake(0, 0, screenWidth, screenHeight);
+        
         [self addSubview:imageBig];
         //self.minimumZoomScale = 1;
         self.maximumZoomScale = 3.0;
         
-       // self.contentSize = CGSizeMake(anImage.size.width, anImage.size.width);
-       self.delegate = self;
+        // self.contentSize = CGSizeMake(anImage.size.width, anImage.size.width);
+        self.delegate = self;
+        self.clipsToBounds = YES;
         
         [self setUserInteractionEnabled:YES];
         

@@ -8,14 +8,22 @@
 
 #import <UIKit/UIKit.h>
 #import "Reachability.h" //Permet de savoir si on est connecté ou non à Internet
+#import "PhotographyViewController.h"
 
 @class ViewController;
 
-@interface AppDelegate : UIResponder <UIApplicationDelegate>
+@interface AppDelegate : UIResponder <UIApplicationDelegate>{
+    UITabBarController *tabBarController;
+   
+}
 
 @property (strong, nonatomic) UIWindow *window;
-
 @property (strong, nonatomic) ViewController *viewController;
+@property (nonatomic, assign) float volume;
+
+
 - (NSDictionary*) getElementsFromJSON:(NSString*)anURL;
+- (void)showTabBar:(UITabBarController *) tabbarcontroller;
+- (void)hideTabBar:(UITabBarController *) tabbarcontroller;
 
 @end

@@ -139,8 +139,7 @@
         
         NSLog(@"%@", NSStringFromCGRect(pinView.frame));
         
-        
-        [pinView addGestureRecognizer:[[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(topPinTapped:)]];
+        [pinView addGestureRecognizer:[[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(topPinTapped)]];
         [map addSubview:pinView];
         
         /*
@@ -179,12 +178,11 @@
     
 }
 
-- (void)topPinTapped:(UIGestureRecognizer *)sender {
+- (void)topPinTapped {
     // show our callout if it's not already shown!
     // now in this example we're going to introduce an artificial delay in order to make our popup feel identical to MKMapView.
     // MKMapView has a delay after tapping so that it can intercept a double-tap for zooming. We don't need that delay but we'll
     // add it just so things feel the same.
-    pinView = (MKPinAnnotationView *)sender.view;
     if (!calloutView.window)
         [self performSelector:@selector(popupCalloutView) withObject:nil afterDelay:1.0/3.0];
 }
@@ -216,11 +214,6 @@
     //                      constrainedToView:scrollView
     //               permittedArrowDirections:SMCalloutArrowDirectionDown
     //                               animated:YES];
-}
-
-- (void)mapView:(MKMapView *)mapView didSelectAnnotationView:(MKAnnotationView *)view
-{
-    NSLog(@"tapped");
 }
 
 - (NSTimeInterval)calloutView:(SMCalloutView *)theCalloutView delayForRepositionWithSize:(CGSize)offset {
