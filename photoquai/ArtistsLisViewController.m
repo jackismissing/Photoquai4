@@ -19,6 +19,7 @@
 @synthesize sections;
 @synthesize artistsTable;
 @synthesize tableMenuScrollView;
+@synthesize cellBackground;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -100,6 +101,12 @@
     // Custom menu Scroll View
     
     self.tableMenuScrollView.backgroundColor = [UIColor blackColor];
+    
+    // Table View
+    
+    self.artistsTable.backgroundColor = [UIColor whiteColor];
+    
+    
 
 }
 
@@ -264,9 +271,14 @@
 {
     UIView *headerView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, tableView.bounds.size.width, 30)];
     
-    headerView.backgroundColor = [UIColor blackColor];
+    UIImageView *artistsSeparator = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"artistsSeparator.png"]];
+
     
-    UILabel *headerTitle = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, headerView.frame.size.width, headerView.frame.size.height)];
+    artistsSeparator.center = CGPointMake(headerView.bounds.size.width / 2, headerView.bounds.size.height /2);
+    
+    [headerView addSubview:artistsSeparator];
+    
+    UILabel *headerTitle = [[UILabel alloc] initWithFrame:CGRectMake(headerView.frame.size.width / 2 - 10, 0, 20, headerView.frame.size.height)];
     
     headerTitle.text = [[[self.sections allKeys] sortedArrayUsingSelector:@selector(localizedCaseInsensitiveCompare:)] objectAtIndex:section];
     
@@ -275,8 +287,6 @@
     headerTitle.font = [UIFont fontWithName:@"Parisine-Bold" size:15];
     
     [headerView addSubview:headerTitle];
-    
-    
     
     
     return headerView;
@@ -292,6 +302,20 @@
  
  */
 
+#pragma mark - Table willDisplay cell
+
+- (void)tableView:(UITableView *)tableView willDisplayCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    
+    cellBackground = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"pushnoir4.png"]];
+    
+    UIView *cellBackgroundView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, cellBackground.frame.size.height, cellBackground.frame.size.height)];
+    
+    [cellBackgroundView addSubview:cellBackground];
+    
+    cell.backgroundView = cellBackgroundView;
+}
+/*
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     
     static NSString *CellIdentifier = @"Cell";
@@ -300,15 +324,87 @@
     if (cell == nil) {
         cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:CellIdentifier];
     }
+    UILabel *mainLabel, *numberLabel;
+    UIImageView *separatorImage;
+    
+    UITableViewCell *cell;
+    
+    cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
+    
+    if (cell == nil) {
+        
+        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];
+        
+        // Custon disclosure
+        
+        
+        cell.accessoryView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"disclosure.png"]];  ;
+        
+        // Création du label principal de chaque cellule
+        
+        mainLabel = [[UILabel alloc] initWithFrame:CGRectMake(65, cell.frame.size.height / 2 - 9, 175, 18)];
+        
+        mainLabel.tag = MAINLABEL_TAG;
+        
+        mainLabel.font = [UIFont fontWithName:@"Parisine-Bold" size:18];
+        
+        mainLabel.textColor = [UIColor whiteColor];
+        
+        mainLabel.backgroundColor = [UIColor colorWithWhite:255 alpha:0];
+        
+        [cell.contentView addSubview:mainLabel];
+        
+        // Image séparant le numéro de cellule du label
+        
+        separatorImage = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"infosLabelSeparator.png"]];
+        
+        separatorImage.frame = CGRectMake(42, cell.frame.size.height / 2 - separatorImage.frame.size.height / 2, separatorImage.frame.size.width, separatorImage.frame.size.height);
+        
+        separatorImage.tag = SEPARATORIMAGE_TAG;
+        
+        [cell.contentView addSubview:separatorImage];
+        
+        // Label numéro de cellule
+        
+        numberLabel = [[UILabel alloc] initWithFrame:CGRectMake(15, cell.frame.size.height / 2 - 9, 20, 18)];
+        
+        numberLabel.tag = NUMBERLABEL_TAG;
+        
+        numberLabel.font = [UIFont fontWithName:@"Parisine-Italic" size:18];
+        
+        numberLabel.textColor = [UIColor whiteColor];
+        
+        numberLabel.backgroundColor = [UIColor colorWithWhite:255 alpha:0];
+        
+        [cell.contentView addSubview:numberLabel];
+        
+    } else {
+        
+        mainLabel = (UILabel *)[cell.contentView viewWithTag:MAINLABEL_TAG];
+        
+        artistImage = (UIImageView *)[cell.contentView viewWithTag:SEPARATORIMAGE_TAG];
+        
+        artistCountry = (UILabel *)[cell.contentView viewWithTag:NUMBERLABEL_TAG];
+        
+    }
+
     
     NSDictionary *artistInfos = [[self.sections valueForKey:[[[self.sections allKeys] sortedArrayUsingSelector:@selector(localizedCaseInsensitiveCompare:)] objectAtIndex:indexPath.section]] objectAtIndex:indexPath.row];
     
-    cell.textLabel.text = [artistInfos objectForKey:@"artistName"];
-    cell.detailTextLabel.text = [artistInfos objectForKey:@"artistFirstName"];
+    mainLabel.text = [artistInfos objectForKey:@"artistName"];
+    artistCountry.text = [artistInfos objectForKey:@"artistFirstName"];
+    
+    
+    
+    cell.backgroundView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, cell.frame.size.width, cell.frame.size.height)];
+    
+    cell.backgroundView.backgroundColor = [UIColor whiteColor];
+    
+    cell.selectionStyle = UITableViewCellSelectionStyleNone;
     
     return cell;
 }
-
+*/
 -(void)createTableMenu
 {
     

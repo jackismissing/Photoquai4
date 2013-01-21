@@ -18,6 +18,7 @@
 @property(nonatomic, strong) NSMutableDictionary *sections;
 @property(nonatomic, strong) UITableView *artistsTable;
 @property(nonatomic, strong) UIScrollView *tableMenuScrollView;
+@property(nonatomic, strong) UIImageView *cellBackground;
 
 -(void)loadArtists;
 -(void)showMenu;
