@@ -134,9 +134,9 @@
     [agendaScroll setScrollEnabled:YES];
     
     
-    agendaScroll.contentSize = CGSizeMake(780, 40);
+    agendaScroll.contentSize = CGSizeMake(780, 50);
     [agendaScroll setShowsHorizontalScrollIndicator:NO];
-    [agendaScroll scrollRectToVisible:CGRectMake(190, 0, self.view.frame.size.width, 40) animated:NO];
+    [agendaScroll scrollRectToVisible:CGRectMake(190, 0, self.view.frame.size.width, 50) animated:NO];
     [agendaScroll setDelegate:self];
     
     
@@ -145,56 +145,56 @@
     
     // Creating one view per button
     
-    octobreLastView = [[UIView alloc] initWithFrame:CGRectMake(10, 0, 50, 40)];
+    octobreLastView = [[UIView alloc] initWithFrame:CGRectMake(10, 0, 50, 50)];
     octobreLastView.backgroundColor = [UIColor colorWithWhite:0 alpha:100];
     [agendaScroll addSubview:octobreLastView];
     
-    novembreLastView = [[UIView alloc] initWithFrame:CGRectMake(70, 0, 50, 40)];
+    novembreLastView = [[UIView alloc] initWithFrame:CGRectMake(70, 0, 50, 50)];
     novembreLastView.backgroundColor = [UIColor colorWithWhite:0 alpha:100];
     [agendaScroll addSubview:novembreLastView];
     
-    decembreLastView = [[UIView alloc] initWithFrame:CGRectMake(130, 0, 50, 40)];
+    decembreLastView = [[UIView alloc] initWithFrame:CGRectMake(130, 0, 50, 50)];
     decembreLastView.backgroundColor = [UIColor colorWithWhite:0 alpha:100];
     [agendaScroll addSubview:decembreLastView];
     
     
-    juinView = [[UIView alloc] initWithFrame:CGRectMake(190, 0, 50, 40)];
+    juinView = [[UIView alloc] initWithFrame:CGRectMake(190, 0, 50, 50)];
     juinView.backgroundColor = [UIColor colorWithWhite:0 alpha:100];
     [agendaScroll addSubview:juinView];
     
-    juilletView = [[UIView alloc] initWithFrame:CGRectMake(250, 0, 50, 40)];
+    juilletView = [[UIView alloc] initWithFrame:CGRectMake(250, 0, 50, 50)];
     juilletView.backgroundColor = [UIColor colorWithWhite:0 alpha:100];
     [agendaScroll addSubview:juilletView];
     
-    aoutView = [[UIView alloc] initWithFrame:CGRectMake(310, 0, 50, 40)];
+    aoutView = [[UIView alloc] initWithFrame:CGRectMake(310, 0, 50, 50)];
     aoutView.backgroundColor = [UIColor colorWithWhite:0 alpha:100];
     [agendaScroll addSubview:aoutView];
     
-    septembreView = [[UIView alloc] initWithFrame:CGRectMake(370, 0, 50, 40)];
+    septembreView = [[UIView alloc] initWithFrame:CGRectMake(370, 0, 50, 50)];
     septembreView.backgroundColor = [UIColor colorWithWhite:0 alpha:100];
     [agendaScroll addSubview:septembreView];
     
-    octobreView = [[UIView alloc] initWithFrame:CGRectMake(430, 0, 50, 40)];
+    octobreView = [[UIView alloc] initWithFrame:CGRectMake(430, 0, 50, 50)];
     octobreView.backgroundColor = [UIColor colorWithWhite:0 alpha:100];
     [agendaScroll addSubview:octobreView];
     
-    novembreView = [[UIView alloc] initWithFrame:CGRectMake(490, 0, 50, 40)];
+    novembreView = [[UIView alloc] initWithFrame:CGRectMake(490, 0, 50, 50)];
     novembreView.backgroundColor = [UIColor colorWithWhite:0 alpha:100];
     [agendaScroll addSubview:novembreView];
     
-    decembreView = [[UIView alloc] initWithFrame:CGRectMake(550, 0, 50, 40)];
+    decembreView = [[UIView alloc] initWithFrame:CGRectMake(550, 0, 50, 50)];
     decembreView.backgroundColor = [UIColor colorWithWhite:0 alpha:100];
     [agendaScroll addSubview:decembreView];
     
-    juinFirstView = [[UIView alloc] initWithFrame:CGRectMake(610, 0, 50, 40)];
+    juinFirstView = [[UIView alloc] initWithFrame:CGRectMake(610, 0, 50, 50)];
     juinFirstView.backgroundColor = [UIColor colorWithWhite:0 alpha:100];
     [agendaScroll addSubview:juinFirstView];
     
-    juilletFirstView = [[UIView alloc] initWithFrame:CGRectMake(670, 0, 50, 40)];
+    juilletFirstView = [[UIView alloc] initWithFrame:CGRectMake(670, 0, 50, 50)];
     juilletFirstView.backgroundColor = [UIColor colorWithWhite:0 alpha:100];
     [agendaScroll addSubview:juilletFirstView];
     
-    aoutFirstView = [[UIView alloc] initWithFrame:CGRectMake(730, 0, 50, 40)];
+    aoutFirstView = [[UIView alloc] initWithFrame:CGRectMake(730, 0, 50, 50)];
     aoutFirstView.backgroundColor = [UIColor colorWithWhite:0 alpha:100];
     [agendaScroll addSubview:aoutFirstView];
     

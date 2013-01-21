@@ -10,15 +10,17 @@
 
 @interface ArtistsLisViewController : UIViewController<UITableViewDataSource, UITableViewDelegate>
 {
-    int artistsIterate, i, nbrArtists;
+    int artistsIterate, i, nbrArtists, j;
     NSMutableArray *artistsList;
 
 }
 
 @property(nonatomic, strong) NSMutableDictionary *sections;
 @property(nonatomic, strong) UITableView *artistsTable;
+@property(nonatomic, strong) UIScrollView *tableMenuScrollView;
 
 -(void)loadArtists;
 -(void)showMenu;
+-(void)createTableMenu;
 
 @end

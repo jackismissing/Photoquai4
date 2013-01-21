@@ -18,6 +18,7 @@
 @implementation ArtistsLisViewController
 @synthesize sections;
 @synthesize artistsTable;
+@synthesize tableMenuScrollView;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -53,16 +54,29 @@
     self.navigationItem.title = @"Artistes";
     //self.navigationItem.tintColor = [UIColor whiteColor];
     
+    // Menu scroll view
+    
+    self.tableMenuScrollView = [[UIScrollView alloc] initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, 50)];
+    [self.tableMenuScrollView setShowsHorizontalScrollIndicator:NO];
+    [self.tableMenuScrollView scrollRectToVisible:CGRectMake(0, 0, self.view.frame.size.width, 50) animated:NO];
+    [self.tableMenuScrollView setDelegate:self];
+    
+    [self.view addSubview:tableMenuScrollView];
+
+    
     artistsList = [[NSMutableArray alloc] init];
     
     self.sections = [[NSMutableDictionary alloc] init];
     
-    self.artistsTable = [[UITableView alloc] initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, self.view.frame.size.height - self.navigationController.navigationBar.frame.size.height) style:UITableViewStylePlain];
+    self.artistsTable = [[UITableView alloc] initWithFrame:CGRectMake(0, self.tableMenuScrollView.frame.size.height, self.view.frame.size.width, self.view.frame.size.height - self.navigationController.navigationBar.frame.size.height - self.tableMenuScrollView.frame.size.height) style:UITableViewStyleGrouped];
     
     self.artistsTable.delegate = self;
     self.artistsTable.dataSource = self;
     
     [self.view addSubview:artistsTable];
+    
+        
+    
 }
 
 -(void)viewWillAppear:(BOOL)animated
@@ -82,6 +96,10 @@
     
     UIBarButtonItem* menuBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:menuButton];
     [self.navigationItem setLeftBarButtonItem:menuBarButtonItem];
+    
+    // Custom menu Scroll View
+    
+    self.tableMenuScrollView.backgroundColor = [UIColor blackColor];
 
 }
 
@@ -167,7 +185,8 @@
         
         [artistsTable reloadData];
         
-        
+        [self createTableMenu];
+                
         return;
         
     }
@@ -232,10 +251,46 @@
     return [[self.sections valueForKey:[[[self.sections allKeys] sortedArrayUsingSelector:@selector(localizedCaseInsensitiveCompare:)] objectAtIndex:section]] count];
 }
 
+// Customize header section
+
+
+- (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section
+{
+    return 30;
+}
+
+
+- (UIView *) tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section
+{
+    UIView *headerView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, tableView.bounds.size.width, 30)];
+    
+    headerView.backgroundColor = [UIColor blackColor];
+    
+    UILabel *headerTitle = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, headerView.frame.size.width, headerView.frame.size.height)];
+    
+    headerTitle.text = [[[self.sections allKeys] sortedArrayUsingSelector:@selector(localizedCaseInsensitiveCompare:)] objectAtIndex:section];
+    
+    headerTitle.textAlignment = UITextAlignmentCenter;
+    
+    headerTitle.font = [UIFont fontWithName:@"Parisine-Bold" size:15];
+    
+    [headerView addSubview:headerTitle];
+    
+    
+    
+    
+    return headerView;
+}
+ 
+ 
+
+/*
 - (NSArray *)sectionIndexTitlesForTableView:(UITableView *)tableView 
 {
     return [[self.sections allKeys] sortedArrayUsingSelector:@selector(localizedCaseInsensitiveCompare:)];
 }
+ 
+ */
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     
@@ -253,8 +308,42 @@
     
     return cell;
 }
- 
- 
+
+-(void)createTableMenu
+{
+    
+    
+    // Navigation menu
+    
+    j = 0;
+    
+    for (NSString *index in [[self.sections allKeys] sortedArrayUsingSelector:@selector(localizedCaseInsensitiveCompare:)])
+    {
+        
+        UIButton *indexButton = [[UIButton alloc] initWithFrame:CGRectMake(j*30, 15, 20, 20)];
+        
+        [indexButton addTarget:self action:@selector(showTable:) forControlEvents:UIControlEventTouchUpInside];
+        
+        // Passing parameter to button
+        indexButton.tag = j;
+        
+        [indexButton setTitle:index forState:UIControlStateNormal];
+        
+        indexButton.titleLabel.font = [UIFont fontWithName:@"Parisine-Bold" size:13];
+        
+        [indexButton setBackgroundColor:[UIColor colorWithWhite:255 alpha:0]];
+        
+        [tableMenuScrollView addSubview:indexButton];
+        
+        j++;
+    }
+    
+    self.tableMenuScrollView.contentSize = CGSizeMake(j*30, 50);
+
+
+}
+
+
 
 
 
