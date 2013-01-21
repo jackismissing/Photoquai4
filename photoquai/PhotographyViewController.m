@@ -413,6 +413,9 @@
             
         case 2:
         {
+            toolBar.locationImage.image = [UIImage imageNamed:@"geoloc-RO"];
+            toolBar.locationLabel.textColor = [UIColor whiteColor];
+
             toolBar.infosImage.image = [UIImage imageNamed:@"informations"];
             toolBar.infosLabel.textColor = [UIColor r:109 g:109 b:109 alpha:1];
             toolBar.audioguideImage.image = [UIImage imageNamed:@"audioguide"];
