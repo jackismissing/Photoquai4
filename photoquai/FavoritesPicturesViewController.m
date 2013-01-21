@@ -86,6 +86,7 @@
     
     for (int imgIterate = 0; imgIterate < [favoritesPictures count]; imgIterate++) {
         xPosition++;
+        NSLog(@"xPosition : %i", xPosition);
         
         if (imgIterate % 2) {
             xPosition = 0;
