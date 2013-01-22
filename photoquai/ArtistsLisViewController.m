@@ -11,6 +11,15 @@
 #import "Reachability.h"
 #import "NavigationViewController.h"
 
+#define NAME_TAG 1
+
+#define FIRSTNAME_TAG 1
+
+#define ARTISTCOVER_TAG 1
+
+#define ARTISTAVATAR_TAG 1
+
+
 @interface ArtistsLisViewController ()
 
 @end
@@ -20,6 +29,12 @@
 @synthesize artistsTable;
 @synthesize tableMenuScrollView;
 @synthesize cellBackground;
+
+@synthesize nameLabel;
+@synthesize firstNameLabel;
+
+@synthesize artistCover;
+@synthesize artistAvatar;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -105,6 +120,8 @@
     // Table View
     
     self.artistsTable.backgroundColor = [UIColor whiteColor];
+    
+
     
     
 
@@ -215,10 +232,18 @@
     
     NSString *lastNameArtist = [[appdelegate getElementsFromJSON:appendLink] valueForKeyPath:@"photographer.lastname"];
     NSString *firstNameArtist = [[appdelegate getElementsFromJSON:appendLink] valueForKeyPath:@"photographer.firstname"];
+    NSString *avatarArtist = [[appdelegate getElementsFromJSON:appendLink] valueForKeyPath:@"photographer.avatar.file.link"];
+    NSString *coverArtist = [[appdelegate getElementsFromJSON:appendLink] valueForKeyPath:@"photographer.cover.file.link"];
+    
+    UIImage *artistAvatarImage = [[UIImage alloc] initWithData:[NSData dataWithContentsOfURL:[NSURL URLWithString:avatarArtist]]];
+    
+    UIImage *artistCoverImage = [[UIImage alloc] initWithData:[NSData dataWithContentsOfURL:[NSURL URLWithString:coverArtist]]];
     
         
-    NSDictionary *artistInfos = [[NSDictionary alloc] initWithObjectsAndKeys:(id)idArtist, @"artistId", lastNameArtist, @"artistName", firstNameArtist, @"artistFirstName", nil];
+    NSDictionary *artistInfos = [[NSDictionary alloc] initWithObjectsAndKeys:(id)idArtist, @"artistId", lastNameArtist, @"artistName", firstNameArtist, @"artistFirstName", artistAvatarImage, @"artistAvatar", artistCoverImage, @"artistCover", nil];
     
+    NSLog(@"%@", avatarArtist);
+    NSLog(@"%@", coverArtist);
     
     
     // Add single artist infos to NSMutableArray
@@ -304,6 +329,16 @@
 
 #pragma mark - Table willDisplay cell
 
+
+
+#pragma mark - Table view cell height
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    return 100;
+    
+    
+}
+
 - (void)tableView:(UITableView *)tableView willDisplayCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath
 {
     
@@ -318,19 +353,13 @@
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     
+    NSDictionary *artistInfos = [[self.sections valueForKey:[[[self.sections allKeys] sortedArrayUsingSelector:@selector(localizedCaseInsensitiveCompare:)] objectAtIndex:indexPath.section]] objectAtIndex:indexPath.row];
+    
     static NSString *CellIdentifier = @"Cell";
     
-    UITableViewCell *cell = [artistsTable dequeueReusableCellWithIdentifier:CellIdentifier];
-    if (cell == nil) {
-        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:CellIdentifier];
-    }
-        /*
-    UILabel *mainLabel, *numberLabel;
-    UIImageView *separatorImage;
+    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
     
-    UITableViewCell *cell;
-    
-    cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
+       
     
     if (cell == nil) {
         
@@ -338,72 +367,93 @@
         
         // Custon disclosure
         
-        
-        
-        
         cell.accessoryView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"disclosure.png"]];  ;
         
-        // Création du label principal de chaque cellule
         
-        mainLabel = [[UILabel alloc] initWithFrame:CGRectMake(65, cell.frame.size.height / 2 - 9, 175, 18)];
         
-        mainLabel.tag = MAINLABEL_TAG;
+        // Création du label firstname de chaque cellule
         
-        mainLabel.font = [UIFont fontWithName:@"Parisine-Bold" size:18];
+        firstNameLabel = [[UILabel alloc] initWithFrame:CGRectMake(120, cell.frame.size.height / 2 - 9, 100, 18)];
         
-        mainLabel.textColor = [UIColor whiteColor];
+        firstNameLabel.tag = FIRSTNAME_TAG;
         
-        mainLabel.backgroundColor = [UIColor colorWithWhite:255 alpha:0];
+        firstNameLabel.font = [UIFont fontWithName:@"Parisine-Bold" size:15];
         
-        [cell.contentView addSubview:mainLabel];
+        firstNameLabel.textColor = [UIColor blackColor];
         
-        // Image séparant le numéro de cellule du label
+        firstNameLabel.backgroundColor = [UIColor colorWithWhite:255 alpha:0];
         
-        separatorImage = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"infosLabelSeparator.png"]];
+        [cell.contentView addSubview:firstNameLabel];
         
-        separatorImage.frame = CGRectMake(42, cell.frame.size.height / 2 - separatorImage.frame.size.height / 2, separatorImage.frame.size.width, separatorImage.frame.size.height);
+        // Création du label name de chaque cellule
         
-        separatorImage.tag = SEPARATORIMAGE_TAG;
+        nameLabel = [[UILabel alloc] initWithFrame:CGRectMake(120 + firstNameLabel.frame.size.width, cell.frame.size.height / 2 - 9, 100, 18)];
         
-        [cell.contentView addSubview:separatorImage];
+        nameLabel.tag = NAME_TAG;
         
-        // Label numéro de cellule
+        nameLabel.font = [UIFont fontWithName:@"Parisine-Bold" size:15];
         
-        numberLabel = [[UILabel alloc] initWithFrame:CGRectMake(15, cell.frame.size.height / 2 - 9, 20, 18)];
+        nameLabel.textColor = [UIColor blackColor];
         
-        numberLabel.tag = NUMBERLABEL_TAG;
+        nameLabel.backgroundColor = [UIColor colorWithWhite:255 alpha:0];
         
-        numberLabel.font = [UIFont fontWithName:@"Parisine-Italic" size:18];
+        [cell.contentView addSubview:nameLabel];
         
-        numberLabel.textColor = [UIColor whiteColor];
+        // Artist Cover
         
-        numberLabel.backgroundColor = [UIColor colorWithWhite:255 alpha:0];
+        artistCover = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, cell.frame.size.width, cell.frame.size.height/2)];
         
-        [cell.contentView addSubview:numberLabel];
+        
+        
+        
+        [cell.contentView addSubview:artistCover];
+        
+        // Artist avatar
+        
+         artistAvatar = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, 100, 100)];
+        
+        
+        
+        //[artistAvatar setImage:[artistInfos objectForKey:@"artistAvatar"]];
+        
+        [cell.contentView addSubview:artistAvatar];
+        
         
     } else {
         
-        mainLabel = (UILabel *)[cell.contentView viewWithTag:MAINLABEL_TAG];
+        nameLabel = (UILabel *)[cell.contentView viewWithTag:NAME_TAG];
         
-        artistImage = (UIImageView *)[cell.contentView viewWithTag:SEPARATORIMAGE_TAG];
+        firstNameLabel = (UILabel *)[cell.contentView viewWithTag:FIRSTNAME_TAG];
         
-        artistCountry = (UILabel *)[cell.contentView viewWithTag:NUMBERLABEL_TAG];
+      
+        
+       
         
     }
 
     
-    NSDictionary *artistInfos = [[self.sections valueForKey:[[[self.sections allKeys] sortedArrayUsingSelector:@selector(localizedCaseInsensitiveCompare:)] objectAtIndex:indexPath.section]] objectAtIndex:indexPath.row];
+    //[artistAvatar setImage:[artistInfos objectForKey:@"artistAvatar"]];
     
-    mainLabel.text = [artistInfos objectForKey:@"artistName"];
-    artistCountry.text = [artistInfos objectForKey:@"artistFirstName"];
+    artistAvatar.image = [artistInfos objectForKey:@"artistAvatar"];
     
-    */
-        
-        NSDictionary *artistInfos = [[self.sections valueForKey:[[[self.sections allKeys] sortedArrayUsingSelector:@selector(localizedCaseInsensitiveCompare:)] objectAtIndex:indexPath.section]] objectAtIndex:indexPath.row];
-        
-        cell.textLabel.text = [artistInfos objectForKey:@"artistName"];
-        cell.detailTextLabel.text = [artistInfos objectForKey:@"artistFirstName"];
+        artistCover.image = [artistInfos objectForKey:@"artistCover"];
+    
+    nameLabel.text = [artistInfos objectForKey:@"artistName"];
+    firstNameLabel.text = [artistInfos objectForKey:@"artistFirstName"];
+    
+    // Artist Cover
+    
+    
+    //[artistCover setImage:[[UIImage alloc] initWithData:[NSData dataWithContentsOfURL:[NSURL URLWithString:[artistInfos objectForKey:@"artistCover"]]]]];
+    
 
+    
+    //[artistAvatar setImage:[artistInfos objectForKey:@"artistAvatar"]];
+    
+    /*
+    
+    [artistAvatar setImage:[[UIImage alloc] initWithData:[NSData dataWithContentsOfURL:[NSURL URLWithString:[artistInfos objectForKey:@"artistAvatar"]]]]];
+     */
     
     cell.backgroundView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, cell.frame.size.width, cell.frame.size.height)];
     
@@ -413,6 +463,8 @@
     
     return cell;
 }
+
+
 
 -(void)createTableMenu
 {
