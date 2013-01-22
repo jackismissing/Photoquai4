@@ -16,6 +16,7 @@
 #import "ToolBarPhotography.h"
 #import "AudioImageView.h"
 #import "CustomPopOver.h"
+#import "FavoriteIndicator.h"
 
 @class AudioImageView;
 

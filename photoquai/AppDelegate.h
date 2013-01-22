@@ -9,6 +9,7 @@
 #import <UIKit/UIKit.h>
 #import "Reachability.h" //Permet de savoir si on est connecté ou non à Internet
 #import "PhotographyViewController.h"
+#import "FavoriteIndicator.h"
 
 @class ViewController;
 

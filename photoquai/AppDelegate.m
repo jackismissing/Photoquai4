@@ -171,6 +171,15 @@
     [UIView commitAnimations];
 }
 
+- (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
+{
+    if (buttonIndex == 0) {
+        NSLog(@"THE 'NO' BUTTON WAS PRESSED");
+    }
+    if (buttonIndex == 1) {
+        NSLog(@"THE 'YES' BUTTON WAS PRESSED");
+    }
+}
 
 
 @end

@@ -9,8 +9,6 @@
 
 #import "PhotographyViewController.h"
 
-
-
 @interface PhotographyViewController ()
 
 @end
@@ -144,7 +142,7 @@
     [self.view addSubview:descriptionPhotography];
     
     UITapGestureRecognizer *singleTap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(hideNavigation)];
-    [picture addGestureRecognizer:singleTap];
+    //[picture addGestureRecognizer:singleTap];
 
     elementsNavigationAreHidden = NO; //Par défaut les élements de navigation ne sont pas affichés
     
@@ -191,6 +189,10 @@
                               message:@"L'image a été ajoutée à vos favoris"
                               delegate:self
                               cancelButtonTitle:@"OK" otherButtonTitles:nil];
+        //FavoriteIndicator *favoriteIndicator = [[FavoriteIndicator alloc] initWithFrame:CGRectMake(0, 0, 320, 540)];
+        
+        //[self.view addSubview:favoriteIndicator];
+        //[favoriteIndicator show];
         
         [favouriteButton setImage:[UIImage imageNamed:@"etoilejaune"] forState:UIControlStateNormal];
         
