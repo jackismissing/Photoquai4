@@ -51,15 +51,10 @@
     // Add cancel button
     
     UIButton *cancelBtn = [[UIButton alloc] initWithFrame:CGRectMake(20, 250, 150, 20)];
-    
     [cancelBtn addTarget:self action:@selector(dismissPage) forControlEvents:UIControlEventTouchUpInside];
-    
     [cancelBtn setTitle:@"Annuler" forState:UIControlStateNormal];
-    
     [cancelBtn setBackgroundColor:[UIColor redColor]];
-    
     [self.view addSubview:cancelBtn];
-    
 }
 
 
@@ -74,9 +69,7 @@
     
     
     self.sectorLabel.text = newValue;
-    
-    
-    
+
     if(selectedSection == 1) {
         
         //NSLog(@"test");

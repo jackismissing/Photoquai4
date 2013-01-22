@@ -16,6 +16,7 @@
     int width;
     int x;
     int y;
+    
 }
 
 - (id)initWithFrame:(CGRect)frame imageURL: (NSString*)aImageName colonne:(NSNumber*)colonne;
@@ -26,6 +27,7 @@
 - (int) x;
 - (int) y;
 - (NSNumber *)idColonne;
+
 
 
 @end

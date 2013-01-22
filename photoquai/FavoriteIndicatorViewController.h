@@ -1,5 +1,6 @@
 //
-//  FavoriteIndicator.h
+//  FavoriteIndicatorViewController.h
+
 //  photoquai
 //
 //  Created by Jean-Louis Danielo on 21/01/13.
@@ -11,7 +12,7 @@
 
 #import "UIColor+RVB255.h"
 
-@interface FavoriteIndicator : UIView{
+@interface FavoriteIndicatorViewController : UIViewController{
     //UILabel *message;
     UIView *content;
     UIView *arrow;
@@ -24,5 +25,7 @@
 
 
 @property (nonatomic, strong) UILabel *message;
+
+
 
 @end

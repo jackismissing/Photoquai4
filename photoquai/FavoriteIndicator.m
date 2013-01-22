@@ -20,6 +20,7 @@
         
         self.userInteractionEnabled = YES;
         self.clipsToBounds = YES;
+        self.alpha = 1;
         self.frame = CGRectMake(0, 0, frame.size.width, frame.size.height);
         
         UIView *background = [[UIView alloc] initWithFrame:CGRectMake(0, 0, self.frame.size.width, self.frame.size.height)];
@@ -29,12 +30,13 @@
         
         [self addSubview:background];
         
-        content = [[UIView alloc] initWithFrame:CGRectMake(0, 7, screenWidth * .8, 130)];
+        content = [[UIView alloc] initWithFrame:CGRectMake(0, 9, screenWidth * .8, 130)];
         content.frame = CGRectMake((screenWidth - content.frame.size.width) / 2, 7, screenWidth * .8, 130);
         content.backgroundColor = [UIColor whiteColor];
         content.layer.cornerRadius = 3;
-        content.clipsToBounds = YES;
+        //content.clipsToBounds = YES;
         content.userInteractionEnabled = YES;
+        content.alpha = 0;
         
         
         CALayer *bottomBorder = [CALayer layer];
@@ -43,12 +45,13 @@
         bottomBorder.backgroundColor = [UIColor r:215 g:26 b:33 alpha:1.0f].CGColor;
         [content.layer addSublayer:bottomBorder];
         
-        UIView *arrow = [[UIView alloc] initWithFrame:CGRectMake(content.frame.size.width - 20, 7, 33, 30)];
+        arrow = [[UIView alloc] initWithFrame:CGRectMake(content.frame.size.width - 53, 0, 33, 30)];
         arrow.backgroundColor = [UIColor whiteColor];
         // Rotate 90 degrees to hide it off screen
         CGAffineTransform rotationTransform = CGAffineTransformIdentity;
         rotationTransform = CGAffineTransformRotate(rotationTransform, 40);
         arrow.transform = rotationTransform;
+        arrow.alpha = 0;
         
         [content addSubview:arrow];
         [self addSubview:content];
@@ -113,29 +116,31 @@
 */
 
 - (void) hide{
-    NSLog(@"okrefr");
-    [UIView animateWithDuration:0.5
+    [UIView animateWithDuration:0.25
                           delay:0
-                        options: UIViewAnimationCurveEaseOut
+                        options: UIViewAnimationOptionCurveLinear
                      animations:^{
                          
                          content.transform = CGAffineTransformMakeScale(.1, .1);
                          content.alpha = 0;
+                         arrow.alpha = 0;
                      }completion:^(BOOL finished){
-                         [content removeFromSuperview];
+                         [self removeFromSuperview];
                      }];
 }
 
 - (void) show{
     
-    [UIView animateWithDuration:0.5
+    [UIView animateWithDuration:0.25
                           delay:0
-                        options: UIViewAnimationCurveEaseOut
+                        options: UIViewAnimationCurveEaseIn
                      animations:^{
                          
                          content.transform = CGAffineTransformMakeScale(1, 1);
-                     }completion:^(BOOL finished){
                          content.alpha = 1;
+                         arrow.alpha = 1;
+                     }completion:^(BOOL finished){
+                         
                      }];
 }
 

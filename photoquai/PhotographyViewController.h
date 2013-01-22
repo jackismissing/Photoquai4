@@ -17,6 +17,7 @@
 #import "AudioImageView.h"
 #import "CustomPopOver.h"
 #import "FavoriteIndicator.h"
+#import "FavoriteIndicatorViewController.h"
 
 @class AudioImageView;
 

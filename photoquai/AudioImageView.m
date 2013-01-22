@@ -247,4 +247,9 @@
     }
 }
 
+- (void)audioPlayerDidFinishPlaying:(AVAudioPlayer *)player successfully:(BOOL)flag{
+    soundIsPlayed = NO;
+    playPauseButtonImage.image = [UIImage imageNamed:@"playrouge"];
+}
+
 @end

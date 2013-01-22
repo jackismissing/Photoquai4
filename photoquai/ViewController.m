@@ -54,6 +54,7 @@
     myScrollView.showsHorizontalScrollIndicator = NO;
     myScrollView.showsVerticalScrollIndicator = NO;
     myScrollView.delegate = self;
+    //myScrollView.contentSize = CGSizeMake(130 * 5, 2000);
     myScrollView.autoresizesSubviews = YES;
     myScrollView.minimumZoomScale = 0.5;
     myScrollView.maximumZoomScale = 5.0;
@@ -129,6 +130,8 @@
 - (void) loadImageWall{
     AppDelegate *appdelegate = [[UIApplication sharedApplication] delegate];
     
+    int randomAnimate = (arc4random() % 2);
+    
     
     if (i >= nbrPictures) return;
     
@@ -178,7 +181,8 @@
     int height = [imageWallElement height];
     int width = [imageWallElement width];
     
-    imageWallElement.frame = CGRectMake(((width + 5) * xPosition + 5), yPosition - 10, width, height);
+    imageWallElement.frame = CGRectMake(((width + 5) * xPosition + 5), yPosition - 10, width, height); //L'image vient du haut
+    
     imageWallElement.clipsToBounds = YES;
     imageWallElement.tag = idPicture;
     
@@ -202,6 +206,7 @@
     [UIView setAnimationDelegate:imageWallElement];
     imageWallElement.alpha = 1.0;
     imageWallElement.frame = CGRectMake(((width + 5) * xPosition + 5), yPosition, width, height);
+    
     [UIView commitAnimations];
     
     if (i != 0) { //Ne place pas l'écouteur d'évènement du clic sur la première image, celle du logo PHQ
@@ -238,7 +243,9 @@
     
     [myScrollView addSubview:thumbsContainer];
     
-    thumbsContainer.frame = CGRectMake(0, 0, totalWidth, heightMax);
+    thumbsContainer.frame = CGRectMake(0, 0, totalWidth, heightMax + 21);
+    
+    NSLog(@"%i", heightMax);
     
     [myScrollView setContentSize:CGSizeMake(totalWidth, heightMax + 21)];
     //Place le catalogue à une valeur aléatoire

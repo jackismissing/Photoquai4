@@ -120,9 +120,16 @@
     appendLink = [appendLink stringByAppendingString:@".json"];
     
     NSInteger idPicture = [[[appdelegate getElementsFromJSON:appendLink] valueForKeyPath:@"picture.id"] integerValue];
+    NSInteger idPhotographer = [[[appdelegate getElementsFromJSON:appendLink] valueForKeyPath:@"picture.photographer.id"] integerValue];
     linkImg = [[appdelegate getElementsFromJSON:appendLink] valueForKeyPath:@"picture.link_iphone"];
     
-    NSLog(@"%@", linkImg);
+    NSString *appendLinkPhotographer = @"http://phq.cdnl.me/api/fr/photographers/";
+    appendLinkPhotographer = [appendLinkPhotographer stringByAppendingString:[NSString stringWithFormat:@"%d", idPhotographer]];
+    appendLinkPhotographer = [appendLinkPhotographer stringByAppendingString:@".json"];
+    
+    NSLog(@"%@", [[appdelegate getElementsFromJSON:appendLinkPhotographer] valueForKeyPath:@"picture.link_iphone.commissioner"]);
+    
+
     
     CGRect screenRect = [[UIScreen mainScreen] bounds];
     CGFloat screenWidth = screenRect.size.width;
@@ -184,34 +191,43 @@
         [defaults setObject:favoritesImages forKey:@"favorisImages"];
         [defaults synchronize];
         
-        UIAlertView *alert = [[UIAlertView alloc]
+        /*UIAlertView *alert = [[UIAlertView alloc]
                               initWithTitle:nil
                               message:@"L'image a été ajoutée à vos favoris"
                               delegate:self
-                              cancelButtonTitle:@"OK" otherButtonTitles:nil];
-        //FavoriteIndicator *favoriteIndicator = [[FavoriteIndicator alloc] initWithFrame:CGRectMake(0, 0, 320, 540)];
+                              cancelButtonTitle:@"OK" otherButtonTitles:nil];*/
+        FavoriteIndicator *favoriteIndicator = [[FavoriteIndicator alloc] initWithFrame:CGRectMake(0, 0, 320, 540)];
         
-        //[self.view addSubview:favoriteIndicator];
-        //[favoriteIndicator show];
+        [self.view addSubview:favoriteIndicator];
+        [favoriteIndicator show];
+        
+        
         
         [favouriteButton setImage:[UIImage imageNamed:@"etoilejaune"] forState:UIControlStateNormal];
         
-        [alert show];
+        //[alert show];
     }else{
         [favoritesImages removeObject:idPicture];
         NSLog(@"%@", favoritesImages);
         [defaults setObject:favoritesImages forKey:@"favorisImages"];
         [defaults synchronize];
         
-        UIAlertView *alert = [[UIAlertView alloc]
-                              initWithTitle:nil
-                              message:@"L'image a été supprimée de vos favoris"
-                              delegate:self
-                              cancelButtonTitle:@"OK" otherButtonTitles:nil];
+        FavoriteIndicator *favoriteIndicator = [[FavoriteIndicator alloc] initWithFrame:CGRectMake(0, 0, 320, 540)];
+        
+        favoriteIndicator.message.text = @"L'image a été supprimée de vos favoris";
+        [self.view addSubview:favoriteIndicator];
+        [favoriteIndicator show];
+ 
+        
+//        UIAlertView *alert = [[UIAlertView alloc]
+//                              initWithTitle:nil
+//                              message:@"L'image a été supprimée de vos favoris"
+//                              delegate:self
+//                              cancelButtonTitle:@"OK" otherButtonTitles:nil];
         
         [favouriteButton setImage:[UIImage imageNamed:@"etoilepush"] forState:UIControlStateNormal];
         
-        [alert show];
+        //[alert show];
     }
 }
 
