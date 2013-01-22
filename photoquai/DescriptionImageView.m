@@ -13,7 +13,7 @@
 
 @implementation DescriptionImageView
 
-- (id)initWithFrame:(CGRect)frame description:(NSString*)aDescription title:(NSString*)aTitle place:(NSString*)aPlace{
+- (id)initWithFrame:(CGRect)frame description:(NSString*)aDescription title:(NSString*)aTitle place:(NSString*)aPlace withId:(int)anId{
     
     self = [super initWithFrame:frame];
     if (self) {
@@ -77,7 +77,7 @@
         [_photographyDatas addSubview:greyLine];
         
 
-        PhotographerVignette *photographerVignette = [[PhotographerVignette alloc] initWithFrame:CGRectMake(25, greyLineY + 20, greyLine.frame.size.width, 90) withId:5];
+        PhotographerVignette *photographerVignette = [[PhotographerVignette alloc] initWithFrame:CGRectMake(25, greyLineY + 20, greyLine.frame.size.width, 90) withId:anId];
         photographerVignette.userInteractionEnabled = YES;
         [_photographyDatas addSubview:photographerVignette];
         

@@ -10,8 +10,17 @@
 
 @interface PhotographerVignette : UIView {
     UIImageView *imageView;
+    
+    NSString *lastname;
+    NSString *firstname;
 }
 
 - (id)initWithFrame:(CGRect)frame withId:(int)anId;
+
+- (NSString*) lastname;
+- (NSString*) firstname;
+
+- (void) setLastname:(NSString*)lastname;
+- (void) setFirstname:(NSString*)firstname;
 
 @end

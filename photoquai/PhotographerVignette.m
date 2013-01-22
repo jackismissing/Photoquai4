@@ -31,11 +31,19 @@
         appendLink = [appendLink stringByAppendingString:[NSString stringWithFormat:@"%d", anId]];
         appendLink = [appendLink stringByAppendingString:@".json"];
         
-        NSString *linkImg = [[appdelegate getElementsFromJSON:appendLink] valueForKeyPath:@"photographer"];
+        NSLog(@"photovignette: %i", anId);
+        
+        //NSString *linkImg = [[appdelegate getElementsFromJSON:appendLink] valueForKeyPath:@"photographer"];
         NSString *imgPhotographer = [[appdelegate getElementsFromJSON:appendLink] valueForKeyPath:@"photographer.link_iphone"];
-        //NSLog(@"%@", linkImg);
         
         
+        NSString *firstnamePhotographer = [[appdelegate getElementsFromJSON:appendLink] valueForKeyPath:@"photographer.firstname"];
+        NSString *lastnamePhotographer = [[appdelegate getElementsFromJSON:appendLink] valueForKeyPath:@"photographer.lastname"];
+        NSString *patronymPhotographer = [[NSString alloc] initWithString:firstnamePhotographer];
+        patronymPhotographer = [patronymPhotographer stringByAppendingString:@" "];
+        patronymPhotographer = [patronymPhotographer stringByAppendingString:lastnamePhotographer];
+        
+
         imageView = [[UIImageView alloc] init];
         
         imageView.opaque = YES;
@@ -59,7 +67,7 @@
         
         float photographerPatronymX = imageView.frame.origin.x + imageView.frame.size.width + 13;
         UILabel *photographerPatronym = [[UILabel alloc] initWithFrame:CGRectMake(photographerPatronymX, 25, 25, 15)];
-        photographerPatronym.text = @"Holden Caulfield";
+        photographerPatronym.text = patronymPhotographer;
         photographerPatronym.font = [UIFont fontWithName:@"Parisine-Bold" size:12.0];
         [photographerPatronym sizeToFit];
         //titre.adjustsFontSizeToFitWidth = YES;
@@ -106,6 +114,22 @@
         [[imgView layer] setMask:[CAShapeLayer layer]];
     
     [(CAShapeLayer*) [[imgView layer] mask] setPath:[clippingPath CGPath]];
+}
+
+- (NSString*) lastname{
+    return lastname;
+}
+
+- (NSString*) firstname{
+    return firstname;
+}
+
+- (void) setLastname:(NSString*)aLastname{
+    lastname = aLastname;
+}
+
+- (void) setFirstname:(NSString*)aFirstname{
+    firstname = aFirstname;
 }
 
 

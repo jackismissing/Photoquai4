@@ -8,6 +8,8 @@
 
 #import <UIKit/UIKit.h>
 
+#import "PhotographerVignette.h"
+
 @interface DescriptionImageView : UIView <UIScrollViewDelegate>{
     
     NSString *title;
@@ -21,8 +23,9 @@
 
 @property (nonatomic, strong) UIScrollView *photographyDatas;
 
+
 //Constructeur
-- (id)initWithFrame:(CGRect)frame description:(NSString*)aDescription title:(NSString*)aTitle place:(NSString*)aPlace;
+- (id)initWithFrame:(CGRect)frame description:(NSString*)aDescription title:(NSString*)aTitle place:(NSString*)aPlace withId:(int)anId;
 
 //Getters
 - (NSString *) title;

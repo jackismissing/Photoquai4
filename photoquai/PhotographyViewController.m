@@ -123,11 +123,7 @@
     NSInteger idPhotographer = [[[appdelegate getElementsFromJSON:appendLink] valueForKeyPath:@"picture.photographer.id"] integerValue];
     linkImg = [[appdelegate getElementsFromJSON:appendLink] valueForKeyPath:@"picture.link_iphone"];
     
-    NSString *appendLinkPhotographer = @"http://phq.cdnl.me/api/fr/photographers/";
-    appendLinkPhotographer = [appendLinkPhotographer stringByAppendingString:[NSString stringWithFormat:@"%d", idPhotographer]];
-    appendLinkPhotographer = [appendLinkPhotographer stringByAppendingString:@".json"];
     
-    NSLog(@"%@", [[appdelegate getElementsFromJSON:appendLinkPhotographer] valueForKeyPath:@"picture.link_iphone.commissioner"]);
     
 
     
@@ -143,7 +139,7 @@
     NSString *descriptionTextPhotography = @"Lorem ipsum dolor sit amet, consectetur adipiscing elit. In euismod leo at mi posuere mollis. Morbi lacinia, felis ac ultrices auctor, magna sem tempus mi, nec blandit felis purus ut metus. Donec dolor mauris, eleifend id fermentum eu, placerat eget felis. Proin suscipit bibendum tincidunt.";
     NSString *titleTextPhotography = @"Gangnam Style";
     
-    descriptionPhotography = [[DescriptionImageView alloc] initWithFrame:CGRectMake(0, 500, 320, 500) description:descriptionTextPhotography title:titleTextPhotography place:@"Maroc"];
+    descriptionPhotography = [[DescriptionImageView alloc] initWithFrame:CGRectMake(0, 500, 320, 500) description:descriptionTextPhotography title:titleTextPhotography place:@"Maroc" withId:idPhotographer];
     descriptionPhotography.userInteractionEnabled = YES;
     //[descriptionPhotography setUserInteractionEnabled:YES];
     [self.view addSubview:descriptionPhotography];

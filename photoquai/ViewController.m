@@ -245,7 +245,7 @@
     
     thumbsContainer.frame = CGRectMake(0, 0, totalWidth, heightMax + 21);
     
-    NSLog(@"%i", heightMax);
+    
     
     [myScrollView setContentSize:CGSizeMake(totalWidth, heightMax + 21)];
     //Place le catalogue à une valeur aléatoire
