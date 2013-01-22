@@ -77,6 +77,7 @@
 		1ACACF3816A804050060DA49 /* Parisine-Italic.otf in Resources */ = {isa = PBXBuildFile; fileRef = 1ACACF3416A804050060DA49 /* Parisine-Italic.otf */; };
 		1ACACF3916A804050060DA49 /* Parisine-Regular.otf in Resources */ = {isa = PBXBuildFile; fileRef = 1ACACF3516A804050060DA49 /* Parisine-Regular.otf */; };
 		1ADCFE4616AF3CB80088A4C5 /* FavoriteIndicatorViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1ADCFE4516AF3CB70088A4C5 /* FavoriteIndicatorViewController.m */; };
+		1ADCFE4A16AF4A5B0088A4C5 /* CustomAlertView.m in Sources */ = {isa = PBXBuildFile; fileRef = 1ADCFE4916AF4A5B0088A4C5 /* CustomAlertView.m */; };
 		1ADF100D16AAF0B700C2ADD2 /* DrawRect.m in Sources */ = {isa = PBXBuildFile; fileRef = 1ADF100C16AAF0B700C2ADD2 /* DrawRect.m */; };
 		1AEEF43D16ADDEE900489C08 /* ArtistsLisViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1AEEF43C16ADDEE900489C08 /* ArtistsLisViewController.m */; };
 		1AEEF44416ADE11000489C08 /* audioguide-over.png in Resources */ = {isa = PBXBuildFile; fileRef = 1AEEF44016ADE10F00489C08 /* audioguide-over.png */; };
@@ -231,6 +232,8 @@
 		1ACACF3516A804050060DA49 /* Parisine-Regular.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Parisine-Regular.otf"; sourceTree = "<group>"; };
 		1ADCFE4416AF3CB70088A4C5 /* FavoriteIndicatorViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FavoriteIndicatorViewController.h; sourceTree = "<group>"; };
 		1ADCFE4516AF3CB70088A4C5 /* FavoriteIndicatorViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FavoriteIndicatorViewController.m; sourceTree = "<group>"; };
+		1ADCFE4816AF4A5B0088A4C5 /* CustomAlertView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CustomAlertView.h; sourceTree = "<group>"; };
+		1ADCFE4916AF4A5B0088A4C5 /* CustomAlertView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CustomAlertView.m; sourceTree = "<group>"; };
 		1ADF100B16AAF0B700C2ADD2 /* DrawRect.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DrawRect.h; sourceTree = "<group>"; };
 		1ADF100C16AAF0B700C2ADD2 /* DrawRect.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DrawRect.m; sourceTree = "<group>"; };
 		1AEEF43B16ADDEE900489C08 /* ArtistsLisViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ArtistsLisViewController.h; sourceTree = "<group>"; };
@@ -688,6 +691,8 @@
 				1AEEF48E16ADF4A600489C08 /* FavoriteIndicator.m */,
 				1ADCFE4416AF3CB70088A4C5 /* FavoriteIndicatorViewController.h */,
 				1ADCFE4516AF3CB70088A4C5 /* FavoriteIndicatorViewController.m */,
+				1ADCFE4816AF4A5B0088A4C5 /* CustomAlertView.h */,
+				1ADCFE4916AF4A5B0088A4C5 /* CustomAlertView.m */,
 			);
 			name = FavoriteIndicator;
 			sourceTree = "<group>";
@@ -1005,6 +1010,7 @@
 				1AEEF43D16ADDEE900489C08 /* ArtistsLisViewController.m in Sources */,
 				1AEEF48F16ADF4A600489C08 /* FavoriteIndicator.m in Sources */,
 				1ADCFE4616AF3CB80088A4C5 /* FavoriteIndicatorViewController.m in Sources */,
+				1ADCFE4A16AF4A5B0088A4C5 /* CustomAlertView.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

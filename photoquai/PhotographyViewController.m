@@ -145,7 +145,7 @@
     [self.view addSubview:descriptionPhotography];
     
     UITapGestureRecognizer *singleTap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(hideNavigation)];
-    //[picture addGestureRecognizer:singleTap];
+    [picture addGestureRecognizer:singleTap];
 
     elementsNavigationAreHidden = NO; //Par défaut les élements de navigation ne sont pas affichés
     
@@ -187,32 +187,37 @@
         [defaults setObject:favoritesImages forKey:@"favorisImages"];
         [defaults synchronize];
         
-        /*UIAlertView *alert = [[UIAlertView alloc]
+        CustomAlertView *alert = [[CustomAlertView alloc]
                               initWithTitle:nil
                               message:@"L'image a été ajoutée à vos favoris"
                               delegate:self
-                              cancelButtonTitle:@"OK" otherButtonTitles:nil];*/
-        FavoriteIndicator *favoriteIndicator = [[FavoriteIndicator alloc] initWithFrame:CGRectMake(0, 0, 320, 540)];
-        
-        [self.view addSubview:favoriteIndicator];
-        [favoriteIndicator show];
-        
-        
+                              cancelButtonTitle:@"OK" otherButtonTitles:@"Favoris", nil];
+//        FavoriteIndicator *favoriteIndicator = [[FavoriteIndicator alloc] initWithFrame:CGRectMake(0, 0, 320, 540)];
+//        
+//        [self.view addSubview:favoriteIndicator];
+//        [favoriteIndicator show];
         
         [favouriteButton setImage:[UIImage imageNamed:@"etoilejaune"] forState:UIControlStateNormal];
         
-        //[alert show];
+        [alert show];
     }else{
         [favoritesImages removeObject:idPicture];
         NSLog(@"%@", favoritesImages);
         [defaults setObject:favoritesImages forKey:@"favorisImages"];
         [defaults synchronize];
         
-        FavoriteIndicator *favoriteIndicator = [[FavoriteIndicator alloc] initWithFrame:CGRectMake(0, 0, 320, 540)];
+        //FavoriteIndicator *favoriteIndicator = [[FavoriteIndicator alloc] initWithFrame:CGRectMake(0, 0, 320, 540)];
         
-        favoriteIndicator.message.text = @"L'image a été supprimée de vos favoris";
-        [self.view addSubview:favoriteIndicator];
-        [favoriteIndicator show];
+        //favoriteIndicator.message.text = @"L'image a été supprimée de vos favoris";
+        //[self.view addSubview:favoriteIndicator];
+        //[favoriteIndicator show];
+        
+        CustomAlertView *alert = [[CustomAlertView alloc]
+                                  initWithTitle:nil
+                                  message:@"L'image a été supprimée de vos favoris"
+                                  delegate:self
+                                  cancelButtonTitle:@"OK" otherButtonTitles:@"Favoris", nil];
+        [alert show];
  
         
 //        UIAlertView *alert = [[UIAlertView alloc]
@@ -224,6 +229,15 @@
         [favouriteButton setImage:[UIImage imageNamed:@"etoilepush"] forState:UIControlStateNormal];
         
         //[alert show];
+    }
+}
+
+- (void)alertView:(UIAlertView *)alertView didDismissWithButtonIndex:(NSInteger)buttonIndex
+{
+    if (buttonIndex == 1)
+    {
+        NSLog(@"Reply");
+        
     }
 }
 

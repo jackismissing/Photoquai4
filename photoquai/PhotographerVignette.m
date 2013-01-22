@@ -31,11 +31,10 @@
         appendLink = [appendLink stringByAppendingString:[NSString stringWithFormat:@"%d", anId]];
         appendLink = [appendLink stringByAppendingString:@".json"];
         
-        NSLog(@"photovignette: %i", anId);
         
-        //NSString *linkImg = [[appdelegate getElementsFromJSON:appendLink] valueForKeyPath:@"photographer"];
-        NSString *imgPhotographer = [[appdelegate getElementsFromJSON:appendLink] valueForKeyPath:@"photographer.link_iphone"];
+        NSString *imgPhotographer = [[appdelegate getElementsFromJSON:appendLink] valueForKeyPath:@"photographer.cover.link_thumbnail9784"];
         
+        NSLog(@"%@", imgPhotographer);
         
         NSString *firstnamePhotographer = [[appdelegate getElementsFromJSON:appendLink] valueForKeyPath:@"photographer.firstname"];
         NSString *lastnamePhotographer = [[appdelegate getElementsFromJSON:appendLink] valueForKeyPath:@"photographer.lastname"];
@@ -52,7 +51,7 @@
         imageView.contentMode = UIViewContentModeRedraw;
         imageView.frame = CGRectMake(10, 10, 75, 75);
         imageView.backgroundColor = [UIColor cyanColor];
-        [imageView setImageWithURL:[NSURL URLWithString:@"http://phq.cdnl.me/media/cache/iphone/data/images/haj-0.jpg"] placeholderImage:[UIImage imageNamed:@"navigationBar"]];
+        [imageView setImageWithURL:[NSURL URLWithString:imgPhotographer] placeholderImage:[UIImage imageNamed:@"navigationBar"]];
         imageView.layer.shadowColor = [UIColor purpleColor].CGColor;
         imageView.layer.shadowOffset = CGSizeMake(0, 1);
         imageView.layer.shadowOpacity = 1;

@@ -10,10 +10,11 @@
 #import "Reachability.h" //Permet de savoir si on est connecté ou non à Internet
 #import "PhotographyViewController.h"
 #import "FavoriteIndicator.h"
+#import "CustomAlertView.h"
 
 @class ViewController;
 
-@interface AppDelegate : UIResponder <UIApplicationDelegate>{
+@interface AppDelegate : UIResponder <UIApplicationDelegate, UIAlertViewDelegate>{
     UITabBarController *tabBarController;
    
 }
