@@ -236,8 +236,8 @@
 {
     if (buttonIndex == 1)
     {
-        NSLog(@"Reply");
-        
+        FavoritesPicturesViewController *favoritesPictures = [[FavoritesPicturesViewController alloc] init];
+        [self.navigationController pushViewController:favoritesPictures animated:YES];
     }
 }
 

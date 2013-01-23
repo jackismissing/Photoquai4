@@ -15,9 +15,10 @@
 #import "UIColor+RVB255.h"
 #import "ToolBarPhotography.h"
 #import "AudioImageView.h"
-#import "CustomPopOver.h"
+#import "CustomPopOver.h" //conteneur des boutons share
 #import "FavoriteIndicator.h"
 #import "FavoriteIndicatorViewController.h"
+#import "FavoritesPicturesViewController.h"
 
 @class AudioImageView;
 

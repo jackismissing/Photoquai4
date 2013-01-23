@@ -36,6 +36,9 @@
     UIBarButtonItem* menuBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:menuButton];
     [self.navigationItem setLeftBarButtonItem:menuBarButtonItem];
     
+    AppDelegate *appdelegate = [[UIApplication sharedApplication] delegate];
+    [appdelegate showTabBar:self.tabBarController];
+    
     //[self showTabBar:self.tabBarController];
 }
 
@@ -67,8 +70,7 @@
     
     [self performSelectorInBackground:@selector(loadFavoritesPictures) withObject:nil];
     
-    AppDelegate *appdelegate = [[UIApplication sharedApplication] delegate];
-    [appdelegate showTabBar:self.tabBarController];
+    
     
     
 } //Fin du view didload
@@ -86,18 +88,18 @@
     
     for (int imgIterate = 0; imgIterate < [favoritesPictures count]; imgIterate++) {
         xPosition++;
-        NSLog(@"xPosition : %i", xPosition);
+        NSLog(@"xPosition : %i", yPosition);
         
-        if (imgIterate % 2) {
+        if (imgIterate % 2 == 0) {
             xPosition = 0;
         }
         
         if(imgIterate >= 2){
             int h = [[heights objectAtIndex: (imgIterate - 2)] integerValue];
             int y = [[ys objectAtIndex: (imgIterate - 2)] integerValue];
-            yPosition =  h + y + 15;
+            yPosition =  h + y + 5;
         }else{
-            yPosition = 10;
+            yPosition = 5;
         }
         
         NSString *imgFavoriteIndex = [favoritesPictures objectAtIndex:imgIterate];
@@ -119,7 +121,7 @@
         favoritePictureElement.tag = idPicture;
         
         [heights addObject: [NSNumber numberWithInt: favoritePictureElement.frame.size.height]];
-        [ys addObject: [NSNumber numberWithInt: favoritePictureElement.imageWallElement.frame.origin.y]];
+        [ys addObject: [NSNumber numberWithInt: favoritePictureElement.frame.origin.y]];
         
         [myScrollView addSubview:favoritePictureElement];
         
@@ -136,7 +138,7 @@
                 
                 int idColonne = [[view idColonne] integerValue];
                 if (idColonne == heightColumn) {
-                    
+                    NSLog(@"hauteur colonne : %i", hauteurColonne);
                     hauteurColonne += view.frame.size.height + 15;
                 }
             }
@@ -147,7 +149,7 @@
             }
         }
         
-        [myScrollView setContentSize:CGSizeMake(320, heightMax + 21)];
+        [myScrollView setContentSize:CGSizeMake(320, heightMax + 70)];
     }
 }
 
@@ -166,7 +168,6 @@
                          index.backgroundColor = [UIColor clearColor];
                      }
                      completion:^(BOOL finished){
-                         
                          PhotographyViewController *imageViewController = [[PhotographyViewController alloc] initWithNibName:@"PhotographyViewController" bundle:nil];
                          imageViewController.idPicture = index.tag;
                          [self.navigationController pushViewController:imageViewController animated:YES];
