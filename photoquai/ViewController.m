@@ -55,7 +55,8 @@
     myScrollView.showsVerticalScrollIndicator = NO;
     myScrollView.delegate = self;
     //myScrollView.contentSize = CGSizeMake(130 * 5, 2000);
-    myScrollView.autoresizesSubviews = YES;
+    //myScrollView.autoresizesSubviews = YES;
+    myScrollView.zoomScale = .5;
     myScrollView.minimumZoomScale = 0.5;
     myScrollView.maximumZoomScale = 5.0;
     [self.view addSubview:myScrollView];
@@ -240,6 +241,7 @@
     }
     
     totalWidth = (imageWallElement.frame.size.width * nbrColumns) + (nbrColumns * 6); //Le chiffre 6 étant les marges entre chaque vue
+    
     
     [myScrollView addSubview:thumbsContainer];
     

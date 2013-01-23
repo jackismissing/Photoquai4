@@ -19,7 +19,7 @@
 {
     self = [super initWithFrame:frame];
     if (self) {
-        AppDelegate *appdelegate = [[UIApplication sharedApplication] delegate];
+        AppDelegate *appdelegate = (AppDelegate *)[[UIApplication sharedApplication] delegate];
         
         
         //self.frame = CGRectMake(frame.origin.x, frame.origin.y, frame.size.width, frame.size.height);
@@ -33,8 +33,7 @@
         
         
         NSString *imgPhotographer = [[appdelegate getElementsFromJSON:appendLink] valueForKeyPath:@"photographer.cover.link_thumbnail9784"];
-        
-        NSLog(@"%@", imgPhotographer);
+    
         
         NSString *firstnamePhotographer = [[appdelegate getElementsFromJSON:appendLink] valueForKeyPath:@"photographer.firstname"];
         NSString *lastnamePhotographer = [[appdelegate getElementsFromJSON:appendLink] valueForKeyPath:@"photographer.lastname"];

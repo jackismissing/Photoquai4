@@ -13,6 +13,7 @@
 #import "MapPhqViewController.h"
 #import "FavoritesPicturesViewController.h"
 #import "ArtistsLisViewController.h"
+#import "FavoritePhotographerViewController.h"
 
 @interface NavigationViewController ()
 
@@ -129,8 +130,11 @@
         //FavoritesPicturesViewController *favoritesPictures = [[FavoritesPicturesViewController alloc] init];
         //[self.navigationController pushViewController:favoritesPictures animated:YES];
         
-        ArtistsLisViewController *artistsView = [[ArtistsLisViewController alloc] init];
-        [self.navigationController pushViewController:artistsView animated:YES];
+//        ArtistsLisViewController *artistsView = [[ArtistsLisViewController alloc] init];
+//        [self.navigationController pushViewController:artistsView animated:YES];
+        
+        FavoritePhotographerViewController  *favoritePhotograhers = [[FavoritePhotographerViewController alloc] init];
+        [self.navigationController pushViewController:favoritePhotograhers animated:YES];
     }
 
 

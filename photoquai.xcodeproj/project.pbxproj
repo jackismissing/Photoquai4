@@ -7,6 +7,11 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		1A0466B716B072A800F01AA3 /* ArtistFavoriteElement.m in Sources */ = {isa = PBXBuildFile; fileRef = 1A0466B616B072A800F01AA3 /* ArtistFavoriteElement.m */; };
+		1A0466BC16B0815400F01AA3 /* FavoritePhotographerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1A0466BA16B0815400F01AA3 /* FavoritePhotographerViewController.m */; };
+		1A0466BD16B0815400F01AA3 /* FavoritePhotographerViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1A0466BB16B0815400F01AA3 /* FavoritePhotographerViewController.xib */; };
+		1A0466C016B0996200F01AA3 /* suppfavoris@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 1A0466BE16B0996200F01AA3 /* suppfavoris@2x.png */; };
+		1A0466C116B0996200F01AA3 /* suppfavoris.png in Resources */ = {isa = PBXBuildFile; fileRef = 1A0466BF16B0996200F01AA3 /* suppfavoris.png */; };
 		1A0B2D2916A852290060234E /* ImageWall.m in Sources */ = {isa = PBXBuildFile; fileRef = 1A0B2D2816A852290060234E /* ImageWall.m */; };
 		1A0B2D3016A859020060234E /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1A0B2D2F16A859010060234E /* QuartzCore.framework */; };
 		1A0B2D3D16A861E50060234E /* PhotographyViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1A0B2D3B16A861E50060234E /* PhotographyViewController.m */; };
@@ -135,6 +140,13 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		1A0466B516B072A800F01AA3 /* ArtistFavoriteElement.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ArtistFavoriteElement.h; sourceTree = "<group>"; };
+		1A0466B616B072A800F01AA3 /* ArtistFavoriteElement.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ArtistFavoriteElement.m; sourceTree = "<group>"; };
+		1A0466B916B0815400F01AA3 /* FavoritePhotographerViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FavoritePhotographerViewController.h; sourceTree = "<group>"; };
+		1A0466BA16B0815400F01AA3 /* FavoritePhotographerViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FavoritePhotographerViewController.m; sourceTree = "<group>"; };
+		1A0466BB16B0815400F01AA3 /* FavoritePhotographerViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = FavoritePhotographerViewController.xib; sourceTree = "<group>"; };
+		1A0466BE16B0996200F01AA3 /* suppfavoris@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "suppfavoris@2x.png"; sourceTree = "<group>"; };
+		1A0466BF16B0996200F01AA3 /* suppfavoris.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = suppfavoris.png; sourceTree = "<group>"; };
 		1A0B2D2716A852290060234E /* ImageWall.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ImageWall.h; path = AFNetworking/ImageWall.h; sourceTree = "<group>"; };
 		1A0B2D2816A852290060234E /* ImageWall.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ImageWall.m; path = AFNetworking/ImageWall.m; sourceTree = "<group>"; };
 		1A0B2D2F16A859010060234E /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
@@ -336,6 +348,25 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		1A0466B316B0724E00F01AA3 /* ArtistFavorite */ = {
+			isa = PBXGroup;
+			children = (
+				1A0466B516B072A800F01AA3 /* ArtistFavoriteElement.h */,
+				1A0466B616B072A800F01AA3 /* ArtistFavoriteElement.m */,
+			);
+			name = ArtistFavorite;
+			sourceTree = "<group>";
+		};
+		1A0466B816B0811500F01AA3 /* FavoritePhotographersViewController */ = {
+			isa = PBXGroup;
+			children = (
+				1A0466B916B0815400F01AA3 /* FavoritePhotographerViewController.h */,
+				1A0466BA16B0815400F01AA3 /* FavoritePhotographerViewController.m */,
+				1A0466BB16B0815400F01AA3 /* FavoritePhotographerViewController.xib */,
+			);
+			name = FavoritePhotographersViewController;
+			sourceTree = "<group>";
+		};
 		1A0B2D2A16A852340060234E /* ImageWall */ = {
 			isa = PBXGroup;
 			children = (
@@ -401,14 +432,14 @@
 			name = FavoriteView;
 			sourceTree = "<group>";
 		};
-		1ABDFCED16AB64A7004C95C8 /* FavoriteViewController */ = {
+		1ABDFCED16AB64A7004C95C8 /* FavoritePicturesViewController */ = {
 			isa = PBXGroup;
 			children = (
 				1ABDFCEE16AB64F5004C95C8 /* FavoritesPicturesViewController.h */,
 				1ABDFCEF16AB64F5004C95C8 /* FavoritesPicturesViewController.m */,
 				1ABDFCF016AB64F5004C95C8 /* FavoritesPicturesViewController.xib */,
 			);
-			name = FavoriteViewController;
+			name = FavoritePicturesViewController;
 			sourceTree = "<group>";
 		};
 		1ABEAC9616A5C34E0034D316 = {
@@ -450,7 +481,8 @@
 		1ABEACAB16A5C34E0034D316 /* photoquai */ = {
 			isa = PBXGroup;
 			children = (
-				1ABDFCED16AB64A7004C95C8 /* FavoriteViewController */,
+				1ABDFCED16AB64A7004C95C8 /* FavoritePicturesViewController */,
+				1A0466B816B0811500F01AA3 /* FavoritePhotographersViewController */,
 				375E21F816A945DF00F012AF /* MapViewController */,
 				1ABEACB416A5C34E0034D316 /* AppDelegate.h */,
 				1ABEACB516A5C34E0034D316 /* AppDelegate.m */,
@@ -462,9 +494,9 @@
 				37FA709416A81F5C0039E9C3 /* NavigationViewController */,
 				1A0B2D3F16A861EA0060234E /* PhotographyViewController */,
 				1A0B2D4616A863030060234E /* ViewController */,
+				1ABEACCF16A5C9EF0034D316 /* Classes */,
 				1ACACF2316A7F58B0060DA49 /* Categories */,
 				1ABEACD016A5CA130034D316 /* Vendor */,
-				1ABEACCF16A5C9EF0034D316 /* Classes */,
 				1ABEACCC16A5C9420034D316 /* Ressources */,
 				1ABEACAC16A5C34E0034D316 /* Supporting Files */,
 			);
@@ -500,6 +532,7 @@
 		1ABEACCF16A5C9EF0034D316 /* Classes */ = {
 			isa = PBXGroup;
 			children = (
+				1A0466B316B0724E00F01AA3 /* ArtistFavorite */,
 				1AEEF48916ADEDC900489C08 /* FavoriteIndicator */,
 				1ABDFCE016AB59BB004C95C8 /* FavoriteView */,
 				1ACA0CD816AA0CCB0070EFB5 /* Draws */,
@@ -649,7 +682,6 @@
 			isa = PBXGroup;
 			children = (
 				1A3980AF16AC83A500584731 /* firstImgPHQ.png */,
-				1AEEF46016ADE1A500489C08 /* New Group */,
 				1ACA0CD716A9FE240070EFB5 /* AudioPlayer */,
 				37C7831716A9B7CF001D6295 /* Share */,
 				37C7830616A9AD0D001D6295 /* Favorites */,
@@ -667,21 +699,6 @@
 				1AEEF43C16ADDEE900489C08 /* ArtistsLisViewController.m */,
 			);
 			name = ArtistListViewCOntroller;
-			sourceTree = "<group>";
-		};
-		1AEEF46016ADE1A500489C08 /* New Group */ = {
-			isa = PBXGroup;
-			children = (
-				1AEEF45016ADE19400489C08 /* icon0.png */,
-				1AEEF45116ADE19400489C08 /* icon1.png */,
-				1AEEF45216ADE19400489C08 /* icon2.png */,
-				1AEEF45316ADE19400489C08 /* icon3.png */,
-				1AEEF45416ADE19500489C08 /* icon4.png */,
-				1AEEF45516ADE19500489C08 /* icon5.png */,
-				1AEEF45616ADE19500489C08 /* icon6.png */,
-				1AEEF45716ADE19500489C08 /* icon7.png */,
-			);
-			name = "New Group";
 			sourceTree = "<group>";
 		};
 		1AEEF48916ADEDC900489C08 /* FavoriteIndicator */ = {
@@ -745,6 +762,14 @@
 		3784D01816A8649D00C75804 /* NavigationBar */ = {
 			isa = PBXGroup;
 			children = (
+				1AEEF45016ADE19400489C08 /* icon0.png */,
+				1AEEF45116ADE19400489C08 /* icon1.png */,
+				1AEEF45216ADE19400489C08 /* icon2.png */,
+				1AEEF45316ADE19400489C08 /* icon3.png */,
+				1AEEF45416ADE19500489C08 /* icon4.png */,
+				1AEEF45516ADE19500489C08 /* icon5.png */,
+				1AEEF45616ADE19500489C08 /* icon6.png */,
+				1AEEF45716ADE19500489C08 /* icon7.png */,
 				37C782FE16A9AB91001D6295 /* navigationBar-photographie_@2X.png */,
 				37C782FF16A9AB91001D6295 /* navigationBar@2X.png */,
 				37C7830016A9AB91001D6295 /* navigationBar-photographie.png */,
@@ -778,6 +803,8 @@
 		37C7830616A9AD0D001D6295 /* Favorites */ = {
 			isa = PBXGroup;
 			children = (
+				1A0466BE16B0996200F01AA3 /* suppfavoris@2x.png */,
+				1A0466BF16B0996200F01AA3 /* suppfavoris.png */,
 				1AC94C5B16AC4AFA00C854F5 /* favoritesPicturesIcon@2x.png */,
 				1AC94C5C16AC4AFA00C854F5 /* favoritesPicturesIcon.png */,
 				37C7831316A9B5AC001D6295 /* etoilejaune.png */,
@@ -963,6 +990,9 @@
 				1AEEF46E16ADE5DE00489C08 /* fleche.png in Resources */,
 				1AEEF47116ADE75200489C08 /* arrowArtistVignette.png in Resources */,
 				1AEEF47216ADE75200489C08 /* arrowArtistVignette@2x.png in Resources */,
+				1A0466BD16B0815400F01AA3 /* FavoritePhotographerViewController.xib in Resources */,
+				1A0466C016B0996200F01AA3 /* suppfavoris@2x.png in Resources */,
+				1A0466C116B0996200F01AA3 /* suppfavoris.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1011,6 +1041,8 @@
 				1AEEF48F16ADF4A600489C08 /* FavoriteIndicator.m in Sources */,
 				1ADCFE4616AF3CB80088A4C5 /* FavoriteIndicatorViewController.m in Sources */,
 				1ADCFE4A16AF4A5B0088A4C5 /* CustomAlertView.m in Sources */,
+				1A0466B716B072A800F01AA3 /* ArtistFavoriteElement.m in Sources */,
+				1A0466BC16B0815400F01AA3 /* FavoritePhotographerViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

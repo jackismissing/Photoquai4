@@ -36,7 +36,7 @@
     UIBarButtonItem* menuBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:menuButton];
     [self.navigationItem setLeftBarButtonItem:menuBarButtonItem];
     
-    AppDelegate *appdelegate = [[UIApplication sharedApplication] delegate];
+    AppDelegate *appdelegate = (AppDelegate *)[[UIApplication sharedApplication] delegate];
     [appdelegate showTabBar:self.tabBarController];
     
     //[self showTabBar:self.tabBarController];
@@ -78,7 +78,7 @@
 
 
 - (void) loadFavoritesPictures{
-    AppDelegate *appdelegate = [[UIApplication sharedApplication] delegate];
+    AppDelegate *appdelegate = (AppDelegate *)[[UIApplication sharedApplication] delegate];
     
     int xPosition = 0;
     int yPosition = 10;
@@ -138,7 +138,7 @@
                 
                 int idColonne = [[view idColonne] integerValue];
                 if (idColonne == heightColumn) {
-                    NSLog(@"hauteur colonne : %i", hauteurColonne);
+                    
                     hauteurColonne += view.frame.size.height + 15;
                 }
             }
