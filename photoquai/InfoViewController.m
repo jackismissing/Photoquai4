@@ -167,6 +167,8 @@
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
     //Where we configure the cell in each row
     
+
+    
     static NSString *CellIdentifier = @"Cell";
     
     UILabel *mainLabel, *numberLabel;
@@ -269,6 +271,8 @@
     [cellBackgroundView addSubview:cellBackground];
     
     cell.backgroundView = cellBackgroundView;
+    
+
 }
 
 

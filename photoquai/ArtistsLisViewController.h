@@ -10,7 +10,7 @@
 
 @interface ArtistsLisViewController : UIViewController<UITableViewDataSource, UITableViewDelegate>
 {
-    int artistsIterate, i, nbrArtists, j;
+    int artistsIterate, i, nbrArtists, j, cellNumber;
     NSMutableArray *artistsList;
     UIImageView *artistAvatar;
 
@@ -24,10 +24,13 @@
 @property(nonatomic, strong) UILabel *firstNameLabel;
 @property(nonatomic, strong) UIImageView *artistCover;
 @property(nonatomic, strong) UIImageView *artistAvatar;
+@property(nonatomic, strong) UIImageView *disclosure;
 
 
 -(void)loadArtists;
 -(void)showMenu;
 -(void)createTableMenu;
+
+-(void)scrollToSection : (id)sender;
 
 @end
