@@ -33,7 +33,7 @@
     [self.navigationItem setLeftBarButtonItem:menuBarButtonItem];
     
     UIImage* image3 = [UIImage imageNamed:@"suppfavoris"];
-    CGRect frameimg = CGRectMake(-10, 0, image3.size.width, image3.size.height);
+    CGRect frameimg = CGRectMake(0, 0, image3.size.width, image3.size.height);
     UIButton *someButton = [[UIButton alloc] initWithFrame:frameimg];
     [someButton setBackgroundImage:image3 forState:UIControlStateNormal];
     [someButton addTarget:self action:@selector(suppfavoris)
@@ -64,7 +64,7 @@
     CGFloat screenHeight = screenRect.size.height;
     
     NSUserDefaults *preferencesUser = [NSUserDefaults standardUserDefaults];
-    //favoritesPictures = [[NSArray alloc] initWithArray: [preferencesUser objectForKey:@"favorisImages"]];
+    favoritesPhotographers = [[NSArray alloc] initWithArray: [preferencesUser objectForKey:@"favorisImages"]];
     
     UIScrollView *myScrollView = [[UIScrollView alloc] initWithFrame:CGRectMake(0, 0, screenWidth, screenHeight)];
     myScrollView.opaque = YES;
@@ -73,6 +73,8 @@
     myScrollView.delegate = self;
     myScrollView.clipsToBounds = YES;
     
+    removeEnabled = NO; //La suppression de favoris n'est pas actif par défaut
+    
     
     int yPosition = 0, xPosition = 0;
     
@@ -80,18 +82,15 @@
         xPosition++;
         if (i % 2 == 0) {
             xPosition = 0;
-            
         }
         
         if (i % 2 == 0 && i != 0) {
             yPosition++;
         }
         
-        NSLog(@"yPosition : %i", yPosition);
-        
         ArtistFavoriteElement *artistFavoriteElement = [[ArtistFavoriteElement alloc] initWithFrame:CGRectMake(xPosition * 150 + 13, (yPosition * 189) + 15, 145, 200) withId:1];
         [artistFavoriteElement setIdColonne:xPosition];
-        //NSLog(@"%i", artistFavoriteElement.idColonne);
+        
         [myScrollView addSubview:artistFavoriteElement];
         
         UITapGestureRecognizer *accessPicture = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(accessPicture:)];
@@ -126,6 +125,23 @@
 
 - (void) suppfavoris{
     NSLog(@"oki");
+}
+
+- (void)showMenu
+{
+    NavigationViewController *mainMenu = [[NavigationViewController alloc] init];
+    mainMenu.delegate = self;
+    
+    // This is where you wrap the view up nicely in a navigation controller
+    UINavigationController *navigationController = [[UINavigationController alloc] initWithRootViewController:mainMenu];
+    
+    [navigationController setNavigationBarHidden:YES animated:NO];
+    
+    // You can even set the style of stuff before you show it
+    //navigationController.navigationBar.barStyle = UIBarStyleBlackTranslucent;
+    
+    // And now you want to present the view in a modal fashion all nice and animated
+    [self presentModalViewController:navigationController animated:YES];
 }
 
 - (void)didReceiveMemoryWarning

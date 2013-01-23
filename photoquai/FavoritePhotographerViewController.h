@@ -10,6 +10,9 @@
 
 #import "ArtistFavoriteElement.h"
 
-@interface FavoritePhotographerViewController : UIViewController <UIScrollViewDelegate>
+@interface FavoritePhotographerViewController : UIViewController <UIScrollViewDelegate>{
+    BOOL removeEnabled;
+    NSArray *favoritesPhotographers;
+}
 
 @end

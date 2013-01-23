@@ -11,6 +11,7 @@
 #import "ViewController.h"
 #import "UIColor+RVB255.h"
 #import "FavoritesPicturesViewController.h"
+#import "FavoritePhotographerViewController.h"
 
 
 @implementation AppDelegate
@@ -53,8 +54,8 @@
     v1.tabBarItem.image = [UIImage imageNamed:@"favoritesPicturesIcon"];
     v1.tabBarItem.title = @"Photographies";
     
-    UIViewController *v2 = [[FavoritesPicturesViewController alloc] initWithNibName:@"FavoritesPicturesViewController" bundle:nil];
-    v2.tabBarItem.image = [UIImage imageNamed:@"favoritesPicturesIcon"];
+    UIViewController *v2 = [[FavoritePhotographerViewController alloc] initWithNibName:@"FavoritePhotographerViewController" bundle:nil];
+    v2.tabBarItem.image = [UIImage imageNamed:@"favoritesPhotographersIcon"];
     v2.tabBarItem.title = @"Photographes";
     
     

@@ -39,7 +39,6 @@
     AppDelegate *appdelegate = (AppDelegate *)[[UIApplication sharedApplication] delegate];
     [appdelegate showTabBar:self.tabBarController];
     
-    //[self showTabBar:self.tabBarController];
 }
 
 - (void)viewDidLoad
@@ -69,10 +68,6 @@
     [self.view addSubview:myScrollView];
     
     [self performSelectorInBackground:@selector(loadFavoritesPictures) withObject:nil];
-    
-    
-    
-    
 } //Fin du view didload
 
 
