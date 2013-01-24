@@ -10,9 +10,10 @@
 
 @interface ArtistsLisViewController : UIViewController<UITableViewDataSource, UITableViewDelegate>
 {
-    int artistsIterate, i, nbrArtists, j, cellNumber;
+    int artistsIterate, i, nbrArtists, b, e, j, cellNumber;
     NSMutableArray *artistsList;
     UIImageView *artistAvatar;
+    BOOL disableAnchor;
 
 }
 
@@ -31,6 +32,6 @@
 -(void)showMenu;
 -(void)createTableMenu;
 
--(void)scrollToSection : (id)sender;
+-(void)scrollToSection : (NSInteger)sectionNumber;
 
 @end
