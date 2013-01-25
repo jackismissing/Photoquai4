@@ -516,7 +516,7 @@
         
     }
     
-    // On crée la première série de bouttons qui va correspondre à la seconde moitité de notre tableau
+    // On crée la première série de boutons qui va correspondre à la seconde moitité de notre tableau
     ///.        Il faut donc que le tag des boutons corresponde aux index des dernières sections !
     /// \
     //_!_\      Logique inside \0/

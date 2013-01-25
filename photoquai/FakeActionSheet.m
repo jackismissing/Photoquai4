@@ -35,9 +35,15 @@
         [removeButton setTitleColor:[UIColor blackColor] forState:UIControlStateNormal]; 
         removeButton.backgroundColor = [UIColor whiteColor];
         removeButton.layer.cornerRadius = 3.0f;
+        [removeButton addTarget:self action:@selector(removeFavorites) forControlEvents:UIControlEventTouchUpInside];
         [self addSubview:removeButton];
     }
     return self;
+}
+
+- (void) removeFavorites{
+    [[NSNotificationCenter defaultCenter] postNotificationName:@"removeFavorites" object:nil];
+    [self hide];
 }
 
 - (void) show{
@@ -49,7 +55,8 @@
                           delay:0
                         options: UIViewAnimationCurveEaseOut
                      animations:^{
-                         self.frame = CGRectMake(0, screenHeight, screenWidth, 100);
+                         
+                         self.frame = CGRectMake(0, screenHeight - 150, screenWidth, 100);
                      }
                      completion:^(BOOL finished){
                          //[self addSubview:self];
@@ -65,7 +72,8 @@
                           delay:0
                         options: UIViewAnimationCurveEaseOut
                      animations:^{
-                         self.frame = CGRectMake(0, screenHeight - 150, screenWidth, 100);
+                         self.frame = CGRectMake(0, screenHeight, screenWidth, 100);
+                         //self.frame = CGRectMake(0, screenHeight - 150, screenWidth, 100);
                      }
                      completion:^(BOOL finished){
                          //[self removeFromSuperview];

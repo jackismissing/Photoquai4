@@ -20,6 +20,9 @@
     UITapGestureRecognizer *selectFavorites2Remove;
     UITapGestureRecognizer *accessPhotographer;
     FakeActionSheet *fakeActionSheet;
+  
+    CGFloat screenWidth;
+    CGFloat screenHeight;
 }
 
 @end

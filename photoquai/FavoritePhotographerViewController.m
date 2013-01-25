@@ -37,8 +37,7 @@
     CGRect frameimg = CGRectMake(0, 0, image3.size.width, image3.size.height);
     UIButton *someButton = [[UIButton alloc] initWithFrame:frameimg];
     [someButton setBackgroundImage:image3 forState:UIControlStateNormal];
-    [someButton addTarget:self action:@selector(suppfavoris)
-         forControlEvents:UIControlEventTouchUpInside];
+    [someButton addTarget:self action:@selector(suppfavoris) forControlEvents:UIControlEventTouchUpInside];
     
     UIBarButtonItem *mailbutton =[[UIBarButtonItem alloc] initWithCustomView:someButton];
     self.navigationItem.rightBarButtonItem=mailbutton;
@@ -61,8 +60,8 @@
     self.navigationItem.title = @"Favoris";
     
     CGRect screenRect = [[UIScreen mainScreen] bounds];
-    CGFloat screenWidth = screenRect.size.width;
-    CGFloat screenHeight = screenRect.size.height;
+    screenWidth = screenRect.size.width;
+    screenHeight = screenRect.size.height;
     
     NSUserDefaults *preferencesUser = [NSUserDefaults standardUserDefaults];
     favoritesPhotographers = [[NSMutableArray alloc] initWithArray: [preferencesUser objectForKey:@"favorisPhotographers"]];
@@ -76,6 +75,7 @@
     
     removeEnabled = NO; //La suppression de favoris n'est pas actif par défaut
     
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(removeFavorites) name:@"removeFavorites" object:nil];
     
     
     int yPosition = 0, xPosition = 0;
@@ -130,51 +130,69 @@
 }
 
 - (void) suppfavoris{
-    [fakeActionSheet hide];
+    
     if(removeEnabled == NO){
+        [fakeActionSheet show];
         removeEnabled = YES;
         for(ArtistFavoriteElement *view in myScrollView.subviews){
             selectFavorites2Remove = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(selectFavorites2Remove:)];
             [view addGestureRecognizer:selectFavorites2Remove];
             [view removeGestureRecognizer:accessPhotographer];
         }
-    }else{
-        [fakeActionSheet show];
+        myScrollView.frame = CGRectMake(0, 0, screenWidth, screenHeight- 75);
+    }else{ 
+        [fakeActionSheet hide];
         removeEnabled = NO;
         for(ArtistFavoriteElement *view in myScrollView.subviews){
             accessPhotographer = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(accessPhotographer:)];
             [view addGestureRecognizer:accessPhotographer];
             [view removeGestureRecognizer:selectFavorites2Remove];
         }
+        myScrollView.frame = CGRectMake(0, 0, screenWidth, screenHeight);
     }
-    
-    
 }
 
-//- (void) removeFavorites{
-//    for (int i = 0; <#condition#>; i++) {
-//        <#statements#>
-//    }
-//}
+- (void) removeFavorites{
+    for (int i = 0; i < [favoritesPhotographers count]; i++) {
+        [favoritesPhotographers removeObjectAtIndex:i];
+    }
+    
+    removeEnabled = NO;
+    //[self viewDidLoad];
+    NSLog(@"removed");
+}
 
 - (void) selectFavorites2Remove:(UIGestureRecognizer *)gesture{
     UIView *index = gesture.view;
     
     NSNumber *favorite = [NSNumber numberWithInteger:index.tag];
 
-    UIImage*    backgroundImage = [UIImage imageNamed:@"favorite2remove@2x"];
+    UIImage*    backgroundImage = [UIImage imageNamed:@"favorite2remove"];
     CALayer*    crossLayer = [CALayer layer];
-    CGRect startFrame = CGRectMake(index.frame.size.height - 30, index.frame.size.width - 30, 30, 30);
+    CGRect startFrame = CGRectMake(index.frame.size.width - 30, index.frame.size.height - 30, 30, 30);
     crossLayer.contents = (id)backgroundImage.CGImage;
     crossLayer.frame = startFrame;
+    
+    crossLayer.opaque = YES;
     
     if (![favoritesPhotographers containsObject:favorite]){ //On checke si le favoris n'a pas déjà été checké
         [favoritesPhotographers addObject:favorite];
         [index.layer addSublayer:crossLayer];
+        crossLayer.name = [NSString stringWithFormat:@"%i", index.tag];
+        crossLayer.opacity = 1.0f;
     }else{
         [favoritesPhotographers removeObject:favorite];
-        [crossLayer removeFromSuperlayer];
+        for (CALayer *layer in index.layer.sublayers) {
+            if ([layer.name isEqualToString:[NSString stringWithFormat:@"%i", index.tag]]) {
+                [layer removeFromSuperlayer];
+                break;
+            }
+        }
         
+        
+//        for (CALayer *layer in self.view.layer.sublayers) {
+//            [layer removeFromSuperlayer];
+//        }
     }
 }
 
