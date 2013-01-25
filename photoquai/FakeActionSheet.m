@@ -18,7 +18,8 @@
         CGFloat screenWidth = screenRect.size.width;
         CGFloat screenHeight = screenRect.size.height;
         
-        self.frame = CGRectMake(frame.origin.x, screenHeight - 150, screenWidth, 100);
+        //self.frame = CGRectMake(frame.origin.x, screenHeight - 150, screenWidth, 100);
+        self.frame = CGRectMake(0, screenHeight, screenWidth, 100);
         self.backgroundColor = [UIColor r:35 g:35 b:35 alpha:1];
         
         CALayer *bottomBorder = [CALayer layer];
@@ -48,10 +49,10 @@
                           delay:0
                         options: UIViewAnimationCurveEaseOut
                      animations:^{
-                         self.frame = CGRectMake(0, screenHeight - 150, screenWidth, 100);
+                         self.frame = CGRectMake(0, screenHeight, screenWidth, 100);
                      }
                      completion:^(BOOL finished){
-                         [self addSubview:self];
+                         //[self addSubview:self];
                      }];
 }
 
@@ -64,10 +65,10 @@
                           delay:0
                         options: UIViewAnimationCurveEaseOut
                      animations:^{
-                         self.frame = CGRectMake(0, screenHeight, screenWidth, 100);
+                         self.frame = CGRectMake(0, screenHeight - 150, screenWidth, 100);
                      }
                      completion:^(BOOL finished){
-                         [self removeFromSuperview];
+                         //[self removeFromSuperview];
                      }];
 }
 

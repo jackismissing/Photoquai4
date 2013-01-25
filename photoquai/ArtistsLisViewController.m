@@ -11,6 +11,15 @@
 #import "Reachability.h"
 #import "NavigationViewController.h"
 
+#define NAME_TAG 1
+
+#define FIRSTNAME_TAG 1
+
+#define ARTISTCOVER_TAG 1
+
+#define ARTISTAVATAR_TAG 1
+
+
 @interface ArtistsLisViewController ()
 
 @end
@@ -19,6 +28,15 @@
 @synthesize sections;
 @synthesize artistsTable;
 @synthesize tableMenuScrollView;
+@synthesize cellBackground;
+
+@synthesize nameLabel;
+@synthesize firstNameLabel;
+
+@synthesize artistCover;
+@synthesize artistAvatar;
+
+@synthesize disclosure;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -33,7 +51,7 @@
         
         // Post a notification to loginComplete
         [[NSNotificationCenter defaultCenter] postNotificationName:@"loginComplete" object:reachabilityInfo];
-
+        
     }
     return self;
 }
@@ -62,20 +80,24 @@
     [self.tableMenuScrollView setDelegate:self];
     
     [self.view addSubview:tableMenuScrollView];
-
+    
     
     artistsList = [[NSMutableArray alloc] init];
     
     self.sections = [[NSMutableDictionary alloc] init];
     
-    self.artistsTable = [[UITableView alloc] initWithFrame:CGRectMake(0, self.tableMenuScrollView.frame.size.height, self.view.frame.size.width, self.view.frame.size.height - self.navigationController.navigationBar.frame.size.height - self.tableMenuScrollView.frame.size.height) style:UITableViewStyleGrouped];
+    cellNumber = 0;
+    
+    self.artistsTable = [[UITableView alloc] initWithFrame:CGRectMake(0, self.tableMenuScrollView.frame.size.height, self.view.frame.size.width, self.view.frame.size.height - self.navigationController.navigationBar.frame.size.height - self.tableMenuScrollView.frame.size.height) style:UITableViewStylePlain];
     
     self.artistsTable.delegate = self;
     self.artistsTable.dataSource = self;
     
+    [artistsTable reloadData];
+    
     [self.view addSubview:artistsTable];
     
-        
+    
     
 }
 
@@ -100,7 +122,15 @@
     // Custom menu Scroll View
     
     self.tableMenuScrollView.backgroundColor = [UIColor blackColor];
-
+    
+    // Table View
+    
+    self.artistsTable.backgroundColor = [UIColor whiteColor];
+    
+    
+    
+    
+    
 }
 
 - (void)didReceiveMemoryWarning
@@ -153,7 +183,7 @@
         BOOL found;
         
         for (NSDictionary *artistIndex in artistsList) {
-        
+            
             NSString *c = [[artistIndex objectForKey:@"artistName"] substringToIndex:1];
             
             found = NO;
@@ -165,7 +195,7 @@
                 {
                     found = YES;
                 }
-            
+                
             }
             
             if (!found)
@@ -173,8 +203,8 @@
                 [self.sections setValue:[[NSMutableArray alloc] init] forKey:c];
             }
             
-        
-        
+            
+            
         }
         
         
@@ -183,15 +213,18 @@
             [[self.sections objectForKey:[[artistIndex objectForKey:@"artistName"] substringToIndex:1]] addObject:artistIndex];
         }
         
-        [artistsTable reloadData];
+        
+        // Création du menu
         
         [self createTableMenu];
-                
+        
+        [artistsTable reloadData];
+        
         return;
         
     }
     
-
+    
     artistsIterate = i+1;
     
     
@@ -208,10 +241,18 @@
     
     NSString *lastNameArtist = [[appdelegate getElementsFromJSON:appendLink] valueForKeyPath:@"photographer.lastname"];
     NSString *firstNameArtist = [[appdelegate getElementsFromJSON:appendLink] valueForKeyPath:@"photographer.firstname"];
+    NSString *avatarArtist = [[appdelegate getElementsFromJSON:appendLink] valueForKeyPath:@"photographer.avatar.file.link"];
+    NSString *coverArtist = [[appdelegate getElementsFromJSON:appendLink] valueForKeyPath:@"photographer.cover.file.link"];
     
-        
-    NSDictionary *artistInfos = [[NSDictionary alloc] initWithObjectsAndKeys:(id)idArtist, @"artistId", lastNameArtist, @"artistName", firstNameArtist, @"artistFirstName", nil];
+    UIImage *artistAvatarImage = [[UIImage alloc] initWithData:[NSData dataWithContentsOfURL:[NSURL URLWithString:avatarArtist]]];
     
+    UIImage *artistCoverImage = [[UIImage alloc] initWithData:[NSData dataWithContentsOfURL:[NSURL URLWithString:coverArtist]]];
+    
+    
+    NSDictionary *artistInfos = [[NSDictionary alloc] initWithObjectsAndKeys:(id)idArtist, @"artistId", lastNameArtist, @"artistName", firstNameArtist, @"artistFirstName", artistAvatarImage, @"artistAvatar", artistCoverImage, @"artistCover", nil];
+    
+    //NSLog(@"%@", avatarArtist);
+    //NSLog(@"%@", coverArtist);
     
     
     // Add single artist infos to NSMutableArray
@@ -224,12 +265,12 @@
     
     //NSLog(@"%@", artistInfos);
     
-        
+    
     i++;
     [self performSelectorInBackground:@selector(loadArtists) withObject:nil];
     
-
-    NSLog(@"%u", i);
+    
+    //NSLog(@"%u", i);
     
     
 }
@@ -264,9 +305,16 @@
 {
     UIView *headerView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, tableView.bounds.size.width, 30)];
     
-    headerView.backgroundColor = [UIColor blackColor];
     
-    UILabel *headerTitle = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, headerView.frame.size.width, headerView.frame.size.height)];
+    
+    UIImageView *artistsSeparator = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"artistsSeparator.png"]];
+    
+    
+    artistsSeparator.center = CGPointMake(headerView.bounds.size.width / 2, headerView.bounds.size.height /2);
+    
+    [headerView addSubview:artistsSeparator];
+    
+    UILabel *headerTitle = [[UILabel alloc] initWithFrame:CGRectMake(headerView.frame.size.width / 2 - 10, 0, 20, headerView.frame.size.height)];
     
     headerTitle.text = [[[self.sections allKeys] sortedArrayUsingSelector:@selector(localizedCaseInsensitiveCompare:)] objectAtIndex:section];
     
@@ -274,55 +322,243 @@
     
     headerTitle.font = [UIFont fontWithName:@"Parisine-Bold" size:15];
     
+    headerTitle.backgroundColor = [UIColor colorWithWhite:255 alpha:0];
+    
     [headerView addSubview:headerTitle];
-    
-    
     
     
     return headerView;
 }
- 
- 
+
+
 
 /*
-- (NSArray *)sectionIndexTitlesForTableView:(UITableView *)tableView 
-{
-    return [[self.sections allKeys] sortedArrayUsingSelector:@selector(localizedCaseInsensitiveCompare:)];
-}
+ - (NSArray *)sectionIndexTitlesForTableView:(UITableView *)tableView
+ {
+ return [[self.sections allKeys] sortedArrayUsingSelector:@selector(localizedCaseInsensitiveCompare:)];
+ }
  
  */
 
+#pragma mark - Table willDisplay cell
+
+
+
+#pragma mark - Table view cell height
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    return 140;
+    
+    
+}
+
+
+
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     
-    static NSString *CellIdentifier = @"Cell";
     
-    UITableViewCell *cell = [artistsTable dequeueReusableCellWithIdentifier:CellIdentifier];
+    NSString *CellIdentifier = [NSString stringWithFormat:@"%d%d", indexPath.section, indexPath.row];
+    
+    //NSLog(@"%@", CellIdentifier);
+    
+    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
+    
+    tableView.separatorStyle = UITableViewCellSelectionStyleNone;
+    
+    
+    
     if (cell == nil) {
-        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:CellIdentifier];
+        
+        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];
+        
+        // Custon disclosure
+        
+        //cell.accessoryView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"disclosure.png"]];  ;
+        
+        
+        
+        
+        
+        // Création du label name de chaque cellule
+        
+        nameLabel = [[UILabel alloc] initWithFrame:CGRectMake(120, 72, 150, 18)];
+        
+        nameLabel.tag = NAME_TAG;
+        
+        nameLabel.font = [UIFont fontWithName:@"Parisine-Bold" size:18];
+        
+        nameLabel.textColor = [UIColor blackColor];
+        
+        nameLabel.backgroundColor = [UIColor colorWithWhite:255 alpha:0];
+        
+        [cell.contentView addSubview:nameLabel];
+        
+        // Création du label firstname de chaque cellule
+        
+        
+        
+        firstNameLabel = [[UILabel alloc] initWithFrame:CGRectMake(122, 75 + nameLabel.frame.size.height , 150, 18)];
+        
+        firstNameLabel.tag = FIRSTNAME_TAG;
+        
+        firstNameLabel.font = [UIFont fontWithName:@"Parisine-Italic" size:15];
+        
+        firstNameLabel.textColor = [UIColor grayColor];
+        
+        firstNameLabel.backgroundColor = [UIColor colorWithWhite:255 alpha:0];
+        
+        [cell.contentView addSubview:firstNameLabel];
+        
+        // Artist Cover
+        
+        artistCover = [[UIImageView alloc] initWithFrame:CGRectMake(15, 0, 290, 60)];
+        
+        [cell.contentView addSubview:artistCover];
+        
+        // Artist avatar
+        
+        artistAvatar = [[UIImageView alloc] initWithFrame:CGRectMake(25, 50, 73, 73)];
+        
+        [cell.contentView addSubview:artistAvatar];
+        
+        // Disclosure button
+        
+        disclosure = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"disclosure.png"]];
+        
+        disclosure.center = CGPointMake(cell.contentView.frame.size.width - 25, 90);
+        
+        [cell.contentView addSubview:disclosure];
+        
+        
+        
     }
     
     NSDictionary *artistInfos = [[self.sections valueForKey:[[[self.sections allKeys] sortedArrayUsingSelector:@selector(localizedCaseInsensitiveCompare:)] objectAtIndex:indexPath.section]] objectAtIndex:indexPath.row];
     
-    cell.textLabel.text = [artistInfos objectForKey:@"artistName"];
-    cell.detailTextLabel.text = [artistInfos objectForKey:@"artistFirstName"];
+    
+    //[artistAvatar setImage:[artistInfos objectForKey:@"artistAvatar"]];
+    
+    // Set avatar, corp it in circle shape and add border
+    
+    artistAvatar.image = [artistInfos objectForKey:@"artistAvatar"];
+    
+    artistAvatar.layer.masksToBounds = YES;
+    
+    artistAvatar.layer.cornerRadius = 35;
+    
+    artistAvatar.layer.borderWidth = 2;
+    
+    artistAvatar.layer.borderColor = [UIColor whiteColor].CGColor;
+    
+    
+    
+    artistCover.image = [artistInfos objectForKey:@"artistCover"];
+    
+    nameLabel.text = [artistInfos objectForKey:@"artistName"];
+    firstNameLabel.text = [artistInfos objectForKey:@"artistFirstName"];
+    
+    // Artist Cover
+    
+    
+    //[artistCover setImage:[[UIImage alloc] initWithData:[NSData dataWithContentsOfURL:[NSURL URLWithString:[artistInfos objectForKey:@"artistCover"]]]]];
+    
+    
+    
+    //[artistAvatar setImage:[artistInfos objectForKey:@"artistAvatar"]];
+    
+    /*
+     
+     [artistAvatar setImage:[[UIImage alloc] initWithData:[NSData dataWithContentsOfURL:[NSURL URLWithString:[artistInfos objectForKey:@"artistAvatar"]]]]];
+     */
+    
+    cell.backgroundView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, cell.frame.size.width, cell.frame.size.height)];
+    
+    cell.backgroundView.backgroundColor = [UIColor whiteColor];
+    
+    cell.selectionStyle = UITableViewCellSelectionStyleNone;
     
     return cell;
 }
 
+
+
+
+
+
 -(void)createTableMenu
 {
+    // On instancie le menu en fonction des libellés de nos sections. Ce menu sera en scroll infini
+    // Donc on ajoute la dernière moitité des labels au début de notre tableau et la première moitié à la fin
+    
+    // En premier, on coupe le tableau des libellés du menu en 2 sous menus
+    
+    NSArray *sectionIndexArray = [[self.sections allKeys] sortedArrayUsingSelector:@selector(localizedCaseInsensitiveCompare:)];
+    
+    NSMutableArray *firstHalfArray = [[NSMutableArray alloc] init];
+    
+    NSMutableArray *secondHalfArray = [[NSMutableArray alloc] init];
+    
+    // On récup la moitié des libellés dans firstHalfArray
+    
+    for (int f = 0; f < [sectionIndexArray count] / 2; f++) {
+        
+        [firstHalfArray addObject:sectionIndexArray[f]];
+        
+        
+    }
+    
+    // Puis la seconde moitié des libellés dans secondHalfArray
+    
+    for (int s = [sectionIndexArray count] / 2; s < [sectionIndexArray count]; s++) {
+        
+        [secondHalfArray addObject:sectionIndexArray[s]];
+        
+        
+    }
+    
+    // On crée la première série de bouttons qui va correspondre à la seconde moitité de notre tableau
+    ///.        Il faut donc que le tag des boutons corresponde aux index des dernières sections !
+    /// \
+    //_!_\      Logique inside \0/
+    ////////////////////////////////////////////////////////////////////////////////////////////////////
     
     
-    // Navigation menu
+    //b for beginning
+    
+    b = 0;
+    
+    for (NSString *index in secondHalfArray)
+    {
+        
+        UIButton *indexButton = [[UIButton alloc] initWithFrame:CGRectMake(b*30, 15, 20, 20)];
+        
+        //[indexButton addTarget:self action:@selector(scrollToSection:) forControlEvents:UIControlEventTouchUpInside];
+        
+        // Passing parameter to button
+        indexButton.tag = [sectionIndexArray count] / 2 + b;
+        
+        [indexButton setTitle:index forState:UIControlStateNormal];
+        
+        indexButton.titleLabel.font = [UIFont fontWithName:@"Parisine-Bold" size:13];
+        
+        [indexButton setBackgroundColor:[UIColor colorWithWhite:255 alpha:0]];
+        
+        [tableMenuScrollView addSubview:indexButton];
+        
+        b++;
+    }
+    
+    
+    /// On crée les boutons correspondant à la liste complête des labels
     
     j = 0;
     
-    for (NSString *index in [[self.sections allKeys] sortedArrayUsingSelector:@selector(localizedCaseInsensitiveCompare:)])
+    for (NSString *index in sectionIndexArray)
     {
         
-        UIButton *indexButton = [[UIButton alloc] initWithFrame:CGRectMake(j*30, 15, 20, 20)];
+        UIButton *indexButton = [[UIButton alloc] initWithFrame:CGRectMake(b*30 + j*30, 15, 20, 20)];
         
-        [indexButton addTarget:self action:@selector(showTable:) forControlEvents:UIControlEventTouchUpInside];
+        //[indexButton addTarget:self action:@selector(scrollToSection:) forControlEvents:UIControlEventTouchUpInside];
         
         // Passing parameter to button
         indexButton.tag = j;
@@ -338,10 +574,56 @@
         j++;
     }
     
-    self.tableMenuScrollView.contentSize = CGSizeMake(j*30, 50);
-
-
+    /// Enfin, on crée les boutons correspondant à la première moitié des labels, que l'on place à la fin
+    
+    // e for end
+    
+    e = 0;
+    
+    for (NSString *index in firstHalfArray)
+    {
+        
+        UIButton *indexButton = [[UIButton alloc] initWithFrame:CGRectMake(b*30 + j*30 + e*30, 15, 20, 20)];
+        
+        //[indexButton addTarget:self action:@selector(scrollToSection:) forControlEvents:UIControlEventTouchUpInside];
+        
+        // Passing parameter to button
+        indexButton.tag = e;
+        
+        [indexButton setTitle:index forState:UIControlStateNormal];
+        
+        indexButton.titleLabel.font = [UIFont fontWithName:@"Parisine-Bold" size:13];
+        
+        [indexButton setBackgroundColor:[UIColor colorWithWhite:255 alpha:0]];
+        
+        [tableMenuScrollView addSubview:indexButton];
+        
+        e++;
+    }
+    
+    
+    
+    
+    self.tableMenuScrollView.contentSize = CGSizeMake(b*30 + j*30 + e*30 , 50);
+    
+    [tableMenuScrollView scrollRectToVisible:CGRectMake(b*30 ,0 ,self.view.frame.size.width, 50) animated:NO];
+    
+    
 }
+
+- (void)scrollToSection : (NSInteger)sectionNumber;
+{
+    
+    //NSInteger section = ((UIControl *) sender).tag;
+    
+    NSIndexPath *indexPath = [NSIndexPath indexPathForRow:0 inSection:sectionNumber];
+    
+    [self.artistsTable scrollToRowAtIndexPath:indexPath atScrollPosition:UITableViewScrollPositionTop animated:YES];
+    
+    
+}
+
+
 
 
 
@@ -366,6 +648,66 @@
     
     
     // [self presentModalViewController:mainMenu animated:YES];
+    
+}
+
+- (void)scrollViewDidEndDecelerating:(UIScrollView *)sender
+{
+    
+    // Le fameux scroll infini !
+    
+    if (tableMenuScrollView.contentOffset.x == 0) {
+        
+        // user is scrolling to the left from image 1 to image 10.
+        // reposition offset to show image 10 that is on the right in the scroll view
+        [tableMenuScrollView scrollRectToVisible:CGRectMake(b*30 + j*15,0,self.view.frame.size.width, 40) animated:NO];
+    }
+    else if (tableMenuScrollView.contentOffset.x == b*30 + j*30) {
+        
+        // user is scrolling to the right from image 10 to image 1.
+        // reposition offset to show image 1 that is on the left in the scroll view
+        [tableMenuScrollView scrollRectToVisible:CGRectMake(30,0,self.view.frame.size.width, 50) animated:NO];
+    }
+}
+
+
+// Detecter la position des boutons au scroll
+
+
+- (void)scrollViewDidEndDragging:(UIScrollView *)scrollView willDecelerate:(BOOL)decelerate
+{
+    
+    if (scrollView == tableMenuScrollView){
+        
+        for (UIView *subview in [tableMenuScrollView subviews])
+        {
+            
+            // Coordonnées du bouton relatives à la scroll view
+            
+            CGPoint buttonCenter = subview.center;
+            
+            // Coordonnées du bouton relatives à la vue principale
+            
+            CGPoint buttonCenterInCoord = [[subview superview] convertPoint:buttonCenter toView:self.view];
+            
+            //NSLog(@"%@", NSStringFromCGPoint(buttonCenterInCoord));
+            
+            // Notre bouton est proche du centre : on scroll donc de sorte à ce qu'il soit au centre !
+            
+            
+            if(buttonCenterInCoord.x > self.view.frame.size.width / 2 - 15 && buttonCenterInCoord.x < self.view.frame.size.width / 2 + 15)
+            {
+                
+                
+                [tableMenuScrollView setContentOffset:CGPointMake(buttonCenter.x - self.view.frame.size.width / 2 , 0) animated:YES];
+                [self scrollToSection:subview.tag];
+                
+                
+            }
+            
+        }
+    }
+    
     
 }
 

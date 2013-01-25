@@ -13,7 +13,7 @@
 {
     NSMutableIndexSet *expandedSections;
     int selectedMonth;
-
+    
 }
 
 @property (nonatomic, strong) UITableView *infosTableView;
@@ -70,8 +70,9 @@
 
 @property UILabel *dateLabel;
 @property UILabel *headerTitle;
+@property UILabel *headerText;
 
-@property BOOL didLoad;
+
 
 - (void)showMenu;
 
