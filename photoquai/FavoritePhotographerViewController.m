@@ -8,6 +8,7 @@
 
 #import "FavoritePhotographerViewController.h"
 
+
 @interface FavoritePhotographerViewController ()
 
 @end
@@ -64,9 +65,9 @@
     CGFloat screenHeight = screenRect.size.height;
     
     NSUserDefaults *preferencesUser = [NSUserDefaults standardUserDefaults];
-    favoritesPhotographers = [[NSArray alloc] initWithArray: [preferencesUser objectForKey:@"favorisImages"]];
+    favoritesPhotographers = [[NSMutableArray alloc] initWithArray: [preferencesUser objectForKey:@"favorisPhotographers"]];
     
-    UIScrollView *myScrollView = [[UIScrollView alloc] initWithFrame:CGRectMake(0, 0, screenWidth, screenHeight)];
+    myScrollView = [[UIScrollView alloc] initWithFrame:CGRectMake(0, 0, screenWidth, screenHeight)];
     myScrollView.opaque = YES;
     myScrollView.showsHorizontalScrollIndicator = NO;
     myScrollView.showsVerticalScrollIndicator = YES;
@@ -74,6 +75,7 @@
     myScrollView.clipsToBounds = YES;
     
     removeEnabled = NO; //La suppression de favoris n'est pas actif par défaut
+    
     
     
     int yPosition = 0, xPosition = 0;
@@ -88,13 +90,13 @@
             yPosition++;
         }
         
-        ArtistFavoriteElement *artistFavoriteElement = [[ArtistFavoriteElement alloc] initWithFrame:CGRectMake(xPosition * 150 + 13, (yPosition * 189) + 15, 145, 200) withId:1];
+        artistFavoriteElement = [[ArtistFavoriteElement alloc] initWithFrame:CGRectMake(xPosition * 150 + 13, (yPosition * 189) + 15, 145, 200) withId:1];
         [artistFavoriteElement setIdColonne:xPosition];
+        artistFavoriteElement.tag = i;
         
         [myScrollView addSubview:artistFavoriteElement];
         
-        UITapGestureRecognizer *accessPicture = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(accessPicture:)];
-        [artistFavoriteElement addGestureRecognizer:accessPicture];
+        
         
         //Calcul de la hauteur de la scrollview
         int heightMax = 0;
@@ -121,11 +123,61 @@
     }
     
     [self.view addSubview:myScrollView];
+    
+    fakeActionSheet = [[FakeActionSheet alloc] initWithFrame:CGRectMake(0, 0, 100, 100)];
+    
+    [self.view addSubview:fakeActionSheet];
 }
 
 - (void) suppfavoris{
-    NSLog(@"oki");
+    [fakeActionSheet hide];
+    if(removeEnabled == NO){
+        removeEnabled = YES;
+        for(ArtistFavoriteElement *view in myScrollView.subviews){
+            selectFavorites2Remove = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(selectFavorites2Remove:)];
+            [view addGestureRecognizer:selectFavorites2Remove];
+            [view removeGestureRecognizer:accessPhotographer];
+        }
+    }else{
+        [fakeActionSheet show];
+        removeEnabled = NO;
+        for(ArtistFavoriteElement *view in myScrollView.subviews){
+            accessPhotographer = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(accessPhotographer:)];
+            [view addGestureRecognizer:accessPhotographer];
+            [view removeGestureRecognizer:selectFavorites2Remove];
+        }
+    }
+    
+    
 }
+
+//- (void) removeFavorites{
+//    for (int i = 0; <#condition#>; i++) {
+//        <#statements#>
+//    }
+//}
+
+- (void) selectFavorites2Remove:(UIGestureRecognizer *)gesture{
+    UIView *index = gesture.view;
+    
+    NSNumber *favorite = [NSNumber numberWithInteger:index.tag];
+
+    UIImage*    backgroundImage = [UIImage imageNamed:@"favorite2remove@2x"];
+    CALayer*    crossLayer = [CALayer layer];
+    CGRect startFrame = CGRectMake(index.frame.size.height - 30, index.frame.size.width - 30, 30, 30);
+    crossLayer.contents = (id)backgroundImage.CGImage;
+    crossLayer.frame = startFrame;
+    
+    if (![favoritesPhotographers containsObject:favorite]){ //On checke si le favoris n'a pas déjà été checké
+        [favoritesPhotographers addObject:favorite];
+        [index.layer addSublayer:crossLayer];
+    }else{
+        [favoritesPhotographers removeObject:favorite];
+        [crossLayer removeFromSuperlayer];
+        
+    }
+}
+
 
 - (void)showMenu
 {

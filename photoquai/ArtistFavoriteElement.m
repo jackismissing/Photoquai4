@@ -27,7 +27,6 @@
         
         int randomImgPhotographer = arc4random() % [imgsPhotographerArray count];
         
-        NSLog(@"%@", [[imgsPhotographerArray objectAtIndex:0] valueForKeyPath:@"link_iphone"]);
         
         NSString *imgsPhotographer = [[imgsPhotographerArray objectAtIndex:randomImgPhotographer] valueForKeyPath:@"link_iphone"];
         
@@ -41,8 +40,7 @@
         [photographerFirstPhotography setImageWithURL:[NSURL URLWithString:imgsPhotographer] placeholderImage:[UIImage imageNamed:@"etoilejaune"]];
         photographerFirstPhotography.frame = CGRectMake(0, 0, 150, 115);
         photographerFirstPhotography.opaque = YES;
-        //photographerFirstPhotography.clipsToBounds = YES;
-        photographerFirstPhotography.contentMode = UIViewContentModeRedraw;
+        photographerFirstPhotography.contentMode = UIViewContentModeScaleToFill;
         [self addSubview:photographerFirstPhotography];
         
         CALayer *bottomBorderImageWallElement = [CALayer layer];
@@ -55,8 +53,6 @@
         artistPhotography.opaque = YES;
         artistPhotography.contentMode = UIViewContentModeRedraw;
         artistPhotography.frame = CGRectMake(37.5, photographerFirstPhotography.frame.size.height - 47.5, 90, 90);
-        //artistPhotography.layer.cornerRadius = 70;
-        
         
         
         UIBezierPath *aPath = [UIBezierPath bezierPathWithOvalInRect: CGRectMake(0, 0, 70, 70)];
@@ -64,7 +60,6 @@
         CAShapeLayer *borderPath = [CAShapeLayer layer];
         borderPath.path = aPath.CGPath;
         [borderPath setFillColor:[UIColor clearColor].CGColor];
-        //[borderPath setBorderWidth:50.0f];
         [borderPath setStrokeColor:[UIColor whiteColor].CGColor];
         borderPath.lineWidth = 3;
         borderPath.frame = CGRectMake(37.5, photographerFirstPhotography.frame.size.height - 47.5, 70, 70);
@@ -94,8 +89,6 @@
         self.frame = CGRectMake(frame.origin.x, frame.origin.y, frame.size.width, selfHeight - 90);
         self.clipsToBounds = YES;
         self.userInteractionEnabled = YES;
-        
-        NSLog(@"%f", self.frame.size.height);
         
         self.opaque = YES;
         self.backgroundColor = [UIColor whiteColor];
