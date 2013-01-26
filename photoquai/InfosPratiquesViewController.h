@@ -32,6 +32,14 @@
 
 -(void)scrollToTransport : (id)sender;
 
+-(void)viewMetro;
+
+-(void)viewRer;
+
+-(void)viewBus;
+
+-(void)viewVelib;
+
 
 
 @end
