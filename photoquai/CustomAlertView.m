@@ -75,7 +75,7 @@
     CGGradientRelease(gradient);
     
     CGContextAddPath(context, path);
-    CGContextSetLineWidth(context, 3.0f);
+    CGContextSetLineWidth(context, .5f);
     CGContextSetStrokeColorWithColor(context, [UIColor colorWithRed:210.0f/255.0f green:210.0f/255.0f blue:210.0f/255.0f alpha:1.0f].CGColor);
     CGContextSetShadowWithColor(context, CGSizeMake(0.0f, 0.0f), 6.0f, [UIColor colorWithRed:0.0f/255.0f green:0.0f/255.0f blue:0.0f/255.0f alpha:1.0f].CGColor);
     CGContextDrawPath(context, kCGPathStroke);

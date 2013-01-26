@@ -13,6 +13,7 @@
 #import "CustomAlertView.h"
 
 @class ViewController;
+@class Reachability;
 
 @interface AppDelegate : UIResponder <UIApplicationDelegate, UIAlertViewDelegate>{
     UITabBarController *tabBarController;

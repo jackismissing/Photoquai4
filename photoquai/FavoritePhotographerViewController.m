@@ -89,6 +89,8 @@
     
     
     [self loadFavoris];
+    
+    NSLog(@"reload");
 }
 
 - (void) loadFavoris{
@@ -139,7 +141,6 @@
     [self.view addSubview:myScrollView];
     
     fakeActionSheet = [[FakeActionSheet alloc] initWithFrame:CGRectMake(0, 0, 100, 100)];
-    
     [self.view addSubview:fakeActionSheet];
 }
 
@@ -179,7 +180,9 @@
     for (int i = 0; i < [favoritesToRemove count]; i++) {
         [favoritesPhotographers removeObject:[favoritesToRemove objectAtIndex:i]];
     }
-    [self loadFavoris];
+    //[self loadFavoris];
+    [self.view setNeedsDisplay];
+    
     [defaults setObject:favoritesPhotographers forKey:@"favorisPhotographes"];
     [defaults synchronize];
 }

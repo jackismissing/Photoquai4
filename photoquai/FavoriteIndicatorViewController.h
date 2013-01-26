@@ -21,7 +21,7 @@
 - (void) show;
 - (void) hide;
 
-- (void) setText:(NSString*)text;
+//- (void) setText:(NSString*)text;
 
 
 @property (nonatomic, strong) UILabel *message;

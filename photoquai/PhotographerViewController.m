@@ -91,7 +91,7 @@
     screenHeight = screenRect.size.height;
     // Do any additional setup after loading the view from its nib.
     
-    [self loadPhotographersDatas:self.idPhotographer];
+    descriptionIsFull = NO;
     
     preferencesUser = [NSUserDefaults standardUserDefaults];
     oldFavorites = [[NSArray alloc] initWithArray: [preferencesUser objectForKey:@"favorisPhotographes"]];
@@ -112,6 +112,19 @@
     popOver.transform = rotationTransform;
     
     [self.view addSubview:popOver];
+    
+#pragma mark - Scrollview
+    myScrollView = [[UIScrollView alloc] initWithFrame:CGRectMake(0, 0, screenWidth, screenHeight)];
+    myScrollView.opaque = YES;
+    myScrollView.showsHorizontalScrollIndicator = NO;
+    myScrollView.showsVerticalScrollIndicator = YES;
+    myScrollView.delegate = self;
+    myScrollView.alpha = 1;
+    myScrollView.backgroundColor = [UIColor clearColor];
+    
+    [self.view addSubview:myScrollView];
+    [self loadPhotographersDatas:self.idPhotographer];
+    //[self performSelectorInBackground:@selector(loadPhotographersDatas:) withObject:self.idPhotographer];
 }
 
 - (void) loadPhotographersDatas:(int)index{
@@ -121,47 +134,89 @@
     appendLink = [appendLink stringByAppendingString:[NSString stringWithFormat:@"%d", index]];
     appendLink = [appendLink stringByAppendingString:@".json"];
     
+    NSString *photographerPictureLink = [[appdelegate getElementsFromJSON:appendLink] valueForKeyPath:@"photographer.cover.file.link"];
     NSString *firstnamePhotographer = [[appdelegate getElementsFromJSON:appendLink] valueForKeyPath:@"photographer.firstname"];
     NSString *lastnamePhotographer = [[appdelegate getElementsFromJSON:appendLink] valueForKeyPath:@"photographer.lastname"];
     patronymPhotographer = [[NSString alloc] initWithString:firstnamePhotographer];
     patronymPhotographer = [patronymPhotographer stringByAppendingString:@" "];
     patronymPhotographer = [patronymPhotographer stringByAppendingString:lastnamePhotographer];
     
-    
-    UIView *patronymPhotographerView = [[UIView alloc] initWithFrame:CGRectMake(0, 200, screenWidth, 70)];
-    patronymPhotographerView.backgroundColor = [UIColor whiteColor];
+    UIImageView *photographerPicture = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, screenWidth, 150)];
+    photographerPicture.opaque = YES;
+    photographerPicture.contentMode = UIViewContentModeScaleAspectFill;
+    [photographerPicture setImageWithURL:[NSURL URLWithString:photographerPictureLink]];
     
     CALayer *bottomBorderPatronymPhotographerView = [CALayer layer];
-    bottomBorderPatronymPhotographerView.frame = CGRectMake(0.0f, patronymPhotographerView.frame.size.height, patronymPhotographerView.frame.size.width, 2.0f);
+    bottomBorderPatronymPhotographerView.frame = CGRectMake(0.0f, photographerPicture.frame.size.height, photographerPicture.frame.size.width, 2.0f);
     bottomBorderPatronymPhotographerView.backgroundColor = [UIColor r:215 g:26 b:33 alpha:1].CGColor;
-    [patronymPhotographerView.layer addSublayer:bottomBorderPatronymPhotographerView];
+    [photographerPicture.layer addSublayer:bottomBorderPatronymPhotographerView];
     
-    CALayer *topBorderPatronymPhotographerView = [CALayer layer];
-    topBorderPatronymPhotographerView.frame = CGRectMake(0.0f, 0.0f, patronymPhotographerView.frame.size.width, 2.0f);
-    topBorderPatronymPhotographerView.backgroundColor = [UIColor r:215 g:26 b:33 alpha:1].CGColor;
-    [patronymPhotographerView.layer addSublayer:topBorderPatronymPhotographerView];
+    [myScrollView addSubview:photographerPicture];
     
-    [self.view addSubview:patronymPhotographerView];
+    UIImage *buttonImage = [UIImage imageNamed:@"globe"];
     
-    UILabel *patronymPhotographerLabel = [[UILabel alloc] initWithFrame:CGRectMake((screenWidth - 90) / 2, 25, 120, 15)];
+    photographerLocalisationButton = [UIButton buttonWithType:UIButtonTypeCustom];
+    [photographerLocalisationButton setImage:buttonImage forState:UIControlStateNormal];
+    photographerLocalisationButton.backgroundColor = [UIColor r:35 g:35 b:35 alpha:1];
+    photographerLocalisationButton.frame = CGRectMake(screenWidth - 70, photographerPicture.frame.size.height - 17.5, 40, 35);
+    [photographerLocalisationButton addTarget:self action:@selector(displayPhotographerLocation) forControlEvents:UIControlEventTouchUpInside];
+    
+    float contentUnderPhotographerPictureY = photographerPicture.frame.size.height + photographerPicture.frame.origin.y;
+    
+    photographerLocationMap = [[UIImageView alloc] initWithFrame:CGRectMake((screenWidth/2), contentUnderPhotographerPictureY - 73, screenWidth, 100)];
+    photographerLocationMap.image = [UIImage imageNamed:@"photographerLocation"];
+    photographerLocationMap.contentMode = UIViewContentModeScaleAspectFill;
+    [photographerLocationMap sizeToFit];
+    photographerLocationMap.layer.anchorPoint = CGPointMake(1, 0); //Déplace le centre
+    photographerLocationMap.transform = CGAffineTransformMakeScale(1, 0.001);
+    [myScrollView addSubview:photographerLocationMap];
+    
+    [myScrollView addSubview:photographerLocalisationButton];
+    
+    //Content
+    contentUnderPhotographerPicture = [[UIImageView alloc] initWithFrame:CGRectMake(0, contentUnderPhotographerPictureY, screenHeight, 100)];
+    
+    UILabel *patronymPhotographerLabel = [[UILabel alloc] initWithFrame:CGRectMake(15, 20, 120, 15)];
     patronymPhotographerLabel.text = patronymPhotographer;
-    patronymPhotographerLabel.font = [UIFont fontWithName:@"Parisine-Bold" size:15];
-    [patronymPhotographerView addSubview:patronymPhotographerLabel];
+    patronymPhotographerLabel.font = [UIFont fontWithName:@"Parisine-Bold" size:17];
+    [contentUnderPhotographerPicture addSubview:patronymPhotographerLabel];
     [patronymPhotographerLabel sizeToFit];
     
-    UITextView *descriptionPhotographer = [[UITextView alloc] initWithFrame:CGRectMake(0, patronymPhotographerView.frame.origin.y + patronymPhotographerView.frame.size.height + 10, screenWidth * .8, screenHeight)];
+    float originPhotographerLabelY = patronymPhotographerLabel.frame.origin.y + patronymPhotographerLabel.frame.size.height;
+    UILabel *originPhotographerLabel = [[UILabel alloc] initWithFrame:CGRectMake(15, originPhotographerLabelY + 5, 75, 15)];
+    originPhotographerLabel.text = @"Groland";
+    originPhotographerLabel.font = [UIFont fontWithName:@"Parisine-Italic" size:11];
+    originPhotographerLabel.textColor = [UIColor r:102 g:102 b:102 alpha:1];
+    [contentUnderPhotographerPicture addSubview:originPhotographerLabel];
+    
+    float descriptionPhotographerY = originPhotographerLabel.frame.origin.y + originPhotographerLabel.frame.size.height;
+   
+    descriptionPhotographer = [[UITextView alloc] initWithFrame:CGRectMake(10, descriptionPhotographerY, screenWidth * .85, screenHeight)];
     descriptionPhotographer.text = [[appdelegate getElementsFromJSON:appendLink] valueForKeyPath:@"photographer.description"];
     descriptionPhotographer.editable = NO;
-    descriptionPhotographer.textColor = [UIColor blackColor];
+    descriptionPhotographer.textColor = [UIColor r:51 g:51 b:51 alpha:1];
     descriptionPhotographer.font = [UIFont fontWithName:@"Parisine-Regular" size:11];
-    [self.view addSubview:descriptionPhotographer];
-    CGRect frame = descriptionPhotographer.frame;
-    frame.size.height = descriptionPhotographer.contentSize.height;
-    //descriptionPhotographer.frame = frame;
-    descriptionPhotographer.contentSize = CGSizeMake(descriptionPhotographer.frame.size.width, frame.size.height + 10);
-    descriptionPhotographer.contentInset = UIEdgeInsetsMake(0, 0, 50, 0);
+    [contentUnderPhotographerPicture addSubview:descriptionPhotographer];
     
-    self.navigationItem.title = patronymPhotographer;
+    UIButton *displayFullDescriptionButton = [UIButton buttonWithType:UIButtonTypeCustom];
+    displayFullDescriptionButton.frame = CGRectMake(15, descriptionPhotographer.frame.size.height + descriptionPhotographer.frame.origin.y, screenWidth * .8, 35);
+    displayFullDescriptionButton.layer.borderColor = [UIColor r:215 g:215 b:215 alpha:1].CGColor;
+    displayFullDescriptionButton.layer.borderWidth = 1.0;
+    displayFullDescriptionButton.backgroundColor = [UIColor r:236 g:236 b:236 alpha:1];
+    displayFullDescriptionButton.titleLabel.text = @"Afficher +";
+    displayFullDescriptionButton.titleLabel.textColor = [UIColor r:106 g:106 b:106 alpha:1];
+    [displayFullDescriptionButton addSubview:descriptionPhotographer];
+    [displayFullDescriptionButton addTarget:self action:@selector(displayFullDescription) forControlEvents:UIControlEventTouchUpInside];
+ 
+    
+    float contentUnderPhotographerPictureHeight = patronymPhotographerLabel.frame.origin.y + patronymPhotographerLabel.frame.size.height + originPhotographerLabel.frame.size.height + originPhotographerLabel.frame.origin.y + descriptionPhotographer.frame.origin.y + descriptionPhotographer.frame.size.height;
+    contentUnderPhotographerPicture.frame = CGRectMake(0, contentUnderPhotographerPictureY, screenHeight, contentUnderPhotographerPictureHeight);
+    
+    [myScrollView addSubview:contentUnderPhotographerPicture];
+
+    myScrollViewHeight = photographerPicture.frame.size.height + contentUnderPhotographerPicture.frame.size.height;
+    NSLog(@"%@", NSStringFromCGRect(contentUnderPhotographerPicture.frame));
+    myScrollView.contentSize = CGSizeMake(screenWidth, myScrollViewHeight);
 }
 
 
@@ -216,6 +271,7 @@
 - (void) sharePicture{
     
     if(shareIsHidden){ //Les options de partage ne sont pas là... on les affiche
+        
         [UIView animateWithDuration:0.5
                               delay:0
                             options: UIViewAnimationCurveEaseOut
@@ -226,6 +282,7 @@
                          completion:^(BOOL finished){}];
         shareIsHidden = NO;
     }else{
+        
         [UIView animateWithDuration:0.5
                               delay:0
                             options: UIViewAnimationCurveEaseOut
@@ -236,7 +293,7 @@
                          completion:^(BOOL finished){}];
         shareIsHidden = YES;
     }
-    
+    photographerLocationIsVisible = NO;
 }
 
 - (void)back {
@@ -280,6 +337,60 @@
     PhotographerViewController *imageViewController = [[PhotographerViewController alloc] initWithNibName:@"PhotographerViewController" bundle:nil];
     imageViewController.idPhotographer = [[notification object] intValue];
     [self.navigationController pushViewController:imageViewController animated:YES];
+}
+
+- (void) displayPhotographerLocation{
+    if (photographerLocationIsVisible == NO) { //La carte apparait
+        myScrollView.contentSize = CGSizeMake(screenWidth, myScrollViewHeight + 130);
+        
+        UIImage *buttonImage = [UIImage imageNamed:@"closeMap"];
+        [photographerLocalisationButton setImage:buttonImage forState:UIControlStateNormal];
+        
+        [UIView animateWithDuration:0.5
+                              delay:0
+                            options: UIViewAnimationCurveEaseOut
+                         animations:^{
+                             photographerLocationMap.transform = CGAffineTransformMakeScale(1, 1);
+                             contentUnderPhotographerPicture.frame = CGRectMake(0, contentUnderPhotographerPicture.frame.origin.y + 155, screenHeight, 100);
+                             
+                         }
+                         completion:^(BOOL finished){
+                             photographerLocationIsVisible = YES;
+                             
+                         }];
+    }else{ //La carte disparait
+        myScrollView.contentSize = CGSizeMake(screenWidth, myScrollViewHeight - 20);
+        
+        UIImage *buttonImage = [UIImage imageNamed:@"globe"];
+        [photographerLocalisationButton setImage:buttonImage forState:UIControlStateNormal];
+        
+        [UIView animateWithDuration:0.5
+                              delay:0
+                            options: UIViewAnimationCurveEaseOut
+                         animations:^{
+                             photographerLocationMap.transform = CGAffineTransformMakeScale(1, 0.001);
+                             contentUnderPhotographerPicture.frame = CGRectMake(0, contentUnderPhotographerPicture.frame.origin.y - 155, screenHeight, 100);
+                             myScrollView.contentOffset = CGPointMake(0, 0);
+                         }
+                         completion:^(BOOL finished){
+                             photographerLocationIsVisible = NO;
+                         }];
+    }
+}
+
+- (void) displayFullDescription{
+    if (descriptionIsFull == NO) {
+        CGRect frame = descriptionPhotographer.frame;
+        frame.size = descriptionPhotographer.contentSize;
+        descriptionPhotographer.frame = frame;
+        
+        descriptionIsFull = YES;
+    }else{
+        descriptionPhotographer.frame = CGRectMake(10, 60, screenWidth * .85, screenHeight);
+        
+        descriptionIsFull = NO;
+    }
+    
 }
 
 - (void)didReceiveMemoryWarning

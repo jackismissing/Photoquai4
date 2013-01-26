@@ -50,6 +50,15 @@
     
     tabBarController = [[UITabBarController alloc] init];
     
+    Reachability *reachability = [Reachability reachabilityForInternetConnection];
+    NetworkStatus internetStatus = [reachability currentReachabilityStatus];
+    if (internetStatus != NotReachable) {
+        //my web-dependent code
+    }
+    else {
+        NSLog(@"ok - connected");
+    }
+    
     UIViewController *v1 = [[FavoritesPicturesViewController alloc] initWithNibName:@"FavoritesPicturesViewController" bundle:nil];
     v1.tabBarItem.image = [UIImage imageNamed:@"favoritesPicturesIcon"];
     v1.tabBarItem.title = @"Photographies";

@@ -63,14 +63,12 @@
 
     
     Reachability *reachabilityInfo;
-    [[NSNotificationCenter defaultCenter] addObserver:self
-                                             selector:@selector(connexionStateChanged:)
-                                                 name:@"loginComplete" object:reachabilityInfo];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(connexionStateChanged:) name:@"loginComplete" object:reachabilityInfo];
     
     // Post a notification to loginComplete
     [[NSNotificationCenter defaultCenter] postNotificationName:@"loginComplete" object:reachabilityInfo];
     
-    AppDelegate *appdelegate = [[UIApplication sharedApplication] delegate];
+    AppDelegate *appdelegate = (AppDelegate *)[[UIApplication sharedApplication] delegate];
     [appdelegate hideTabBar:self.tabBarController];
 }
 
@@ -129,7 +127,7 @@
 }
 
 - (void) loadImageWall{
-    AppDelegate *appdelegate = [[UIApplication sharedApplication] delegate];
+    AppDelegate *appdelegate = (AppDelegate *)[[UIApplication sharedApplication] delegate];
     
     int randomAnimate = (arc4random() % 2);
     
@@ -246,9 +244,7 @@
     [myScrollView addSubview:thumbsContainer];
     
     thumbsContainer.frame = CGRectMake(0, 0, totalWidth, heightMax + 21);
-    
-    
-    
+
     [myScrollView setContentSize:CGSizeMake(totalWidth, heightMax + 21)];
     //Place le catalogue à une valeur aléatoire
     float randNumY = (arc4random() % heightMax);

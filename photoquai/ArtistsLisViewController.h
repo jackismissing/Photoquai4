@@ -8,6 +8,8 @@
 
 #import <UIKit/UIKit.h>
 
+#import "UIImageView+AFNetworking.h"
+
 @interface ArtistsLisViewController : UIViewController<UITableViewDataSource, UITableViewDelegate>
 {
     int artistsIterate, i, nbrArtists, b, e, j, cellNumber;

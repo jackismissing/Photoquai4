@@ -15,7 +15,8 @@
 #import "CustomPopOver.h"
 #import "FavoritePhotographerViewController.h"
 
-@interface PhotographerViewController : UIViewController<MFMailComposeViewControllerDelegate>{
+
+@interface PhotographerViewController : UIViewController <MFMailComposeViewControllerDelegate, UIScrollViewDelegate>{
     UIButton *favouriteButton;
     BOOL shareIsHidden;
     
@@ -31,6 +32,16 @@
     CGFloat screenHeight;
     
     CustomPopOver *popOver;
+    UIScrollView *myScrollView;
+    
+    BOOL photographerLocationIsVisible;
+    UIView *contentUnderPhotographerPicture;
+    UIImageView *photographerLocationMap;
+    float myScrollViewHeight;
+    UIButton *photographerLocalisationButton;
+    UITextView *descriptionPhotographer;
+    
+    BOOL descriptionIsFull;
 }
 
 @property (nonatomic, assign) int idPhotographer;

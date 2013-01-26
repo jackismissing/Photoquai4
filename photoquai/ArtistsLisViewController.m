@@ -224,10 +224,7 @@
         
     }
     
-    
     artistsIterate = i+1;
-    
-    
     
     NSString *appendLink = @"http://phq.cdnl.me/api/fr/photographers/";
     appendLink = [appendLink stringByAppendingString:[NSString stringWithFormat:@"%d", artistsIterate]];
@@ -249,7 +246,9 @@
     UIImage *artistCoverImage = [[UIImage alloc] initWithData:[NSData dataWithContentsOfURL:[NSURL URLWithString:coverArtist]]];
     
     
-    NSDictionary *artistInfos = [[NSDictionary alloc] initWithObjectsAndKeys:(id)idArtist, @"artistId", lastNameArtist, @"artistName", firstNameArtist, @"artistFirstName", artistAvatarImage, @"artistAvatar", artistCoverImage, @"artistCover", nil];
+    //NSDictionary *artistInfos = [[NSDictionary alloc] initWithObjectsAndKeys:(id)idArtist, @"artistId", lastNameArtist, @"artistName", firstNameArtist, @"artistFirstName", artistAvatarImage, @"artistAvatar", artistCoverImage, @"artistCover", nil];
+    
+    NSDictionary *artistInfos = [[NSDictionary alloc] initWithObjectsAndKeys:(id)idArtist, @"artistId", lastNameArtist, @"artistName", firstNameArtist, @"artistFirstName", avatarArtist, @"artistAvatar", coverArtist, @"artistCover", nil];
     
     //NSLog(@"%@", avatarArtist);
     //NSLog(@"%@", coverArtist);
@@ -440,7 +439,8 @@
     
     // Set avatar, corp it in circle shape and add border
     
-    artistAvatar.image = [artistInfos objectForKey:@"artistAvatar"];
+    //artistAvatar.image = [artistInfos objectForKey:@"artistAvatar"];
+    [artistAvatar setImageWithURL:[NSURL URLWithString:[artistInfos objectForKey:@"artistAvatar"]]];
     
     artistAvatar.layer.masksToBounds = YES;
     
@@ -452,7 +452,8 @@
     
     
     
-    artistCover.image = [artistInfos objectForKey:@"artistCover"];
+    //artistCover.image = [artistInfos objectForKey:@"artistCover"];
+    [artistCover setImageWithURL:[NSURL URLWithString:[artistInfos objectForKey:@"artistCover"]]];
     
     nameLabel.text = [artistInfos objectForKey:@"artistName"];
     firstNameLabel.text = [artistInfos objectForKey:@"artistFirstName"];
@@ -619,15 +620,7 @@
     NSIndexPath *indexPath = [NSIndexPath indexPathForRow:0 inSection:sectionNumber];
     
     [self.artistsTable scrollToRowAtIndexPath:indexPath atScrollPosition:UITableViewScrollPositionTop animated:YES];
-    
-    
 }
-
-
-
-
-
-
 
 - (void)showMenu
 {

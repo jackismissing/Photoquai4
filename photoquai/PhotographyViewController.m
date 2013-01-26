@@ -158,7 +158,7 @@
 #pragma mark - Partage
     shareIsHidden = YES; //Par défaut les options de partage sont cachées
     popOver = [[CustomPopOver alloc] init];
-    popOver.layer.anchorPoint = CGPointMake(1.0, 0.0);
+    popOver.layer.anchorPoint = CGPointMake(1.0, 0.0); //Déplace le centre de rotation
     popOver.frame = CGRectMake(210, 0, 100, 100);
     popOver.alpha = 0;
     //popOver.center = CGPointMake(CGRectGetWidth(popOver.bounds), 0.0);
@@ -199,7 +199,7 @@
         [alert show];
     }else{
         [favoritesImages removeObject:idPicture];
-        NSLog(@"%@", favoritesImages);
+        
         [defaults setObject:favoritesImages forKey:@"favorisImages"];
         [defaults synchronize];
         

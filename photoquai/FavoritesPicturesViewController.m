@@ -11,7 +11,6 @@
 @interface FavoritesPicturesViewController (){
     
     UIScrollView *myScrollView;
-    
 }
 
 @end
@@ -47,8 +46,6 @@
     
     //AppDelegate *appdelegate = (AppDelegate *)[[UIApplication sharedApplication] delegate];
     //[appdelegate showTabBar:self.tabBarController];
-    
-    
 }
 
 - (void)viewDidLoad
@@ -198,7 +195,8 @@
         [favoritesPictures removeObject:[favoritesToRemove objectAtIndex:i]];
     }
     removeEnabled = YES;
-    [self suppfavoris];
+    [self.view removeFromSuperview];
+    [self.view setNeedsDisplay];
     
     [defaults setObject:favoritesPictures forKey:@"favorisImages"];
     [defaults synchronize];
