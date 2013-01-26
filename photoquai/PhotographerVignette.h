@@ -13,14 +13,18 @@
     
     NSString *lastname;
     NSString *firstname;
+    
+    int idPhotographer;
 }
 
 - (id)initWithFrame:(CGRect)frame withId:(int)anId;
 
 - (NSString*) lastname;
 - (NSString*) firstname;
+- (int) idPhotographer;
 
 - (void) setLastname:(NSString*)lastname;
 - (void) setFirstname:(NSString*)firstname;
+- (void) setIdPhotographer:(int)anIdPhotographer;
 
 @end

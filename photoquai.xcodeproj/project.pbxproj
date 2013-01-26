@@ -7,7 +7,10 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		1A0466B716B072A800F01AA3 /* ArtistFavoriteElement.m in Sources */ = {isa = PBXBuildFile; fileRef = 1A0466B616B072A800F01AA3 /* ArtistFavoriteElement.m */; };
+		1A017EDC16B31F7100181788 /* SliderImage.m in Sources */ = {isa = PBXBuildFile; fileRef = 1A017EDB16B31F7100181788 /* SliderImage.m */; };
+		1A017EE116B320DD00181788 /* PhotographerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1A017EDF16B320DD00181788 /* PhotographerViewController.m */; };
+		1A017EE216B320DD00181788 /* PhotographerViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1A017EE016B320DD00181788 /* PhotographerViewController.xib */; };
+		1A017EED16B35DA500181788 /* ArtistFavoriteElement.m in Sources */ = {isa = PBXBuildFile; fileRef = 1A017EEC16B35DA500181788 /* ArtistFavoriteElement.m */; };
 		1A0466BC16B0815400F01AA3 /* FavoritePhotographerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1A0466BA16B0815400F01AA3 /* FavoritePhotographerViewController.m */; };
 		1A0466BD16B0815400F01AA3 /* FavoritePhotographerViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1A0466BB16B0815400F01AA3 /* FavoritePhotographerViewController.xib */; };
 		1A0466C016B0996200F01AA3 /* suppfavoris@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 1A0466BE16B0996200F01AA3 /* suppfavoris@2x.png */; };
@@ -89,6 +92,8 @@
 		1ADCFE4616AF3CB80088A4C5 /* FavoriteIndicatorViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1ADCFE4516AF3CB70088A4C5 /* FavoriteIndicatorViewController.m */; };
 		1ADCFE4A16AF4A5B0088A4C5 /* CustomAlertView.m in Sources */ = {isa = PBXBuildFile; fileRef = 1ADCFE4916AF4A5B0088A4C5 /* CustomAlertView.m */; };
 		1ADF100D16AAF0B700C2ADD2 /* DrawRect.m in Sources */ = {isa = PBXBuildFile; fileRef = 1ADF100C16AAF0B700C2ADD2 /* DrawRect.m */; };
+		1AE2B0CB16B2607800DC1829 /* emptycheck@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 1AE2B0C916B2607800DC1829 /* emptycheck@2x.png */; };
+		1AE2B0CC16B2607800DC1829 /* emptycheck.png in Resources */ = {isa = PBXBuildFile; fileRef = 1AE2B0CA16B2607800DC1829 /* emptycheck.png */; };
 		1AEEF43D16ADDEE900489C08 /* ArtistsLisViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1AEEF43C16ADDEE900489C08 /* ArtistsLisViewController.m */; };
 		1AEEF44416ADE11000489C08 /* audioguide-over.png in Resources */ = {isa = PBXBuildFile; fileRef = 1AEEF44016ADE10F00489C08 /* audioguide-over.png */; };
 		1AEEF44516ADE11000489C08 /* audioguide-over@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 1AEEF44116ADE10F00489C08 /* audioguide-over@2x.png */; };
@@ -145,8 +150,13 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		1A0466B516B072A800F01AA3 /* ArtistFavoriteElement.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ArtistFavoriteElement.h; sourceTree = "<group>"; };
-		1A0466B616B072A800F01AA3 /* ArtistFavoriteElement.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ArtistFavoriteElement.m; sourceTree = "<group>"; };
+		1A017EDA16B31F7100181788 /* SliderImage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SliderImage.h; sourceTree = "<group>"; };
+		1A017EDB16B31F7100181788 /* SliderImage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SliderImage.m; sourceTree = "<group>"; };
+		1A017EDE16B320DD00181788 /* PhotographerViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PhotographerViewController.h; sourceTree = "<group>"; };
+		1A017EDF16B320DD00181788 /* PhotographerViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PhotographerViewController.m; sourceTree = "<group>"; };
+		1A017EE016B320DD00181788 /* PhotographerViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PhotographerViewController.xib; sourceTree = "<group>"; };
+		1A017EEB16B35DA500181788 /* ArtistFavoriteElement.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ArtistFavoriteElement.h; sourceTree = "<group>"; };
+		1A017EEC16B35DA500181788 /* ArtistFavoriteElement.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ArtistFavoriteElement.m; sourceTree = "<group>"; };
 		1A0466B916B0815400F01AA3 /* FavoritePhotographerViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FavoritePhotographerViewController.h; sourceTree = "<group>"; };
 		1A0466BA16B0815400F01AA3 /* FavoritePhotographerViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FavoritePhotographerViewController.m; sourceTree = "<group>"; };
 		1A0466BB16B0815400F01AA3 /* FavoritePhotographerViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = FavoritePhotographerViewController.xib; sourceTree = "<group>"; };
@@ -259,6 +269,8 @@
 		1ADCFE4916AF4A5B0088A4C5 /* CustomAlertView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CustomAlertView.m; sourceTree = "<group>"; };
 		1ADF100B16AAF0B700C2ADD2 /* DrawRect.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DrawRect.h; sourceTree = "<group>"; };
 		1ADF100C16AAF0B700C2ADD2 /* DrawRect.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DrawRect.m; sourceTree = "<group>"; };
+		1AE2B0C916B2607800DC1829 /* emptycheck@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "emptycheck@2x.png"; sourceTree = "<group>"; };
+		1AE2B0CA16B2607800DC1829 /* emptycheck.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = emptycheck.png; sourceTree = "<group>"; };
 		1AEEF43B16ADDEE900489C08 /* ArtistsLisViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ArtistsLisViewController.h; sourceTree = "<group>"; };
 		1AEEF43C16ADDEE900489C08 /* ArtistsLisViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ArtistsLisViewController.m; sourceTree = "<group>"; };
 		1AEEF44016ADE10F00489C08 /* audioguide-over.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "audioguide-over.png"; sourceTree = "<group>"; };
@@ -359,11 +371,28 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		1A017ED816B31F1200181788 /* SliderPicturesPhotographer */ = {
+			isa = PBXGroup;
+			children = (
+				1A017EDA16B31F7100181788 /* SliderImage.h */,
+				1A017EDB16B31F7100181788 /* SliderImage.m */,
+			);
+			name = SliderPicturesPhotographer;
+			sourceTree = "<group>";
+		};
+		1A017EDD16B320A600181788 /* PhotographerViewController */ = {
+			isa = PBXGroup;
+			children = (
+				1A017EDE16B320DD00181788 /* PhotographerViewController.h */,
+				1A017EDF16B320DD00181788 /* PhotographerViewController.m */,
+				1A017EE016B320DD00181788 /* PhotographerViewController.xib */,
+			);
+			name = PhotographerViewController;
+			sourceTree = "<group>";
+		};
 		1A0466B316B0724E00F01AA3 /* ArtistFavorite */ = {
 			isa = PBXGroup;
 			children = (
-				1A0466B516B072A800F01AA3 /* ArtistFavoriteElement.h */,
-				1A0466B616B072A800F01AA3 /* ArtistFavoriteElement.m */,
 			);
 			name = ArtistFavorite;
 			sourceTree = "<group>";
@@ -501,6 +530,7 @@
 		1ABEACAB16A5C34E0034D316 /* photoquai */ = {
 			isa = PBXGroup;
 			children = (
+				1A017EDD16B320A600181788 /* PhotographerViewController */,
 				1ABDFCED16AB64A7004C95C8 /* FavoritePicturesViewController */,
 				1A0466B816B0811500F01AA3 /* FavoritePhotographersViewController */,
 				375E21F816A945DF00F012AF /* MapViewController */,
@@ -552,6 +582,9 @@
 		1ABEACCF16A5C9EF0034D316 /* Classes */ = {
 			isa = PBXGroup;
 			children = (
+				1A017EEB16B35DA500181788 /* ArtistFavoriteElement.h */,
+				1A017EEC16B35DA500181788 /* ArtistFavoriteElement.m */,
+				1A017ED816B31F1200181788 /* SliderPicturesPhotographer */,
 				1A9D4B8F16B1F4EE00CC8FD2 /* Fake UIActionSheet */,
 				1A0466B316B0724E00F01AA3 /* ArtistFavorite */,
 				1AEEF48916ADEDC900489C08 /* FavoriteIndicator */,
@@ -824,6 +857,8 @@
 		37C7830616A9AD0D001D6295 /* Favorites */ = {
 			isa = PBXGroup;
 			children = (
+				1AE2B0C916B2607800DC1829 /* emptycheck@2x.png */,
+				1AE2B0CA16B2607800DC1829 /* emptycheck.png */,
 				1A9D4B9116B1F5EA00CC8FD2 /* favorite2remove.png */,
 				1A9D4B9216B1F5EA00CC8FD2 /* favorite2remove@2x.png */,
 				1A0466C216B0AE8200F01AA3 /* favoritesPhotographersIcon.png */,
@@ -1022,6 +1057,9 @@
 				1A0466C516B0AE8200F01AA3 /* favoritesPhotographersIcon@2x.png in Resources */,
 				1A9D4B9316B1F5EA00CC8FD2 /* favorite2remove.png in Resources */,
 				1A9D4B9416B1F5EA00CC8FD2 /* favorite2remove@2x.png in Resources */,
+				1AE2B0CB16B2607800DC1829 /* emptycheck@2x.png in Resources */,
+				1AE2B0CC16B2607800DC1829 /* emptycheck.png in Resources */,
+				1A017EE216B320DD00181788 /* PhotographerViewController.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1070,9 +1108,11 @@
 				1AEEF48F16ADF4A600489C08 /* FavoriteIndicator.m in Sources */,
 				1ADCFE4616AF3CB80088A4C5 /* FavoriteIndicatorViewController.m in Sources */,
 				1ADCFE4A16AF4A5B0088A4C5 /* CustomAlertView.m in Sources */,
-				1A0466B716B072A800F01AA3 /* ArtistFavoriteElement.m in Sources */,
 				1A0466BC16B0815400F01AA3 /* FavoritePhotographerViewController.m in Sources */,
 				1A9D4B9716B1F60E00CC8FD2 /* FakeActionSheet.m in Sources */,
+				1A017EDC16B31F7100181788 /* SliderImage.m in Sources */,
+				1A017EE116B320DD00181788 /* PhotographerViewController.m in Sources */,
+				1A017EED16B35DA500181788 /* ArtistFavoriteElement.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

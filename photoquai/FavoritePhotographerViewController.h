@@ -11,9 +11,12 @@
 #import "ArtistFavoriteElement.h"
 #import "FakeActionSheet.h"
 
-@interface FavoritePhotographerViewController : UIViewController <UIScrollViewDelegate, UIActionSheetDelegate>{
+@class ArtistFavoriteElement; 
+
+@interface FavoritePhotographerViewController : UIViewController <UIScrollViewDelegate, UIActionSheetDelegate, UITabBarControllerDelegate>{
     BOOL removeEnabled;
     NSMutableArray *favoritesPhotographers;
+    NSMutableArray *favoritesToRemove;
     ArtistFavoriteElement *artistFavoriteElement;
     UIScrollView *myScrollView;
     

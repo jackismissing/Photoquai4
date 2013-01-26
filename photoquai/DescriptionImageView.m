@@ -102,8 +102,9 @@
 
 - (void)accessPhotographer:(UIGestureRecognizer *)gesture{
     
-    //On définit la méthode à appeler dans la vue l'appelant
-    [[NSNotificationCenter defaultCenter] postNotificationName:@"showArtistPage" object:[NSNumber numberWithInt:5]];
+    UIView *index = gesture.view;
+    
+    [[NSNotificationCenter defaultCenter] postNotificationName:@"showArtistPage" object:[NSNumber numberWithInt:index.tag]];
 }
 
 //Place le nom de la photo

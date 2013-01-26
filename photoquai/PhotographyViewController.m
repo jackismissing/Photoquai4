@@ -94,7 +94,7 @@
 {
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
-    AppDelegate *appdelegate = [[UIApplication sharedApplication] delegate];
+    AppDelegate *appdelegate = (AppDelegate *)[[UIApplication sharedApplication] delegate];
     self.view.backgroundColor = [UIColor r:9 g:9 b:9 alpha:1];
     
     self.navigationItem.hidesBackButton = YES;
@@ -352,8 +352,11 @@
 }
 
 - (void) accessPhotographerPage:(NSNotification *)notification{
-
-    NSLog(@"%@", [notification object]);
+    
+    
+    PhotographerViewController *imageViewController = [[PhotographerViewController alloc] initWithNibName:@"PhotographerViewController" bundle:nil];
+    imageViewController.idPhotographer = [[notification object] intValue];
+    [self.navigationController pushViewController:imageViewController animated:YES];
 }
 
 - (void) showImageVolet:(NSNotification *)notification{
@@ -454,7 +457,7 @@
 }
 
 - (void)scrollViewDidScroll:(UIScrollView *)scrollView{
-    NSLog(@"ok");
+    
     
 }
 

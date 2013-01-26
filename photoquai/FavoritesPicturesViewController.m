@@ -36,8 +36,18 @@
     UIBarButtonItem* menuBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:menuButton];
     [self.navigationItem setLeftBarButtonItem:menuBarButtonItem];
     
-    AppDelegate *appdelegate = (AppDelegate *)[[UIApplication sharedApplication] delegate];
-    [appdelegate showTabBar:self.tabBarController];
+    UIImage* image3 = [UIImage imageNamed:@"suppfavoris"];
+    CGRect frameimg = CGRectMake(-100, 0, image3.size.width, image3.size.height);
+    UIButton *removeButton = [[UIButton alloc] initWithFrame:frameimg];
+    [removeButton setBackgroundImage:image3 forState:UIControlStateNormal];
+    [removeButton addTarget:self action:@selector(suppfavoris) forControlEvents:UIControlEventTouchUpInside];
+    
+    UIBarButtonItem *removeButtonItem = [[UIBarButtonItem alloc] initWithCustomView:removeButton];
+    self.navigationItem.rightBarButtonItem = removeButtonItem;
+    
+    //AppDelegate *appdelegate = (AppDelegate *)[[UIApplication sharedApplication] delegate];
+    //[appdelegate showTabBar:self.tabBarController];
+    
     
 }
 
@@ -53,7 +63,17 @@
     self.navigationItem.title = @"Favoris";
     
     NSUserDefaults *preferencesUser = [NSUserDefaults standardUserDefaults];
-    favoritesPictures = [[NSArray alloc] initWithArray: [preferencesUser objectForKey:@"favorisImages"]];
+    favoritesPictures = [[NSMutableArray alloc] initWithArray: [preferencesUser objectForKey:@"favorisImages"]];
+    favoritesToRemove = [[NSMutableArray alloc] init];
+    
+    if ([favoritesPictures count] == 0) {
+        CustomAlertView *alert = [[CustomAlertView alloc]
+                                  initWithTitle:nil
+                                  message:@"Vous n'avez pas de favoris pour le moment."
+                                  delegate:self
+                                  cancelButtonTitle:@"OK" otherButtonTitles:@"Favoris", nil];
+        [alert show];
+    }
     
     CGRect screenRect = [[UIScreen mainScreen] bounds];
     CGFloat screenWidth = screenRect.size.width;
@@ -67,9 +87,13 @@
     myScrollView.autoresizesSubviews = YES;
     [self.view addSubview:myScrollView];
     
+    fakeActionSheet = [[FakeActionSheet alloc] initWithFrame:CGRectMake(0, 0, 100, 100)];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(removeFavorites) name:@"removeFavorites" object:nil];
+    removeEnabled = NO; //La suppression de favoris n'est pas actif par défaut
+    [self.view addSubview:fakeActionSheet];
+    
     [self performSelectorInBackground:@selector(loadFavoritesPictures) withObject:nil];
 } //Fin du view didload
-
 
 
 - (void) loadFavoritesPictures{
@@ -83,7 +107,6 @@
     
     for (int imgIterate = 0; imgIterate < [favoritesPictures count]; imgIterate++) {
         xPosition++;
-        NSLog(@"xPosition : %i", yPosition);
         
         if (imgIterate % 2 == 0) {
             xPosition = 0;
@@ -114,14 +137,13 @@
         favoritePictureElement.frame = CGRectMake(((width + 5) * xPosition + 5), yPosition, width, height + heightText);
         
         favoritePictureElement.tag = idPicture;
+        accessPicture = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(accessPicture:)];
+        [favoritePictureElement addGestureRecognizer:accessPicture];
         
         [heights addObject: [NSNumber numberWithInt: favoritePictureElement.frame.size.height]];
         [ys addObject: [NSNumber numberWithInt: favoritePictureElement.frame.origin.y]];
         
         [myScrollView addSubview:favoritePictureElement];
-        
-        UITapGestureRecognizer *accessPicture = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(accessPicture:)];
-        [favoritePictureElement addGestureRecognizer:accessPicture];
         
         //Calcul de la hauteur de la scrollview
         int heightMax = 0;
@@ -147,6 +169,70 @@
         [myScrollView setContentSize:CGSizeMake(320, heightMax + 70)];
     }
 }
+
+
+- (void) suppfavoris{
+    if(removeEnabled == NO){
+        [fakeActionSheet show];
+        removeEnabled = YES;
+        for(FavoriteElement *view in myScrollView.subviews){
+            selectFavorites2Remove = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(selectFavorites2Remove:)];
+            [view addGestureRecognizer:selectFavorites2Remove];
+            [view removeGestureRecognizer:accessPicture];
+        }
+    }else{
+        [fakeActionSheet hide];
+        removeEnabled = NO;
+        for(FavoriteElement *view in myScrollView.subviews){
+            accessPicture = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(accessPicture:)];
+            [view addGestureRecognizer:accessPicture];
+            [view removeGestureRecognizer:selectFavorites2Remove];
+        }
+    }
+}
+
+- (void) removeFavorites{
+    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+    
+    for (int i = 0; i < [favoritesToRemove count]; i++) {
+        [favoritesPictures removeObject:[favoritesToRemove objectAtIndex:i]];
+    }
+    removeEnabled = YES;
+    [self suppfavoris];
+    
+    [defaults setObject:favoritesPictures forKey:@"favorisImages"];
+    [defaults synchronize];
+    NSLog(@"favoritesToRemove : %@", favoritesToRemove);
+}
+
+- (void) selectFavorites2Remove:(UIGestureRecognizer *)gesture{
+    UIView *index = gesture.view;
+    
+    NSNumber *favorite = [NSNumber numberWithInteger:index.tag];
+    
+    UIImage*    backgroundImage = [UIImage imageNamed:@"favorite2remove"];
+    CALayer*    crossLayer = [CALayer layer];
+    CGRect startFrame = CGRectMake(index.frame.size.width - 30, index.frame.size.height - 30, 30, 30);
+    crossLayer.contents = (id)backgroundImage.CGImage;
+    crossLayer.frame = startFrame;
+    
+    crossLayer.opaque = YES;
+    
+    if (![favoritesToRemove containsObject:favorite]){ //On checke si le favoris n'a pas déjà été checké
+        [favoritesToRemove addObject:favorite];
+        [index.layer addSublayer:crossLayer];
+        crossLayer.name = [NSString stringWithFormat:@"%i", index.tag];
+    }else{
+        [favoritesToRemove removeObject:favorite];
+        for (CALayer *layer in index.layer.sublayers) {
+            if ([layer.name isEqualToString:[NSString stringWithFormat:@"%i", index.tag]]) {
+                [layer removeFromSuperlayer];
+                break;
+            }
+        }
+    }
+}
+
 
 - (void)accessPicture:(UIGestureRecognizer *)gesture{
     

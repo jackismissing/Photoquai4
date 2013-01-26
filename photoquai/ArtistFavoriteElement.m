@@ -36,6 +36,9 @@
         patronymPhotographer = [patronymPhotographer stringByAppendingString:@" "];
         patronymPhotographer = [patronymPhotographer stringByAppendingString:lastnamePhotographer];
         
+
+        self.tag = [[[appdelegate getElementsFromJSON:appendLink] valueForKeyPath:@"photographer.id"] integerValue];
+        
         UIImageView *photographerFirstPhotography = [[UIImageView alloc] init];
         [photographerFirstPhotography setImageWithURL:[NSURL URLWithString:imgsPhotographer] placeholderImage:[UIImage imageNamed:@"etoilejaune"]];
         photographerFirstPhotography.frame = CGRectMake(0, 0, 150, 115);
@@ -94,8 +97,18 @@
         self.backgroundColor = [UIColor whiteColor];
         self.layer.borderColor = [UIColor r:233 g:233 b:233 alpha:1].CGColor;
         self.layer.borderWidth = 2;
+        
+        UITapGestureRecognizer *accessPhotographer = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(accessPhotographer:)];
+        [self addGestureRecognizer:accessPhotographer];
+        
     }
     return self;
+}
+
+- (void)accessPhotographer:(UIGestureRecognizer *)gesture{
+    
+    UIView *index = gesture.view;
+    [[NSNotificationCenter defaultCenter] postNotificationName:@"accessPhotographer" object:[NSNumber numberWithInt:index.tag]];
 }
 
 - (void) setClippingPath:(UIBezierPath *)clippingPath clippingPath:(UIImageView *)imgView{

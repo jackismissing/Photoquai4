@@ -12,9 +12,17 @@
 #import "AppDelegate.h"
 #import "NavigationViewController.h"
 #import "PhotographyViewController.h"
+#import "FakeActionSheet.h"
 
 @interface FavoritesPicturesViewController : UIViewController <UIScrollViewDelegate, UITabBarControllerDelegate>{
-    NSArray *favoritesPictures;
+    NSMutableArray *favoritesPictures;
+    NSMutableArray *favoritesToRemove;
+    BOOL removeEnabled;
+    
+    UITapGestureRecognizer *selectFavorites2Remove;
+    UITapGestureRecognizer *accessPicture;
+    FakeActionSheet *fakeActionSheet;
+
 }
 
 @end

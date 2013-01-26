@@ -19,6 +19,7 @@
 #import "FavoriteIndicator.h"
 #import "FavoriteIndicatorViewController.h"
 #import "FavoritesPicturesViewController.h"
+#import "PhotographerViewController.h"
 
 @class AudioImageView;
 

@@ -41,8 +41,10 @@
         patronymPhotographer = [patronymPhotographer stringByAppendingString:@" "];
         patronymPhotographer = [patronymPhotographer stringByAppendingString:lastnamePhotographer];
         
-
+        self.tag = [[[appdelegate getElementsFromJSON:appendLink] valueForKeyPath:@"photographer.id"] intValue];
         imageView = [[UIImageView alloc] init];
+        
+        NSLog(@"%@", [appdelegate getElementsFromJSON:appendLink]);
         
         imageView.opaque = YES;
         imageView.clipsToBounds = YES;
@@ -122,12 +124,20 @@
     return firstname;
 }
 
+- (int) idPhotographer{
+    return idPhotographer;
+}
+
 - (void) setLastname:(NSString*)aLastname{
     lastname = aLastname;
 }
 
 - (void) setFirstname:(NSString*)aFirstname{
     firstname = aFirstname;
+}
+
+- (void) setIdPhotographer:(int)anIdPhotographer{
+    idPhotographer = anIdPhotographer;
 }
 
 

@@ -34,24 +34,24 @@
     [self.navigationItem setLeftBarButtonItem:menuBarButtonItem];
     
     UIImage* image3 = [UIImage imageNamed:@"suppfavoris"];
-    CGRect frameimg = CGRectMake(0, 0, image3.size.width, image3.size.height);
-    UIButton *someButton = [[UIButton alloc] initWithFrame:frameimg];
-    [someButton setBackgroundImage:image3 forState:UIControlStateNormal];
-    [someButton addTarget:self action:@selector(suppfavoris) forControlEvents:UIControlEventTouchUpInside];
+    CGRect frameimg = CGRectMake(-100, 0, image3.size.width, image3.size.height);
+    UIButton *removeButton = [[UIButton alloc] initWithFrame:frameimg];
+    [removeButton setBackgroundImage:image3 forState:UIControlStateNormal];
+    [removeButton addTarget:self action:@selector(suppfavoris) forControlEvents:UIControlEventTouchUpInside];
     
-    UIBarButtonItem *mailbutton =[[UIBarButtonItem alloc] initWithCustomView:someButton];
-    self.navigationItem.rightBarButtonItem=mailbutton;
+    UIBarButtonItem *removeButtonItem = [[UIBarButtonItem alloc] initWithCustomView:removeButton];
+    self.navigationItem.rightBarButtonItem = removeButtonItem;
     
     AppDelegate *appdelegate = (AppDelegate *)[[UIApplication sharedApplication] delegate];
     [appdelegate showTabBar:self.tabBarController];
-    
-    //[self showTabBar:self.tabBarController];
 }
 
 - (void)viewDidLoad
 {
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(accessPhotographer:) name:@"accessPhotographer" object:nil];
     
     //Réinstancie la navigation bar, une fois le menu disparu
     [self.navigationController setNavigationBarHidden:NO animated:NO];
@@ -64,7 +64,17 @@
     screenHeight = screenRect.size.height;
     
     NSUserDefaults *preferencesUser = [NSUserDefaults standardUserDefaults];
-    favoritesPhotographers = [[NSMutableArray alloc] initWithArray: [preferencesUser objectForKey:@"favorisPhotographers"]];
+    favoritesPhotographers = [[NSMutableArray alloc] initWithArray: [preferencesUser objectForKey:@"favorisPhotographes"]];
+    favoritesToRemove = [[NSMutableArray alloc] init];
+    
+    if ([favoritesPhotographers count] == 0) {
+        CustomAlertView *alert = [[CustomAlertView alloc]
+                                  initWithTitle:nil
+                                  message:@"Vous n'avez pas de favoris pour le moment."
+                                  delegate:self
+                                  cancelButtonTitle:@"OK" otherButtonTitles:@"Favoris", nil];
+        [alert show];
+    }
     
     myScrollView = [[UIScrollView alloc] initWithFrame:CGRectMake(0, 0, screenWidth, screenHeight)];
     myScrollView.opaque = YES;
@@ -78,9 +88,13 @@
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(removeFavorites) name:@"removeFavorites" object:nil];
     
     
+    [self loadFavoris];
+}
+
+- (void) loadFavoris{
     int yPosition = 0, xPosition = 0;
     
-    for (int i = 0; i < 8; i++) {
+    for (int i = 0; i < [favoritesPhotographers count]; i++) {
         xPosition++;
         if (i % 2 == 0) {
             xPosition = 0;
@@ -90,13 +104,13 @@
             yPosition++;
         }
         
-        artistFavoriteElement = [[ArtistFavoriteElement alloc] initWithFrame:CGRectMake(xPosition * 150 + 13, (yPosition * 189) + 15, 145, 200) withId:1];
+        NSLog(@"reload 1");
+        
+        artistFavoriteElement = [[ArtistFavoriteElement alloc] initWithFrame:CGRectMake(xPosition * 150 + 13, (yPosition * 189) + 15, 145, 200) withId:[[favoritesPhotographers objectAtIndex:i] intValue]];
         [artistFavoriteElement setIdColonne:xPosition];
-        artistFavoriteElement.tag = i;
+        
         
         [myScrollView addSubview:artistFavoriteElement];
-        
-        
         
         //Calcul de la hauteur de la scrollview
         int heightMax = 0;
@@ -129,8 +143,14 @@
     [self.view addSubview:fakeActionSheet];
 }
 
-- (void) suppfavoris{
+- (void) accessPhotographer:(NSNotification *)notification{
     
+    PhotographerViewController *imageViewController = [[PhotographerViewController alloc] initWithNibName:@"PhotographerViewController" bundle:nil];
+    imageViewController.idPhotographer = [[notification object] intValue];
+    [self.navigationController pushViewController:imageViewController animated:YES];
+}
+
+- (void) suppfavoris{
     if(removeEnabled == NO){
         [fakeActionSheet show];
         removeEnabled = YES;
@@ -139,7 +159,7 @@
             [view addGestureRecognizer:selectFavorites2Remove];
             [view removeGestureRecognizer:accessPhotographer];
         }
-        myScrollView.frame = CGRectMake(0, 0, screenWidth, screenHeight- 75);
+        myScrollView.frame = CGRectMake(0, 0, screenWidth, screenHeight - 75);
     }else{ 
         [fakeActionSheet hide];
         removeEnabled = NO;
@@ -153,13 +173,15 @@
 }
 
 - (void) removeFavorites{
-    for (int i = 0; i < [favoritesPhotographers count]; i++) {
-        [favoritesPhotographers removeObjectAtIndex:i];
-    }
-    
+    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
     removeEnabled = NO;
-    //[self viewDidLoad];
-    NSLog(@"removed");
+    
+    for (int i = 0; i < [favoritesToRemove count]; i++) {
+        [favoritesPhotographers removeObject:[favoritesToRemove objectAtIndex:i]];
+    }
+    [self loadFavoris];
+    [defaults setObject:favoritesPhotographers forKey:@"favorisPhotographes"];
+    [defaults synchronize];
 }
 
 - (void) selectFavorites2Remove:(UIGestureRecognizer *)gesture{
@@ -175,13 +197,12 @@
     
     crossLayer.opaque = YES;
     
-    if (![favoritesPhotographers containsObject:favorite]){ //On checke si le favoris n'a pas déjà été checké
-        [favoritesPhotographers addObject:favorite];
+    if (![favoritesToRemove containsObject:favorite]){ //On checke si le favoris n'a pas déjà été checké
+        [favoritesToRemove addObject:favorite];
         [index.layer addSublayer:crossLayer];
         crossLayer.name = [NSString stringWithFormat:@"%i", index.tag];
-        crossLayer.opacity = 1.0f;
     }else{
-        [favoritesPhotographers removeObject:favorite];
+        [favoritesToRemove removeObject:favorite];
         for (CALayer *layer in index.layer.sublayers) {
             if ([layer.name isEqualToString:[NSString stringWithFormat:@"%i", index.tag]]) {
                 [layer removeFromSuperlayer];
@@ -195,6 +216,7 @@
 //        }
     }
 }
+
 
 
 - (void)showMenu
