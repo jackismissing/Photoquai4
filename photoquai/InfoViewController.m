@@ -12,6 +12,8 @@
 
 #import "NavigationViewController.h"
 
+#import "InfosPratiquesViewController.h"
+
 #define MAINLABEL_TAG 1
 
 #define NUMBERLABEL_TAG 1
@@ -314,6 +316,21 @@
         // [self presentViewController:navigationController animated:YES completion:nil];
         
         [self.navigationController pushViewController:AgendaView animated:YES];
+        
+        
+    }
+    
+    if(indexPath.row == 1) {
+        
+        InfosPratiquesViewController *InfosPratiques = [[InfosPratiquesViewController alloc] init] ;
+        
+        UINavigationController *navigationController = [[UINavigationController alloc] initWithRootViewController:InfosPratiques];
+        
+        [navigationController setNavigationBarHidden:NO];
+        
+        // [self presentViewController:navigationController animated:YES completion:nil];
+        
+        [self.navigationController pushViewController:InfosPratiques animated:YES];
         
         
     }
