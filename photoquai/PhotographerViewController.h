@@ -45,6 +45,8 @@
     UIView *sliderContent;
     SliderImage *sliderImages;
     
+    CGRect frame; //Réelle hauteur de la textView
+    
     BOOL descriptionIsFull;
 }
 

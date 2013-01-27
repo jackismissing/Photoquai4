@@ -215,9 +215,9 @@
     NSString *avatarArtist = [[appdelegate getElementsFromJSON:appendLink] valueForKeyPath:@"photographer.avatar.file.link"];
     NSString *coverArtist = [[appdelegate getElementsFromJSON:appendLink] valueForKeyPath:@"photographer.cover.file.link"];
     
-    UIImage *artistAvatarImage = [[UIImage alloc] initWithData:[NSData dataWithContentsOfURL:[NSURL URLWithString:avatarArtist]]];
+    //UIImage *artistAvatarImage = [[UIImage alloc] initWithData:[NSData dataWithContentsOfURL:[NSURL URLWithString:avatarArtist]]];
     
-    UIImage *artistCoverImage = [[UIImage alloc] initWithData:[NSData dataWithContentsOfURL:[NSURL URLWithString:coverArtist]]];
+    //UIImage *artistCoverImage = [[UIImage alloc] initWithData:[NSData dataWithContentsOfURL:[NSURL URLWithString:coverArtist]]];
     
     
     //NSDictionary *artistInfos = [[NSDictionary alloc] initWithObjectsAndKeys:(id)idArtist, @"artistId", lastNameArtist, @"artistName", firstNameArtist, @"artistFirstName", artistAvatarImage, @"artistAvatar", artistCoverImage, @"artistCover", nil];

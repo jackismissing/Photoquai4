@@ -52,6 +52,7 @@
     
     UIScrollView *scrollView = [[UIScrollView alloc] initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, self.view.frame.size.height)];
     
+    
     UIImageView *creditsImage = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"credits.png"]];
     
     scrollView.contentSize = CGSizeMake(creditsImage.frame.size.width, creditsImage.frame.size.height);

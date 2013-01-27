@@ -6,6 +6,8 @@
 //  Copyright (c) 2013 Groupe 5 PHQ Gobelins CDNL. All rights reserved.
 //
 
+#define   DEGREES_TO_RADIANS(degrees)  ((3.14159265359 * degrees)/ 180)
+
 #import "ViewController.h"
 #import "AgendaController.h"
 #import "ImageWall.h"
@@ -72,6 +74,8 @@
     [appdelegate hideTabBar:self.tabBarController];
     
     [NSThread detachNewThreadSelector:@selector(loadingViewAsync) toTarget:self withObject:nil];
+    
+    
 }
 
 - (void)viewWillAppear:(BOOL)animated
@@ -268,9 +272,46 @@
 - (void)accessPicture:(UIGestureRecognizer *)gesture{
     
     UIView *index = gesture.view;
+    [self.view setNeedsDisplay];
+    index.alpha = .5;
+    //index.backgroundColor = [UIColor redColor];
     
-    index.alpha = .3;
-    index.backgroundColor = [UIColor redColor];
+    // Set up the shape of the circle
+    int radius = 42;
+    
+    float midX = ((index.frame.size.width - radius) / 2);
+    float midY = ((index.frame.size.height - radius) / 2);
+   
+    CAShapeLayer *circle = [CAShapeLayer layer];
+    // Make a circular shape
+    circle.path = [UIBezierPath bezierPathWithRoundedRect:CGRectMake(midX, midY, radius, radius)
+                                             cornerRadius:radius].CGPath;
+    // Center the shape in self.view
+    //circle.position = CGPointMake(midX, midY);
+    
+    // Configure the apperence of the circle
+    circle.fillColor = [UIColor clearColor].CGColor;
+    circle.strokeColor = [UIColor whiteColor].CGColor;
+    circle.lineWidth = 3;
+    
+    // Add to parent layer
+    [index.layer addSublayer:circle];
+    
+    // Configure animation
+    CABasicAnimation *drawAnimation = [CABasicAnimation animationWithKeyPath:@"strokeEnd"];
+    drawAnimation.duration            = 0.42; // "animate over 10 seconds or so.."
+    drawAnimation.repeatCount         = 1.0;  // Animate only once..
+    drawAnimation.removedOnCompletion = NO;   // Remain stroked after the animation..
+    
+    // Animate from no part of the stroke being drawn to the entire stroke being drawn
+    drawAnimation.fromValue = [NSNumber numberWithFloat:0.0f];
+    drawAnimation.toValue   = [NSNumber numberWithFloat:1.0f];
+    
+    // Experiment with timing to get the appearence to look the way you want
+    drawAnimation.timingFunction = [CAMediaTimingFunction functionWithName:kCAMediaTimingFunctionEaseIn];
+    
+    // Add the animation to the circle
+    [circle addAnimation:drawAnimation forKey:@"drawCircleAnimation"];
     
     [UIView animateWithDuration:0.42
                           delay:0
@@ -284,6 +325,7 @@
                          PhotographyViewController *imageViewController = [[PhotographyViewController alloc] initWithNibName:@"PhotographyViewController" bundle:nil];
                          imageViewController.idPicture = index.tag;
                          [self.navigationController pushViewController:imageViewController animated:YES];
+                         [circle removeFromSuperlayer];
                      }];
     
     //UIBarButtonItem *backButton = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"backButton"] style:UIBarButtonItemStylePlain target:nil action:nil];
@@ -292,6 +334,8 @@
     
     //[self.navigationItem setBackBarButtonItem: backButton];
 }
+
+
 
 /*- (void)scrollViewWillBeginDragging:(UIScrollView *)scrollView{
     

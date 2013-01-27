@@ -406,6 +406,28 @@
 }
 
 - (void) displayPhotographerLocation{
+    if (descriptionIsFull == YES) {
+        [displayFullDescriptionButton setTitle:@"Afficher +" forState:UIControlStateNormal];
+        
+        [UIView animateWithDuration:0.5
+                              delay:0
+                            options: UIViewAnimationCurveEaseOut
+                         animations:^{
+                             descriptionPhotographer.frame = CGRectMake(10, 60, screenWidth * .85, 150);
+                             myScrollView.contentSize = CGSizeMake(screenWidth, myScrollViewHeight);
+                             displayFullDescriptionButton.frame = CGRectMake(15,
+                                                                             descriptionPhotographer.frame.size.height +
+                                                                             descriptionPhotographer.frame.origin.y + 15,
+                                                                             screenWidth * .9,
+                                                                             35);
+                             contentUnderPhotographerPicture.frame = CGRectMake(0, contentUnderPhotographerPicture.frame.origin.y, screenWidth, 310);
+                             sliderContent.frame = CGRectMake(0, sliderContent.frame.origin.y - frame.size.height + 150, screenWidth, sliderContent.frame.size.height);
+                         }
+                         completion:^(BOOL finished){
+                             descriptionIsFull = NO;
+                         }];
+    }
+    
     if (photographerLocationIsVisible == NO) { //La carte apparait
         myScrollView.contentSize = CGSizeMake(screenWidth, myScrollViewHeight + 130);
         [photographerLocalisationButton removeTarget:self action:@selector(displayPhotographerLocation) forControlEvents:UIControlEventTouchUpInside];
@@ -449,7 +471,7 @@
 }
 
 - (void) displayFullDescription{
-    CGRect frame = descriptionPhotographer.frame;
+    frame = descriptionPhotographer.frame;
     frame.size = descriptionPhotographer.contentSize;
     
     if (photographerLocationIsVisible == YES) {

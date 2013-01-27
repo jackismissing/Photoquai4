@@ -289,6 +289,7 @@
                              toolBar.frame = CGRectMake(0, screenHeight, toolBar.frame.size.width, toolBar.frame.size.height);
                              audioDescription.frame = CGRectMake(0, 500, audioDescription.frame.size.width, audioDescription.frame.size.height);
                              descriptionPhotography.frame = CGRectMake(0, 500, descriptionPhotography.frame.size.width, descriptionPhotography.frame.size.height);
+                             imageLocation.frame = CGRectMake(0, 500, descriptionPhotography.frame.size.width, descriptionPhotography.frame.size.height);
                              picture.transform = CGAffineTransformIdentity;
                              //picture.transform = CGAffineTransformMakeScale(1.2, 1.2);
                              picture.frame = CGRectMake(0, 35, screenWidth, screenHeight);
@@ -380,7 +381,7 @@
     [self.navigationController pushViewController:imageViewController animated:YES];
 }
 
-- (void) showImageVolet:(NSNotification *)notification{
+- (void) showImageVolet:(NSNotification *)notification{ //Switch de volet
     
     
     NSInteger idToolBarItem = [[notification object] integerValue];
@@ -507,6 +508,25 @@
             break;
     } //Fin switch
 }
+
+//- (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
+//{
+//    if (interfaceOrientation == UIInterfaceOrientationLandscapeLeft || interfaceOrientation == UIInterfaceOrientationLandscapeRight) {
+//        [UIView animateWithDuration:0.5
+//                              delay:0
+//                            options: UIViewAnimationCurveEaseOut
+//                         animations:^{
+//                             picture.layer.anchorPoint = CGPointMake(0.5, 0.5);
+//                             picture.transform = CGAffineTransformMakeRotation(DEGREES_TO_RADIANS(90));
+//                         }
+//                         completion:^(BOOL finished){}];
+//        [self hideNavigation];
+//    }
+//    
+//    return (interfaceOrientation == UIInterfaceOrientationPortrait);
+//    
+//    //return YES;
+//}
 
 
 - (void)didReceiveMemoryWarning

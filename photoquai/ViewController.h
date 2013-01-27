@@ -10,6 +10,7 @@
 #import "NavigationViewController.h"
 #import "ImageWall.h"
 #import "AppDelegate.h"
+#import "UIColor+RVB255.h"
 
 @interface ViewController : UIViewController <UIScrollViewDelegate>
 {
