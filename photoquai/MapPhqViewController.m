@@ -41,7 +41,7 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-	// Do any additional setup after loading the view.
+    // Do any additional setup after loading the view.
     
     // Navigation bar
     
@@ -87,7 +87,7 @@
     
     [self displayPins];
     
-
+    
 }
 
 - (void)viewWillAppear:(BOOL)animated
@@ -125,8 +125,8 @@
     for(int i = 0; i < 10; i++)
     {
         /*
-        UIImageView *pinImage = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"pin.png"]];
-        UIView *pinView = [[UIView alloc] initWithFrame:CGRectMake(50 + 100*i, 100 + 100*i, 25, 35)];
+         UIImageView *pinImage = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"pin.png"]];
+         UIView *pinView = [[UIView alloc] initWithFrame:CGRectMake(50 + 100*i, 100 + 100*i, 25, 35)];
          */
         
         pinView = [[MKPinAnnotationView alloc] initWithAnnotation:nil reuseIdentifier:@""];
@@ -135,18 +135,19 @@
         
         // Add frame
         
-       // pinView.frame = CGRectMake(50 + 100*i, 100 + 100*i, 32, 39);
+        // pinView.frame = CGRectMake(50 + 100*i, 100 + 100*i, 32, 39);
         
         NSLog(@"%@", NSStringFromCGRect(pinView.frame));
         
-        [pinView addGestureRecognizer:[[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(topPinTapped)]];
+        
+        [pinView addGestureRecognizer:[[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(topPinTapped:)]];
         [map addSubview:pinView];
         
         /*
-        
-        [pinView addSubview:pinImage];
-        [pins insertObject:pinView atIndex:i];
-        */
+         
+         [pinView addSubview:pinImage];
+         [pins insertObject:pinView atIndex:i];
+         */
         
         UIButton *topDisclosure = [UIButton buttonWithType:UIButtonTypeDetailDisclosure];
         [topDisclosure addGestureRecognizer:[[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(disclosureTapped)]];
@@ -168,7 +169,7 @@
     }
     
     
-
+    
 }
 
 - (UIView *)viewForZoomingInScrollView:(UIScrollView *)scrollView
@@ -178,11 +179,12 @@
     
 }
 
-- (void)topPinTapped {
+- (void)topPinTapped:(UIGestureRecognizer *)sender {
     // show our callout if it's not already shown!
     // now in this example we're going to introduce an artificial delay in order to make our popup feel identical to MKMapView.
     // MKMapView has a delay after tapping so that it can intercept a double-tap for zooming. We don't need that delay but we'll
     // add it just so things feel the same.
+    pinView = (MKPinAnnotationView *)sender.view;
     if (!calloutView.window)
         [self performSelector:@selector(popupCalloutView) withObject:nil afterDelay:1.0/3.0];
 }
@@ -198,7 +200,7 @@
                       constrainedToView:mapView
                permittedArrowDirections:SMCalloutArrowDirectionDown
                                animated:YES];
-     
+    
     
     // Here's an alternate method that adds the callout *inside* the pin view. This may seem strange, but it's how MKMapView
     // does it. It brings the selected pin to the front, then pops up the callout inside the pin's view. This way, the callout
@@ -214,6 +216,11 @@
     //                      constrainedToView:scrollView
     //               permittedArrowDirections:SMCalloutArrowDirectionDown
     //                               animated:YES];
+}
+
+- (void)mapView:(MKMapView *)mapView didSelectAnnotationView:(MKAnnotationView *)view
+{
+    NSLog(@"tapped");
 }
 
 - (NSTimeInterval)calloutView:(SMCalloutView *)theCalloutView delayForRepositionWithSize:(CGSize)offset {

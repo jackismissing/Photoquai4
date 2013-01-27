@@ -635,6 +635,36 @@
         // reposition offset to show image 1 that is on the left in the scroll view
         [tableMenuScrollView scrollRectToVisible:CGRectMake(30,0,self.view.frame.size.width, 50) animated:NO];
     }
+    
+        
+        for (UIView *subview in [tableMenuScrollView subviews])
+        {
+            
+            // Coordonnées du bouton relatives à la scroll view
+            
+            CGPoint buttonCenter = subview.center;
+            
+            // Coordonnées du bouton relatives à la vue principale
+            
+            CGPoint buttonCenterInCoord = [[subview superview] convertPoint:buttonCenter toView:self.view];
+            
+            //NSLog(@"%@", NSStringFromCGPoint(buttonCenterInCoord));
+            
+            // Notre bouton est proche du centre : on scroll donc de sorte à ce qu'il soit au centre !
+            
+            
+            if(buttonCenterInCoord.x > self.view.frame.size.width / 2 - 15 && buttonCenterInCoord.x < self.view.frame.size.width / 2 + 15)
+            {
+                
+                
+                [tableMenuScrollView setContentOffset:CGPointMake(buttonCenter.x - self.view.frame.size.width / 2 , 0) animated:YES];
+                [self scrollToSection:subview.tag];
+                
+                
+            }
+            
+        }
+    
 }
 
 

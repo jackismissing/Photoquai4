@@ -135,6 +135,11 @@
         
 //        FavoritePhotographerViewController  *favoritePhotograhers = [[FavoritePhotographerViewController alloc] init];
 //        [self.navigationController pushViewController:favoritePhotograhers animated:YES];
+
+        
+       // FavoritePhotographerViewController  *favoritePhotograhers = [[FavoritePhotographerViewController alloc] init];
+        //[self.navigationController pushViewController:favoritePhotograhers animated:YES];
+
     }
 
 

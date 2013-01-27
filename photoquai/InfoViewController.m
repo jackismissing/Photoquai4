@@ -12,6 +12,12 @@
 
 #import "NavigationViewController.h"
 
+#import "InfosPratiquesViewController.h"
+
+#import "ArtDirectorViewController.h"
+
+#import "CreditsViewController.h"
+
 #define MAINLABEL_TAG 1
 
 #define NUMBERLABEL_TAG 1
@@ -284,25 +290,7 @@
     
     
     
-    if(indexPath.row == 2) {
         
-        /*
-         
-         ADViewController *ADView = [[ADViewController alloc] init] ;
-         
-         UINavigationController *navigationController = [[UINavigationController alloc] initWithRootViewController:ADView];
-         
-         [navigationController setNavigationBarHidden:NO];
-         
-         // [self presentViewController:navigationController animated:YES completion:nil];
-         
-         [self.navigationController pushViewController:ADView animated:YES];
-         
-         */
-        
-        
-    }
-    
     if(indexPath.row == 0) {
         
         AgendaController *AgendaView = [[AgendaController alloc] init] ;
@@ -317,6 +305,61 @@
         
         
     }
+    
+    if(indexPath.row == 1) {
+        
+        InfosPratiquesViewController *InfosPratiques = [[InfosPratiquesViewController alloc] init] ;
+        
+        UINavigationController *navigationController = [[UINavigationController alloc] initWithRootViewController:InfosPratiques];
+        
+        [navigationController setNavigationBarHidden:NO];
+        
+        // [self presentViewController:navigationController animated:YES completion:nil];
+        
+        [self.navigationController pushViewController:InfosPratiques animated:YES];
+        
+        
+    }
+    
+    if(indexPath.row == 2) {
+        
+        
+         
+         ArtDirectorViewController *ADView = [[ArtDirectorViewController alloc] init] ;
+         
+         UINavigationController *navigationController = [[UINavigationController alloc] initWithRootViewController:ADView];
+         
+         [navigationController setNavigationBarHidden:NO];
+         
+         // [self presentViewController:navigationController animated:YES completion:nil];
+         
+         [self.navigationController pushViewController:ADView animated:YES];
+         
+         
+        
+        
+    }
+    
+    if(indexPath.row == 5) {
+        
+        
+        
+        CreditsViewController *creditsView = [[CreditsViewController alloc] init] ;
+        
+        UINavigationController *navigationController = [[UINavigationController alloc] initWithRootViewController:creditsView];
+        
+        [navigationController setNavigationBarHidden:NO];
+        
+        // [self presentViewController:navigationController animated:YES completion:nil];
+        
+        [self.navigationController pushViewController:creditsView animated:YES];
+        
+        
+        
+        
+    }
+
+
     
     
     // Deselect the cell when changing page
