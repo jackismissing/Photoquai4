@@ -19,6 +19,7 @@
 #import "FavoriteIndicator.h"
 #import "FavoritesPicturesViewController.h"
 #import "PhotographerViewController.h"
+#import "ImageLocation.h"
 
 @class AudioImageView;
 
@@ -41,6 +42,8 @@
     BOOL shareIsHidden;
     
     NSString *linkImg; //Lien de l'image;
+    ImageLocation *imageLocation;
+    
 }
 
 @property (nonatomic, assign) int idPicture;

@@ -60,10 +60,7 @@
                               delegate:self
                               cancelButtonTitle:@"OK" otherButtonTitles:nil];
         [alert show];
-    } else {
-        
-        NSLog(@"There IS internet connection");
-    }  
+    }
     
     UIViewController *v1 = [[FavoritesPicturesViewController alloc] initWithNibName:@"FavoritesPicturesViewController" bundle:nil];
     v1.tabBarItem.image = [UIImage imageNamed:@"favoritesPicturesIcon"];
