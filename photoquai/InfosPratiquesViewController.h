@@ -7,8 +7,15 @@
 //
 
 #import <UIKit/UIKit.h>
+#import <MapKit/MapKit.h>
+#import "PinLocation.h"
 
-@interface InfosPratiquesViewController : UIViewController<UIScrollViewDelegate>
+#define METERS_PER_MILE 1069.344
+
+@interface InfosPratiquesViewController : UIViewController<UIScrollViewDelegate, MKMapViewDelegate>
+{
+    BOOL _doneInitialZoom;
+}
 
 @property(strong, nonatomic) UIScrollView *infoPratiqueScrollView;
 
@@ -30,6 +37,12 @@
 
 @property(strong, nonatomic) UIView *velibView;
 
+@property(strong, nonatomic) MKMapView *mapView;
+
+@property(strong, nonatomic) UIButton *closeBtn;
+
+
+
 -(void)scrollToTransport : (id)sender;
 
 -(void)viewMetro;
@@ -39,6 +52,10 @@
 -(void)viewBus;
 
 -(void)viewVelib;
+
+-(void)showMap : (id)sender;
+
+-(void)closeMap;
 
 
 

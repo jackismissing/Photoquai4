@@ -29,6 +29,9 @@
 @synthesize busView;
 @synthesize velibView;
 
+@synthesize mapView;
+@synthesize closeBtn;
+
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
@@ -126,7 +129,34 @@
         self.navigationItem.title = @"Infos pratiques";
         
         self.navigationItem.hidesBackButton = YES;
+        
+        //  /////////////////////////////////////////////////////////////////////////////////// Close button /////////////////
+        
+        closeBtn = [[UIButton alloc] initWithFrame:CGRectMake(0, self.view.frame.size.height, 60, 30)];
+        
+        [closeBtn addTarget:self action:@selector(closeMap) forControlEvents:UIControlEventTouchUpInside];
+        
+        closeBtn.backgroundColor = [UIColor whiteColor];
+        
+        UILabel *closeLabel = [[UILabel alloc]initWithFrame:CGRectMake(10, 0, 50, 30)];
+        
+        closeLabel.text = @"Fermer";
+        
+        
+        closeLabel.numberOfLines = 1;
+        
+        closeLabel.font = [UIFont fontWithName:@"Parisine" size:12];
+        
+        [closeBtn addSubview:closeLabel];
+        
+        [self.view addSubview:closeBtn];
 
+        
+        //  /////////////////////////////////////////////////////////////////////////////////// MAP /////////////////
+        
+        mapView = [[MKMapView alloc] initWithFrame:CGRectMake(0, self.view.frame.size.height + closeBtn.frame.size.height, self.view.frame.size.width, 450)];
+        
+        [self.view addSubview:mapView];
         
 
         
@@ -138,6 +168,8 @@
 {
     [super viewDidLoad];
 	// Do any additional setup after loading the view.
+    
+
 }
 
 - (void)viewWillAppear:(BOOL)animated
@@ -434,7 +466,9 @@
 
     [viewMapBtn setImage:[UIImage imageNamed:@"btn-viewmap-hover.png"] forState:UIControlStateHighlighted];
     
-    [viewMapBtn addTarget:self action:@selector(showMap) forControlEvents:UIControlEventTouchUpInside];
+    viewMapBtn.tag = 1;
+    
+    [viewMapBtn addTarget:self action:@selector(showMap:) forControlEvents:UIControlEventTouchUpInside];
 
     
     [metroView addSubview:viewMapBtn];
@@ -470,7 +504,9 @@
     
     [viewMapBtn setImage:[UIImage imageNamed:@"btn-viewmap-hover.png"] forState:UIControlStateHighlighted];
     
-    [viewMapBtn addTarget:self action:@selector(showMap) forControlEvents:UIControlEventTouchUpInside];
+    viewMapBtn.tag = 2;
+    
+    [viewMapBtn addTarget:self action:@selector(showMap:) forControlEvents:UIControlEventTouchUpInside];
     
     
     [rerView addSubview:viewMapBtn];
@@ -504,7 +540,9 @@
     
     [viewMapBtn setImage:[UIImage imageNamed:@"btn-viewmap-hover.png"] forState:UIControlStateHighlighted];
     
-    [viewMapBtn addTarget:self action:@selector(showMap) forControlEvents:UIControlEventTouchUpInside];
+    viewMapBtn.tag = 3;
+    
+    [viewMapBtn addTarget:self action:@selector(showMap:) forControlEvents:UIControlEventTouchUpInside];
     
     
     [busView addSubview:viewMapBtn];
@@ -538,7 +576,9 @@
     
     [viewMapBtn setImage:[UIImage imageNamed:@"btn-viewmap-hover.png"] forState:UIControlStateHighlighted];
     
-    [viewMapBtn addTarget:self action:@selector(showMap) forControlEvents:UIControlEventTouchUpInside];
+    viewMapBtn.tag = 4;
+    
+    [viewMapBtn addTarget:self action:@selector(showMap:) forControlEvents:UIControlEventTouchUpInside];
     
     
     [busView addSubview:viewMapBtn];
@@ -550,9 +590,200 @@
     [self.navigationController popViewControllerAnimated:YES];
 }
 
--(void)showMap {
+-(void)showMap : (id)sender
+{
+  
+  
+  // Initialisation de la map ici
+  
+  
+  // Get the parameter
+  
+    NSInteger vueId = ((UIControl *) sender).tag;
+    
+
+    // Code pour la map ici
+    
+    if (vueId == 1 || vueId == 2 || vueId == 3 || vueId == 4)
+    {
+        CLLocationCoordinate2D zoomLocation;
+        zoomLocation.latitude = 48.861136;
+        zoomLocation.longitude = 2.297581;
+        
+        
+
+        MKCoordinateRegion viewRegion = MKCoordinateRegionMakeWithDistance(zoomLocation, 1.3*METERS_PER_MILE, 1.3*METERS_PER_MILE);
+
+        MKCoordinateRegion adjustedRegion = [mapView regionThatFits:viewRegion];
+
+        [mapView setRegion:adjustedRegion animated:YES];
+        
+        
+        // Placer les pins sur la carte
+        
+        // Jardins
+        
+        NSInteger jardins = 1;
+        
+        [self pinContent:jardins];
+        
+         //// Ligne 9
+        
+        NSInteger ligne9 = 9;
+        
+        [self pinContent:ligne9];
+        
+        //// Ligne 9 bis
+        
+        NSInteger ligne9bis = 99;
+        
+        [self pinContent:ligne9bis];
+        
+        //// Ligne 8
+        
+        NSInteger ligne8 = 8;
+        
+        [self pinContent:ligne8];
+        
+        //// Ligne 6
+        
+        NSInteger ligne6 = 6;
+        
+        [self pinContent:ligne6];
+        
+        [UIView animateWithDuration:0.5
+                                  delay:0
+                                options: UIViewAnimationCurveEaseOut
+                             animations:^{
+                                 
+                                 closeBtn.frame = CGRectMake(0, 82 - closeBtn.frame.size.height, closeBtn.frame.size.width, closeBtn.frame.size.height);
+                                 mapView.frame = CGRectMake(0, 82, mapView.frame.size.width, mapView.frame.size.height);
+                                 
+                             }
+                             completion:^(BOOL finished){}];
+            
+         
+    }
+    
+    
     
 }
+
+-(void)closeMap
+{
+    
+
+    [UIView animateWithDuration:0.5
+                          delay:0
+                        options: UIViewAnimationCurveEaseOut
+                     animations:^{
+                         
+                         closeBtn.frame = CGRectMake(0, self.view.frame.size.height, closeBtn.frame.size.width, closeBtn.frame.size.height);
+                         mapView.frame = CGRectMake(0, self.view.frame.size.height + closeBtn.frame.size.height, mapView.frame.size.width, mapView.frame.size.height);
+                         
+                     }
+                     completion:^(BOOL finished){}];
+
+}
+
+-(void)pinContent : (NSInteger)pinNumber {
+    
+    if(pinNumber == 1){
+       
+        
+        double latitude = 48.861136;
+        double longitude = 2.297581;
+        NSString * name = @"Musée du Quai Branly";
+        NSString * address = @"";
+        
+        CLLocationCoordinate2D coordinate;
+        coordinate.latitude = latitude;
+        coordinate.longitude = longitude;
+        PinLocation *annotation = [[PinLocation alloc] initWithName:name address:address coordinate:coordinate] ;
+        [mapView addAnnotation:annotation];
+    }
+    
+    if(pinNumber == 9) {
+        
+        double latitude = 48.864835;
+        double longitude = 2.300682;
+        NSString * name = @"Ligne 9 - Alma - Marceau";
+        NSString * address = @"Alma - Marceau";
+        
+        CLLocationCoordinate2D coordinate;
+        coordinate.latitude = latitude;
+        coordinate.longitude = longitude;
+        PinLocation *annotation = [[PinLocation alloc] initWithName:name address:address coordinate:coordinate] ;
+        [mapView addAnnotation:annotation];
+    }
+    
+    if(pinNumber == 99) {
+        
+        double latitude = 48.864517;
+        double longitude = 2.293268;
+        NSString * name = @"Ligne 9 - Iéna";
+        NSString * address = @"Iéna";
+        
+        CLLocationCoordinate2D coordinate;
+        coordinate.latitude = latitude;
+        coordinate.longitude = longitude;
+        PinLocation *annotation = [[PinLocation alloc] initWithName:name address:address coordinate:coordinate] ;
+        [mapView addAnnotation:annotation];
+    }
+    
+    if(pinNumber == 8) {
+        
+        double latitude = 48.854889;
+        double longitude = 2.306364;
+        NSString * name = @"Ligne 8 - École Militaire";
+        NSString * address = @"École Militaire";
+        
+        CLLocationCoordinate2D coordinate;
+        coordinate.latitude = latitude;
+        coordinate.longitude = longitude;
+        PinLocation *annotation = [[PinLocation alloc] initWithName:name address:address coordinate:coordinate] ;
+        [mapView addAnnotation:annotation];
+    }
+    
+    if(pinNumber == 6) {
+        
+        double latitude = 48.853986;
+        double longitude = 2.28937;
+        NSString * name = @"Ligne 6 - Bir Hekeim";
+        NSString * address = @"Bir Hekeim";
+        
+        CLLocationCoordinate2D coordinate;
+        coordinate.latitude = latitude;
+        coordinate.longitude = longitude;
+        PinLocation *annotation = [[PinLocation alloc] initWithName:name address:address coordinate:coordinate] ;
+        [mapView addAnnotation:annotation];
+    }
+        
+    
+    
+}
+
+- (MKAnnotationView *)mapViewView:(MKMapView *)mapViewView viewForAnnotation:(id <MKAnnotation>)annotation {
+    
+    static NSString *identifier = @"MyLocation";
+    if ([annotation isKindOfClass:[PinLocation class]]) {
+        
+        MKPinAnnotationView *annotationView = (MKPinAnnotationView *) [mapViewView dequeueReusableAnnotationViewWithIdentifier:identifier];
+        if (annotationView == nil) {
+            annotationView = [[MKPinAnnotationView alloc] initWithAnnotation:annotation reuseIdentifier:identifier];
+        } else {
+            annotationView.annotation = annotation;
+        }
+        
+        annotationView.enabled = YES;
+        annotationView.canShowCallout = YES;
+                
+        return annotationView;
+    }
+    
+    return nil;    
+}
+
 
 - (void)didReceiveMemoryWarning
 {
