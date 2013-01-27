@@ -25,10 +25,10 @@
         
         for (int i = 0; i < [arrayImages count]; i++){
             
-            CGRect dimension = CGRectMake(i * frame.size.width, 0, self.frame.size.width, self.frame.size.height);
+            CGRect dimension = CGRectMake(i * frame.size.width + 50, 0, self.frame.size.width, self.frame.size.height);
             //UIImage *theImage = [UIImage imageNamed:[arrayImages objectAtIndex:i]];
-            NSData* imageData = [[NSData alloc]initWithContentsOfURL:[NSURL URLWithString:[arrayImages objectAtIndex:i]]];
-            UIImage *theImage = [UIImage imageWithData:imageData];
+            //NSData* imageData = [[NSData alloc]initWithContentsOfURL:[NSURL URLWithString:[arrayImages objectAtIndex:i]]];
+            //UIImage *theImage = [UIImage imageWithData:imageData];
             
             UIImageView *imageView = [[UIImageView alloc] initWithFrame:dimension];
             imageView.opaque = YES;
@@ -37,7 +37,8 @@
             NSInteger myInt = [[arrayIndexes objectAtIndex:i] intValue]; //Conversion object to NSInteger
             imageView.tag = myInt;
             
-            [imageView setImage:theImage];
+            //[imageView setImage:theImage];
+            [imageView setImageWithURL:[NSURL URLWithString:[arrayImages objectAtIndex:i]]];
             imageView.userInteractionEnabled = true;
             imageView.exclusiveTouch = true;
             
@@ -55,9 +56,10 @@
 
 - (void)accessPicture:(UIGestureRecognizer *)gesture{
     UIView *index = gesture.view;
-    NSLog(@"%i", index.tag);
-    [[NSNotificationCenter defaultCenter] postNotificationName:@"showArtistPage" object:[NSNumber numberWithInt:5]];
+    //NSLog(@"%i", index.tag);
+    [[NSNotificationCenter defaultCenter] postNotificationName:@"accessPicture" object:[NSNumber numberWithInt:index.tag]];
 }
+
 
 - (int) fakeTag{
     return fakeTag;

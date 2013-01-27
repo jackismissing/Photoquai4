@@ -101,7 +101,7 @@
     
     [appdelegate hideTabBar:self.tabBarController];
     
-    [self setTitle:@"Title"];
+    //[self setTitle:@"Title"];
 #pragma mark - Notifications
     //Permet de renvoyer vers la fiche artiste
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(accessPhotographerPage:) name:@"showArtistPage" object:nil];
@@ -110,6 +110,8 @@
     //Permet l'envoi de mail
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(sendMailImage:) name:@"sendMailImage" object:nil];
     //[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(sendFBImage:) name:@"sendFBImage" object:nil];
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(reBindListenerFavorite) name:@"reBindListenerFavorite" object:nil];
     
     
     //NSString *imageLink = [[machine getPictureElementsAtIndex:self.index] valueForKey:@"linkImg"];
@@ -175,20 +177,31 @@
     [self.view addSubview:toolBar];
 }
 
+- (void) reBindListenerFavorite{
+    [favouriteButton addTarget:self action:@selector(addToFavorites) forControlEvents:UIControlEventTouchUpInside];
+}
+
 - (void)addToFavorites
 {
     NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+    [favouriteButton removeTarget:self action:@selector(addToFavorites) forControlEvents:UIControlEventTouchUpInside];
 
     if (![favoritesImages containsObject:idPicture]){
         [favoritesImages addObject:idPicture];
         [defaults setObject:favoritesImages forKey:@"favorisImages"];
         [defaults synchronize];
         
-        CustomAlertView *alert = [[CustomAlertView alloc]
-                              initWithTitle:nil
-                              message:@"L'image a été ajoutée à vos favoris"
-                              delegate:self
-                              cancelButtonTitle:@"OK" otherButtonTitles:@"Favoris", nil];
+        FavoriteIndicator *favoriteIndicator = [[FavoriteIndicator alloc] initWithFrame:CGRectMake(0, 0, 320, 540)];
+        
+        favoriteIndicator.message.text = @"L'image a été ajoutée à vos favoris";
+        [self.view addSubview:favoriteIndicator];
+        [favoriteIndicator show];
+        
+//        CustomAlertView *alert = [[CustomAlertView alloc]
+//                              initWithTitle:nil
+//                              message:@"L'image a été ajoutée à vos favoris"
+//                              delegate:self
+//                              cancelButtonTitle:@"OK" otherButtonTitles:@"Favoris", nil];
 //        FavoriteIndicator *favoriteIndicator = [[FavoriteIndicator alloc] initWithFrame:CGRectMake(0, 0, 320, 540)];
 //        
 //        [self.view addSubview:favoriteIndicator];
@@ -196,25 +209,27 @@
         
         [favouriteButton setImage:[UIImage imageNamed:@"etoilejaune"] forState:UIControlStateNormal];
         
-        [alert show];
+        //[alert show];
     }else{
         [favoritesImages removeObject:idPicture];
         
         [defaults setObject:favoritesImages forKey:@"favorisImages"];
         [defaults synchronize];
         
-        //FavoriteIndicator *favoriteIndicator = [[FavoriteIndicator alloc] initWithFrame:CGRectMake(0, 0, 320, 540)];
+        FavoriteIndicator *favoriteIndicator = [[FavoriteIndicator alloc] initWithFrame:CGRectMake(0, 0, 320, 540)];
         
-        //favoriteIndicator.message.text = @"L'image a été supprimée de vos favoris";
-        //[self.view addSubview:favoriteIndicator];
-        //[favoriteIndicator show];
+        favoriteIndicator.message.text = @"L'image a été supprimée de vos favoris";
+        [self.view addSubview:favoriteIndicator];
+        [favoriteIndicator show];
         
-        CustomAlertView *alert = [[CustomAlertView alloc]
-                                  initWithTitle:nil
-                                  message:@"L'image a été supprimée de vos favoris"
-                                  delegate:self
-                                  cancelButtonTitle:@"OK" otherButtonTitles:@"Favoris", nil];
-        [alert show];
+        
+        
+//        CustomAlertView *alert = [[CustomAlertView alloc]
+//                                  initWithTitle:nil
+//                                  message:@"L'image a été supprimée de vos favoris"
+//                                  delegate:self
+//                                  cancelButtonTitle:@"OK" otherButtonTitles:@"Favoris", nil];
+//[alert show];
  
         
 //        UIAlertView *alert = [[UIAlertView alloc]
@@ -226,15 +241,6 @@
         [favouriteButton setImage:[UIImage imageNamed:@"etoilepush"] forState:UIControlStateNormal];
         
         //[alert show];
-    }
-}
-
-- (void)alertView:(UIAlertView *)alertView didDismissWithButtonIndex:(NSInteger)buttonIndex
-{
-    if (buttonIndex == 1)
-    {
-        FavoritesPicturesViewController *favoritesPictures = [[FavoritesPicturesViewController alloc] init];
-        [self.navigationController pushViewController:favoritesPictures animated:YES];
     }
 }
 
@@ -323,16 +329,26 @@
 // Gestion des mails
 
 - (void) sendMailImage:(NSNotification *)notification{
-    MFMailComposeViewController *mailer = [[MFMailComposeViewController alloc] init];
-    mailer.mailComposeDelegate = self;
-    [mailer setSubject:@"Regarde ce qu'il y a à PHQ"];
+    if ([MFMailComposeViewController canSendMail]) {
+        MFMailComposeViewController *mailer = [[MFMailComposeViewController alloc] init];
+        mailer.mailComposeDelegate = self;
+        [mailer setSubject:@"Regarde ce qu'il y a à PHQ"];
+        
+        UIImage *picturePHQMail = [UIImage imageWithData:[NSData dataWithContentsOfURL:[NSURL URLWithString:linkImg]]];
+        NSData *imageData = UIImagePNGRepresentation(picturePHQMail);
+        [mailer addAttachmentData:imageData mimeType:@"image/png" fileName:@"PHQPhotography"];
+        NSString *emailBody = @"J'apprécie cette photo de l'exposition PHQ";
+        [mailer setMessageBody:emailBody isHTML:NO];
+        [self presentModalViewController:mailer animated:YES];
+    }else{
+        CustomAlertView *alert = [[CustomAlertView alloc]
+                                  initWithTitle:nil
+                                  message:@"Impossible d'effectuer cette action : aucun compte mail n'est lié à votre appareil"
+                                  delegate:self
+                                  cancelButtonTitle:@"OK" otherButtonTitles:nil];
+        [alert show];
+    }
     
-    UIImage *picturePHQMail = [UIImage imageWithData:[NSData dataWithContentsOfURL:[NSURL URLWithString:linkImg]]];
-    NSData *imageData = UIImagePNGRepresentation(picturePHQMail);
-    [mailer addAttachmentData:imageData mimeType:@"image/png" fileName:@"PHQPhotography"];
-    NSString *emailBody = @"J'apprécie cette photo de l'exposition PHQ";
-    [mailer setMessageBody:emailBody isHTML:NO];
-    [self presentModalViewController:mailer animated:YES];
 }
 
 //Annulation du mail
@@ -454,11 +470,6 @@
         default:
             break;
     } //Fin switch
-}
-
-- (void)scrollViewDidScroll:(UIScrollView *)scrollView{
-    
-    
 }
 
 

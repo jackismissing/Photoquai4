@@ -8,7 +8,9 @@
 
 #import <UIKit/UIKit.h>
 
-@interface SliderImage : UIScrollView{
+#import "UIImageView+AFNetworking.h"
+
+@interface SliderImage : UIScrollView <UIScrollViewDelegate>{
     
     int fakeTag;
 }

@@ -13,6 +13,7 @@
 #import "CustomPopOver.h" //conteneur des boutons share
 #import "AppDelegate.h"
 #import "CustomPopOver.h"
+#import "SliderImage.h"
 #import "FavoritePhotographerViewController.h"
 
 
@@ -40,6 +41,9 @@
     float myScrollViewHeight;
     UIButton *photographerLocalisationButton;
     UITextView *descriptionPhotographer;
+    UIButton *displayFullDescriptionButton;
+    UIView *sliderContent;
+    SliderImage *sliderImages;
     
     BOOL descriptionIsFull;
 }

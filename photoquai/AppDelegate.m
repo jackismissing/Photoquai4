@@ -10,6 +10,7 @@
 
 #import "ViewController.h"
 #import "UIColor+RVB255.h"
+#import "CustomAlertView.h"
 #import "FavoritesPicturesViewController.h"
 #import "FavoritePhotographerViewController.h"
 
@@ -50,14 +51,19 @@
     
     tabBarController = [[UITabBarController alloc] init];
     
-    Reachability *reachability = [Reachability reachabilityForInternetConnection];
-    NetworkStatus internetStatus = [reachability currentReachabilityStatus];
-    if (internetStatus != NotReachable) {
-        //my web-dependent code
-    }
-    else {
-        NSLog(@"ok - connected");
-    }
+    Reachability *networkReachability = [Reachability reachabilityForInternetConnection];
+    NetworkStatus networkStatus = [networkReachability currentReachabilityStatus];
+    if (networkStatus == NotReachable) {
+        CustomAlertView *alert = [[CustomAlertView alloc]
+                              initWithTitle:nil
+                              message:@"Votre appareil n'est pas connecté à Internet. Pour profiter pleinement de l'expérience PHQ4, veuillez vous connecter à Internet."
+                              delegate:self
+                              cancelButtonTitle:@"OK" otherButtonTitles:nil];
+        [alert show];
+    } else {
+        
+        NSLog(@"There IS internet connection");
+    }  
     
     UIViewController *v1 = [[FavoritesPicturesViewController alloc] initWithNibName:@"FavoritesPicturesViewController" bundle:nil];
     v1.tabBarItem.image = [UIImage imageNamed:@"favoritesPicturesIcon"];

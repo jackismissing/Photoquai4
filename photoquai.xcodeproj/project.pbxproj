@@ -94,7 +94,6 @@
 		1ACACF3716A804050060DA49 /* Parisine-BoldItalic.otf in Resources */ = {isa = PBXBuildFile; fileRef = 1ACACF3316A804050060DA49 /* Parisine-BoldItalic.otf */; };
 		1ACACF3816A804050060DA49 /* Parisine-Italic.otf in Resources */ = {isa = PBXBuildFile; fileRef = 1ACACF3416A804050060DA49 /* Parisine-Italic.otf */; };
 		1ACACF3916A804050060DA49 /* Parisine-Regular.otf in Resources */ = {isa = PBXBuildFile; fileRef = 1ACACF3516A804050060DA49 /* Parisine-Regular.otf */; };
-		1ADCFE4616AF3CB80088A4C5 /* FavoriteIndicatorViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1ADCFE4516AF3CB70088A4C5 /* FavoriteIndicatorViewController.m */; };
 		1ADCFE4A16AF4A5B0088A4C5 /* CustomAlertView.m in Sources */ = {isa = PBXBuildFile; fileRef = 1ADCFE4916AF4A5B0088A4C5 /* CustomAlertView.m */; };
 		1ADF100D16AAF0B700C2ADD2 /* DrawRect.m in Sources */ = {isa = PBXBuildFile; fileRef = 1ADF100C16AAF0B700C2ADD2 /* DrawRect.m */; };
 		1AE2B0CB16B2607800DC1829 /* emptycheck@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 1AE2B0C916B2607800DC1829 /* emptycheck@2x.png */; };
@@ -273,8 +272,6 @@
 		1ACACF3316A804050060DA49 /* Parisine-BoldItalic.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Parisine-BoldItalic.otf"; sourceTree = "<group>"; };
 		1ACACF3416A804050060DA49 /* Parisine-Italic.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Parisine-Italic.otf"; sourceTree = "<group>"; };
 		1ACACF3516A804050060DA49 /* Parisine-Regular.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Parisine-Regular.otf"; sourceTree = "<group>"; };
-		1ADCFE4416AF3CB70088A4C5 /* FavoriteIndicatorViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FavoriteIndicatorViewController.h; sourceTree = "<group>"; };
-		1ADCFE4516AF3CB70088A4C5 /* FavoriteIndicatorViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FavoriteIndicatorViewController.m; sourceTree = "<group>"; };
 		1ADCFE4816AF4A5B0088A4C5 /* CustomAlertView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CustomAlertView.h; sourceTree = "<group>"; };
 		1ADCFE4916AF4A5B0088A4C5 /* CustomAlertView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CustomAlertView.m; sourceTree = "<group>"; };
 		1ADF100B16AAF0B700C2ADD2 /* DrawRect.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DrawRect.h; sourceTree = "<group>"; };
@@ -783,8 +780,6 @@
 			children = (
 				1AEEF48D16ADF4A600489C08 /* FavoriteIndicator.h */,
 				1AEEF48E16ADF4A600489C08 /* FavoriteIndicator.m */,
-				1ADCFE4416AF3CB70088A4C5 /* FavoriteIndicatorViewController.h */,
-				1ADCFE4516AF3CB70088A4C5 /* FavoriteIndicatorViewController.m */,
 				1ADCFE4816AF4A5B0088A4C5 /* CustomAlertView.h */,
 				1ADCFE4916AF4A5B0088A4C5 /* CustomAlertView.m */,
 			);
@@ -1134,7 +1129,6 @@
 				1ABDFCF116AB64F5004C95C8 /* FavoritesPicturesViewController.m in Sources */,
 				1AEEF43D16ADDEE900489C08 /* ArtistsLisViewController.m in Sources */,
 				1AEEF48F16ADF4A600489C08 /* FavoriteIndicator.m in Sources */,
-				1ADCFE4616AF3CB80088A4C5 /* FavoriteIndicatorViewController.m in Sources */,
 				1ADCFE4A16AF4A5B0088A4C5 /* CustomAlertView.m in Sources */,
 				1A0466BC16B0815400F01AA3 /* FavoritePhotographerViewController.m in Sources */,
 				1A9D4B9716B1F60E00CC8FD2 /* FakeActionSheet.m in Sources */,

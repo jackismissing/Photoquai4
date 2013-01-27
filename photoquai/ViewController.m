@@ -66,10 +66,12 @@
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(connexionStateChanged:) name:@"loginComplete" object:reachabilityInfo];
     
     // Post a notification to loginComplete
-    [[NSNotificationCenter defaultCenter] postNotificationName:@"loginComplete" object:reachabilityInfo];
+    //[[NSNotificationCenter defaultCenter] postNotificationName:@"loginComplete" object:reachabilityInfo];
     
     AppDelegate *appdelegate = (AppDelegate *)[[UIApplication sharedApplication] delegate];
     [appdelegate hideTabBar:self.tabBarController];
+    
+    [NSThread detachNewThreadSelector:@selector(loadingViewAsync) toTarget:self withObject:nil];
 }
 
 - (void)viewWillAppear:(BOOL)animated
@@ -90,25 +92,6 @@
     
     UIBarButtonItem* menuBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:menuButton];
     [self.navigationItem setLeftBarButtonItem:menuBarButtonItem];
-}
-
-//Détecte la connexion d'un utilisateur
-- (void)connexionStateChanged:(NSNotification*)notification{
-    
-    //Permet de savoir si l'utilisateur est connecté à Internet (Wi-fi, 3G, EDGE)
-    Reachability *reachability = [Reachability reachabilityForInternetConnection];
-    NetworkStatus internetStatus = [reachability currentReachabilityStatus];
-    if (internetStatus != NotReachable) { //Oui, il l'est
-        
-        [NSThread detachNewThreadSelector:@selector(loadingViewAsync) toTarget:self withObject:nil];
-    } else { // Non, on lui balance une erreur
-        UIAlertView *alert = [[UIAlertView alloc]
-                              initWithTitle:nil
-                              message:@"Votre appareil n'est pas connecté à Internet. Pour profiter pleinement de l'expérience PHQ4, veuillez vous connecter à Internet."
-                              delegate:self
-                              cancelButtonTitle:@"OK" otherButtonTitles:nil];
-        [alert show];
-    }
 }
 
 - (void) loadingViewAsync{

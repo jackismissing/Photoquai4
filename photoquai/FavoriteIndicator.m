@@ -69,7 +69,7 @@
         
         UITextView *subMessage = [[UITextView alloc] initWithFrame:CGRectMake(18, _message.frame.size.height + _message.frame.origin.y, content.frame.size.width * .8, 25)];
         subMessage.font = [UIFont fontWithName:@"Parisine-Regular" size: 9.0f];
-        subMessage.text = @"Rendez-vous dans la catégorie “Favoris“ pour retouver votre séléction de photographies et d’artistes";
+        subMessage.text = @"Rendez-vous dans la catégorie “Favoris“ pour retrouver votre séléction de photographies et d’artistes";
         subMessage.backgroundColor = [UIColor clearColor];
         subMessage.textColor = [UIColor blackColor];
         subMessage.editable = NO;
@@ -91,7 +91,7 @@
         [closeBtn addTarget:self action:@selector(hide) forControlEvents:UIControlEventTouchUpInside];
         
         closeBtn.backgroundColor = [UIColor r:241 g:241 b:241 alpha:1];
-        closeBtn.layer.borderColor = [UIColor r:0 g:0 b:236 alpha:1].CGColor;
+        closeBtn.layer.borderColor = [UIColor r:220 g:220 b:220 alpha:1].CGColor;
 
         closeBtn.layer.borderWidth = 1.0f;
         closeBtn.layer.cornerRadius = 3.0f;
@@ -105,17 +105,8 @@
     _message.text = text;
 }
 
-/*
-// Only override drawRect: if you perform custom drawing.
-// An empty implementation adversely affects performance during animation.
-- (void)drawRect:(CGRect)rect
-{
- 
-}
- 
-*/
-
 - (void) hide{
+    [[NSNotificationCenter defaultCenter] postNotificationName:@"reBindListenerFavorite" object:nil];
     [UIView animateWithDuration:0.25
                           delay:0
                         options: UIViewAnimationOptionCurveLinear
@@ -130,7 +121,6 @@
 }
 
 - (void) show{
-    
     [UIView animateWithDuration:0.25
                           delay:0
                         options: UIViewAnimationCurveEaseIn
