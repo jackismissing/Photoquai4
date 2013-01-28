@@ -72,6 +72,13 @@
     
     [self.view addSubview:tableMenuScrollView];
     
+    // petit triangle
+    
+    UIImageView *petitTriange = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"triangleblanc.png"]];
+    
+    petitTriange.center = CGPointMake(self.view.frame.size.width / 2, 50 - petitTriange.frame.size.height /2 );
+    
+    [self.view addSubview:petitTriange];
     
     artistsList = [[NSMutableArray alloc] init];
     
@@ -621,6 +628,7 @@
 - (void)scrollViewDidEndDecelerating:(UIScrollView *)sender
 {
     
+    
     // Le fameux scroll infini !
     
     if (tableMenuScrollView.contentOffset.x == 0) {
@@ -635,6 +643,8 @@
         // reposition offset to show image 1 that is on the left in the scroll view
         [tableMenuScrollView scrollRectToVisible:CGRectMake(30,0,self.view.frame.size.width, 50) animated:NO];
     }
+    
+        if (sender == tableMenuScrollView){
     
         
         for (UIView *subview in [tableMenuScrollView subviews])
@@ -659,6 +669,7 @@
                 [self scrollToSection:subview.tag];
             }
             
+        }
         }
     
 }

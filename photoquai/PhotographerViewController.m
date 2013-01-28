@@ -140,6 +140,19 @@
     NSString *photographerPictureLink = [[appdelegate getElementsFromJSON:appendLink] valueForKeyPath:@"photographer.cover.file.link"];
     NSString *firstnamePhotographer = [[appdelegate getElementsFromJSON:appendLink] valueForKeyPath:@"photographer.firstname"];
     NSString *lastnamePhotographer = [[appdelegate getElementsFromJSON:appendLink] valueForKeyPath:@"photographer.lastname"];
+    
+    // Coordonnées
+    
+    NSNumber *latitudeNumber = [[appdelegate getElementsFromJSON:appendLink] valueForKeyPath:@"photographer.origin_location.latitude"];
+    
+    double latitude = [latitudeNumber doubleValue];
+    
+    NSNumber *longitudeNumber = [[appdelegate getElementsFromJSON:appendLink] valueForKeyPath:@"photographer.origin_location.longitude"];
+    
+    double longitude = [longitudeNumber doubleValue];
+    
+    
+
     // NSString *picturesBrut = [[appdelegate getElementsFromJSON:appendLink] valueForKeyPath:@"photographer.pictures"];
     
     NSDictionary *photographerPicturesDict = [[appdelegate getElementsFromJSON:appendLink] valueForKeyPath:@"photographer.pictures"];
@@ -174,13 +187,40 @@
     
     float contentUnderPhotographerPictureY = photographerPicture.frame.size.height + photographerPicture.frame.origin.y;
     
-    photographerLocationMap = [[UIImageView alloc] initWithFrame:CGRectMake((screenWidth/2), contentUnderPhotographerPictureY - 73, screenWidth, 100)];
-    photographerLocationMap.image = [UIImage imageNamed:@"photographerLocation"];
-    photographerLocationMap.contentMode = UIViewContentModeScaleAspectFill;
-    [photographerLocationMap sizeToFit];
+    // localiser l'artiste sur la map
+    
+    //  /////////////////////////////////////////////////////////////////////////////////// MAP /////////////////
+    
+    photographerLocationMap = [[MKMapView alloc] initWithFrame:CGRectMake((screenWidth/2), contentUnderPhotographerPictureY - 73, screenWidth, 150)];
+
     photographerLocationMap.layer.anchorPoint = CGPointMake(1, 0); //Déplace le centre
     photographerLocationMap.transform = CGAffineTransformMakeScale(1, 0.001);
     [myScrollView addSubview:photographerLocationMap];
+    
+    // Zoom to artist's coordinates
+    
+    CLLocationCoordinate2D zoomLocation;
+    zoomLocation.latitude = latitude;
+    zoomLocation.longitude = longitude;
+    
+    
+    
+    MKCoordinateRegion viewRegion = MKCoordinateRegionMakeWithDistance(zoomLocation, 3000*METERS_PER_MILE, 3000*METERS_PER_MILE);
+    
+    MKCoordinateRegion adjustedRegion = [photographerLocationMap regionThatFits:viewRegion];
+    
+    [photographerLocationMap setRegion:adjustedRegion animated:YES];
+    
+    // Add an annotation
+    MKPointAnnotation *point = [[MKPointAnnotation alloc] init];
+    
+    CLLocationCoordinate2D coordinate;
+    coordinate.latitude = latitude;
+    coordinate.longitude = longitude;
+    
+    point.coordinate = coordinate;
+       
+    [photographerLocationMap addAnnotation:point];
     
     
     //Content
@@ -403,10 +443,12 @@
                          //imageViewController.idPicture = [[notification object] intValue];
                          //[self.navigationController pushViewController:imageViewController animated:YES];
                          
-                         SliderViewController *sliderImage = [[SliderViewController alloc] initWithNibName:nil bundle:nil];
-                         sliderImage.arrayImages = photographerPictures;
-                         sliderImage.arrayIndexes = photographerPicturesIds;
-                         [self presentModalViewController:sliderImage animated:YES];
+                         SliderViewController *sliderImageViewController = [[SliderViewController alloc] initWithNibName:nil bundle:nil];
+                         sliderImageViewController.arrayImages = photographerPictures;
+                         sliderImageViewController.arrayIndexes = photographerPicturesIds;
+                         UINavigationController *navigationController = [[UINavigationController alloc] initWithRootViewController:sliderImageViewController];
+                         [self presentModalViewController:navigationController animated:YES];
+                         //[self presentModalViewController:sliderImage animated:YES];
                      }];
 }
 

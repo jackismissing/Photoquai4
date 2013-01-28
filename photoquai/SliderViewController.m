@@ -19,16 +19,20 @@
     [super viewWillAppear:animated];
     
     [self.navigationController.navigationBar setBackgroundImage:[UIImage imageNamed:@"navigationBar-photographie.png"] forBarMetrics:UIBarMetricsDefault];
-
     
-    UIButton *cancelBtn = [[UIButton alloc] initWithFrame:CGRectMake(0, 250, 150, 20)];
+    
+    self.navigationItem.title = @"Images de ";
+    
+    UIButton *cancelBtn = [[UIButton alloc] initWithFrame:CGRectMake(10, 10, 20, 20)];
     [cancelBtn addTarget:self action:@selector(dismissPage) forControlEvents:UIControlEventTouchUpInside];
-    //[cancelBtn setTitle:@"Annuler" forState:UIControlStateNormal];
+    
     [cancelBtn setImage:[UIImage imageNamed:@"closeMap"] forState:UIControlStateNormal];
-    [self.view addSubview:cancelBtn];
+    //[self.view addSubview:cancelBtn];
     
+    UIView *rightNavigationButtons = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 40, 40)];
+    [rightNavigationButtons addSubview:cancelBtn];
     
-    UIBarButtonItem *rightNavigationBarItems = [[UIBarButtonItem alloc] initWithCustomView:cancelBtn];
+    UIBarButtonItem *rightNavigationBarItems = [[UIBarButtonItem alloc] initWithCustomView:rightNavigationButtons];
     self.navigationItem.rightBarButtonItem = rightNavigationBarItems;
 }
 
@@ -41,7 +45,7 @@
     screenWidth = screenRect.size.width;
     screenHeight = screenRect.size.height;
     
-    SliderImage *sliderImage = [[SliderImage alloc] initWithImages:self.arrayImages withIndexes:self.arrayIndexes atPosition:CGRectMake(15, 42, screenWidth * .8, screenHeight - 100)];
+    SliderImage *sliderImage = [[SliderImage alloc] initWithImages:self.arrayImages withIndexes:self.arrayIndexes atPosition:CGRectMake(-15, 15, screenWidth * .8, screenHeight - 100)];
     
     [self.view setOpaque:YES];
     [self.view setAlpha:.8];

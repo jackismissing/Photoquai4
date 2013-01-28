@@ -55,7 +55,7 @@
     
     UIImageView *creditsImage = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"credits.png"]];
     
-    scrollView.contentSize = CGSizeMake(creditsImage.frame.size.width, creditsImage.frame.size.height);
+    scrollView.contentSize = CGSizeMake(creditsImage.frame.size.width, creditsImage.frame.size.height + self.navigationController.navigationBar.frame.size.height);
     
     
     [scrollView addSubview:creditsImage];

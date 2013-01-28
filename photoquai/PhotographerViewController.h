@@ -17,6 +17,11 @@
 #import "FavoritePhotographerViewController.h"
 #import "SliderViewController.h"
 
+#import <MapKit/MapKit.h>
+#import "PinLocation.h"
+
+#define METERS_PER_MILE 1069.344
+
 
 @interface PhotographerViewController : UIViewController <MFMailComposeViewControllerDelegate, UIScrollViewDelegate>{
     UIButton *favouriteButton;
@@ -38,7 +43,7 @@
     
     BOOL photographerLocationIsVisible;
     UIView *contentUnderPhotographerPicture;
-    UIImageView *photographerLocationMap;
+    MKMapView *photographerLocationMap;
     float myScrollViewHeight;
     UIButton *photographerLocalisationButton;
     UITextView *descriptionPhotographer;
@@ -55,6 +60,5 @@
 }
 
 @property (nonatomic, assign) int idPhotographer;
-
 
 @end
