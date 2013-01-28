@@ -15,6 +15,7 @@
 #import "CustomPopOver.h"
 #import "SliderImage.h"
 #import "FavoritePhotographerViewController.h"
+#import "SliderViewController.h"
 
 
 @interface PhotographerViewController : UIViewController <MFMailComposeViewControllerDelegate, UIScrollViewDelegate>{
@@ -48,8 +49,12 @@
     CGRect frame; //Réelle hauteur de la textView
     
     BOOL descriptionIsFull;
+    
+    NSArray *photographerPicturesIds;
+    NSArray *photographerPictures;
 }
 
 @property (nonatomic, assign) int idPhotographer;
+
 
 @end

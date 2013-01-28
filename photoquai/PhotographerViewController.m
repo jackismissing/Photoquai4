@@ -143,8 +143,8 @@
     // NSString *picturesBrut = [[appdelegate getElementsFromJSON:appendLink] valueForKeyPath:@"photographer.pictures"];
     
     NSDictionary *photographerPicturesDict = [[appdelegate getElementsFromJSON:appendLink] valueForKeyPath:@"photographer.pictures"];
-    NSArray *photographerPictures = [photographerPicturesDict valueForKey:@"link_iphone"];
-    NSArray *photographerPicturesIds = [photographerPicturesDict valueForKey:@"id"];
+    photographerPictures = [photographerPicturesDict valueForKey:@"link_iphone"];
+    photographerPicturesIds = [photographerPicturesDict valueForKey:@"id"];
     
     //NSLog(@"photographerPictures : %@", photographerPictures);
     
@@ -399,9 +399,14 @@
                      }
                      completion:^(BOOL finished){
                          
-                         PhotographyViewController *imageViewController = [[PhotographyViewController alloc] initWithNibName:@"PhotographyViewController" bundle:nil];
-                         imageViewController.idPicture = [[notification object] intValue];
-                         [self.navigationController pushViewController:imageViewController animated:YES];
+                         //PhotographyViewController *imageViewController = [[PhotographyViewController alloc] initWithNibName:@"PhotographyViewController" bundle:nil];
+                         //imageViewController.idPicture = [[notification object] intValue];
+                         //[self.navigationController pushViewController:imageViewController animated:YES];
+                         
+                         SliderViewController *sliderImage = [[SliderViewController alloc] initWithNibName:nil bundle:nil];
+                         sliderImage.arrayImages = photographerPictures;
+                         sliderImage.arrayIndexes = photographerPicturesIds;
+                         [self presentModalViewController:sliderImage animated:YES];
                      }];
 }
 

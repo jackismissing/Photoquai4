@@ -655,12 +655,8 @@
             
             if(buttonCenterInCoord.x > self.view.frame.size.width / 2 - 15 && buttonCenterInCoord.x < self.view.frame.size.width / 2 + 15)
             {
-                
-                
                 [tableMenuScrollView setContentOffset:CGPointMake(buttonCenter.x - self.view.frame.size.width / 2 , 0) animated:YES];
                 [self scrollToSection:subview.tag];
-                
-                
             }
             
         }
