@@ -446,6 +446,8 @@
                          SliderViewController *sliderImageViewController = [[SliderViewController alloc] initWithNibName:nil bundle:nil];
                          sliderImageViewController.arrayImages = photographerPictures;
                          sliderImageViewController.arrayIndexes = photographerPicturesIds;
+                         sliderImageViewController.patronymPhotographer = patronymPhotographer;
+                         
                          UINavigationController *navigationController = [[UINavigationController alloc] initWithRootViewController:sliderImageViewController];
                          [self presentModalViewController:navigationController animated:YES];
                          //[self presentModalViewController:sliderImage animated:YES];

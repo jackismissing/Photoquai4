@@ -89,8 +89,6 @@
     
     
     [self loadFavoris];
-    
-    NSLog(@"reload");
 }
 
 - (void) loadFavoris{
@@ -106,11 +104,8 @@
             yPosition++;
         }
         
-        NSLog(@"reload 1");
-        
         artistFavoriteElement = [[ArtistFavoriteElement alloc] initWithFrame:CGRectMake(xPosition * 150 + 13, (yPosition * 189) + 15, 145, 200) withId:[[favoritesPhotographers objectAtIndex:i] intValue]];
         [artistFavoriteElement setIdColonne:xPosition];
-        
         
         [myScrollView addSubview:artistFavoriteElement];
         
@@ -151,7 +146,7 @@
     [self.navigationController pushViewController:imageViewController animated:YES];
 }
 
-- (void) suppfavoris{
+- (void) suppfavoris{ //Activation de la possibilité de supprimer les favoris
     if(removeEnabled == NO){
         [fakeActionSheet show];
         removeEnabled = YES;
@@ -173,15 +168,41 @@
     }
 }
 
-- (void) removeFavorites{
+
+- (void) removeFavorites{ //Supprime les favoris
     NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
     removeEnabled = NO;
     
+    if ([favoritesToRemove count] == 0) {
+        CustomAlertView *alert = [[CustomAlertView alloc]
+                                  initWithTitle:nil
+                                  message:@"Vous n'avez pas sélectionné de favoris à supprimer"
+                                  delegate:self
+                                  cancelButtonTitle:@"OK" otherButtonTitles:@"Favoris", nil];
+        [alert show];
+    }
+    
     for (int i = 0; i < [favoritesToRemove count]; i++) {
+        for (ArtistFavoriteElement *view in myScrollView.subviews) {
+            if (view.tag == [[favoritesToRemove objectAtIndex:i] intValue]) {
+                [UIView animateWithDuration:0.42
+                                      delay:0
+                                    options: UIViewAnimationCurveEaseOut
+                                 animations:^{
+                                     view.alpha = 0;
+                                     view.layer.anchorPoint = CGPointMake(.5, .5);
+                                     view.transform = CGAffineTransformMakeScale(0, 0);
+                                 }
+                                 completion:^(BOOL finished){
+                                     for (UIView *view in myScrollView.subviews) {
+                                         [view removeFromSuperview];
+                                     }
+                                     [self loadFavoris];
+                                 }];
+            }
+        }
         [favoritesPhotographers removeObject:[favoritesToRemove objectAtIndex:i]];
     }
-    //[self loadFavoris];
-    [self.view setNeedsDisplay];
     
     [defaults setObject:favoritesPhotographers forKey:@"favorisPhotographes"];
     [defaults synchronize];

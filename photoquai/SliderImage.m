@@ -25,7 +25,7 @@
         
         for (int i = 0; i < [arrayImages count]; i++){
             
-            CGRect dimension = CGRectMake(i * frame.size.width + 50, 0, self.frame.size.width, self.frame.size.height);
+            CGRect dimension = CGRectMake(i * frame.size.width + 15, 0, self.frame.size.width, self.frame.size.height);
             //UIImage *theImage = [UIImage imageNamed:[arrayImages objectAtIndex:i]];
             //NSData* imageData = [[NSData alloc]initWithContentsOfURL:[NSURL URLWithString:[arrayImages objectAtIndex:i]]];
             //UIImage *theImage = [UIImage imageWithData:imageData];

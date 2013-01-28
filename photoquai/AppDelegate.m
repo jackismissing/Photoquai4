@@ -56,7 +56,7 @@
     if (networkStatus == NotReachable) {
         CustomAlertView *alert = [[CustomAlertView alloc]
                               initWithTitle:nil
-                              message:@"Votre appareil n'est pas connecté à Internet. Pour profiter pleinement de l'expérience PHQ4, veuillez vous connecter à Internet."
+                              message:@"Votre appareil n'est pas connecté à Internet. Pour profiter pleinement de l'expérience PHQ4, veuillez vous connecter."
                               delegate:self
                               cancelButtonTitle:@"OK" otherButtonTitles:nil];
         [alert show];

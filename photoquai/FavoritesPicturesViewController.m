@@ -188,19 +188,43 @@
     }
 }
 
-- (void) removeFavorites{
+- (void) removeFavorites{ //Supprime les favoris
     NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+    removeEnabled = NO;
+    
+    if ([favoritesToRemove count] == 0) {
+        CustomAlertView *alert = [[CustomAlertView alloc]
+                                  initWithTitle:nil
+                                  message:@"Vous n'avez pas sélectionné de favoris à supprimer"
+                                  delegate:self
+                                  cancelButtonTitle:@"OK" otherButtonTitles:@"Favoris", nil];
+        [alert show];
+    }
     
     for (int i = 0; i < [favoritesToRemove count]; i++) {
+        for (FavoriteElement *view in myScrollView.subviews) {
+            if (view.tag == [[favoritesToRemove objectAtIndex:i] intValue]) {
+                [UIView animateWithDuration:0.42
+                                      delay:0
+                                    options: UIViewAnimationCurveEaseOut
+                                 animations:^{
+                                     view.alpha = 0;
+                                     view.layer.anchorPoint = CGPointMake(.5, .5);
+                                     view.transform = CGAffineTransformMakeScale(0, 0);
+                                 }
+                                 completion:^(BOOL finished){
+                                     for (UIView *view in myScrollView.subviews) {
+                                         [view removeFromSuperview];
+                                     }
+                                     [self loadFavoritesPictures];
+                                 }];
+            }
+        }
         [favoritesPictures removeObject:[favoritesToRemove objectAtIndex:i]];
     }
-    removeEnabled = YES;
-    [self.view removeFromSuperview];
-    [self.view setNeedsDisplay];
     
     [defaults setObject:favoritesPictures forKey:@"favorisImages"];
     [defaults synchronize];
-    NSLog(@"favoritesToRemove : %@", favoritesToRemove);
 }
 
 - (void) selectFavorites2Remove:(UIGestureRecognizer *)gesture{

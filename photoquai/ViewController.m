@@ -233,13 +233,6 @@
     thumbsContainer.frame = CGRectMake(0, 0, totalWidth, heightMax + 21);
 
     [myScrollView setContentSize:CGSizeMake(totalWidth, heightMax + 21)];
-    //Place le catalogue à une valeur aléatoire
-    float randNumY = (arc4random() % heightMax);
-    float randNumX = (arc4random() % totalWidth);
-    
-    CGPoint offset;
-    offset.x = randNumX;
-    offset.y = randNumY;
 }
 
 //Gère le pinch to zoom gesture
