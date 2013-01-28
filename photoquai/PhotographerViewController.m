@@ -156,8 +156,8 @@
     // NSString *picturesBrut = [[appdelegate getElementsFromJSON:appendLink] valueForKeyPath:@"photographer.pictures"];
     
     NSDictionary *photographerPicturesDict = [[appdelegate getElementsFromJSON:appendLink] valueForKeyPath:@"photographer.pictures"];
-    NSArray *photographerPictures = [photographerPicturesDict valueForKey:@"link_iphone"];
-    NSArray *photographerPicturesIds = [photographerPicturesDict valueForKey:@"id"];
+    photographerPictures = [photographerPicturesDict valueForKey:@"link_iphone"];
+    photographerPicturesIds = [photographerPicturesDict valueForKey:@"id"];
     
     //NSLog(@"photographerPictures : %@", photographerPictures);
     
@@ -273,7 +273,7 @@
     float contentUnderPhotographerPictureHeight = patronymPhotographerLabel.frame.origin.y + patronymPhotographerLabel.frame.size.height + originPhotographerLabel.frame.size.height + originPhotographerLabel.frame.origin.y + descriptionPhotographer.frame.size.height + 15;
     
     float sliderContentY = contentUnderPhotographerPictureHeight + photographerPicture.frame.size.height + photographerPicture.frame.origin.y + 15;
-    sliderContent = [[UIView alloc] initWithFrame:CGRectMake(0, sliderContentY, screenWidth, 250)];
+    sliderContent = [[UIView alloc] initWithFrame:CGRectMake(0, sliderContentY, screenWidth, 260)];
     sliderContent.backgroundColor = [UIColor blackColor];
     
     UILabel *sliderTitle = [[UILabel alloc] initWithFrame:CGRectMake(15, 15, 35, 10)];
@@ -318,42 +318,46 @@
         [defaults setObject:favoritesPhotographers forKey:@"favorisPhotographes"];
         [defaults synchronize];
         
-        CustomAlertView *alert = [[CustomAlertView alloc]
-                                  initWithTitle:nil
-                                  message:[patronymPhotographer stringByAppendingString:@" a été ajouté à vos favoris"]
-                                  delegate:self
-                                  cancelButtonTitle:@"OK" otherButtonTitles:@"Favoris", nil];
+        FavoriteIndicator *favoriteIndicator = [[FavoriteIndicator alloc] initWithFrame:CGRectMake(0, 0, 320, 540)];
+        
+        favoriteIndicator.message.text = [patronymPhotographer stringByAppendingString:@" a été ajouté à vos favoris"];
+        [self.view addSubview:favoriteIndicator];
+        [favoriteIndicator show];
+        
+//        CustomAlertView *alert = [[CustomAlertView alloc]
+//                                  initWithTitle:nil
+//                                  message:[patronymPhotographer stringByAppendingString:@" a été ajouté à vos favoris"]
+//                                  delegate:self
+//                                  cancelButtonTitle:@"OK" otherButtonTitles:@"Favoris", nil];
 
         
         [favouriteButton setImage:[UIImage imageNamed:@"etoilejaune"] forState:UIControlStateNormal];
         
-        [alert show];
+//        [alert show];
     }else{
         [favoritesPhotographers removeObject:idPhotographer];
         
         [defaults setObject:favoritesPhotographers forKey:@"favorisPhotographes"];
         [defaults synchronize];
         
-        CustomAlertView *alert = [[CustomAlertView alloc]
-                                  initWithTitle:nil
-                                  message:[patronymPhotographer stringByAppendingString:@" a été supprimé de vos favoris"]
-                                  delegate:self
-                                  cancelButtonTitle:@"OK" otherButtonTitles:@"Favoris", nil];
-        [alert show];
+        FavoriteIndicator *favoriteIndicator = [[FavoriteIndicator alloc] initWithFrame:CGRectMake(0, 0, 320, 540)];
+        
+        favoriteIndicator.message.text = [patronymPhotographer stringByAppendingString:@" a été supprimée de vos favoris"];
+        [self.view addSubview:favoriteIndicator];
+        [favoriteIndicator show];
+        
+//        CustomAlertView *alert = [[CustomAlertView alloc]
+//                                  initWithTitle:nil
+//                                  message:[patronymPhotographer stringByAppendingString:@" a été supprimé de vos favoris"]
+//                                  delegate:self
+//                                  cancelButtonTitle:@"OK" otherButtonTitles:@"Favoris", nil];
+//        [alert show];
 
         
         [favouriteButton setImage:[UIImage imageNamed:@"etoilepush"] forState:UIControlStateNormal];
     }
 }
 
-- (void)alertView:(UIAlertView *)alertView didDismissWithButtonIndex:(NSInteger)buttonIndex
-{
-    if (buttonIndex == 1)
-    {
-        FavoritePhotographerViewController *favoritesPictures = [[FavoritePhotographerViewController alloc] init];
-        [self.navigationController pushViewController:favoritesPictures animated:YES];
-    }
-}
 
 - (void) sharePicture{
     
@@ -435,16 +439,45 @@
                      }
                      completion:^(BOOL finished){
                          
-                         PhotographyViewController *imageViewController = [[PhotographyViewController alloc] initWithNibName:@"PhotographyViewController" bundle:nil];
-                         imageViewController.idPicture = [[notification object] intValue];
-                         [self.navigationController pushViewController:imageViewController animated:YES];
+                         //PhotographyViewController *imageViewController = [[PhotographyViewController alloc] initWithNibName:@"PhotographyViewController" bundle:nil];
+                         //imageViewController.idPicture = [[notification object] intValue];
+                         //[self.navigationController pushViewController:imageViewController animated:YES];
+                         
+                         SliderViewController *sliderImageViewController = [[SliderViewController alloc] initWithNibName:nil bundle:nil];
+                         sliderImageViewController.arrayImages = photographerPictures;
+                         sliderImageViewController.arrayIndexes = photographerPicturesIds;
+                         UINavigationController *navigationController = [[UINavigationController alloc] initWithRootViewController:sliderImageViewController];
+                         [self presentModalViewController:navigationController animated:YES];
+                         //[self presentModalViewController:sliderImage animated:YES];
                      }];
 }
 
 - (void) displayPhotographerLocation{
+    if (descriptionIsFull == YES) {
+        [displayFullDescriptionButton setTitle:@"Afficher +" forState:UIControlStateNormal];
+        
+        [UIView animateWithDuration:0.5
+                              delay:0
+                            options: UIViewAnimationCurveEaseOut
+                         animations:^{
+                             descriptionPhotographer.frame = CGRectMake(10, 60, screenWidth * .85, 150);
+                             myScrollView.contentSize = CGSizeMake(screenWidth, myScrollViewHeight);
+                             displayFullDescriptionButton.frame = CGRectMake(15,
+                                                                             descriptionPhotographer.frame.size.height +
+                                                                             descriptionPhotographer.frame.origin.y + 15,
+                                                                             screenWidth * .9,
+                                                                             35);
+                             contentUnderPhotographerPicture.frame = CGRectMake(0, contentUnderPhotographerPicture.frame.origin.y, screenWidth, 310);
+                             sliderContent.frame = CGRectMake(0, sliderContent.frame.origin.y - frame.size.height + 150, screenWidth, sliderContent.frame.size.height);
+                         }
+                         completion:^(BOOL finished){
+                             descriptionIsFull = NO;
+                         }];
+    }
+    
     if (photographerLocationIsVisible == NO) { //La carte apparait
         myScrollView.contentSize = CGSizeMake(screenWidth, myScrollViewHeight + 130);
-        
+        [photographerLocalisationButton removeTarget:self action:@selector(displayPhotographerLocation) forControlEvents:UIControlEventTouchUpInside];
         UIImage *buttonImage = [UIImage imageNamed:@"closeMap"];
         [photographerLocalisationButton setImage:buttonImage forState:UIControlStateNormal];
         
@@ -459,10 +492,36 @@
                          }
                          completion:^(BOOL finished){
                              photographerLocationIsVisible = YES;
+                             [photographerLocalisationButton addTarget:self action:@selector(displayPhotographerLocation) forControlEvents:UIControlEventTouchUpInside];
                          }];
     }else{ //La carte disparait
-        myScrollView.contentSize = CGSizeMake(screenWidth, myScrollViewHeight - 20);
+           //myScrollView.contentSize = CGSizeMake(screenWidth, myScrollViewHeight - 20);
+        [photographerLocalisationButton removeTarget:self action:@selector(displayPhotographerLocation) forControlEvents:UIControlEventTouchUpInside];
+        UIImage *buttonImage = [UIImage imageNamed:@"globe"];
+        [photographerLocalisationButton setImage:buttonImage forState:UIControlStateNormal];
         
+        [UIView animateWithDuration:0.5
+                              delay:0
+                            options: UIViewAnimationCurveEaseOut
+                         animations:^{
+                             photographerLocationMap.transform = CGAffineTransformMakeScale(1, 0.001);
+                             contentUnderPhotographerPicture.frame = CGRectMake(0, contentUnderPhotographerPicture.frame.origin.y - 155, screenHeight, contentUnderPhotographerPicture.frame.size.height);
+                             myScrollView.contentOffset = CGPointMake(0, 0);
+                             myScrollView.contentSize = CGSizeMake(screenWidth, myScrollViewHeight);
+                             sliderContent.frame = CGRectMake(0, sliderContent.frame.origin.y - 165, screenWidth, sliderContent.frame.size.height);
+                         }
+                         completion:^(BOOL finished){
+                             photographerLocationIsVisible = NO;
+                             [photographerLocalisationButton addTarget:self action:@selector(displayPhotographerLocation) forControlEvents:UIControlEventTouchUpInside];
+                         }];
+    }
+}
+
+- (void) displayFullDescription{
+    frame = descriptionPhotographer.frame;
+    frame.size = descriptionPhotographer.contentSize;
+    
+    if (photographerLocationIsVisible == YES) {
         UIImage *buttonImage = [UIImage imageNamed:@"globe"];
         [photographerLocalisationButton setImage:buttonImage forState:UIControlStateNormal];
         
@@ -480,15 +539,8 @@
                              photographerLocationIsVisible = NO;
                          }];
     }
-}
-
-- (void) displayFullDescription{
-    CGRect frame = descriptionPhotographer.frame;
-    frame.size = descriptionPhotographer.contentSize;
     
     if (descriptionIsFull == NO) { //La description se déroule
-        
-        
         [displayFullDescriptionButton setTitle:@"Afficher -" forState:UIControlStateNormal];
         [UIView animateWithDuration:0.5
                               delay:0

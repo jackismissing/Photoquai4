@@ -15,6 +15,7 @@
 #import "CustomPopOver.h"
 #import "SliderImage.h"
 #import "FavoritePhotographerViewController.h"
+#import "SliderViewController.h"
 
 #import <MapKit/MapKit.h>
 #import "PinLocation.h"
@@ -50,11 +51,14 @@
     UIView *sliderContent;
     SliderImage *sliderImages;
     
+    CGRect frame; //Réelle hauteur de la textView
+    
     BOOL descriptionIsFull;
+    
+    NSArray *photographerPicturesIds;
+    NSArray *photographerPictures;
 }
 
 @property (nonatomic, assign) int idPhotographer;
-
-
 
 @end

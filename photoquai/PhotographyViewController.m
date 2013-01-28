@@ -13,7 +13,9 @@
 
 @end
 
+
 @implementation PhotographyViewController
+
 
 - (void)viewWillAppear:(BOOL)animated
 {
@@ -151,6 +153,9 @@
     audioDescription = [[AudioImageView alloc] initWithFrame:CGRectMake(0, 500, screenWidth, 230) title:titleTextPhotography];
     [self.view addSubview:audioDescription];
     
+    imageLocation = [[ImageLocation alloc] initWithFrame:CGRectMake(0, 500, screenWidth, 300)];
+    [self.view addSubview:imageLocation];
+    
 #pragma mark - Favoris 
     
     preferencesUser = [NSUserDefaults standardUserDefaults];
@@ -177,7 +182,7 @@
     [self.view addSubview:toolBar];
 }
 
-- (void) reBindListenerFavorite{
+- (void) reBindListenerFavorite{ //On relie l'évènement d'ajout de favoris lorsque l'on a fait disparaitre la popup
     [favouriteButton addTarget:self action:@selector(addToFavorites) forControlEvents:UIControlEventTouchUpInside];
 }
 
@@ -284,6 +289,7 @@
                              toolBar.frame = CGRectMake(0, screenHeight, toolBar.frame.size.width, toolBar.frame.size.height);
                              audioDescription.frame = CGRectMake(0, 500, audioDescription.frame.size.width, audioDescription.frame.size.height);
                              descriptionPhotography.frame = CGRectMake(0, 500, descriptionPhotography.frame.size.width, descriptionPhotography.frame.size.height);
+                             imageLocation.frame = CGRectMake(0, 500, descriptionPhotography.frame.size.width, descriptionPhotography.frame.size.height);
                              picture.transform = CGAffineTransformIdentity;
                              //picture.transform = CGAffineTransformMakeScale(1.2, 1.2);
                              picture.frame = CGRectMake(0, 35, screenWidth, screenHeight);
@@ -375,7 +381,7 @@
     [self.navigationController pushViewController:imageViewController animated:YES];
 }
 
-- (void) showImageVolet:(NSNotification *)notification{
+- (void) showImageVolet:(NSNotification *)notification{ //Switch de volet
     
     
     NSInteger idToolBarItem = [[notification object] integerValue];
@@ -404,7 +410,7 @@
                                      picture.transform=CGAffineTransformMakeScale(1.2, 1.2);
                                      descriptionPhotography.frame = CGRectMake(0, 50, descriptionPhotography.frame.size.width, descriptionPhotography.frame.size.height);
                                      audioDescription.frame = CGRectMake(0, 500, audioDescription.frame.size.width, audioDescription.frame.size.height);
-                                     //locationPicture
+                                     imageLocation.frame = CGRectMake(0, 500, imageLocation.frame.size.width, imageLocation.frame.size.height);
                                  }
                                  completion:^(BOOL finished){}];
                 
@@ -441,6 +447,7 @@
                                      picture.transform=CGAffineTransformMakeScale(1.2, 1.2);
                                      descriptionPhotography.frame = CGRectMake(0, 500, descriptionPhotography.frame.size.width, descriptionPhotography.frame.size.height);
                                      audioDescription.frame = CGRectMake(0, 132, audioDescription.frame.size.width, audioDescription.frame.size.height);
+                                     imageLocation.frame = CGRectMake(0, 500, imageLocation.frame.size.width, imageLocation.frame.size.height);
                                  }
                                  completion:^(BOOL finished){}];
                 
@@ -457,13 +464,43 @@
             
         case 2:
         {
-            toolBar.locationImage.image = [UIImage imageNamed:@"geoloc-RO"];
-            toolBar.locationLabel.textColor = [UIColor whiteColor];
+            if (imageLocation.frame.origin.y == 132) {
+                [UIView animateWithDuration:0.5
+                                      delay:0
+                                    options: UIViewAnimationCurveEaseOut
+                                 animations:^{
+                                     picture.transform=CGAffineTransformMakeScale(1, 1);
+                                     audioDescription.frame = CGRectMake(0, 500, audioDescription.frame.size.width, audioDescription.frame.size.height);
+                                     imageLocation.frame = CGRectMake(0, 500, imageLocation.frame.size.width, imageLocation.frame.size.height);
+                                 }completion:^(BOOL finished){}];
+                
+                
+                toolBar.locationImage.image = [UIImage imageNamed:@"geoloc"];
+                toolBar.locationLabel.textColor = [UIColor r:109 g:109 b:109 alpha:1];
+            }else if (imageLocation.frame.origin.y == 500){
+                [UIView animateWithDuration:0.5
+                                      delay:0
+                                    options: UIViewAnimationCurveEaseOut
+                                 animations:^{
+                                     picture.transform=CGAffineTransformMakeScale(1.2, 1.2);
+                                     descriptionPhotography.frame = CGRectMake(0, 500, descriptionPhotography.frame.size.width, descriptionPhotography.frame.size.height);
+                                     audioDescription.frame = CGRectMake(0, 500, audioDescription.frame.size.width, audioDescription.frame.size.height);
+                                     imageLocation.frame = CGRectMake(0, 132, imageLocation.frame.size.width, imageLocation.frame.size.height);
+                                 }
+                                 completion:^(BOOL finished){}];
+                
+                toolBar.locationImage.image = [UIImage imageNamed:@"geoloc-RO"];
+                toolBar.locationLabel.textColor = [UIColor whiteColor];
+            }
+            
+            
 
             toolBar.infosImage.image = [UIImage imageNamed:@"informations"];
             toolBar.infosLabel.textColor = [UIColor r:109 g:109 b:109 alpha:1];
             toolBar.audioguideImage.image = [UIImage imageNamed:@"audioguide"];
             toolBar.audioguideLabel.textColor = [UIColor r:109 g:109 b:109 alpha:1];
+            
+            
         }
             break;
             
@@ -471,6 +508,25 @@
             break;
     } //Fin switch
 }
+
+//- (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
+//{
+//    if (interfaceOrientation == UIInterfaceOrientationLandscapeLeft || interfaceOrientation == UIInterfaceOrientationLandscapeRight) {
+//        [UIView animateWithDuration:0.5
+//                              delay:0
+//                            options: UIViewAnimationCurveEaseOut
+//                         animations:^{
+//                             picture.layer.anchorPoint = CGPointMake(0.5, 0.5);
+//                             picture.transform = CGAffineTransformMakeRotation(DEGREES_TO_RADIANS(90));
+//                         }
+//                         completion:^(BOOL finished){}];
+//        [self hideNavigation];
+//    }
+//    
+//    return (interfaceOrientation == UIInterfaceOrientationPortrait);
+//    
+//    //return YES;
+//}
 
 
 - (void)didReceiveMemoryWarning
