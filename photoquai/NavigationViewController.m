@@ -70,24 +70,13 @@
     
     
     self.sectorLabel.text = newValue;
+    
+    
 
     if(selectedSection == 1) {
         
         //NSLog(@"test");
-        
-        /*
-        
-        InfoViewController *infoView = [[InfoViewController alloc] init] ;
-        
-        UINavigationController *navigationController = [[UINavigationController alloc] initWithRootViewController:infoView];
-        
-        [navigationController setNavigationBarHidden:YES];
-        
-        // [self presentViewController:navigationController animated:YES completion:nil];
-        
-        [self.navigationController pushViewController:infoView animated:YES];
-        */
-        
+                
         ViewController *catalogueView = [[ViewController alloc] init];
         [self.navigationController pushViewController:catalogueView animated:YES];
     }
@@ -141,6 +130,8 @@
         //[self.navigationController pushViewController:favoritePhotograhers animated:YES];
 
     }
+     
+     
 
 
 }

@@ -205,7 +205,7 @@
     
     
     
-    MKCoordinateRegion viewRegion = MKCoordinateRegionMakeWithDistance(zoomLocation, 3200*METERS_PER_MILE, 3200*METERS_PER_MILE);
+    MKCoordinateRegion viewRegion = MKCoordinateRegionMakeWithDistance(zoomLocation, 3000*METERS_PER_MILE, 3000*METERS_PER_MILE);
     
     MKCoordinateRegion adjustedRegion = [photographerLocationMap regionThatFits:viewRegion];
     
