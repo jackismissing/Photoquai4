@@ -41,9 +41,9 @@
 	sectorLabel.textAlignment = UITextAlignmentCenter;
 	[self.view addSubview:sectorLabel];
     // 3 - Set up rotary wheel
-    rotaryWheel *wheel = [[rotaryWheel alloc] initWithFrame:CGRectMake(0, 0, 200, 200)
+    rotaryWheel *wheel = [[rotaryWheel alloc] initWithFrame:CGRectMake(0, 0, 240, 320)
                                                 andDelegate:self
-                                               withSections:5];
+                                               withSections:6];
     wheel.center = CGPointMake(160, 120);
     wheel.backgroundColor = [UIColor grayColor];
     // 4 - Add wheel to view

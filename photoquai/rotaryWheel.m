@@ -68,7 +68,7 @@ static float maxAlphavalue = 1.0;
         
         // 4 - Create image view
         
-        UIImageView *im = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"segment.png"]];
+        UIImageView *im = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"wheel_bottom.png"]];
         
         im.layer.anchorPoint = CGPointMake(1.0f, 0.5f);
         
@@ -89,9 +89,11 @@ static float maxAlphavalue = 1.0;
         }
 		// 5 - Set sector image
         
-        UIImageView *sectorImage = [[UIImageView alloc] initWithFrame:CGRectMake(12, 15, 40, 40)];
+        UIImageView *sectorImage = [[UIImageView alloc] initWithFrame:CGRectMake(18, 43, 23, 23)];
         
         sectorImage.image = [UIImage imageNamed:[NSString stringWithFormat:@"icon%i.png", i]];
+        
+
         
         [im addSubview:sectorImage];
         
@@ -111,17 +113,17 @@ static float maxAlphavalue = 1.0;
     // 7.1 - Add background image
 	UIImageView *bg = [[UIImageView alloc] initWithFrame:self.frame];
 	bg.image = [UIImage imageNamed:@"bg.png"];
-	[self addSubview:bg];
+	//[self addSubview:bg];
     
     UIImageView *mask = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, 58, 58)];
     mask.image =[UIImage imageNamed:@"centerButton.png"] ;
     mask.center = self.center;
     mask.center = CGPointMake(mask.center.x, mask.center.y+3);
-    [self addSubview:mask];
+   // [self addSubview:mask];
     
     // 8 - Initialize sectors
     sectors = [NSMutableArray arrayWithCapacity:numberOfSections];
-    if (numberOfSections % 2 == 0) {
+    if (numberOfSections % 2 != 0) {
         [self buildSectorsEven];
     } else {
         [self buildSectorsOdd];
@@ -150,7 +152,7 @@ static float maxAlphavalue = 1.0;
     
     // 1.2 - Filter out touches too close to the center
     
-    if (dist < 40 || dist > 175)
+    if (dist < 50 || dist > 120)
     {
         // forcing a tap to be on the ferrule
         //NSLog(@"ignoring tap (%f,%f)", touchPoint.x, touchPoint.y);
