@@ -15,6 +15,9 @@
 
 @implementation PhotographerViewController
 
+
+
+
 - (void)viewWillAppear:(BOOL)animated
 {
     //Réinstancie la navigation bar, une fois le menu disparu
@@ -585,6 +588,7 @@
 - (void)didReceiveMemoryWarning
 {
     [super didReceiveMemoryWarning];
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
     // Dispose of any resources that can be recreated.
 }
 

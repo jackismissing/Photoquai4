@@ -172,15 +172,15 @@
 - (void) removeFavorites{ //Supprime les favoris
     NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
     removeEnabled = NO;
-    
-    if ([favoritesToRemove count] == 0) {
-        CustomAlertView *alert = [[CustomAlertView alloc]
-                                  initWithTitle:nil
-                                  message:@"Vous n'avez pas sélectionné de favoris à supprimer"
-                                  delegate:self
-                                  cancelButtonTitle:@"OK" otherButtonTitles:@"Favoris", nil];
-        [alert show];
-    }
+//    
+//    if ([favoritesToRemove count] == 0) {
+//        CustomAlertView *alert = [[CustomAlertView alloc]
+//                                  initWithTitle:nil
+//                                  message:@"Vous n'avez pas sélectionné de favoris à supprimer"
+//                                  delegate:self
+//                                  cancelButtonTitle:@"OK" otherButtonTitles:@"Favoris", nil];
+//        [alert show];
+//    }
     
     for (int i = 0; i < [favoritesToRemove count]; i++) {
         for (ArtistFavoriteElement *view in myScrollView.subviews) {

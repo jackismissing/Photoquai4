@@ -11,6 +11,7 @@
 #import "ImageWall.h"
 #import "AppDelegate.h"
 #import "UIColor+RVB255.h"
+#import "FilterViewController.h"
 
 @interface ViewController : UIViewController <UIScrollViewDelegate>
 {

@@ -56,7 +56,7 @@
     myScrollView.showsHorizontalScrollIndicator = NO;
     myScrollView.showsVerticalScrollIndicator = NO;
     myScrollView.delegate = self;
-    //myScrollView.contentSize = CGSizeMake(130 * 5, 2000);
+    myScrollView.contentSize = CGSizeMake(130 * 5, 2000);
     //myScrollView.autoresizesSubviews = YES;
     myScrollView.zoomScale = .5;
     myScrollView.minimumZoomScale = 0.5;
@@ -74,8 +74,6 @@
     [appdelegate hideTabBar:self.tabBarController];
     
     [NSThread detachNewThreadSelector:@selector(loadingViewAsync) toTarget:self withObject:nil];
-    
-    
 }
 
 - (void)viewWillAppear:(BOOL)animated
@@ -93,6 +91,18 @@
     //[menuButton setShowsTouchWhenHighlighted:YES];
     
     [menuButton addTarget:self action:@selector(showMenu) forControlEvents:UIControlEventTouchUpInside];
+    
+    UIButton *fetchBtn = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 33, 44)];
+    [fetchBtn addTarget:self action:@selector(filterImages) forControlEvents:UIControlEventTouchUpInside];
+    
+    [fetchBtn setImage:[UIImage imageNamed:@"filtres"] forState:UIControlStateNormal];
+    //[self.view addSubview:cancelBtn];
+    
+    UIView *rightNavigationButtons = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 40, 40)];
+    [rightNavigationButtons addSubview:fetchBtn];
+    
+    UIBarButtonItem *rightNavigationBarItems = [[UIBarButtonItem alloc] initWithCustomView:rightNavigationButtons];
+    self.navigationItem.rightBarButtonItem = rightNavigationBarItems;
     
     UIBarButtonItem* menuBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:menuButton];
     [self.navigationItem setLeftBarButtonItem:menuBarButtonItem];
@@ -116,7 +126,7 @@
 - (void) loadImageWall{
     AppDelegate *appdelegate = (AppDelegate *)[[UIApplication sharedApplication] delegate];
     
-    int randomAnimate = (arc4random() % 2);
+    //int randomAnimate = (arc4random() % 2);
     
     
     if (i >= nbrPictures) return;
@@ -328,10 +338,17 @@
     //[self.navigationItem setBackBarButtonItem: backButton];
 }
 
+- (void) filterImages{
+    FilterViewController *filterViewController = [[FilterViewController alloc] initWithNibName:nil bundle:nil];
+    
+    UINavigationController *navigationController = [[UINavigationController alloc] initWithRootViewController:filterViewController];
+    [self presentModalViewController:navigationController animated:YES];
+}
+
 
 
 /*- (void)scrollViewWillBeginDragging:(UIScrollView *)scrollView{
-    
+ 
     for (UIImageView *img in thumbsContainer.subviews){
         if(img.frame.origin.y < myScrollView.contentOffset.y || img.frame.origin.y > (myScrollView.contentOffset.y + myScrollView.frame.size.height) || img.frame.origin.x < myScrollView.contentOffset.x || img.frame.origin.x > (myScrollView.contentOffset.x + myScrollView.frame.size.width))
         {            
@@ -365,6 +382,7 @@
 - (void)didReceiveMemoryWarning
 {
     [super didReceiveMemoryWarning];
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
     // Dispose of any resources that can be recreated.
 }
 

@@ -38,7 +38,7 @@
         
 
         self.tag = [[[appdelegate getElementsFromJSON:appendLink] valueForKeyPath:@"photographer.id"] integerValue];
-        //[self setIdGlobal:anId];
+        
         
         UIImageView *photographerFirstPhotography = [[UIImageView alloc] init];
         [photographerFirstPhotography setImageWithURL:[NSURL URLWithString:imgsPhotographer] placeholderImage:[UIImage imageNamed:@"etoilejaune"]];
@@ -128,13 +128,7 @@
     return idColonne;
 }
 
-- (void) setIdGlobal:(int) anIdGlobal{
-    idGlobal = anIdGlobal;
-}
 
-- (int) idGlobal{
-    return idGlobal;
-}
 /*
 // Only override drawRect: if you perform custom drawing.
 // An empty implementation adversely affects performance during animation.

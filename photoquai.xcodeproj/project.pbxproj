@@ -97,6 +97,9 @@
 		1ADF100D16AAF0B700C2ADD2 /* DrawRect.m in Sources */ = {isa = PBXBuildFile; fileRef = 1ADF100C16AAF0B700C2ADD2 /* DrawRect.m */; };
 		1AE2B0CB16B2607800DC1829 /* emptycheck@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 1AE2B0C916B2607800DC1829 /* emptycheck@2x.png */; };
 		1AE2B0CC16B2607800DC1829 /* emptycheck.png in Resources */ = {isa = PBXBuildFile; fileRef = 1AE2B0CA16B2607800DC1829 /* emptycheck.png */; };
+		1AEB307B16B73133000F0F26 /* filtres.png in Resources */ = {isa = PBXBuildFile; fileRef = 1AEB307916B73133000F0F26 /* filtres.png */; };
+		1AEB307C16B73133000F0F26 /* filtres@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 1AEB307A16B73133000F0F26 /* filtres@2x.png */; };
+		1AEB308016B734C2000F0F26 /* FilterViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1AEB307F16B734C2000F0F26 /* FilterViewController.m */; };
 		1AEEF43D16ADDEE900489C08 /* ArtistsLisViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1AEEF43C16ADDEE900489C08 /* ArtistsLisViewController.m */; };
 		1AEEF44416ADE11000489C08 /* audioguide-over.png in Resources */ = {isa = PBXBuildFile; fileRef = 1AEEF44016ADE10F00489C08 /* audioguide-over.png */; };
 		1AEEF44516ADE11000489C08 /* audioguide-over@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 1AEEF44116ADE10F00489C08 /* audioguide-over@2x.png */; };
@@ -347,6 +350,10 @@
 		1ADF100C16AAF0B700C2ADD2 /* DrawRect.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DrawRect.m; sourceTree = "<group>"; };
 		1AE2B0C916B2607800DC1829 /* emptycheck@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "emptycheck@2x.png"; sourceTree = "<group>"; };
 		1AE2B0CA16B2607800DC1829 /* emptycheck.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = emptycheck.png; sourceTree = "<group>"; };
+		1AEB307916B73133000F0F26 /* filtres.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = filtres.png; sourceTree = "<group>"; };
+		1AEB307A16B73133000F0F26 /* filtres@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "filtres@2x.png"; sourceTree = "<group>"; };
+		1AEB307E16B734C2000F0F26 /* FilterViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FilterViewController.h; sourceTree = "<group>"; };
+		1AEB307F16B734C2000F0F26 /* FilterViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FilterViewController.m; sourceTree = "<group>"; };
 		1AEEF43B16ADDEE900489C08 /* ArtistsLisViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ArtistsLisViewController.h; sourceTree = "<group>"; };
 		1AEEF43C16ADDEE900489C08 /* ArtistsLisViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ArtistsLisViewController.m; sourceTree = "<group>"; };
 		1AEEF44016ADE10F00489C08 /* audioguide-over.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "audioguide-over.png"; sourceTree = "<group>"; };
@@ -683,6 +690,7 @@
 		1ABEACAB16A5C34E0034D316 /* photoquai */ = {
 			isa = PBXGroup;
 			children = (
+				1AEB307D16B7345E000F0F26 /* FilterViewController */,
 				1A165EF016B6E7860079EF8B /* SliderViewController */,
 				1A017EDD16B320A600181788 /* PhotographerViewController */,
 				37EDCECB16B58EA600BB9908 /* CreditsViewController */,
@@ -911,6 +919,8 @@
 				37EDCEC116B58B7C00BB9908 /* DA */,
 				371E6ABD16B33F0A00836A1D /* InfosPratiques */,
 				1A3980AF16AC83A500584731 /* firstImgPHQ.png */,
+				1AEB307916B73133000F0F26 /* filtres.png */,
+				1AEB307A16B73133000F0F26 /* filtres@2x.png */,
 				1ACA754F16B4777D001FB984 /* ArtistView */,
 				1ACA0CD716A9FE240070EFB5 /* AudioPlayer */,
 				37C7831716A9B7CF001D6295 /* Share */,
@@ -929,6 +939,15 @@
 				1A017EEC16B35DA500181788 /* ArtistFavoriteElement.m */,
 			);
 			name = ArtistFavoriteElement;
+			sourceTree = "<group>";
+		};
+		1AEB307D16B7345E000F0F26 /* FilterViewController */ = {
+			isa = PBXGroup;
+			children = (
+				1AEB307E16B734C2000F0F26 /* FilterViewController.h */,
+				1AEB307F16B734C2000F0F26 /* FilterViewController.m */,
+			);
+			name = FilterViewController;
 			sourceTree = "<group>";
 		};
 		1AEEF43F16ADDEF500489C08 /* ArtistListViewCOntroller */ = {
@@ -1431,6 +1450,8 @@
 				37E56CA316B6CBB900AF2460 /* icon2.png in Resources */,
 				370151DC16B6F19D004CCFC2 /* triangleblanc@2X.png in Resources */,
 				370151DD16B6F19D004CCFC2 /* triangleblanc.png in Resources */,
+				1AEB307B16B73133000F0F26 /* filtres.png in Resources */,
+				1AEB307C16B73133000F0F26 /* filtres@2x.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1489,6 +1510,7 @@
 				37EDCECE16B58EBC00BB9908 /* CreditsViewController.m in Sources */,
 				1AFDE8B816B59BDC00E1D67D /* ImageLocation.m in Sources */,
 				1A165EF316B6E7A70079EF8B /* SliderViewController.m in Sources */,
+				1AEB308016B734C2000F0F26 /* FilterViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
