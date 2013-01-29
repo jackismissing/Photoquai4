@@ -41,13 +41,21 @@
 	sectorLabel.textAlignment = UITextAlignmentCenter;
 	[self.view addSubview:sectorLabel];
     // 3 - Set up rotary wheel
-    rotaryWheel *wheel = [[rotaryWheel alloc] initWithFrame:CGRectMake(0, 0, 240, 320)
+    rotaryWheel *wheel = [[rotaryWheel alloc] initWithFrame:CGRectMake(0, 0, 227, 227)
                                                 andDelegate:self
                                                withSections:6];
-    wheel.center = CGPointMake(160, 120);
-    wheel.backgroundColor = [UIColor grayColor];
+    wheel.center = CGPointMake(self.view.frame.size.width / 2, self.view.frame.size.height/2);
+
     // 4 - Add wheel to view
     [self.view addSubview:wheel];
+    
+    UIImageView *contours = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"contours.png"]];
+    
+    contours.center = CGPointMake(self.view.frame.size.width / 2, self.view.frame.size.height/2);
+    
+    [self.view addSubview:contours];
+    
+    
     
     // Add cancel button
     
