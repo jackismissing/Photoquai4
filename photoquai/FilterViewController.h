@@ -8,12 +8,16 @@
 
 #import <UIKit/UIKit.h>
 
-@interface FilterViewController : UIViewController {
-    NSDictionary *tableContents;
-    NSArray *sortedKeys;
+#import "UIColor+RVB255.h"
+#import "FilterSwitch.h"
+
+@interface FilterViewController : UIViewController <UITableViewDataSource, UITableViewDelegate> {
+    NSDictionary *tableViewDatas;
+    NSArray *localisationDatas;
+    NSArray *geographyDatas;
 }
 
-@property (nonatomic, retain) NSDictionary *tableContents;
-@property (nonatomic, retain) NSArray *sortedKeys;
+@property (nonatomic, strong) UITableView *sampleTableView;
+@property (nonatomic, strong) NSArray *items;
 
 @end

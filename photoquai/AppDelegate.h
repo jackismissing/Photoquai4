@@ -16,8 +16,7 @@
 @class Reachability;
 
 @interface AppDelegate : UIResponder <UIApplicationDelegate, UIAlertViewDelegate>{
-    UITabBarController *tabBarController;
-   
+
 }
 
 @property (strong, nonatomic) UIWindow *window;
@@ -26,7 +25,6 @@
 
 
 - (NSDictionary*) getElementsFromJSON:(NSString*)anURL;
-- (void)showTabBar:(UITabBarController *) tabbarcontroller;
-- (void)hideTabBar:(UITabBarController *) tabbarcontroller;
+
 
 @end

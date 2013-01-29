@@ -29,6 +29,7 @@
 		1A3980B516ACA3D300584731 /* icon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 1A3980B316ACA3D300584731 /* icon@2x.png */; };
 		1A53A82A16B7B87C00F3742A /* photoInfos.png in Resources */ = {isa = PBXBuildFile; fileRef = 1A53A82816B7B87C00F3742A /* photoInfos.png */; };
 		1A53A82B16B7B87C00F3742A /* photoInfos@2X.png in Resources */ = {isa = PBXBuildFile; fileRef = 1A53A82916B7B87C00F3742A /* photoInfos@2X.png */; };
+		1A53A83016B7E7F900F3742A /* FilterSwitch.m in Sources */ = {isa = PBXBuildFile; fileRef = 1A53A82F16B7E7F900F3742A /* FilterSwitch.m */; };
 		1A579EE116AACAB400AE79D2 /* facebook.png in Resources */ = {isa = PBXBuildFile; fileRef = 1A579EDF16AACAB400AE79D2 /* facebook.png */; };
 		1A579EE216AACAB400AE79D2 /* icon_mail_50.png in Resources */ = {isa = PBXBuildFile; fileRef = 1A579EE016AACAB400AE79D2 /* icon_mail_50.png */; };
 		1A579EE616AACAE200AE79D2 /* facebook@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 1A579EE416AACAE200AE79D2 /* facebook@2x.png */; };
@@ -259,6 +260,8 @@
 		1A3980B316ACA3D300584731 /* icon@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icon@2x.png"; sourceTree = "<group>"; };
 		1A53A82816B7B87C00F3742A /* photoInfos.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = photoInfos.png; sourceTree = "<group>"; };
 		1A53A82916B7B87C00F3742A /* photoInfos@2X.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "photoInfos@2X.png"; sourceTree = "<group>"; };
+		1A53A82E16B7E7F900F3742A /* FilterSwitch.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FilterSwitch.h; sourceTree = "<group>"; };
+		1A53A82F16B7E7F900F3742A /* FilterSwitch.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FilterSwitch.m; sourceTree = "<group>"; };
 		1A579EDF16AACAB400AE79D2 /* facebook.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = facebook.png; sourceTree = "<group>"; };
 		1A579EE016AACAB400AE79D2 /* icon_mail_50.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = icon_mail_50.png; sourceTree = "<group>"; };
 		1A579EE416AACAE200AE79D2 /* facebook@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "facebook@2x.png"; sourceTree = "<group>"; };
@@ -628,6 +631,15 @@
 			name = SliderViewController;
 			sourceTree = "<group>";
 		};
+		1A53A82D16B7E7C000F3742A /* UISwitchCustom */ = {
+			isa = PBXGroup;
+			children = (
+				1A53A82E16B7E7F900F3742A /* FilterSwitch.h */,
+				1A53A82F16B7E7F900F3742A /* FilterSwitch.m */,
+			);
+			name = UISwitchCustom;
+			sourceTree = "<group>";
+		};
 		1A9D4B8F16B1F4EE00CC8FD2 /* Fake UIActionSheet */ = {
 			isa = PBXGroup;
 			children = (
@@ -751,6 +763,7 @@
 		1ABEACCF16A5C9EF0034D316 /* Classes */ = {
 			isa = PBXGroup;
 			children = (
+				1A53A82D16B7E7C000F3742A /* UISwitchCustom */,
 				1AFDE8B416B59BB300E1D67D /* ImageLocation */,
 				1AEB307716B7187C000F0F26 /* ArtistFavoriteElement */,
 				1A017ED816B31F1200181788 /* SliderPicturesPhotographer */,
@@ -1519,6 +1532,7 @@
 				1AFDE8B816B59BDC00E1D67D /* ImageLocation.m in Sources */,
 				1A165EF316B6E7A70079EF8B /* SliderViewController.m in Sources */,
 				1AEB308016B734C2000F0F26 /* FilterViewController.m in Sources */,
+				1A53A83016B7E7F900F3742A /* FilterSwitch.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

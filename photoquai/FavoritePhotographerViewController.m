@@ -42,8 +42,8 @@
     UIBarButtonItem *removeButtonItem = [[UIBarButtonItem alloc] initWithCustomView:removeButton];
     self.navigationItem.rightBarButtonItem = removeButtonItem;
     
-    AppDelegate *appdelegate = (AppDelegate *)[[UIApplication sharedApplication] delegate];
-    [appdelegate showTabBar:self.tabBarController];
+    //AppDelegate *appdelegate = (AppDelegate *)[[UIApplication sharedApplication] delegate];
+    
 }
 
 - (void)viewDidLoad

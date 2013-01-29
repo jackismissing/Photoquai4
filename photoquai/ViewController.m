@@ -71,7 +71,7 @@
     //[[NSNotificationCenter defaultCenter] postNotificationName:@"loginComplete" object:reachabilityInfo];
     
     AppDelegate *appdelegate = (AppDelegate *)[[UIApplication sharedApplication] delegate];
-    [appdelegate hideTabBar:self.tabBarController];
+    
     
     [NSThread detachNewThreadSelector:@selector(loadingViewAsync) toTarget:self withObject:nil];
 }

@@ -101,7 +101,7 @@
     
     self.navigationItem.hidesBackButton = YES;
     
-    [appdelegate hideTabBar:self.tabBarController];
+    
     
     //[self setTitle:@"Title"];
 #pragma mark - Notifications
