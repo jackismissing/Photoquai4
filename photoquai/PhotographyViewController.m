@@ -17,13 +17,12 @@
 @implementation PhotographyViewController
 
 
+
 - (void)viewWillAppear:(BOOL)animated
 {
     //Réinstancie la navigation bar, une fois le menu disparu
     //self.navigationController.navigationBar.tintColor = [UIColor r:219 g:25 b:23 alpha:1];
     [super viewWillAppear:animated];
-    
-    
     
     [self.navigationController.navigationBar setBackgroundImage:[UIImage imageNamed:@"navigationBar-photographie.png"] forBarMetrics:UIBarMetricsDefault];
     
@@ -111,7 +110,7 @@
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(showImageVolet:) name:@"showImageVolet" object:nil];
     //Permet l'envoi de mail
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(sendMailImage:) name:@"sendMailImage" object:nil];
-    //[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(sendFBImage:) name:@"sendFBImage" object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(sendFBImage:) name:@"sendFBImage" object:nil];
     
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(reBindListenerFavorite) name:@"reBindListenerFavorite" object:nil];
     
@@ -123,14 +122,14 @@
     appendLink = [appendLink stringByAppendingString:[NSString stringWithFormat:@"%d", self.idPicture]];
     appendLink = [appendLink stringByAppendingString:@".json"];
     
-    NSInteger idPicture = [[[appdelegate getElementsFromJSON:appendLink] valueForKeyPath:@"picture.id"] integerValue];
+    //NSInteger idPicture = [[[appdelegate getElementsFromJSON:appendLink] valueForKeyPath:@"picture.id"] integerValue];
     NSInteger idPhotographer = [[[appdelegate getElementsFromJSON:appendLink] valueForKeyPath:@"picture.photographer.id"] integerValue];
     linkImg = [[appdelegate getElementsFromJSON:appendLink] valueForKeyPath:@"picture.link_iphone"];
-    
-    
-    CGRect screenRect = [[UIScreen mainScreen] bounds];
-    CGFloat screenWidth = screenRect.size.width;
-    CGFloat screenHeight = screenRect.size.height;
+    truc = self.idPicture;
+    NSLog(@"gref : %i", self.idPicture);
+    screenRect = [[UIScreen mainScreen] bounds];
+    screenWidth = screenRect.size.width;
+    screenHeight = screenRect.size.height;
     
     picture = [[ImageZoomable alloc] initWithImageURL:[NSURL URLWithString:linkImg] andFrame:CGRectMake(0, 0, screenWidth, screenHeight-100)];
     picture.transform = CGAffineTransformMakeScale(1, 1);
@@ -138,7 +137,7 @@
     [self.view addSubview:picture];
     
     NSString *descriptionTextPhotography = @"Lorem ipsum dolor sit amet, consectetur adipiscing elit. In euismod leo at mi posuere mollis. Morbi lacinia, felis ac ultrices auctor, magna sem tempus mi, nec blandit felis purus ut metus. Donec dolor mauris, eleifend id fermentum eu, placerat eget felis. Proin suscipit bibendum tincidunt.";
-    NSString *titleTextPhotography = @"Gangnam Style";
+    titleTextPhotography = @"Gangnam Style";
     
     descriptionPhotography = [[DescriptionImageView alloc] initWithFrame:CGRectMake(0, 500, 320, 500) description:descriptionTextPhotography title:titleTextPhotography place:@"Maroc" withId:idPhotographer];
     descriptionPhotography.userInteractionEnabled = YES;
@@ -180,6 +179,8 @@
     //Laisser en bas pour la que la toolbar passe devant les volets
     toolBar = [[ToolBarPhotography alloc] initWithFrame:CGRectMake(0, screenHeight - 118, 320, 55)];
     [self.view addSubview:toolBar];
+    
+    NSLog(@"%@", descriptionPhotography.photographerVignette.firstname);
 }
 
 - (void) reBindListenerFavorite{ //On relie l'évènement d'ajout de favoris lorsque l'on a fait disparaitre la popup
@@ -276,9 +277,7 @@
 }
 
 - (void) hideNavigation{
-    CGRect screenRect = [[UIScreen mainScreen] bounds];
-    CGFloat screenWidth = screenRect.size.width;
-    CGFloat screenHeight = screenRect.size.height;
+
     
     if(elementsNavigationAreHidden == NO){ //La toolbar ainsi que la navigation bar sont cachés
 
@@ -326,14 +325,46 @@
 }
 
 -(void)back {
-    
     [self.navigationController popViewControllerAnimated:YES];
     [audioDescription.audioPlayer stop];
+}
+
+//Appel du partage sur facebook
+- (void)sendFBImage:(NSNotification *)notification {
     
+//    ShareFBViewController *filterViewController = [[ShareFBViewController alloc] initWithNibName:nil bundle:nil];
+//    filterViewController.idPicture = self.idPicture;
+//    
+//    UINavigationController *navigationController = [[UINavigationController alloc] initWithRootViewController:filterViewController];
+//    if (FBSession.activeSession.isOpen) {
+//        [self presentModalViewController:navigationController animated:YES];
+//    }else{
+//        AppDelegate *appDelegate = (AppDelegate *)[[UIApplication sharedApplication] delegate];
+//        [appDelegate openSessionWithAllowLoginUI:YES];
+//
+//        [self presentModalViewController:navigationController animated:YES];
+//    }
+    FacebookPopOver *facebookPopOver = [[FacebookPopOver alloc] initWithFrame:CGRectMake(0, 0, screenWidth, screenHeight)
+                                                                         name: titleTextPhotography
+                                                                    imageLink: linkImg
+                                        ];
+    
+    facebookPopOver.photographerPhoto.text = linkImg;
+    
+    if (FBSession.activeSession.isOpen) {
+        
+        [self.view addSubview:facebookPopOver];
+        [facebookPopOver show];
+    }else{
+        AppDelegate *appDelegate = (AppDelegate *)[[UIApplication sharedApplication] delegate];
+        [appDelegate openSessionWithAllowLoginUI:YES];
+        
+        [self.view addSubview:facebookPopOver];
+        [facebookPopOver show];
+    }
 }
 
 // Gestion des mails
-
 - (void) sendMailImage:(NSNotification *)notification{
     if ([MFMailComposeViewController canSendMail]) {
         MFMailComposeViewController *mailer = [[MFMailComposeViewController alloc] init];
@@ -527,6 +558,9 @@
 //    
 //    //return YES;
 //}
+
+
+
 
 
 - (void)didReceiveMemoryWarning

@@ -34,13 +34,23 @@
     [cancelBtn addTarget:self action:@selector(dismissPage) forControlEvents:UIControlEventTouchUpInside];
     
     [cancelBtn setImage:[UIImage imageNamed:@"closeMap"] forState:UIControlStateNormal];
-    //[self.view addSubview:cancelBtn];
+    
+    UIButton *checkBtn = [[UIButton alloc] initWithFrame:CGRectMake(10, 10, 20, 20)];
+    [checkBtn addTarget:self action:@selector(dismissPage) forControlEvents:UIControlEventTouchUpInside];
+    
+    [checkBtn setImage:[UIImage imageNamed:@"check"] forState:UIControlStateNormal];
     
     UIView *rightNavigationButtons = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 40, 40)];
     [rightNavigationButtons addSubview:cancelBtn];
     
+    UIView *leftNavigationButtons = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 40, 40)];
+    [leftNavigationButtons addSubview:checkBtn];
+    
     UIBarButtonItem *rightNavigationBarItems = [[UIBarButtonItem alloc] initWithCustomView:rightNavigationButtons];
+    UIBarButtonItem *leftNavigationButtonItems = [[UIBarButtonItem alloc] initWithCustomView:leftNavigationButtons];
+    
     self.navigationItem.rightBarButtonItem = rightNavigationBarItems;
+    self.navigationItem.leftBarButtonItem = leftNavigationButtonItems;
 }
 
 - (void)viewDidLoad
@@ -68,8 +78,13 @@
     self.sampleTableView.delegate = self;
     self.sampleTableView.dataSource = self;
     self.sampleTableView.backgroundColor = [UIColor blackColor];
+    self.sampleTableView.separatorStyle = UITableViewCellSeparatorStyleSingleLine;
+    self.sampleTableView.separatorColor = [UIColor lightGrayColor];
+    
+    //self.sampleTableView.backgroundView.hidden = YES;
     
     //self.sampleTableView.separatorColor = [UIColor r:34 g:34 b:34 alpha:1];
+    self.sampleTableView.separatorColor = [UIColor clearColor];
     
     //self.sampleTableView.separatorColor = [UIImage imageNamed:@"etoilejaune"];
     
@@ -91,6 +106,7 @@
     return [[self->tableViewDatas valueForKey:[[self->tableViewDatas allKeys] objectAtIndex:section]] count];
 }
 
+
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     
     NSString *CellIdentifier = [NSString stringWithFormat:@"%d%d", indexPath.section, indexPath.row];
@@ -98,13 +114,11 @@
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
     if (cell == nil) {
         cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:CellIdentifier];
-        cell.backgroundColor = [UIColor r:41 g:41 b:41 alpha:1];
+        cell.backgroundColor = [UIColor darkGrayColor];
         cell.selectionStyle = UITableViewCellSelectionStyleNone;
         
-        UITapGestureRecognizer *changeBackground = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(changeBackground:)];
-        [cell addGestureRecognizer:changeBackground];
-        
-        filterName = [[UILabel alloc] initWithFrame:CGRectMake(7, 11, 150, 18)];
+        filterName = [[UILabel alloc] initWithFrame:CGRectMake(13, 11, 150, 18)];
+    
         filterName.font = [UIFont fontWithName:@"Parisine-Bold" size:17];
         filterName.backgroundColor = [UIColor clearColor];
         filterName.textColor = [UIColor r:153 g:153 b:153 alpha:1];
@@ -112,8 +126,6 @@
         [cell.contentView addSubview:filterName];
         
         filterSwitch = [[FilterSwitch alloc] initWithFrame:CGRectMake(cell.frame.size.width - 10, 11, 139, 55)];
-    
-        
         [cell.contentView addSubview:filterSwitch];
     }
 
@@ -125,10 +137,14 @@
     return cell;
 }
 
-- (void)tableView:(UITableView *)tableView didDeselectRowAtIndexPath:(NSIndexPath *)indexPath{
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)path {
+    UITableViewCell *cell = [tableView cellForRowAtIndexPath:path];
     
-    //indexPath.row
-    [tableView deselectRowAtIndexPath:indexPath animated:YES];
+    if (cell.backgroundColor == [UIColor darkGrayColor]) {
+        cell.backgroundColor = [UIColor whiteColor];
+    } else {
+        cell.backgroundColor = [UIColor darkGrayColor];
+    }
 }
 
 - (void) changeBackground:(UIGestureRecognizer *)gesture{
@@ -141,6 +157,25 @@
         index.backgroundColor = [UIColor blackColor];
         index.tag = 0;
     }
+}
+
+- (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section{
+    return 30;
+}
+
+
+- (UIView *) tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section
+{
+    UIView *headerView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, tableView.bounds.size.width, 30)];
+    
+    UILabel *headerTitle = [[UILabel alloc] initWithFrame:CGRectMake(10, 0, 200, headerView.frame.size.height)];
+    headerTitle.text = [[self->tableViewDatas allKeys] objectAtIndex:section];
+    headerTitle.textColor = [UIColor whiteColor];
+    headerTitle.font = [UIFont fontWithName:@"Parisine-Bold" size:17];
+    headerTitle.backgroundColor = [UIColor colorWithWhite:255 alpha:0];
+    [headerView addSubview:headerTitle];
+    
+    return headerView;
 }
 
 - (void)dismissPage

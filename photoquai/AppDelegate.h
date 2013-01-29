@@ -7,6 +7,8 @@
 //
 
 #import <UIKit/UIKit.h>
+#import <FacebookSDK/FacebookSDK.h>
+
 #import "Reachability.h" //Permet de savoir si on est connecté ou non à Internet
 #import "PhotographyViewController.h"
 #import "FavoriteIndicator.h"
@@ -19,11 +21,13 @@
 
 }
 
+extern NSString *const FBSessionStateChangedNotification;
+
 @property (strong, nonatomic) UIWindow *window;
 @property (strong, nonatomic) ViewController *viewController;
 @property (nonatomic, assign) float volume;
 
-
+- (BOOL)openSessionWithAllowLoginUI:(BOOL)allowLoginUI;
 - (NSDictionary*) getElementsFromJSON:(NSString*)anURL;
 
 

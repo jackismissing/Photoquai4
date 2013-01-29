@@ -35,7 +35,7 @@
     UIBarButtonItem* menuBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:menuButton];
     [self.navigationItem setLeftBarButtonItem:menuBarButtonItem];
     
-    UIImage* image3 = [UIImage imageNamed:@"suppfavoris"];
+    UIImage* image3 = [UIImage imageNamed:@"poubelle"];
     CGRect frameimg = CGRectMake(-100, 0, image3.size.width, image3.size.height);
     UIButton *removeButton = [[UIButton alloc] initWithFrame:frameimg];
     [removeButton setBackgroundImage:image3 forState:UIControlStateNormal];
@@ -43,9 +43,7 @@
     
     UIBarButtonItem *removeButtonItem = [[UIBarButtonItem alloc] initWithCustomView:removeButton];
     self.navigationItem.rightBarButtonItem = removeButtonItem;
-    
-    //AppDelegate *appdelegate = (AppDelegate *)[[UIApplication sharedApplication] delegate];
-    //[appdelegate showTabBar:self.tabBarController];
+
 }
 
 - (void)viewDidLoad
@@ -82,6 +80,7 @@
     myScrollView.delegate = self;
     myScrollView.clipsToBounds = YES;
     myScrollView.autoresizesSubviews = YES;
+    myScrollView.pagingEnabled = YES;
     [self.view addSubview:myScrollView];
     
     fakeActionSheet = [[FakeActionSheet alloc] initWithFrame:CGRectMake(0, 0, 100, 100)];
@@ -176,6 +175,16 @@
             selectFavorites2Remove = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(selectFavorites2Remove:)];
             [view addGestureRecognizer:selectFavorites2Remove];
             [view removeGestureRecognizer:accessPicture];
+            
+            UIImage*    backgroundImage = [UIImage imageNamed:@"favorite2remove"];
+            CALayer*    crossLayer = [CALayer layer];
+            crossLayer.opacity = .3;
+            CGRect startFrame = CGRectMake(view.frame.size.width - 30, view.frame.size.height - 30, 30, 30);
+            crossLayer.contents = (id)backgroundImage.CGImage;
+            crossLayer.frame = startFrame;
+            
+            crossLayer.opaque = YES;
+            [view.layer addSublayer:crossLayer];
         }
     }else{
         [fakeActionSheet hide];
@@ -184,7 +193,14 @@
             accessPicture = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(accessPicture:)];
             [view addGestureRecognizer:accessPicture];
             [view removeGestureRecognizer:selectFavorites2Remove];
+            
+            for (CALayer *layer in view.layer.sublayers) {
+                    [layer removeFromSuperlayer];
+                    break;
+                
+            }
         }
+        
     }
 }
 

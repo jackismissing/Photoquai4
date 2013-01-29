@@ -19,5 +19,6 @@
 
 @property (nonatomic, strong) UITableView *sampleTableView;
 @property (nonatomic, strong) NSArray *items;
+@property (nonatomic, strong) NSMutableArray *selectedIndexPaths;
 
 @end

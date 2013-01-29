@@ -33,7 +33,7 @@
     UIBarButtonItem* menuBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:menuButton];
     [self.navigationItem setLeftBarButtonItem:menuBarButtonItem];
     
-    UIImage* image3 = [UIImage imageNamed:@"suppfavoris"];
+    UIImage* image3 = [UIImage imageNamed:@"poubelle"];
     CGRect frameimg = CGRectMake(-100, 0, image3.size.width, image3.size.height);
     UIButton *removeButton = [[UIButton alloc] initWithFrame:frameimg];
     [removeButton setBackgroundImage:image3 forState:UIControlStateNormal];
@@ -154,6 +154,16 @@
             selectFavorites2Remove = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(selectFavorites2Remove:)];
             [view addGestureRecognizer:selectFavorites2Remove];
             [view removeGestureRecognizer:accessPhotographer];
+            
+            UIImage*    backgroundImage = [UIImage imageNamed:@"favorite2remove"];
+            CALayer*    crossLayer = [CALayer layer];
+            crossLayer.opacity = .3;
+            CGRect startFrame = CGRectMake(view.frame.size.width - 30, view.frame.size.height - 30, 30, 30);
+            crossLayer.contents = (id)backgroundImage.CGImage;
+            crossLayer.frame = startFrame;
+            
+            crossLayer.opaque = YES;
+            [view.layer addSublayer:crossLayer];
         }
         myScrollView.frame = CGRectMake(0, 0, screenWidth, screenHeight - 75);
     }else{ 
@@ -163,6 +173,12 @@
             accessPhotographer = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(accessPhotographer:)];
             [view addGestureRecognizer:accessPhotographer];
             [view removeGestureRecognizer:selectFavorites2Remove];
+            
+            for (CALayer *layer in view.layer.sublayers) {
+                [layer removeFromSuperlayer];
+                break;
+                
+            }
         }
         myScrollView.frame = CGRectMake(0, 0, screenWidth, screenHeight);
     }

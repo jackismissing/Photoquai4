@@ -74,6 +74,7 @@
     self.infosTableView = [[UITableView alloc] initWithFrame:CGRectMake(self.view.frame.origin.x, photoInfos.frame.size.height, self.view.frame.size.width, self.view.frame.size.height - photoInfos.frame.size.height - self.navigationController.navigationBar.frame.size.height) style:UITableViewStylePlain];
     
     self.infosTableView.separatorColor = [UIColor blackColor];
+    [self.infosTableView.backgroundView setAlpha:0];
     
     self.infosTableView.scrollEnabled = NO;
     

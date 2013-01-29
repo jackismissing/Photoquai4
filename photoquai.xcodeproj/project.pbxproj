@@ -30,10 +30,20 @@
 		1A53A82A16B7B87C00F3742A /* photoInfos.png in Resources */ = {isa = PBXBuildFile; fileRef = 1A53A82816B7B87C00F3742A /* photoInfos.png */; };
 		1A53A82B16B7B87C00F3742A /* photoInfos@2X.png in Resources */ = {isa = PBXBuildFile; fileRef = 1A53A82916B7B87C00F3742A /* photoInfos@2X.png */; };
 		1A53A83016B7E7F900F3742A /* FilterSwitch.m in Sources */ = {isa = PBXBuildFile; fileRef = 1A53A82F16B7E7F900F3742A /* FilterSwitch.m */; };
+		1A53A83316B7FB0400F3742A /* check.png in Resources */ = {isa = PBXBuildFile; fileRef = 1A53A83116B7FB0400F3742A /* check.png */; };
+		1A53A83416B7FB0400F3742A /* check@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 1A53A83216B7FB0400F3742A /* check@2x.png */; };
+		1A53A83616B80C6400F3742A /* FacebookSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1A53A83516B80C6400F3742A /* FacebookSDK.framework */; };
+		1A53A83816B80CAC00F3742A /* FacebookSDKResources.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 1A53A83716B80CAB00F3742A /* FacebookSDKResources.bundle */; };
+		1A53A83A16B80CE400F3742A /* Accounts.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1A53A83916B80CE400F3742A /* Accounts.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
+		1A53A83C16B80CF400F3742A /* AdSupport.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1A53A83B16B80CF400F3742A /* AdSupport.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
 		1A579EE116AACAB400AE79D2 /* facebook.png in Resources */ = {isa = PBXBuildFile; fileRef = 1A579EDF16AACAB400AE79D2 /* facebook.png */; };
 		1A579EE216AACAB400AE79D2 /* icon_mail_50.png in Resources */ = {isa = PBXBuildFile; fileRef = 1A579EE016AACAB400AE79D2 /* icon_mail_50.png */; };
 		1A579EE616AACAE200AE79D2 /* facebook@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 1A579EE416AACAE200AE79D2 /* facebook@2x.png */; };
 		1A579EE716AACAE200AE79D2 /* icon_mail_50@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 1A579EE516AACAE200AE79D2 /* icon_mail_50@2x.png */; };
+		1A7696B016B81F22009D31D1 /* ShareFBViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1A7696AF16B81F22009D31D1 /* ShareFBViewController.m */; };
+		1A7696B316B833C7009D31D1 /* poubelle.png in Resources */ = {isa = PBXBuildFile; fileRef = 1A7696B116B833C7009D31D1 /* poubelle.png */; };
+		1A7696B416B833C7009D31D1 /* poubelle@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 1A7696B216B833C7009D31D1 /* poubelle@2x.png */; };
+		1A7696B816B83827009D31D1 /* FacebookPopOver.m in Sources */ = {isa = PBXBuildFile; fileRef = 1A7696B716B83827009D31D1 /* FacebookPopOver.m */; };
 		1A9D4B9316B1F5EA00CC8FD2 /* favorite2remove.png in Resources */ = {isa = PBXBuildFile; fileRef = 1A9D4B9116B1F5EA00CC8FD2 /* favorite2remove.png */; };
 		1A9D4B9416B1F5EA00CC8FD2 /* favorite2remove@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 1A9D4B9216B1F5EA00CC8FD2 /* favorite2remove@2x.png */; };
 		1A9D4B9716B1F60E00CC8FD2 /* FakeActionSheet.m in Sources */ = {isa = PBXBuildFile; fileRef = 1A9D4B9616B1F60E00CC8FD2 /* FakeActionSheet.m */; };
@@ -262,10 +272,22 @@
 		1A53A82916B7B87C00F3742A /* photoInfos@2X.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "photoInfos@2X.png"; sourceTree = "<group>"; };
 		1A53A82E16B7E7F900F3742A /* FilterSwitch.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FilterSwitch.h; sourceTree = "<group>"; };
 		1A53A82F16B7E7F900F3742A /* FilterSwitch.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FilterSwitch.m; sourceTree = "<group>"; };
+		1A53A83116B7FB0400F3742A /* check.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = check.png; sourceTree = "<group>"; };
+		1A53A83216B7FB0400F3742A /* check@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "check@2x.png"; sourceTree = "<group>"; };
+		1A53A83516B80C6400F3742A /* FacebookSDK.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = FacebookSDK.framework; sourceTree = "<group>"; };
+		1A53A83716B80CAB00F3742A /* FacebookSDKResources.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = FacebookSDKResources.bundle; sourceTree = "<group>"; };
+		1A53A83916B80CE400F3742A /* Accounts.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Accounts.framework; path = System/Library/Frameworks/Accounts.framework; sourceTree = SDKROOT; };
+		1A53A83B16B80CF400F3742A /* AdSupport.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AdSupport.framework; path = System/Library/Frameworks/AdSupport.framework; sourceTree = SDKROOT; };
 		1A579EDF16AACAB400AE79D2 /* facebook.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = facebook.png; sourceTree = "<group>"; };
 		1A579EE016AACAB400AE79D2 /* icon_mail_50.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = icon_mail_50.png; sourceTree = "<group>"; };
 		1A579EE416AACAE200AE79D2 /* facebook@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "facebook@2x.png"; sourceTree = "<group>"; };
 		1A579EE516AACAE200AE79D2 /* icon_mail_50@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icon_mail_50@2x.png"; sourceTree = "<group>"; };
+		1A7696AE16B81F22009D31D1 /* ShareFBViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ShareFBViewController.h; sourceTree = "<group>"; };
+		1A7696AF16B81F22009D31D1 /* ShareFBViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ShareFBViewController.m; sourceTree = "<group>"; };
+		1A7696B116B833C7009D31D1 /* poubelle.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = poubelle.png; sourceTree = "<group>"; };
+		1A7696B216B833C7009D31D1 /* poubelle@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "poubelle@2x.png"; sourceTree = "<group>"; };
+		1A7696B616B83827009D31D1 /* FacebookPopOver.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FacebookPopOver.h; sourceTree = "<group>"; };
+		1A7696B716B83827009D31D1 /* FacebookPopOver.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FacebookPopOver.m; sourceTree = "<group>"; };
 		1A9D4B9116B1F5EA00CC8FD2 /* favorite2remove.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = favorite2remove.png; sourceTree = "<group>"; };
 		1A9D4B9216B1F5EA00CC8FD2 /* favorite2remove@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "favorite2remove@2x.png"; sourceTree = "<group>"; };
 		1A9D4B9516B1F60E00CC8FD2 /* FakeActionSheet.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FakeActionSheet.h; sourceTree = "<group>"; };
@@ -513,6 +535,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				1A53A83C16B80CF400F3742A /* AdSupport.framework in Frameworks */,
+				1A53A83A16B80CE400F3742A /* Accounts.framework in Frameworks */,
 				1AFDE8BA16B5A03900E1D67D /* Social.framework in Frameworks */,
 				1ABDFCDF16AB57B3004C95C8 /* MessageUI.framework in Frameworks */,
 				1ACA0CE516AA23F40070EFB5 /* MediaPlayer.framework in Frameworks */,
@@ -524,6 +548,7 @@
 				1ABEACA616A5C34E0034D316 /* UIKit.framework in Frameworks */,
 				1ABEACA816A5C34E0034D316 /* Foundation.framework in Frameworks */,
 				1ABEACAA16A5C34E0034D316 /* CoreGraphics.framework in Frameworks */,
+				1A53A83616B80C6400F3742A /* FacebookSDK.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -640,6 +665,24 @@
 			name = UISwitchCustom;
 			sourceTree = "<group>";
 		};
+		1A7696AD16B81EEF009D31D1 /* ShareFBViewController */ = {
+			isa = PBXGroup;
+			children = (
+				1A7696AE16B81F22009D31D1 /* ShareFBViewController.h */,
+				1A7696AF16B81F22009D31D1 /* ShareFBViewController.m */,
+			);
+			name = ShareFBViewController;
+			sourceTree = "<group>";
+		};
+		1A7696B516B837FE009D31D1 /* FacebookPopOver */ = {
+			isa = PBXGroup;
+			children = (
+				1A7696B616B83827009D31D1 /* FacebookPopOver.h */,
+				1A7696B716B83827009D31D1 /* FacebookPopOver.m */,
+			);
+			name = FacebookPopOver;
+			sourceTree = "<group>";
+		};
 		1A9D4B8F16B1F4EE00CC8FD2 /* Fake UIActionSheet */ = {
 			isa = PBXGroup;
 			children = (
@@ -671,6 +714,10 @@
 		1ABEAC9616A5C34E0034D316 = {
 			isa = PBXGroup;
 			children = (
+				1A53A83B16B80CF400F3742A /* AdSupport.framework */,
+				1A53A83916B80CE400F3742A /* Accounts.framework */,
+				1A53A83716B80CAB00F3742A /* FacebookSDKResources.bundle */,
+				1A53A83516B80C6400F3742A /* FacebookSDK.framework */,
 				1AFDE8B916B5A03900E1D67D /* Social.framework */,
 				1ABDFCDE16AB57B3004C95C8 /* MessageUI.framework */,
 				1ACA0CE416AA23F30070EFB5 /* MediaPlayer.framework */,
@@ -706,6 +753,7 @@
 		1ABEACAB16A5C34E0034D316 /* photoquai */ = {
 			isa = PBXGroup;
 			children = (
+				1A7696AD16B81EEF009D31D1 /* ShareFBViewController */,
 				1AEB307D16B7345E000F0F26 /* FilterViewController */,
 				1A165EF016B6E7860079EF8B /* SliderViewController */,
 				1A017EDD16B320A600181788 /* PhotographerViewController */,
@@ -763,6 +811,7 @@
 		1ABEACCF16A5C9EF0034D316 /* Classes */ = {
 			isa = PBXGroup;
 			children = (
+				1A7696B516B837FE009D31D1 /* FacebookPopOver */,
 				1A53A82D16B7E7C000F3742A /* UISwitchCustom */,
 				1AFDE8B416B59BB300E1D67D /* ImageLocation */,
 				1AEB307716B7187C000F0F26 /* ArtistFavoriteElement */,
@@ -1107,6 +1156,8 @@
 				1AEEF45716ADE19500489C08 /* icon7.png */,
 				37C782FE16A9AB91001D6295 /* navigationBar-photographie_@2X.png */,
 				37C782FF16A9AB91001D6295 /* navigationBar@2X.png */,
+				1A53A83116B7FB0400F3742A /* check.png */,
+				1A53A83216B7FB0400F3742A /* check@2x.png */,
 				37C7830016A9AB91001D6295 /* navigationBar-photographie.png */,
 				37C7830116A9AB91001D6295 /* navigationBar.png */,
 				375E21F316A9458800F012AF /* back@2x.png */,
@@ -1138,6 +1189,8 @@
 		37C7830616A9AD0D001D6295 /* Favorites */ = {
 			isa = PBXGroup;
 			children = (
+				1A7696B116B833C7009D31D1 /* poubelle.png */,
+				1A7696B216B833C7009D31D1 /* poubelle@2x.png */,
 				1AE2B0C916B2607800DC1829 /* emptycheck@2x.png */,
 				1AE2B0CA16B2607800DC1829 /* emptycheck.png */,
 				1A9D4B9116B1F5EA00CC8FD2 /* favorite2remove.png */,
@@ -1473,6 +1526,11 @@
 				1AEB307C16B73133000F0F26 /* filtres@2x.png in Resources */,
 				1A53A82A16B7B87C00F3742A /* photoInfos.png in Resources */,
 				1A53A82B16B7B87C00F3742A /* photoInfos@2X.png in Resources */,
+				1A53A83316B7FB0400F3742A /* check.png in Resources */,
+				1A53A83416B7FB0400F3742A /* check@2x.png in Resources */,
+				1A53A83816B80CAC00F3742A /* FacebookSDKResources.bundle in Resources */,
+				1A7696B316B833C7009D31D1 /* poubelle.png in Resources */,
+				1A7696B416B833C7009D31D1 /* poubelle@2x.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1533,6 +1591,8 @@
 				1A165EF316B6E7A70079EF8B /* SliderViewController.m in Sources */,
 				1AEB308016B734C2000F0F26 /* FilterViewController.m in Sources */,
 				1A53A83016B7E7F900F3742A /* FilterSwitch.m in Sources */,
+				1A7696B016B81F22009D31D1 /* ShareFBViewController.m in Sources */,
+				1A7696B816B83827009D31D1 /* FacebookPopOver.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1611,10 +1671,15 @@
 		1ABEACC616A5C34E0034D316 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"$(SRCROOT)\"",
+				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "photoquai/photoquai-Prefix.pch";
 				INFOPLIST_FILE = "photoquai/photoquai-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
+				OTHER_LDFLAGS = "-lsqlite3.0";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				WRAPPER_EXTENSION = app;
 			};
@@ -1623,10 +1688,15 @@
 		1ABEACC716A5C34E0034D316 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"$(SRCROOT)\"",
+				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "photoquai/photoquai-Prefix.pch";
 				INFOPLIST_FILE = "photoquai/photoquai-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
+				OTHER_LDFLAGS = "-lsqlite3.0";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				WRAPPER_EXTENSION = app;
 			};

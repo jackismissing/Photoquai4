@@ -20,10 +20,12 @@
 #import "FavoritesPicturesViewController.h"
 #import "PhotographerViewController.h"
 #import "ImageLocation.h"
+#import "ShareFBViewController.h"
+#import "FacebookPopOver.h"
 
 @class AudioImageView;
 
-@interface PhotographyViewController : UIViewController <UIScrollViewDelegate, MFMailComposeViewControllerDelegate>{
+@interface PhotographyViewController : UIViewController <UIScrollViewDelegate, MFMailComposeViewControllerDelegate, UITextFieldDelegate>{
     DescriptionImageView *descriptionPhotography;
     AudioImageView *audioDescription;
 
@@ -44,10 +46,19 @@
     NSString *linkImg; //Lien de l'image;
     ImageLocation *imageLocation;
     
+    
+    CGRect screenRect;
+    CGFloat screenWidth;
+    CGFloat screenHeight;
+    
+    NSString *titleTextPhotography;
+    
+    NSInteger truc;
 }
 
 @property (nonatomic, assign) int idPicture;
 
 - (void)addToFavorite;
+
 
 @end
