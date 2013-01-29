@@ -71,9 +71,9 @@
     v2.tabBarItem.title = @"Photographes";
     
     
-    tabBarController.viewControllers = [NSArray arrayWithObjects:navigationController, v1, v2, nil];
+    //tabBarController.viewControllers = [NSArray arrayWithObjects:navigationController, v1, v2, nil];
     
-    self.window.rootViewController = tabBarController;
+    self.window.rootViewController = navigationController;
     
     [self.window makeKeyAndVisible];
     return YES;

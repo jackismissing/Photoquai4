@@ -189,9 +189,9 @@
                                       delay:0
                                     options: UIViewAnimationCurveEaseOut
                                  animations:^{
+                                     view.layer.anchorPoint = CGPointMake(0.5, 0.5);
+                                     view.transform = CGAffineTransformMakeScale(1, 0.001);
                                      view.alpha = 0;
-                                     view.layer.anchorPoint = CGPointMake(.5, .5);
-                                     view.transform = CGAffineTransformMakeScale(0, 0);
                                  }
                                  completion:^(BOOL finished){
                                      for (UIView *view in myScrollView.subviews) {
