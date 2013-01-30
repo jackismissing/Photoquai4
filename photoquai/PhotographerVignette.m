@@ -41,10 +41,13 @@
         patronymPhotographer = [patronymPhotographer stringByAppendingString:@" "];
         patronymPhotographer = [patronymPhotographer stringByAppendingString:lastnamePhotographer];
         
+        [self setPatronym:patronymPhotographer];
+        
         self.tag = [[[appdelegate getElementsFromJSON:appendLink] valueForKeyPath:@"photographer.id"] intValue];
         imageView = [[UIImageView alloc] init];
         
-        NSLog(@"%@", [appdelegate getElementsFromJSON:appendLink]);
+        //NSLog(@"%@", [appdelegate getElementsFromJSON:appendLink]);
+    
         
         imageView.opaque = YES;
         imageView.clipsToBounds = YES;
@@ -94,6 +97,8 @@
         [self addSubview:arrowPhotographerDataAccess];
         
         
+        
+        
 //        UILongPressGestureRecognizer *longPressRecognizer = [[UILongPressGestureRecognizer alloc] initWithTarget:self action:@selector(handleSwipeAndHoldFrom:)];
 //        longPressRecognizer.delegate = self;
 //        longPressRecognizer.cancelsTouchesInView = NO;
@@ -116,12 +121,16 @@
     [(CAShapeLayer*) [[imgView layer] mask] setPath:[clippingPath CGPath]];
 }
 
-- (NSString*) lastname{
+- (NSString*) lastname{ //Renvoi le nom de famille
     return lastname;
 }
 
-- (NSString*) firstname{
+- (NSString*) firstname{ //Renvoi le prénom
     return firstname;
+}
+
+- (NSString*) patronym{
+    return patronym;
 }
 
 - (int) idPhotographer{
@@ -134,6 +143,10 @@
 
 - (void) setFirstname:(NSString*)aFirstname{
     firstname = aFirstname;
+}
+
+- (void) setPatronym:(NSString*)aPatronym{
+    patronym = aPatronym;
 }
 
 - (void) setIdPhotographer:(int)anIdPhotographer{

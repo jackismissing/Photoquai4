@@ -18,5 +18,6 @@
 
 @property (nonatomic, strong) NSArray *arrayImages;
 @property (nonatomic, strong) NSArray *arrayIndexes;
+@property (nonatomic, strong) NSString *patronymPhotographer;
 
 @end

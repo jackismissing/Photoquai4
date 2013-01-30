@@ -140,7 +140,7 @@
         hautParleursForts.contentMode = UIViewContentModeScaleAspectFit;
         [self addSubview:hautParleursForts];
         
-        AppDelegate *appdelegate = [[UIApplication sharedApplication] delegate];
+        //AppDelegate *appdelegate = (AppDelegate *)[[UIApplication sharedApplication] delegate];
         
         musicPlayer = [MPMusicPlayerController applicationMusicPlayer];
         //musicPlayer.volume = appdelegate.volume;

@@ -14,9 +14,7 @@
 {
     self = [super initWithFrame:frame];
     if (self) {
-        CGRect screenRect = [[UIScreen mainScreen] bounds];
-        CGFloat screenWidth = screenRect.size.width;
-        CGFloat screenHeight = screenRect.size.height;
+
         
         self.clipsToBounds = YES;
         self.userInteractionEnabled = YES;
@@ -37,7 +35,7 @@
         [_imageWallElement.layer addSublayer:bottomBorderImageWallElement];
         
         int height = [self.imageWallElement height];
-        int width = [self.imageWallElement width];
+        //int width = [self.imageWallElement width];
         
         [self addSubview:_imageWallElement];
         

@@ -38,7 +38,7 @@
     CGFloat screenWidth;
     CGFloat screenHeight;
     
-    CustomPopOver *popOver;
+    CustomPopOver *popOver; //Share options
     UIScrollView *myScrollView;
     
     BOOL photographerLocationIsVisible;

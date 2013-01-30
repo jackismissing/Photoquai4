@@ -15,12 +15,15 @@
 
 @interface ArtistFavoriteElement : UIView{
     int idColonne;
+
 }
 
 - (id)initWithFrame:(CGRect)frame withId:(int)anId;
 
 - (int) idColonne;
 
+
 - (void) setIdColonne:(int) anIdColonne;
+
 
 @end

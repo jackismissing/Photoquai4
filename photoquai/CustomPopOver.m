@@ -35,7 +35,7 @@
         UIButton *facebookShare = [UIButton buttonWithType:UIButtonTypeCustom];
         [facebookShare setImage:facebookImage forState:UIControlStateNormal];
         facebookShare.frame = CGRectMake(0, ((facebookShare.frame.size.height - self.frame.size.height) / 2) + 10, facebookImage.size.width, facebookImage.size.height);
-        [facebookShare addTarget:self action:@selector(facebookShare) forControlEvents:UIControlEventTouchUpInside];
+        [facebookShare addTarget:self action:@selector(sendFBImage) forControlEvents:UIControlEventTouchUpInside];
         [self addSubview:facebookShare];
         
         float mailX = facebookShare.frame.size.width + facebookShare.frame.origin.x + 10;
@@ -58,8 +58,8 @@
     [[NSNotificationCenter defaultCenter] postNotificationName:@"sendMailImage" object:nil];
 }
 
-- (void) facebookShare{
-    
+- (void) sendFBImage{
+    [[NSNotificationCenter defaultCenter] postNotificationName:@"sendFBImage" object:nil];
 }
 
 @end

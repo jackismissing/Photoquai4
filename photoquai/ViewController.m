@@ -17,7 +17,9 @@
 #import "PhotographyViewController.h"
 
 
-@interface ViewController ()
+@interface ViewController (){
+    int randomNumber;
+}
 
 @end
 
@@ -37,7 +39,7 @@
     oldFavorites = [[NSArray alloc] initWithArray: [preferencesUser objectForKey:@"favorisImages"]];
     [preferencesUser synchronize];
     
-    [self setTitle:@"Photographies"];
+    [self setTitle:@"Catalogue"];
     self.view.backgroundColor = [UIColor whiteColor];
     
     CGRect screenRect = [[UIScreen mainScreen] bounds];
@@ -56,7 +58,7 @@
     myScrollView.showsHorizontalScrollIndicator = NO;
     myScrollView.showsVerticalScrollIndicator = NO;
     myScrollView.delegate = self;
-    //myScrollView.contentSize = CGSizeMake(130 * 5, 2000);
+    myScrollView.contentSize = CGSizeMake(130 * 5, 2000);
     //myScrollView.autoresizesSubviews = YES;
     myScrollView.zoomScale = .5;
     myScrollView.minimumZoomScale = 0.5;
@@ -70,12 +72,11 @@
     // Post a notification to loginComplete
     //[[NSNotificationCenter defaultCenter] postNotificationName:@"loginComplete" object:reachabilityInfo];
     
-    AppDelegate *appdelegate = (AppDelegate *)[[UIApplication sharedApplication] delegate];
-    [appdelegate hideTabBar:self.tabBarController];
+    //AppDelegate *appdelegate = (AppDelegate *)[[UIApplication sharedApplication] delegate];
+    
     
     [NSThread detachNewThreadSelector:@selector(loadingViewAsync) toTarget:self withObject:nil];
-    
-    
+   
 }
 
 - (void)viewWillAppear:(BOOL)animated
@@ -94,9 +95,59 @@
     
     [menuButton addTarget:self action:@selector(showMenu) forControlEvents:UIControlEventTouchUpInside];
     
+    UIButton *fetchBtn = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 33, 44)];
+    [fetchBtn addTarget:self action:@selector(filterImages) forControlEvents:UIControlEventTouchUpInside];
+    
+    [fetchBtn setImage:[UIImage imageNamed:@"filtres"] forState:UIControlStateNormal];
+    //[self.view addSubview:cancelBtn];
+    
+    UIView *rightNavigationButtons = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 40, 40)];
+    [rightNavigationButtons addSubview:fetchBtn];
+    
+    UIBarButtonItem *rightNavigationBarItems = [[UIBarButtonItem alloc] initWithCustomView:rightNavigationButtons];
+    self.navigationItem.rightBarButtonItem = rightNavigationBarItems;
+    
     UIBarButtonItem* menuBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:menuButton];
     [self.navigationItem setLeftBarButtonItem:menuBarButtonItem];
+    
+    //Accéléromètre
+    UIAccelerometer *testAccel = [UIAccelerometer sharedAccelerometer];
+    testAccel.delegate = self;
+    testAccel.updateInterval = 0.1f;
+    
+    
 }
+
+- (void)accelerometer:(UIAccelerometer *)accelerometer didAccelerate:(UIAcceleration *)acceleration
+{
+    if (fabsf(acceleration.x) > 1.5 || fabsf(acceleration.y) > 1.5 || fabsf(acceleration.z) > 1.5)
+    {
+        NSLog(@"J'ai détecté une secousse");
+        //myScrollView.contentOffset = CGPointMake(acceleration.x * myScrollView.frame.origin.x + 10, acceleration.x * myScrollView.frame.origin.y + 10);
+    }
+}
+
+//Gestion du shake
+- (BOOL) canBecomeFirstResponder{
+    return YES; //La vue se charge de prendre les évènements
+}
+
+- (void) motionEnded:(UIEventSubtype)motion withEvent:(UIEvent *)event{
+    if (motion == UIEventSubtypeMotionShake) {
+        PhotographyViewController *imageViewController = [[PhotographyViewController alloc] initWithNibName:@"PhotographyViewController" bundle:nil];
+        imageViewController.idPicture = randomNumber;
+        [self.navigationController pushViewController:imageViewController animated:YES];
+    }
+    [super motionEnded:motion withEvent:event];
+}
+
+- (void) motionBegan:(UIEventSubtype)motion withEvent:(UIEvent *)event{
+    if (motion == UIEventSubtypeMotionShake) {
+        randomNumber = arc4random() % 50;
+    }
+    [super motionBegan:motion withEvent:event];
+}
+//Gestion du shake
 
 - (void) loadingViewAsync{
     i = 0;
@@ -116,7 +167,7 @@
 - (void) loadImageWall{
     AppDelegate *appdelegate = (AppDelegate *)[[UIApplication sharedApplication] delegate];
     
-    int randomAnimate = (arc4random() % 2);
+    //int randomAnimate = (arc4random() % 2);
     
     
     if (i >= nbrPictures) return;
@@ -233,13 +284,6 @@
     thumbsContainer.frame = CGRectMake(0, 0, totalWidth, heightMax + 21);
 
     [myScrollView setContentSize:CGSizeMake(totalWidth, heightMax + 21)];
-    //Place le catalogue à une valeur aléatoire
-    float randNumY = (arc4random() % heightMax);
-    float randNumX = (arc4random() % totalWidth);
-    
-    CGPoint offset;
-    offset.x = randNumX;
-    offset.y = randNumY;
 }
 
 //Gère le pinch to zoom gesture
@@ -335,10 +379,17 @@
     //[self.navigationItem setBackBarButtonItem: backButton];
 }
 
+- (void) filterImages{
+    FilterViewController *filterViewController = [[FilterViewController alloc] initWithNibName:nil bundle:nil];
+    
+    UINavigationController *navigationController = [[UINavigationController alloc] initWithRootViewController:filterViewController];
+    [self presentModalViewController:navigationController animated:YES];
+}
+
 
 
 /*- (void)scrollViewWillBeginDragging:(UIScrollView *)scrollView{
-    
+ 
     for (UIImageView *img in thumbsContainer.subviews){
         if(img.frame.origin.y < myScrollView.contentOffset.y || img.frame.origin.y > (myScrollView.contentOffset.y + myScrollView.frame.size.height) || img.frame.origin.x < myScrollView.contentOffset.x || img.frame.origin.x > (myScrollView.contentOffset.x + myScrollView.frame.size.width))
         {            
@@ -372,6 +423,7 @@
 - (void)didReceiveMemoryWarning
 {
     [super didReceiveMemoryWarning];
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
     // Dispose of any resources that can be recreated.
 }
 

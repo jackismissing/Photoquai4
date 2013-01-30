@@ -20,6 +20,8 @@
 
 #import "CommissaryViewController.h"
 
+#import "PartenairesViewController.h"
+
 #define MAINLABEL_TAG 1
 
 #define NUMBERLABEL_TAG 1
@@ -76,6 +78,7 @@
     self.infosTableView = [[UITableView alloc] initWithFrame:CGRectMake(self.view.frame.origin.x, photoInfos.frame.size.height, self.view.frame.size.width, self.view.frame.size.height - photoInfos.frame.size.height - self.navigationController.navigationBar.frame.size.height) style:UITableViewStylePlain];
     
     self.infosTableView.separatorColor = [UIColor blackColor];
+    [self.infosTableView.backgroundView setAlpha:0];
     
     self.infosTableView.scrollEnabled = NO;
     
@@ -374,6 +377,24 @@
         // [self presentViewController:navigationController animated:YES completion:nil];
         
         [self.navigationController pushViewController:creditsView animated:YES];
+        
+        
+        
+        
+    }
+    if(indexPath.row == 4) {
+        
+        
+        
+        PartenairesViewController *partenairesView = [[PartenairesViewController alloc] init] ;
+        
+        UINavigationController *navigationController = [[UINavigationController alloc] initWithRootViewController:partenairesView];
+        
+        [navigationController setNavigationBarHidden:NO];
+        
+        // [self presentViewController:navigationController animated:YES completion:nil];
+        
+        [self.navigationController pushViewController:partenairesView animated:YES];
         
         
         

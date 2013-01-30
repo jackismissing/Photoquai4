@@ -17,6 +17,8 @@
 
 @implementation AppDelegate
 
+NSString *const FBSessionStateChangedNotification = @"com.test.testFacebook:FBSessionStateChangedNotification";
+
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
@@ -49,31 +51,20 @@
         name:@"AVSystemController_SystemVolumeDidChangeNotification"
         object:nil];
     
-    tabBarController = [[UITabBarController alloc] init];
+    
     
     Reachability *networkReachability = [Reachability reachabilityForInternetConnection];
     NetworkStatus networkStatus = [networkReachability currentReachabilityStatus];
     if (networkStatus == NotReachable) {
         CustomAlertView *alert = [[CustomAlertView alloc]
                               initWithTitle:nil
-                              message:@"Votre appareil n'est pas connecté à Internet. Pour profiter pleinement de l'expérience PHQ4, veuillez vous connecter à Internet."
+                              message:@"Votre appareil n'est pas connecté à Internet. Pour profiter pleinement de l'expérience PHQ4, veuillez vous connecter."
                               delegate:self
                               cancelButtonTitle:@"OK" otherButtonTitles:nil];
         [alert show];
     }
     
-    UIViewController *v1 = [[FavoritesPicturesViewController alloc] initWithNibName:@"FavoritesPicturesViewController" bundle:nil];
-    v1.tabBarItem.image = [UIImage imageNamed:@"favoritesPicturesIcon"];
-    v1.tabBarItem.title = @"Photographies";
-    
-    UIViewController *v2 = [[FavoritePhotographerViewController alloc] initWithNibName:@"FavoritePhotographerViewController" bundle:nil];
-    v2.tabBarItem.image = [UIImage imageNamed:@"favoritesPhotographersIcon"];
-    v2.tabBarItem.title = @"Photographes";
-    
-    
-    tabBarController.viewControllers = [NSArray arrayWithObjects:navigationController, v1, v2, nil];
-    
-    self.window.rootViewController = tabBarController;
+    self.window.rootViewController = navigationController;
     
     [self.window makeKeyAndVisible];
     return YES;
@@ -110,7 +101,9 @@
 
 - (void)applicationWillTerminate:(UIApplication *)application
 {
-    // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
+    // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:
+    [FBSession.activeSession close];
+    [FBSession.activeSession closeAndClearTokenInformation];
 }
 
 - (NSDictionary*) getElementsFromJSON:(NSString*)anURL{
@@ -141,57 +134,67 @@
     return arrayJson;
 }
 
-
-// Method implementations
-- (void)hideTabBar:(UITabBarController *) tabbarcontroller
-{
-    [UIView beginAnimations:nil context:NULL];
-    [UIView setAnimationDuration:0];
-    
-    for(UIView *view in tabbarcontroller.view.subviews)
-    {
-        if([view isKindOfClass:[UITabBar class]])
-        {
-            [view setFrame:CGRectMake(view.frame.origin.x, 480, view.frame.size.width, view.frame.size.height)];
-        }
-        else
-        {
-            [view setFrame:CGRectMake(view.frame.origin.x, view.frame.origin.y, view.frame.size.width, 480)];
-        }
+/*
+ * Callback for session changes.
+ */
+- (void)sessionStateChanged:(FBSession *)session
+                      state:(FBSessionState) state
+                      error:(NSError *)error{
+    switch (state) {
+        case FBSessionStateOpen:
+            if (!error) {
+                // We have a valid session
+                NSLog(@"User session found");
+            }
+            break;
+        case FBSessionStateClosed:
+        case FBSessionStateClosedLoginFailed:
+            [FBSession.activeSession closeAndClearTokenInformation];
+            break;
+        default:
+            break;
     }
     
-    [UIView commitAnimations];
+    [[NSNotificationCenter defaultCenter]
+     postNotificationName:FBSessionStateChangedNotification
+     object:session];
+    
+    if (error) {
+        UIAlertView *alertView = [[UIAlertView alloc]
+                                  initWithTitle:@"Error"
+                                  message:error.localizedDescription
+                                  delegate:nil
+                                  cancelButtonTitle:@"OK"
+                                  otherButtonTitles:nil];
+        [alertView show];
+    }
 }
 
-- (void)showTabBar:(UITabBarController *) tabbarcontroller
-{
-    [UIView beginAnimations:nil context:NULL];
-    [UIView setAnimationDuration:0.5];
-    for(UIView *view in tabbarcontroller.view.subviews)
-    {
-        
-        if([view isKindOfClass:[UITabBar class]])
-        {
-            [view setFrame:CGRectMake(view.frame.origin.x, 431, view.frame.size.width, view.frame.size.height)];
-            
-        }
-        else
-        {
-            [view setFrame:CGRectMake(view.frame.origin.x, view.frame.origin.y, view.frame.size.width, 431)];
-        }
-    }
-    
-    [UIView commitAnimations];
+/*
+ * Opens a Facebook session and optionally shows the login UX.
+ */
+- (BOOL)openSessionWithAllowLoginUI:(BOOL)allowLoginUI {
+    return [FBSession openActiveSessionWithReadPermissions:nil
+                                              allowLoginUI:allowLoginUI
+                                         completionHandler:^(FBSession *session,
+                                                             FBSessionState state,
+                                                             NSError *error) {
+                                             [self sessionStateChanged:session
+                                                                 state:state
+                                                                 error:error];
+                                         }];
 }
 
-- (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
-{
-    if (buttonIndex == 0) {
-        NSLog(@"THE 'NO' BUTTON WAS PRESSED");
-    }
-    if (buttonIndex == 1) {
-        NSLog(@"THE 'YES' BUTTON WAS PRESSED");
-    }
+/*
+ * If we have a valid session at the time of openURL call, we handle
+ * Facebook transitions by passing the url argument to handleOpenURL
+ */
+- (BOOL)application:(UIApplication *)application
+            openURL:(NSURL *)url
+  sourceApplication:(NSString *)sourceApplication
+         annotation:(id)annotation {
+    // attempt to extract a token from the url
+    return [FBSession.activeSession handleOpenURL:url];
 }
 
 

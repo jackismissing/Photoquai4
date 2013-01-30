@@ -54,7 +54,7 @@
     // Map image init
     
     
-    map = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"MAP_ok.png"]];
+    map = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"MAP_ok"]];
     
     map.userInteractionEnabled = YES;
     [map addGestureRecognizer:[[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(marsTapped)]];
@@ -69,7 +69,7 @@
     self.mapView.clipsToBounds = YES;
     self.mapView.delegate=self;
     
-    [mapView scrollRectToVisible:CGRectMake(250, 754, self.view.frame.size.width, self.view.frame.size.height) animated:NO];
+    [mapView scrollRectToVisible:CGRectMake(250, 150, self.view.frame.size.width, self.view.frame.size.height) animated:NO];
     
     [mapView addSubview:map];
         self.mapView.zoomScale=1;

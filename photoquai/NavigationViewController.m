@@ -14,6 +14,8 @@
 #import "FavoritesPicturesViewController.h"
 #import "ArtistsLisViewController.h"
 #import "FavoritePhotographerViewController.h"
+#import "FavorisPageViewController.h"
+
 
 @interface NavigationViewController ()
 
@@ -37,7 +39,7 @@
     // 1 - Call super method
     [super viewDidLoad];
     
-        [self setTitle:@"PHQ4"];
+        [self setTitle:@"Photoquai 2013"];
     
     // Pattern
     
@@ -90,7 +92,7 @@
                                             ) forControlEvents:UIControlEventTouchUpInside];
     
     UIBarButtonItem *customBarItem = [[UIBarButtonItem alloc] initWithCustomView:button];
-    self.navigationItem.rightBarButtonItem = customBarItem;
+    self.navigationItem.leftBarButtonItem = customBarItem;
 
 }
 
@@ -112,7 +114,7 @@
     if(selectedSection == 1) {
         
         //NSLog(@"test");
-                
+        
         ViewController *catalogueView = [[ViewController alloc] init];
         [self.navigationController pushViewController:catalogueView animated:YES];
     }
@@ -134,6 +136,15 @@
         
         
         [self.navigationController pushViewController:infoView animated:YES];
+    }
+    
+    if(selectedSection == 3) {
+        
+        FavorisPageViewController *FavorisPageView = [[FavorisPageViewController alloc] init];
+
+        
+        
+        [self.navigationController pushViewController:FavorisPageView animated:YES];
     }
     
     if(selectedSection == 4) {
@@ -158,13 +169,13 @@
         ArtistsLisViewController *artistsView = [[ArtistsLisViewController alloc] init];
         [self.navigationController pushViewController:artistsView animated:YES];
         
-//        FavoritePhotographerViewController  *favoritePhotograhers = [[FavoritePhotographerViewController alloc] init];
-//        [self.navigationController pushViewController:favoritePhotograhers animated:YES];
-
+        // FavoritePhotographerViewController *favoritePhotograhers = [[FavoritePhotographerViewController alloc] init];
+        // [self.navigationController pushViewController:favoritePhotograhers animated:YES];
         
-       // FavoritePhotographerViewController  *favoritePhotograhers = [[FavoritePhotographerViewController alloc] init];
+        
+        // FavoritePhotographerViewController *favoritePhotograhers = [[FavoritePhotographerViewController alloc] init];
         //[self.navigationController pushViewController:favoritePhotograhers animated:YES];
-
+        
     }
      
      

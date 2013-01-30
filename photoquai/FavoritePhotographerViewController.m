@@ -33,7 +33,7 @@
     UIBarButtonItem* menuBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:menuButton];
     [self.navigationItem setLeftBarButtonItem:menuBarButtonItem];
     
-    UIImage* image3 = [UIImage imageNamed:@"suppfavoris"];
+    UIImage* image3 = [UIImage imageNamed:@"poubelle"];
     CGRect frameimg = CGRectMake(-100, 0, image3.size.width, image3.size.height);
     UIButton *removeButton = [[UIButton alloc] initWithFrame:frameimg];
     [removeButton setBackgroundImage:image3 forState:UIControlStateNormal];
@@ -42,8 +42,8 @@
     UIBarButtonItem *removeButtonItem = [[UIBarButtonItem alloc] initWithCustomView:removeButton];
     self.navigationItem.rightBarButtonItem = removeButtonItem;
     
-    AppDelegate *appdelegate = (AppDelegate *)[[UIApplication sharedApplication] delegate];
-    [appdelegate showTabBar:self.tabBarController];
+    //AppDelegate *appdelegate = (AppDelegate *)[[UIApplication sharedApplication] delegate];
+    
 }
 
 - (void)viewDidLoad
@@ -89,8 +89,6 @@
     
     
     [self loadFavoris];
-    
-    NSLog(@"reload");
 }
 
 - (void) loadFavoris{
@@ -106,11 +104,8 @@
             yPosition++;
         }
         
-        NSLog(@"reload 1");
-        
         artistFavoriteElement = [[ArtistFavoriteElement alloc] initWithFrame:CGRectMake(xPosition * 150 + 13, (yPosition * 189) + 15, 145, 200) withId:[[favoritesPhotographers objectAtIndex:i] intValue]];
         [artistFavoriteElement setIdColonne:xPosition];
-        
         
         [myScrollView addSubview:artistFavoriteElement];
         
@@ -151,7 +146,7 @@
     [self.navigationController pushViewController:imageViewController animated:YES];
 }
 
-- (void) suppfavoris{
+- (void) suppfavoris{ //Activation de la possibilité de supprimer les favoris
     if(removeEnabled == NO){
         [fakeActionSheet show];
         removeEnabled = YES;
@@ -159,6 +154,16 @@
             selectFavorites2Remove = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(selectFavorites2Remove:)];
             [view addGestureRecognizer:selectFavorites2Remove];
             [view removeGestureRecognizer:accessPhotographer];
+            
+            UIImage*    backgroundImage = [UIImage imageNamed:@"favorite2remove"];
+            CALayer*    crossLayer = [CALayer layer];
+            crossLayer.opacity = .3;
+            CGRect startFrame = CGRectMake(view.frame.size.width - 30, view.frame.size.height - 30, 30, 30);
+            crossLayer.contents = (id)backgroundImage.CGImage;
+            crossLayer.frame = startFrame;
+            
+            crossLayer.opaque = YES;
+            [view.layer addSublayer:crossLayer];
         }
         myScrollView.frame = CGRectMake(0, 0, screenWidth, screenHeight - 75);
     }else{ 
@@ -168,20 +173,52 @@
             accessPhotographer = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(accessPhotographer:)];
             [view addGestureRecognizer:accessPhotographer];
             [view removeGestureRecognizer:selectFavorites2Remove];
+            
+            for (CALayer *layer in view.layer.sublayers) {
+                [layer removeFromSuperlayer];
+                break;
+                
+            }
         }
         myScrollView.frame = CGRectMake(0, 0, screenWidth, screenHeight);
     }
 }
 
-- (void) removeFavorites{
+
+- (void) removeFavorites{ //Supprime les favoris
     NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
     removeEnabled = NO;
+//    
+//    if ([favoritesToRemove count] == 0) {
+//        CustomAlertView *alert = [[CustomAlertView alloc]
+//                                  initWithTitle:nil
+//                                  message:@"Vous n'avez pas sélectionné de favoris à supprimer"
+//                                  delegate:self
+//                                  cancelButtonTitle:@"OK" otherButtonTitles:@"Favoris", nil];
+//        [alert show];
+//    }
     
     for (int i = 0; i < [favoritesToRemove count]; i++) {
+        for (ArtistFavoriteElement *view in myScrollView.subviews) {
+            if (view.tag == [[favoritesToRemove objectAtIndex:i] intValue]) {
+                [UIView animateWithDuration:0.42
+                                      delay:0
+                                    options: UIViewAnimationCurveEaseOut
+                                 animations:^{
+                                     view.layer.anchorPoint = CGPointMake(0.5, 0.5);
+                                     view.transform = CGAffineTransformMakeScale(1, 0.001);
+                                     view.alpha = 0;
+                                 }
+                                 completion:^(BOOL finished){
+                                     for (UIView *view in myScrollView.subviews) {
+                                         [view removeFromSuperview];
+                                     }
+                                     [self loadFavoris];
+                                 }];
+            }
+        }
         [favoritesPhotographers removeObject:[favoritesToRemove objectAtIndex:i]];
     }
-    //[self loadFavoris];
-    [self.view setNeedsDisplay];
     
     [defaults setObject:favoritesPhotographers forKey:@"favorisPhotographes"];
     [defaults synchronize];

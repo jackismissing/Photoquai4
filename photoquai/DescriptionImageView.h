@@ -22,6 +22,7 @@
 }
 
 @property (nonatomic, strong) UIScrollView *photographyDatas;
+@property (nonatomic, strong) PhotographerVignette *photographerVignette;
 
 
 //Constructeur

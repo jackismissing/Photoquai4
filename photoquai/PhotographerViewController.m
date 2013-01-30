@@ -15,6 +15,9 @@
 
 @implementation PhotographerViewController
 
+
+
+
 - (void)viewWillAppear:(BOOL)animated
 {
     //Réinstancie la navigation bar, une fois le menu disparu
@@ -113,7 +116,7 @@
     rotationTransform = CGAffineTransformRotate(rotationTransform, 90);
     popOver.transform = rotationTransform;
     
-    [self.view addSubview:popOver];
+    
     
 #pragma mark - Scrollview
     myScrollView = [[UIScrollView alloc] initWithFrame:CGRectMake(0, 0, screenWidth, screenHeight)];
@@ -295,14 +298,13 @@
     [myScrollView addSubview:contentUnderPhotographerPicture];
     [myScrollView addSubview:sliderContent];
     [sliderContent sizeToFit];
-    //[contentUnderPhotographerPicture sizeToFit];
-    NSLog(@"contentUnderPhotographerPicture : %f", contentUnderPhotographerPicture.frame.size.height);
-    
+        
     myScrollViewHeight = photographerPicture.frame.size.height + contentUnderPhotographerPicture.frame.size.height + sliderContent.frame.size.height + 75;
     myScrollView.contentSize = CGSizeMake(screenWidth, myScrollViewHeight);
     descriptionPhotographer.frame = CGRectMake(10, descriptionPhotographerY, screenWidth * .85, 150);
     
     [myScrollView addSubview:photographerLocalisationButton];
+    [self.view addSubview:popOver];
 }
 
 - (void)scrollViewWillBeginDragging:(UIScrollView *)scrollView {
@@ -324,13 +326,6 @@
         [self.view addSubview:favoriteIndicator];
         [favoriteIndicator show];
         
-//        CustomAlertView *alert = [[CustomAlertView alloc]
-//                                  initWithTitle:nil
-//                                  message:[patronymPhotographer stringByAppendingString:@" a été ajouté à vos favoris"]
-//                                  delegate:self
-//                                  cancelButtonTitle:@"OK" otherButtonTitles:@"Favoris", nil];
-
-        
         [favouriteButton setImage:[UIImage imageNamed:@"etoilejaune"] forState:UIControlStateNormal];
         
 //        [alert show];
@@ -345,14 +340,6 @@
         favoriteIndicator.message.text = [patronymPhotographer stringByAppendingString:@" a été supprimée de vos favoris"];
         [self.view addSubview:favoriteIndicator];
         [favoriteIndicator show];
-        
-//        CustomAlertView *alert = [[CustomAlertView alloc]
-//                                  initWithTitle:nil
-//                                  message:[patronymPhotographer stringByAppendingString:@" a été supprimé de vos favoris"]
-//                                  delegate:self
-//                                  cancelButtonTitle:@"OK" otherButtonTitles:@"Favoris", nil];
-//        [alert show];
-
         
         [favouriteButton setImage:[UIImage imageNamed:@"etoilepush"] forState:UIControlStateNormal];
     }
@@ -394,22 +381,58 @@
 // Gestion des mails
 
 - (void) sendMailImage:(NSNotification *)notification{
-    MFMailComposeViewController *mailer = [[MFMailComposeViewController alloc] init];
-    mailer.mailComposeDelegate = self;
-    [mailer setSubject:@"Regarde ce qu'il y a à PHQ"];
-    
-//    UIImage *picturePHQMail = [UIImage imageWithData:[NSData dataWithContentsOfURL:[NSURL URLWithString:linkImg]]];
-//    NSData *imageData = UIImagePNGRepresentation(picturePHQMail);
-//    [mailer addAttachmentData:imageData mimeType:@"image/png" fileName:@"PHQPhotography"];
-//    NSString *emailBody = @"J'apprécie cette photo de l'exposition PHQ";
-//    [mailer setMessageBody:emailBody isHTML:NO];
-//    [self presentModalViewController:mailer animated:YES];
+    if ([MFMailComposeViewController canSendMail]) {
+        MFMailComposeViewController *mailer = [[MFMailComposeViewController alloc] init];
+        mailer.mailComposeDelegate = self;
+        [mailer setSubject:@"Regarde ce qu'il y a à PHQ"];
+    }else{
+        CustomAlertView *alert = [[CustomAlertView alloc]
+                                  initWithTitle:nil
+                                  message:@"Impossible d'effectuer cette action : aucun compte mail n'est lié à votre appareil"
+                                  delegate:self
+                                  cancelButtonTitle:@"OK" otherButtonTitles:nil];
+        [alert show];
+    }
+
 }
 
+
 //Annulation du mail
-- (void)mailComposeController:(MFMailComposeViewController*)controller
-          didFinishWithResult:(MFMailComposeResult)result
-                        error:(NSError*)error{
+- (void)mailComposeController:(MFMailComposeViewController*)controller didFinishWithResult:(MFMailComposeResult)result error:(NSError*)error
+{
+    switch (result)
+    {
+        case MFMailComposeResultCancelled:
+            NSLog(@"Mail cancelled: you cancelled the operation and no email message was queued.");
+            break;
+        case MFMailComposeResultSaved:
+            NSLog(@"Mail saved: you saved the email message in the drafts folder.");
+            break;
+        case MFMailComposeResultSent:
+        {
+            CustomAlertView *alert = [[CustomAlertView alloc]
+                                      initWithTitle:nil
+                                      message:@"Votre mail a été correctement envoyé"
+                                      delegate:self
+                                      cancelButtonTitle:@"OK" otherButtonTitles:nil];
+            [alert show];
+        }
+            break;
+        case MFMailComposeResultFailed:
+        {
+            CustomAlertView *alert = [[CustomAlertView alloc]
+                                      initWithTitle:nil
+                                      message:@"Une erreur a été rencontrée, veuillez essayer plus tard."
+                                      delegate:self
+                                      cancelButtonTitle:@"OK" otherButtonTitles:nil];
+            [alert show];
+        }
+            break;
+        default:
+            NSLog(@"Mail not sent.");
+            break;
+    }
+    // Remove the mail view
     [UIView animateWithDuration:0.5
                           delay:0
                         options: UIViewAnimationCurveEaseOut
@@ -446,6 +469,8 @@
                          SliderViewController *sliderImageViewController = [[SliderViewController alloc] initWithNibName:nil bundle:nil];
                          sliderImageViewController.arrayImages = photographerPictures;
                          sliderImageViewController.arrayIndexes = photographerPicturesIds;
+                         sliderImageViewController.patronymPhotographer = patronymPhotographer;
+                         
                          UINavigationController *navigationController = [[UINavigationController alloc] initWithRootViewController:sliderImageViewController];
                          [self presentModalViewController:navigationController animated:YES];
                          //[self presentModalViewController:sliderImage animated:YES];
@@ -583,6 +608,7 @@
 - (void)didReceiveMemoryWarning
 {
     [super didReceiveMemoryWarning];
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
     // Dispose of any resources that can be recreated.
 }
 

@@ -20,8 +20,12 @@
     
     [self.navigationController.navigationBar setBackgroundImage:[UIImage imageNamed:@"navigationBar-photographie.png"] forBarMetrics:UIBarMetricsDefault];
     
+    NSString *titleNavigation = @"Images de ";
+    titleNavigation = [titleNavigation stringByAppendingString:self.patronymPhotographer];
     
-    self.navigationItem.title = @"Images de ";
+    
+    self.navigationItem.title = titleNavigation;
+    
     
     UIButton *cancelBtn = [[UIButton alloc] initWithFrame:CGRectMake(10, 10, 20, 20)];
     [cancelBtn addTarget:self action:@selector(dismissPage) forControlEvents:UIControlEventTouchUpInside];
@@ -45,10 +49,9 @@
     screenWidth = screenRect.size.width;
     screenHeight = screenRect.size.height;
     
-    SliderImage *sliderImage = [[SliderImage alloc] initWithImages:self.arrayImages withIndexes:self.arrayIndexes atPosition:CGRectMake(-15, 15, screenWidth * .8, screenHeight - 100)];
+    SliderImage *sliderImage = [[SliderImage alloc] initWithImages:self.arrayImages withIndexes:self.arrayIndexes atPosition:CGRectMake(0, 17, screenWidth * .8, screenHeight - 100)];
     
     [self.view setOpaque:YES];
-    [self.view setAlpha:.8];
     [self.view addSubview:sliderImage];
 }
 
