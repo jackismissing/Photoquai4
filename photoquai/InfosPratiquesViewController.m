@@ -42,6 +42,15 @@
         
         width = self.view.frame.size.width;
         
+        
+        // Cover image en haut là
+        
+        UIImageView *coverTop = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"cover-info.jpg"]];
+        
+        [self.view addSubview:coverTop];
+        
+        
+        
         //  ////////////////////////////////////////////////////////////////////////////////// Init la scroll view //////////////////
         
         infoPratiqueScrollView = [[UIScrollView alloc] initWithFrame:CGRectMake(0, 102, width, 1000)];

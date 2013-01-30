@@ -62,17 +62,17 @@
     // Sroll view init
     
     mapView = [[UIScrollView alloc] initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, self.view.frame.size.height)];
-    self.mapView.minimumZoomScale=0.2;
-    self.mapView.maximumZoomScale=1.0;
+    self.mapView.minimumZoomScale=1.0;
+    self.mapView.maximumZoomScale=2.0;
 
-    self.mapView.contentSize=CGSizeMake(3951, 3396);
+    self.mapView.contentSize=CGSizeMake(2000, 1719);
     self.mapView.clipsToBounds = YES;
     self.mapView.delegate=self;
     
-    [mapView scrollRectToVisible:CGRectMake(950, 754, self.view.frame.size.width, self.view.frame.size.height) animated:NO];
+    [mapView scrollRectToVisible:CGRectMake(250, 754, self.view.frame.size.width, self.view.frame.size.height) animated:NO];
     
     [mapView addSubview:map];
-        self.mapView.zoomScale=0.2;
+        self.mapView.zoomScale=1;
     
     /* MapViewWrapper : usefull to add UIViews over the map (so it doesn't rescale)
      
@@ -133,7 +133,7 @@
          */
         
         pinView = [[MKPinAnnotationView alloc] initWithAnnotation:nil reuseIdentifier:@""];
-        pinView.center = CGPointMake(950 + 100*i, 950 - 10*i);
+        pinView.center = CGPointMake(250 + 100*i, 250 - 10*i);
         
         UIImage *pinImg = [UIImage imageNamed:@"localiser.png"];
         
