@@ -62,15 +62,17 @@
     // Sroll view init
     
     mapView = [[UIScrollView alloc] initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, self.view.frame.size.height)];
-    self.mapView.minimumZoomScale=0.4;
-    self.mapView.maximumZoomScale=6.0;
-    self.mapView.contentSize=CGSizeMake(2070, 1508);
+    self.mapView.minimumZoomScale=0.2;
+    self.mapView.maximumZoomScale=1.0;
+
+    self.mapView.contentSize=CGSizeMake(3951, 3396);
     self.mapView.clipsToBounds = YES;
     self.mapView.delegate=self;
     
-    [mapView scrollRectToVisible:CGRectMake(1035, 754, self.view.frame.size.width, self.view.frame.size.height) animated:NO];
+    [mapView scrollRectToVisible:CGRectMake(950, 754, self.view.frame.size.width, self.view.frame.size.height) animated:NO];
     
     [mapView addSubview:map];
+        self.mapView.zoomScale=0.2;
     
     /* MapViewWrapper : usefull to add UIViews over the map (so it doesn't rescale)
      
@@ -131,7 +133,7 @@
          */
         
         pinView = [[MKPinAnnotationView alloc] initWithAnnotation:nil reuseIdentifier:@""];
-        pinView.center = CGPointMake(50 + 100*i, 100 + 100*i);
+        pinView.center = CGPointMake(950 + 100*i, 950 - 10*i);
         
         UIImage *pinImg = [UIImage imageNamed:@"localiser.png"];
         
@@ -226,10 +228,16 @@
         disclosure.center = CGPointMake(240, 41);
         
         
-        UIButton *displayPhoto = [[UIButton alloc]initWithFrame:CGRectMake(0, 0, calloutView.frame.size.width, calloutView.frame.size.height)];
+        UIButton *displayPhoto = [[UIButton alloc]initWithFrame:CGRectMake(0, 0, 40, 83)];
         
-        [displayPhoto addTarget:self action:@selector(disclosureTapped) forControlEvents:UIControlEventTouchUpInside];
+        [displayPhoto setBackgroundImage:[UIImage imageNamed:@"calloutBg.png"] forState:UIControlStateNormal];
         
+        [displayPhoto setImage:[UIImage imageNamed:@"disclosure.png"] forState:UIControlStateNormal];
+        
+        [displayPhoto addGestureRecognizer:[[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(popUpTapped:)]];
+
+    
+
         
         
         [calloutCustomView addSubview:calloutBg];
@@ -240,17 +248,16 @@
         
         [calloutCustomView addSubview:pinSubtitle];
         
-        [calloutCustomView addSubview:disclosure];
         
-        [calloutCustomView addSubview:displayPhoto];
+        
+
         
         calloutView.contentView = calloutCustomView;
         
-        
-        calloutCustomView.userInteractionEnabled = YES;
-        
-        [calloutCustomView addGestureRecognizer:[[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(disclosureTapped)]];
+        calloutView.rightAccessoryView = displayPhoto;
 
+    
+    
         
     }
     
@@ -340,11 +347,11 @@
     return kSMCalloutViewRepositionDelayForUIScrollView;
 }
 
-- (void)disclosureTapped {
+- (void)popUpTapped : (id)sender {
     
     NSLog(@"J'aime le caca");
     PhotographyViewController *imageViewController = [[PhotographyViewController alloc] initWithNibName:@"PhotographyViewController" bundle:nil];
-    imageViewController.idPicture = 18;
+    imageViewController.idPicture = 13;
     [self.navigationController pushViewController:imageViewController animated:YES];
 
 }

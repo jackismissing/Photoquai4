@@ -18,6 +18,8 @@
 
 #import "CreditsViewController.h"
 
+#import "CommissaryViewController.h"
+
 #define MAINLABEL_TAG 1
 
 #define NUMBERLABEL_TAG 1
@@ -339,6 +341,25 @@
         
         
     }
+    if(indexPath.row == 3) {
+        
+        
+        
+        CommissaryViewController *comView = [[CommissaryViewController alloc] init] ;
+        
+        UINavigationController *navigationController = [[UINavigationController alloc] initWithRootViewController:comView];
+        
+        [navigationController setNavigationBarHidden:NO];
+        
+        // [self presentViewController:navigationController animated:YES completion:nil];
+        
+        [self.navigationController pushViewController:comView animated:YES];
+        
+        
+        
+        
+    }
+
     
     if(indexPath.row == 5) {
         

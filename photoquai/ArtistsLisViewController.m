@@ -73,6 +73,16 @@
     
     [self.view addSubview:tableMenuScrollView];
     
+    UIImageView *leftCornerMenu = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"shadow-scroll-left.png"]];
+    
+    [self.view addSubview:leftCornerMenu];
+    
+    UIImageView *rightCornerMenu = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"shadow-scroll-right.png"]];
+    
+    rightCornerMenu.center = CGPointMake(self.view.frame.size.width - rightCornerMenu.frame.size.width / 2, rightCornerMenu.frame.size.height / 2);
+    
+    [self.view addSubview:rightCornerMenu];
+    
     // petit triangle
     
     UIImageView *petitTriange = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"triangleblanc.png"]];
@@ -95,6 +105,8 @@
     [artistsTable reloadData];
     
     [self.view addSubview:artistsTable];
+    
+
     
     [NSThread detachNewThreadSelector:@selector(loadingViewAsync) toTarget:self withObject:nil];
     
@@ -354,9 +366,24 @@
         
         // Custon disclosure
         
-        //cell.accessoryView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"disclosure.png"]];  ;
+        
+
+        
+        // Artist Cover
+        
+        artistCover = [[UIImageView alloc] initWithFrame:CGRectMake(15, 0, 290, 60)];
+        
+        [cell.contentView addSubview:artistCover];
+        
+        // Background
+        
+        UIImageView *artistListBg = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"artist-list-bg.png"]];
+        
+        artistListBg.center = CGPointMake(cell.contentView.frame.size.width / 2, 91);
         
         
+        [cell.contentView addSubview:artistListBg];
+
         
         
         
@@ -390,15 +417,10 @@
         
         [cell.contentView addSubview:firstNameLabel];
         
-        // Artist Cover
-        
-        artistCover = [[UIImageView alloc] initWithFrame:CGRectMake(15, 0, 290, 60)];
-        
-        [cell.contentView addSubview:artistCover];
-        
+                
         // Artist avatar
         
-        artistAvatar = [[UIImageView alloc] initWithFrame:CGRectMake(25, 50, 73, 73)];
+        artistAvatar = [[UIImageView alloc] initWithFrame:CGRectMake(25, 45, 73, 73)];
         
         [cell.contentView addSubview:artistAvatar];
         
@@ -481,7 +503,7 @@
     
     NSInteger artistId = [[artistInfos objectForKey:@"artistId"] integerValue];
     
-    double delayInSeconds = 0.1;
+    double delayInSeconds = 0.05;
     dispatch_time_t popTime = dispatch_time(DISPATCH_TIME_NOW, delayInSeconds * NSEC_PER_SEC);
     dispatch_after(popTime, dispatch_get_main_queue(), ^(void){
     
@@ -675,11 +697,11 @@
         // reposition offset to show image 10 that is on the right in the scroll view
         [tableMenuScrollView scrollRectToVisible:CGRectMake(b*30 + j*15,0,self.view.frame.size.width, 40) animated:NO];
     }
-    else if (tableMenuScrollView.contentOffset.x == b*30 + j*30) {
+    else if (tableMenuScrollView.contentOffset.x == b*30 + j*30 + e*30 - self.view.frame.size.width) {
         
         // user is scrolling to the right from image 10 to image 1.
         // reposition offset to show image 1 that is on the left in the scroll view
-        [tableMenuScrollView scrollRectToVisible:CGRectMake(30,0,self.view.frame.size.width, 50) animated:NO];
+        [tableMenuScrollView scrollRectToVisible:CGRectMake(b*15 + 40 ,0,self.view.frame.size.width, 50) animated:NO];
     }
     
         if (sender == tableMenuScrollView){

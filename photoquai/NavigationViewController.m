@@ -117,7 +117,7 @@
         [self.navigationController pushViewController:catalogueView animated:YES];
     }
     
-    if(selectedSection == 2) {
+    if(selectedSection == 5) {
         
         //NSLog(@"2");
         
@@ -136,7 +136,7 @@
         [self.navigationController pushViewController:infoView animated:YES];
     }
     
-    if(selectedSection == 3) {
+    if(selectedSection == 4) {
         
         MapPhqViewController *mapView = [[MapPhqViewController alloc] init];
         
@@ -151,7 +151,7 @@
         [self.navigationController pushViewController:mapView animated:YES];
     }
     
-    if (selectedSection == 4) {
+    if (selectedSection == 2) {
         //FavoritesPicturesViewController *favoritesPictures = [[FavoritesPicturesViewController alloc] init];
         //[self.navigationController pushViewController:favoritesPictures animated:YES];
         

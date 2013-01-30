@@ -22,4 +22,6 @@
 
 - (void)showMenu;
 
+- (void)popUpTapped : (id)sender;
+
 @end

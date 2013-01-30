@@ -29,6 +29,8 @@
 @synthesize busView;
 @synthesize velibView;
 
+@synthesize metroViewScroll;
+
 @synthesize mapView;
 @synthesize closeBtn;
 
@@ -51,9 +53,18 @@
         
         //  /////////////////////////////////////////////////////////////////////////////////// Init de la vue metro /////////////////
         
-        metroView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, width, 1000)];
+        metroView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, width, self.view.frame.size.height + 20)];
         
-        [infoPratiqueScrollView addSubview:metroView];
+        metroViewScroll = [[UIScrollView alloc] initWithFrame:CGRectMake(0, 0, width, self.view.frame.size.height)];
+        
+        [metroViewScroll addSubview:metroView];
+        
+        metroViewScroll.contentSize = CGSizeMake(width, metroView.frame.size.height);
+        
+        metroViewScroll.scrollEnabled = YES;
+        
+        
+        [infoPratiqueScrollView addSubview:metroViewScroll];
         
         //  /////////////////////////////////////////////////////////////////////////////////// Init de la vue rer /////////////////
         
@@ -203,7 +214,9 @@
     velibView.backgroundColor = [UIColor whiteColor];
 
     
-    [metroBtn setImage:[UIImage imageNamed:@"metronotselect"] forState:UIControlStateNormal];
+    // Metro selected by default
+    
+    [metroBtn setImage:[UIImage imageNamed:@"metro"] forState:UIControlStateNormal];
     
     [rerBtn setImage:[UIImage imageNamed:@"rerpasselect"] forState:UIControlStateNormal];
     
