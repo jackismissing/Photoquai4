@@ -59,10 +59,10 @@
     myScrollView.showsVerticalScrollIndicator = NO;
     myScrollView.delegate = self;
     myScrollView.contentSize = CGSizeMake(130 * 5, 2000);
-    //myScrollView.autoresizesSubviews = YES;
-    myScrollView.zoomScale = .5;
+    myScrollView.autoresizesSubviews = YES;
+    myScrollView.zoomScale = 1.7;
     myScrollView.minimumZoomScale = 0.5;
-    myScrollView.maximumZoomScale = 5.0;
+    myScrollView.maximumZoomScale = 3.0;
     [self.view addSubview:myScrollView];
 
     
@@ -118,14 +118,6 @@
     
 }
 
-- (void)accelerometer:(UIAccelerometer *)accelerometer didAccelerate:(UIAcceleration *)acceleration
-{
-    if (fabsf(acceleration.x) > 1.5 || fabsf(acceleration.y) > 1.5 || fabsf(acceleration.z) > 1.5)
-    {
-        NSLog(@"J'ai détecté une secousse");
-        //myScrollView.contentOffset = CGPointMake(acceleration.x * myScrollView.frame.origin.x + 10, acceleration.x * myScrollView.frame.origin.y + 10);
-    }
-}
 
 //Gestion du shake
 - (BOOL) canBecomeFirstResponder{
@@ -141,9 +133,10 @@
     [super motionEnded:motion withEvent:event];
 }
 
+//On génère un chiffre entre 0 et le nombre de photographies affichées
 - (void) motionBegan:(UIEventSubtype)motion withEvent:(UIEvent *)event{
     if (motion == UIEventSubtypeMotionShake) {
-        randomNumber = arc4random() % 50;
+        randomNumber = arc4random() % nbrPictures; 
     }
     [super motionBegan:motion withEvent:event];
 }
@@ -155,7 +148,7 @@
     yPosition = 0, totalWidth = 0;
     widthThumb = 130;
     nbrColumns = 5;
-    nbrPictures = 50;
+    nbrPictures = 100;
 
     
     [self performSelectorInBackground:@selector(loadImageWall) withObject:nil];
@@ -166,10 +159,6 @@
 
 - (void) loadImageWall{
     AppDelegate *appdelegate = (AppDelegate *)[[UIApplication sharedApplication] delegate];
-    
-    //int randomAnimate = (arc4random() % 2);
-    
-    
     if (i >= nbrPictures) return;
     
     //On vérifie que l'on a pas atteint le nombre maximal de colonnes

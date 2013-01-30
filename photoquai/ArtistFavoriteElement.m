@@ -39,9 +39,8 @@
 
         self.tag = [[[appdelegate getElementsFromJSON:appendLink] valueForKeyPath:@"photographer.id"] integerValue];
         
-        
         UIImageView *photographerFirstPhotography = [[UIImageView alloc] init];
-        [photographerFirstPhotography setImageWithURL:[NSURL URLWithString:imgsPhotographer] placeholderImage:[UIImage imageNamed:@"etoilejaune"]];
+        [photographerFirstPhotography setImageWithURL:[NSURL URLWithString:imgsPhotographer] placeholderImage:[UIImage imageNamed:@"chargement"]];
         photographerFirstPhotography.frame = CGRectMake(0, 0, 150, 115);
         photographerFirstPhotography.opaque = YES;
         photographerFirstPhotography.contentMode = UIViewContentModeRedraw;
@@ -53,7 +52,7 @@
         [photographerFirstPhotography.layer addSublayer:bottomBorderImageWallElement];
         
         UIImageView *artistPhotography = [[UIImageView alloc] init];
-        [artistPhotography setImageWithURL:[NSURL URLWithString:imgPhotographer] placeholderImage:[UIImage imageNamed:@"etoilejaune"]];
+        [artistPhotography setImageWithURL:[NSURL URLWithString:imgPhotographer] placeholderImage:[UIImage imageNamed:@"chargement"]];
         artistPhotography.opaque = YES;
         artistPhotography.contentMode = UIViewContentModeRedraw;
         artistPhotography.frame = CGRectMake(37.5, photographerFirstPhotography.frame.size.height - 47.5, 90, 90);

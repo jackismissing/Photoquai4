@@ -27,7 +27,9 @@
                                                colonne:colonne];
         _imageWallElement.clipsToBounds = YES;
         
-        idColonne = [colonne integerValue];
+        //self.idColonne = [colonne integerValue];
+        [self setIdColonne:[colonne integerValue]];
+        
         
         CALayer *bottomBorderImageWallElement = [CALayer layer];
         bottomBorderImageWallElement.frame = CGRectMake(0.0f, _imageWallElement.height, _imageWallElement.frame.size.width, 1.0f);
@@ -63,10 +65,17 @@
     return self;
 }
 
-- (NSNumber *)idColonne{
+- (int)idColonne{
     
-    return [NSNumber numberWithInt:idColonne];
+    return idColonne;
 }
+
+- (void) setIdColonne:(int)anIdColonne{
+    idColonne = anIdColonne;
+}
+
+
+
 
 - (void)drawRect:(CGRect)rect
 {

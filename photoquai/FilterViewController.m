@@ -66,7 +66,7 @@
     geographyDatas = [[NSArray alloc] initWithObjects:@"Afrique", @"Amérique du Nord", @"Amérique du Sud", @"Asie", @"Europe", @"Océanie", nil];
     localisationDatas = [[NSArray alloc] initWithObjects:@"Sur le quai", @"Dans les jardins du musée", nil];
     
-    tableViewDatas = [NSDictionary dictionaryWithObjectsAndKeys: geographyDatas, @"Localisation", localisationDatas, @"Origine géographique", nil];
+    tableViewDatas = [NSDictionary dictionaryWithObjectsAndKeys: geographyDatas, @"Origine géographique", localisationDatas, @"Localisation", nil];
     
     //Create a tableView programmatically
     self.sampleTableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 0, screenWidth, screenHeight) style:UITableViewStyleGrouped];

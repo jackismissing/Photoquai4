@@ -32,6 +32,7 @@
     FakeActionSheet *fakeActionSheet;
     ArtistFavoriteElement *artistFavoriteElement;
     ToolBarFavorites *toolbarFavorites;
+    UIButton *removeButton;
     
     UIScrollView *myScrollView;
     

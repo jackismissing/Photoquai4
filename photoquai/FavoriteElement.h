@@ -23,6 +23,8 @@
 @property (nonatomic, assign) int width;
 @property (nonatomic, assign) float heightText;
 
-- (NSNumber *)idColonne;
+- (int)idColonne;
+
+- (void) setIdColonne:(int)anIdColonne;
 
 @end
