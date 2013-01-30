@@ -14,6 +14,7 @@
 #import "FavoritesPicturesViewController.h"
 #import "ArtistsLisViewController.h"
 #import "FavoritePhotographerViewController.h"
+#import "FavorisPageViewController.h"
 
 @interface NavigationViewController ()
 
@@ -116,12 +117,16 @@
     }
     
     if (selectedSection == 4) {
-        FavoritesPicturesViewController *favoritesPictures = [[FavoritesPicturesViewController alloc] init];
-        [self.navigationController pushViewController:favoritesPictures animated:YES];
+//        FavoritesPicturesViewController *favoritesPictures = [[FavoritesPicturesViewController alloc] init];
+//        [self.navigationController pushViewController:favoritesPictures animated:YES];
         
         //ArtistsLisViewController *artistsView = [[ArtistsLisViewController alloc] init];
         //[self.navigationController pushViewController:artistsView animated:YES];
         
+        //#import "FavorisPageViewController.h"
+        
+        FavorisPageViewController *favoritesPage = [[FavorisPageViewController alloc] init];
+        [self.navigationController pushViewController:favoritesPage animated:YES];
 
 //        FavoritePhotographerViewController  *favoritePhotograhers = [[FavoritePhotographerViewController alloc] init];
 //        [self.navigationController pushViewController:favoritePhotograhers animated:YES];

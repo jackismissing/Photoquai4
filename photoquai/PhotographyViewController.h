@@ -52,8 +52,7 @@
     CGFloat screenHeight;
     
     NSString *titleTextPhotography;
-    
-    NSInteger truc;
+
 }
 
 @property (nonatomic, assign) int idPicture;

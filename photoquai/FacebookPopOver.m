@@ -11,18 +11,20 @@
 @implementation FacebookPopOver
 
 @synthesize content;
-@synthesize urlPhoto;
+//@synthesize urlPhoto;
 @synthesize titlePhoto;
 @synthesize photographerPhoto;
 
 
-- (id)initWithFrame:(CGRect)frame name:(NSString*) aName imageLink:(NSString*)anImageLink
+- (id)initWithFrame:(CGRect)frame imageLink:(NSString*)anImageLink
 {
     self = [super initWithFrame:frame];
     if (self) {
         CGRect screenRect = [[UIScreen mainScreen] bounds];
         CGFloat screenWidth = screenRect.size.width;
         CGFloat screenHeight = screenRect.size.height;
+        
+        machine = self.urlPhoto;
         
         self.userInteractionEnabled = YES;
         self.alpha = 1;
@@ -48,7 +50,7 @@
         bottomBorder.backgroundColor = [UIColor r:215 g:26 b:33 alpha:1.0f].CGColor;
         [content.layer addSublayer:bottomBorder];
         
-        urlPhoto = [[UILabel alloc] init];
+        //urlPhoto = [[UILabel alloc] init];
         
         UIImageView *fbPhoto = [[UIImageView alloc] initWithFrame:CGRectMake(10, 10, 50, 70)];
         [fbPhoto setImageWithURL:[NSURL URLWithString:anImageLink]];
@@ -59,8 +61,9 @@
         titlePhoto.numberOfLines = 2;
         titlePhoto.backgroundColor = [UIColor clearColor];
         titlePhoto.textColor = [UIColor blackColor];
-        titlePhoto.text = aName;
+        //titlePhoto.text = aName;
         titlePhoto.font = [UIFont fontWithName:@"Parisine-Bold" size:13];
+        
         [content addSubview:titlePhoto];
         
         photographerPhoto = [[UILabel alloc] initWithFrame:CGRectMake(fbPhoto.frame.origin.x + fbPhoto.frame.size.width + 15, titlePhoto.frame.size.height + titlePhoto.frame.origin.y + 5, 100, 15)];
@@ -79,7 +82,7 @@
         //postMessageTextView.text = @"Écrivez un message";
         postMessageTextView.backgroundColor = [UIColor whiteColor];
         postMessageTextView.textColor = [UIColor grayColor];
-        postMessageTextView.font = [UIFont fontWithName:@"Helvetica" size:11];
+        postMessageTextView.font = [UIFont fontWithName:@"Helvetica" size:13];
         postMessageTextView.layer.cornerRadius = 3.0f;
         postMessageTextView.layer.borderColor = [UIColor r:236 g:236 b:236 alpha:1].CGColor;
         postMessageTextView.layer.borderWidth = 1.0f;
@@ -118,10 +121,12 @@
         NSString *linkFacebook = @"http://www.photoquai.fr/";
         NSString *pictureFacebook = anImageLink;
         NSString *nameFacebook = @"Je souhaite vous faire découvrir ";
-        nameFacebook = [nameFacebook stringByAppendingString:titlePhoto.text];
+        //nameFacebook = [nameFacebook stringByAppendingString:self.titlePhoto.text];
         
-        NSString *captionFacebook = aName;
+        NSString *captionFacebook = nil;
         NSString *descriptionFacebook = postMessageTextView.text;
+        
+        
         
         //PARAMETRES ENVOYÉS À FACEBOOK
         self.facebookParams = [[NSMutableDictionary alloc] initWithObjectsAndKeys:
@@ -156,7 +161,11 @@
 }
 
 - (void)shareButtonAction {
-     [_facebookParams setObject:postMessageTextView.text forKey:@"message"];
+    
+    // Add user message parameter if user filled it in
+    if (![postMessageTextView.text isEqualToString:@""] ) {
+        [self.facebookParams setObject:postMessageTextView.text forKey:@"message"];
+    }
     
       if (FBSession.activeSession.isOpen) {
         // Ask for publish_actions permissions in context
@@ -166,6 +175,17 @@
                 if (!error) {
                     // If permissions granted, publish the story
                     [self publishStory];
+                    [self hide];
+                }
+            }];
+            [[FBRequest requestForMe] startWithCompletionHandler: ^(FBRequestConnection *connection, NSDictionary<FBGraphUser> *user, NSError *error) {
+                
+                if (!error) {
+                    
+                    self.username.text = user.name;
+                    NSLog(@"jhbj : %@", user.name);
+                    
+                    //self.userProfileImage.profileID = user.id;
                 }
             }];
         } else {

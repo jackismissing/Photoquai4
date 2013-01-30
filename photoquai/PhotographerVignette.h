@@ -13,6 +13,7 @@
     
     NSString *lastname;
     NSString *firstname;
+    NSString *patronym;
     
     int idPhotographer;
 }
@@ -21,10 +22,12 @@
 
 - (NSString*) lastname;
 - (NSString*) firstname;
+- (NSString*) patronym;
 - (int) idPhotographer;
 
 - (void) setLastname:(NSString*)lastname;
 - (void) setFirstname:(NSString*)firstname;
 - (void) setIdPhotographer:(int)anIdPhotographer;
+- (void) setPatronym:(NSString*)aPatronym;
 
 @end

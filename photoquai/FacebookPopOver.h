@@ -18,19 +18,19 @@
 @interface FacebookPopOver : UIView <UITextViewDelegate>{
     UIView *backgroundColorBlack;
     UITextField *postMessageTextView;
-    
+    NSString *machine;
     
 }
 
 @property (nonatomic, strong) UIView *content;
-@property (nonatomic, strong) UILabel *urlPhoto;
+@property (copy, nonatomic) NSString *urlPhoto;
 @property (nonatomic, strong) UILabel *titlePhoto;
 @property (nonatomic, strong) UILabel *photographerPhoto;
 @property (strong, nonatomic) NSMutableDictionary *facebookParams;
 @property (strong, nonatomic) UILabel *username;
 @property (nonatomic, assign) int idPicture;
 
-- (id)initWithFrame:(CGRect)frame name:(NSString*)aName imageLink:(NSString*)anImageLink;
+- (id)initWithFrame:(CGRect)frame imageLink:(NSString*)anImageLink;
 
 - (void) show;
 - (void) hide;

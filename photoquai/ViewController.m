@@ -17,7 +17,9 @@
 #import "PhotographyViewController.h"
 
 
-@interface ViewController ()
+@interface ViewController (){
+    int randomNumber;
+}
 
 @end
 
@@ -70,10 +72,11 @@
     // Post a notification to loginComplete
     //[[NSNotificationCenter defaultCenter] postNotificationName:@"loginComplete" object:reachabilityInfo];
     
-    AppDelegate *appdelegate = (AppDelegate *)[[UIApplication sharedApplication] delegate];
+    //AppDelegate *appdelegate = (AppDelegate *)[[UIApplication sharedApplication] delegate];
     
     
     [NSThread detachNewThreadSelector:@selector(loadingViewAsync) toTarget:self withObject:nil];
+   
 }
 
 - (void)viewWillAppear:(BOOL)animated
@@ -106,7 +109,45 @@
     
     UIBarButtonItem* menuBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:menuButton];
     [self.navigationItem setLeftBarButtonItem:menuBarButtonItem];
+    
+    //Accéléromètre
+    UIAccelerometer *testAccel = [UIAccelerometer sharedAccelerometer];
+    testAccel.delegate = self;
+    testAccel.updateInterval = 0.1f;
+    
+    
 }
+
+- (void)accelerometer:(UIAccelerometer *)accelerometer didAccelerate:(UIAcceleration *)acceleration
+{
+    if (fabsf(acceleration.x) > 1.5 || fabsf(acceleration.y) > 1.5 || fabsf(acceleration.z) > 1.5)
+    {
+        NSLog(@"J'ai détecté une secousse");
+        //myScrollView.contentOffset = CGPointMake(acceleration.x * myScrollView.frame.origin.x + 10, acceleration.x * myScrollView.frame.origin.y + 10);
+    }
+}
+
+//Gestion du shake
+- (BOOL) canBecomeFirstResponder{
+    return YES; //La vue se charge de prendre les évènements
+}
+
+- (void) motionEnded:(UIEventSubtype)motion withEvent:(UIEvent *)event{
+    if (motion == UIEventSubtypeMotionShake) {
+        PhotographyViewController *imageViewController = [[PhotographyViewController alloc] initWithNibName:@"PhotographyViewController" bundle:nil];
+        imageViewController.idPicture = randomNumber;
+        [self.navigationController pushViewController:imageViewController animated:YES];
+    }
+    [super motionEnded:motion withEvent:event];
+}
+
+- (void) motionBegan:(UIEventSubtype)motion withEvent:(UIEvent *)event{
+    if (motion == UIEventSubtypeMotionShake) {
+        randomNumber = arc4random() % 50;
+    }
+    [super motionBegan:motion withEvent:event];
+}
+//Gestion du shake
 
 - (void) loadingViewAsync{
     i = 0;

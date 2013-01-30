@@ -125,7 +125,7 @@
     //NSInteger idPicture = [[[appdelegate getElementsFromJSON:appendLink] valueForKeyPath:@"picture.id"] integerValue];
     NSInteger idPhotographer = [[[appdelegate getElementsFromJSON:appendLink] valueForKeyPath:@"picture.photographer.id"] integerValue];
     linkImg = [[appdelegate getElementsFromJSON:appendLink] valueForKeyPath:@"picture.link_iphone"];
-    truc = self.idPicture;
+    
     NSLog(@"gref : %i", self.idPicture);
     screenRect = [[UIScreen mainScreen] bounds];
     screenWidth = screenRect.size.width;
@@ -345,11 +345,12 @@
 //        [self presentModalViewController:navigationController animated:YES];
 //    }
     FacebookPopOver *facebookPopOver = [[FacebookPopOver alloc] initWithFrame:CGRectMake(0, 0, screenWidth, screenHeight)
-                                                                         name: titleTextPhotography
                                                                     imageLink: linkImg
                                         ];
-    
-    facebookPopOver.photographerPhoto.text = linkImg;
+    // NSLog(@"trucs : %@", );
+    facebookPopOver.photographerPhoto.text = descriptionPhotography.photographerVignette.patronym;
+    facebookPopOver.titlePhoto.text = titleTextPhotography;
+    facebookPopOver.urlPhoto = @"http://upload.wikimedia.org/wikipedia/commons/thumb/9/93/Cat_poster_2.jpg/742px-Cat_poster_2.jpg";
     
     if (FBSession.activeSession.isOpen) {
         

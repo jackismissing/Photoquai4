@@ -167,6 +167,8 @@
 }
 
 
+
+
 - (void) suppfavoris{
     if(removeEnabled == NO){
         [fakeActionSheet show];

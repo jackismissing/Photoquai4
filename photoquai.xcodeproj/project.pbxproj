@@ -106,6 +106,18 @@
 		1ACACF3716A804050060DA49 /* Parisine-BoldItalic.otf in Resources */ = {isa = PBXBuildFile; fileRef = 1ACACF3316A804050060DA49 /* Parisine-BoldItalic.otf */; };
 		1ACACF3816A804050060DA49 /* Parisine-Italic.otf in Resources */ = {isa = PBXBuildFile; fileRef = 1ACACF3416A804050060DA49 /* Parisine-Italic.otf */; };
 		1ACACF3916A804050060DA49 /* Parisine-Regular.otf in Resources */ = {isa = PBXBuildFile; fileRef = 1ACACF3516A804050060DA49 /* Parisine-Regular.otf */; };
+		1ACEBD8F16B950470025900A /* FavorisPageViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1ACEBD8E16B950470025900A /* FavorisPageViewController.m */; };
+		1ACEBD9616B9532E0025900A /* toolBarFavorites.png in Resources */ = {isa = PBXBuildFile; fileRef = 1ACEBD9416B9532E0025900A /* toolBarFavorites.png */; };
+		1ACEBD9716B9532E0025900A /* toolBarFavorites@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 1ACEBD9516B9532E0025900A /* toolBarFavorites@2x.png */; };
+		1ACEBD9A16B9537D0025900A /* ToolBarFavorites.m in Sources */ = {isa = PBXBuildFile; fileRef = 1ACEBD9916B9537D0025900A /* ToolBarFavorites.m */; };
+		1ACEBDA316B97C5B0025900A /* favoris-artistes-off.png in Resources */ = {isa = PBXBuildFile; fileRef = 1ACEBD9B16B97C590025900A /* favoris-artistes-off.png */; };
+		1ACEBDA416B97C5B0025900A /* favoris-artistes-off@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 1ACEBD9C16B97C590025900A /* favoris-artistes-off@2x.png */; };
+		1ACEBDA516B97C5B0025900A /* favoris-artistes-on.png in Resources */ = {isa = PBXBuildFile; fileRef = 1ACEBD9D16B97C590025900A /* favoris-artistes-on.png */; };
+		1ACEBDA616B97C5B0025900A /* favoris-artistes-on@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 1ACEBD9E16B97C590025900A /* favoris-artistes-on@2x.png */; };
+		1ACEBDA716B97C5B0025900A /* favoris-photos-off.png in Resources */ = {isa = PBXBuildFile; fileRef = 1ACEBD9F16B97C590025900A /* favoris-photos-off.png */; };
+		1ACEBDA816B97C5B0025900A /* favoris-photos-off@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 1ACEBDA016B97C5A0025900A /* favoris-photos-off@2x.png */; };
+		1ACEBDA916B97C5B0025900A /* favoris-photos-on.png in Resources */ = {isa = PBXBuildFile; fileRef = 1ACEBDA116B97C5A0025900A /* favoris-photos-on.png */; };
+		1ACEBDAA16B97C5B0025900A /* favoris-photos-on@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 1ACEBDA216B97C5A0025900A /* favoris-photos-on@2x.png */; };
 		1ADCFE4A16AF4A5B0088A4C5 /* CustomAlertView.m in Sources */ = {isa = PBXBuildFile; fileRef = 1ADCFE4916AF4A5B0088A4C5 /* CustomAlertView.m */; };
 		1ADF100D16AAF0B700C2ADD2 /* DrawRect.m in Sources */ = {isa = PBXBuildFile; fileRef = 1ADF100C16AAF0B700C2ADD2 /* DrawRect.m */; };
 		1AE2B0CB16B2607800DC1829 /* emptycheck@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 1AE2B0C916B2607800DC1829 /* emptycheck@2x.png */; };
@@ -373,6 +385,20 @@
 		1ACACF3316A804050060DA49 /* Parisine-BoldItalic.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Parisine-BoldItalic.otf"; sourceTree = "<group>"; };
 		1ACACF3416A804050060DA49 /* Parisine-Italic.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Parisine-Italic.otf"; sourceTree = "<group>"; };
 		1ACACF3516A804050060DA49 /* Parisine-Regular.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Parisine-Regular.otf"; sourceTree = "<group>"; };
+		1ACEBD8D16B950470025900A /* FavorisPageViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FavorisPageViewController.h; sourceTree = "<group>"; };
+		1ACEBD8E16B950470025900A /* FavorisPageViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FavorisPageViewController.m; sourceTree = "<group>"; };
+		1ACEBD9416B9532E0025900A /* toolBarFavorites.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = toolBarFavorites.png; sourceTree = "<group>"; };
+		1ACEBD9516B9532E0025900A /* toolBarFavorites@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "toolBarFavorites@2x.png"; sourceTree = "<group>"; };
+		1ACEBD9816B9537D0025900A /* ToolBarFavorites.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ToolBarFavorites.h; sourceTree = "<group>"; };
+		1ACEBD9916B9537D0025900A /* ToolBarFavorites.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ToolBarFavorites.m; sourceTree = "<group>"; };
+		1ACEBD9B16B97C590025900A /* favoris-artistes-off.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "favoris-artistes-off.png"; sourceTree = "<group>"; };
+		1ACEBD9C16B97C590025900A /* favoris-artistes-off@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "favoris-artistes-off@2x.png"; sourceTree = "<group>"; };
+		1ACEBD9D16B97C590025900A /* favoris-artistes-on.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "favoris-artistes-on.png"; sourceTree = "<group>"; };
+		1ACEBD9E16B97C590025900A /* favoris-artistes-on@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "favoris-artistes-on@2x.png"; sourceTree = "<group>"; };
+		1ACEBD9F16B97C590025900A /* favoris-photos-off.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "favoris-photos-off.png"; sourceTree = "<group>"; };
+		1ACEBDA016B97C5A0025900A /* favoris-photos-off@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "favoris-photos-off@2x.png"; sourceTree = "<group>"; };
+		1ACEBDA116B97C5A0025900A /* favoris-photos-on.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "favoris-photos-on.png"; sourceTree = "<group>"; };
+		1ACEBDA216B97C5A0025900A /* favoris-photos-on@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "favoris-photos-on@2x.png"; sourceTree = "<group>"; };
 		1ADCFE4816AF4A5B0088A4C5 /* CustomAlertView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CustomAlertView.h; sourceTree = "<group>"; };
 		1ADCFE4916AF4A5B0088A4C5 /* CustomAlertView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CustomAlertView.m; sourceTree = "<group>"; };
 		1ADF100B16AAF0B700C2ADD2 /* DrawRect.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DrawRect.h; sourceTree = "<group>"; };
@@ -753,6 +779,7 @@
 		1ABEACAB16A5C34E0034D316 /* photoquai */ = {
 			isa = PBXGroup;
 			children = (
+				1ACEBD8B16B950140025900A /* FavorisPageViewController */,
 				1A7696AD16B81EEF009D31D1 /* ShareFBViewController */,
 				1AEB307D16B7345E000F0F26 /* FilterViewController */,
 				1A165EF016B6E7860079EF8B /* SliderViewController */,
@@ -811,6 +838,7 @@
 		1ABEACCF16A5C9EF0034D316 /* Classes */ = {
 			isa = PBXGroup;
 			children = (
+				1ACEBD9016B9506C0025900A /* ToolBarFavoris */,
 				1A7696B516B837FE009D31D1 /* FacebookPopOver */,
 				1A53A82D16B7E7C000F3742A /* UISwitchCustom */,
 				1AFDE8B416B59BB300E1D67D /* ImageLocation */,
@@ -998,6 +1026,24 @@
 				37FA70A016A81FB50039E9C3 /* MainMenu */,
 			);
 			name = Images;
+			sourceTree = "<group>";
+		};
+		1ACEBD8B16B950140025900A /* FavorisPageViewController */ = {
+			isa = PBXGroup;
+			children = (
+				1ACEBD8D16B950470025900A /* FavorisPageViewController.h */,
+				1ACEBD8E16B950470025900A /* FavorisPageViewController.m */,
+			);
+			name = FavorisPageViewController;
+			sourceTree = "<group>";
+		};
+		1ACEBD9016B9506C0025900A /* ToolBarFavoris */ = {
+			isa = PBXGroup;
+			children = (
+				1ACEBD9816B9537D0025900A /* ToolBarFavorites.h */,
+				1ACEBD9916B9537D0025900A /* ToolBarFavorites.m */,
+			);
+			name = ToolBarFavoris;
 			sourceTree = "<group>";
 		};
 		1AEB307716B7187C000F0F26 /* ArtistFavoriteElement */ = {
@@ -1189,6 +1235,8 @@
 		37C7830616A9AD0D001D6295 /* Favorites */ = {
 			isa = PBXGroup;
 			children = (
+				1ACEBD9416B9532E0025900A /* toolBarFavorites.png */,
+				1ACEBD9516B9532E0025900A /* toolBarFavorites@2x.png */,
 				1A7696B116B833C7009D31D1 /* poubelle.png */,
 				1A7696B216B833C7009D31D1 /* poubelle@2x.png */,
 				1AE2B0C916B2607800DC1829 /* emptycheck@2x.png */,
@@ -1196,6 +1244,14 @@
 				1A9D4B9116B1F5EA00CC8FD2 /* favorite2remove.png */,
 				1A9D4B9216B1F5EA00CC8FD2 /* favorite2remove@2x.png */,
 				1A0466C216B0AE8200F01AA3 /* favoritesPhotographersIcon.png */,
+				1ACEBD9B16B97C590025900A /* favoris-artistes-off.png */,
+				1ACEBD9C16B97C590025900A /* favoris-artistes-off@2x.png */,
+				1ACEBD9D16B97C590025900A /* favoris-artistes-on.png */,
+				1ACEBD9E16B97C590025900A /* favoris-artistes-on@2x.png */,
+				1ACEBD9F16B97C590025900A /* favoris-photos-off.png */,
+				1ACEBDA016B97C5A0025900A /* favoris-photos-off@2x.png */,
+				1ACEBDA116B97C5A0025900A /* favoris-photos-on.png */,
+				1ACEBDA216B97C5A0025900A /* favoris-photos-on@2x.png */,
 				1A0466C316B0AE8200F01AA3 /* favoritesPhotographersIcon@2x.png */,
 				1A0466BE16B0996200F01AA3 /* suppfavoris@2x.png */,
 				1A0466BF16B0996200F01AA3 /* suppfavoris.png */,
@@ -1531,6 +1587,16 @@
 				1A53A83816B80CAC00F3742A /* FacebookSDKResources.bundle in Resources */,
 				1A7696B316B833C7009D31D1 /* poubelle.png in Resources */,
 				1A7696B416B833C7009D31D1 /* poubelle@2x.png in Resources */,
+				1ACEBD9616B9532E0025900A /* toolBarFavorites.png in Resources */,
+				1ACEBD9716B9532E0025900A /* toolBarFavorites@2x.png in Resources */,
+				1ACEBDA316B97C5B0025900A /* favoris-artistes-off.png in Resources */,
+				1ACEBDA416B97C5B0025900A /* favoris-artistes-off@2x.png in Resources */,
+				1ACEBDA516B97C5B0025900A /* favoris-artistes-on.png in Resources */,
+				1ACEBDA616B97C5B0025900A /* favoris-artistes-on@2x.png in Resources */,
+				1ACEBDA716B97C5B0025900A /* favoris-photos-off.png in Resources */,
+				1ACEBDA816B97C5B0025900A /* favoris-photos-off@2x.png in Resources */,
+				1ACEBDA916B97C5B0025900A /* favoris-photos-on.png in Resources */,
+				1ACEBDAA16B97C5B0025900A /* favoris-photos-on@2x.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1593,6 +1659,8 @@
 				1A53A83016B7E7F900F3742A /* FilterSwitch.m in Sources */,
 				1A7696B016B81F22009D31D1 /* ShareFBViewController.m in Sources */,
 				1A7696B816B83827009D31D1 /* FacebookPopOver.m in Sources */,
+				1ACEBD8F16B950470025900A /* FavorisPageViewController.m in Sources */,
+				1ACEBD9A16B9537D0025900A /* ToolBarFavorites.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -44,7 +44,7 @@
         [photographerFirstPhotography setImageWithURL:[NSURL URLWithString:imgsPhotographer] placeholderImage:[UIImage imageNamed:@"etoilejaune"]];
         photographerFirstPhotography.frame = CGRectMake(0, 0, 150, 115);
         photographerFirstPhotography.opaque = YES;
-        photographerFirstPhotography.contentMode = UIViewContentModeScaleToFill;
+        photographerFirstPhotography.contentMode = UIViewContentModeRedraw;
         [self addSubview:photographerFirstPhotography];
         
         CALayer *bottomBorderImageWallElement = [CALayer layer];
