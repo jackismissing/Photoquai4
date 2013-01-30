@@ -97,7 +97,7 @@
     
     UIButton *fetchBtn = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 33, 44)];
     [fetchBtn addTarget:self action:@selector(filterImages) forControlEvents:UIControlEventTouchUpInside];
-    
+    fetchBtn.backgroundColor = [UIColor clearColor];
     [fetchBtn setImage:[UIImage imageNamed:@"filtres"] forState:UIControlStateNormal];
     //[self.view addSubview:cancelBtn];
     

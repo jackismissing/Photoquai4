@@ -25,7 +25,8 @@
         //UIImage *PortraitImage = [[UIImage alloc] initWithCGImage: anImage.CGImage scale: 1.0 orientation: UIImageOrientationUp];
         
         imageBig = [[UIImageView alloc] init];
-        [imageBig setImageWithURL:anImageURL placeholderImage:[UIImage imageNamed:@"back"]];
+        [imageBig setImageWithURL:anImageURL placeholderImage:[UIImage imageNamed:@"chargement.png"]];
+        
         imageBig.frame = CGRectMake(0, 0, frame.size.width, frame.size.height); //-43
         imageBig.contentMode = UIViewContentModeScaleAspectFit;
         imageBig.opaque = YES; //Performance

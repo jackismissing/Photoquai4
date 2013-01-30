@@ -246,8 +246,6 @@
     //Laisser en bas pour la que la toolbar passe devant les volets
     toolBar = [[ToolBarPhotography alloc] initWithFrame:CGRectMake(0, screenHeight - 118, 320, 55)];
     [self.view addSubview:toolBar];
-    
-    NSLog(@"%@", descriptionPhotography.photographerVignette.firstname);
 }
 
 - (void) reBindListenerFavorite{ //On relie l'évènement d'ajout de favoris lorsque l'on a fait disparaitre la popup
