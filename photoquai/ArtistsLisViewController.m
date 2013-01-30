@@ -10,6 +10,7 @@
 #import "AppDelegate.h"
 #import "Reachability.h"
 #import "NavigationViewController.h"
+#import "PhotographerViewController.h"
 
 #define NAME_TAG 1
 
@@ -86,7 +87,7 @@
     
     cellNumber = 0;
     
-    self.artistsTable = [[UITableView alloc] initWithFrame:CGRectMake(0, self.tableMenuScrollView.frame.size.height, self.view.frame.size.width, self.view.frame.size.height - self.navigationController.navigationBar.frame.size.height - self.tableMenuScrollView.frame.size.height) style:UITableViewStylePlain];
+    self.artistsTable = [[UITableView alloc] initWithFrame:CGRectMake(0, self.tableMenuScrollView.frame.size.height, self.view.frame.size.width, self.view.frame.size.height - self.navigationController.navigationBar.frame.size.height - self.tableMenuScrollView.frame.size.height ) style:UITableViewStylePlain];
     
     self.artistsTable.delegate = self;
     self.artistsTable.dataSource = self;
@@ -107,9 +108,9 @@
     [self.navigationController.navigationBar setBackgroundImage:[UIImage imageNamed:@"navigationBar.png"] forBarMetrics:UIBarMetricsDefault];
     
     UIImage* image = [UIImage imageNamed:@"menu.png"];
-    CGRect frame = CGRectMake(0, 0, image.size.width, image.size.height);
+    CGRect frame = CGRectMake(0, 0, image.size.width + 20, image.size.height);
     UIButton *menuButton = [[UIButton alloc] initWithFrame:frame];
-    [menuButton setBackgroundImage:image forState:UIControlStateNormal];
+    [menuButton setImage:image forState:UIControlStateNormal];
     //[menuButton setShowsTouchWhenHighlighted:YES];
     
     [menuButton addTarget:self action:@selector(showMenu) forControlEvents:UIControlEventTouchUpInside];
@@ -119,7 +120,7 @@
     
     // Custom menu Scroll View
     
-    self.tableMenuScrollView.backgroundColor = [UIColor blackColor];
+    tableMenuScrollView.backgroundColor = [[UIColor alloc] initWithPatternImage:[UIImage imageNamed:@"fondnoirtexture.png"]];
     
     // Table View
     
@@ -459,8 +460,45 @@
     
     cell.selectionStyle = UITableViewCellSelectionStyleNone;
     
+
+    
     return cell;
 }
+
+// Au select d'une cellule, on load la page artistes
+
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+    
+    [tableView deselectRowAtIndexPath:indexPath animated:NO];
+    
+    UITableViewCell *cell = [tableView cellForRowAtIndexPath:indexPath];
+    
+    cell.contentView.alpha = 0.3;
+    
+
+    
+    NSDictionary *artistInfos = [[self.sections valueForKey:[[[self.sections allKeys] sortedArrayUsingSelector:@selector(localizedCaseInsensitiveCompare:)] objectAtIndex:indexPath.section]] objectAtIndex:indexPath.row];
+    
+    NSInteger artistId = [[artistInfos objectForKey:@"artistId"] integerValue];
+    
+    double delayInSeconds = 0.1;
+    dispatch_time_t popTime = dispatch_time(DISPATCH_TIME_NOW, delayInSeconds * NSEC_PER_SEC);
+    dispatch_after(popTime, dispatch_get_main_queue(), ^(void){
+    
+    [self showArtistPage:artistId];
+    cell.contentView.alpha = 1;
+        
+    });
+    
+
+    
+
+    
+
+    
+}
+
+
 
 
 
@@ -612,7 +650,7 @@
     // This is where you wrap the view up nicely in a navigation controller
     UINavigationController *navigationController = [[UINavigationController alloc] initWithRootViewController:mainMenu];
     
-    [navigationController setNavigationBarHidden:YES animated:NO];
+    [navigationController setNavigationBarHidden:NO animated:NO];
     
     // You can even set the style of stuff before you show it
     //navigationController.navigationBar.barStyle = UIBarStyleBlackTranslucent;
@@ -715,4 +753,14 @@
     
 }
 
+// Show artist page
+
+
+-(void)showArtistPage : (NSInteger)idPhotographer {
+
+    PhotographerViewController *imageViewController = [[PhotographerViewController alloc] initWithNibName:@"PhotographerViewController" bundle:nil];
+    imageViewController.idPhotographer = idPhotographer;
+    [self.navigationController pushViewController:imageViewController animated:YES];
+
+}
 @end

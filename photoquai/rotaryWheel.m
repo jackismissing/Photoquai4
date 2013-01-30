@@ -86,7 +86,7 @@ static float maxAlphavalue = 1.0;
         }
 		// 5 - Set sector image
         
-        UIImageView *sectorImage = [[UIImageView alloc] initWithFrame:CGRectMake(18, 43, 23, 23)];
+        UIImageView *sectorImage = [[UIImageView alloc] initWithFrame:CGRectMake(18, 43, 23, 30)];
         
         sectorImage.image = [UIImage imageNamed:[NSString stringWithFormat:@"icon%i.png", i]];
         
@@ -262,7 +262,7 @@ static float maxAlphavalue = 1.0;
     } else if(deg < 90 && deg >= 30){
         
        
-            [self.delegate wheelDidChangeValue:[NSString stringWithFormat:@"Infos pratiques"]:
+            [self.delegate wheelDidChangeValue:[NSString stringWithFormat:@"Informations"]:
              self.currentSector];
             
 
@@ -444,7 +444,7 @@ static float maxAlphavalue = 1.0;
         double delayInSeconds = 0.5;
         dispatch_time_t popTime = dispatch_time(DISPATCH_TIME_NOW, delayInSeconds * NSEC_PER_SEC);
         dispatch_after(popTime, dispatch_get_main_queue(), ^(void){
-            [self.delegate wheelDidChangeValue:[NSString stringWithFormat:@"Infos pratiques"]:
+            [self.delegate wheelDidChangeValue:[NSString stringWithFormat:@"Informations"]:
              self.currentSector];
             
         });

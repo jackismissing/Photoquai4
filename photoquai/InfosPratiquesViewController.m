@@ -88,9 +88,7 @@
         
         //  /////////////////////////////////////////////////////////////////////////////////// Init des boutons /////////////////
         
-        self.navigationItem.title = @"Infos pratiques";
         
-        self.navigationItem.hidesBackButton = YES;
         
         metroBtn = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 72.5, 35)];
         

@@ -7,6 +7,7 @@
 //
 
 #import <MessageUI/MessageUI.h>
+#import <MapKit/MapKit.h>
 
 #import "ViewController.h"
 #import "DescriptionImageView.h"
@@ -23,7 +24,7 @@
 
 @class AudioImageView;
 
-@interface PhotographyViewController : UIViewController <UIScrollViewDelegate, MFMailComposeViewControllerDelegate>{
+@interface PhotographyViewController : UIViewController <UIScrollViewDelegate, MFMailComposeViewControllerDelegate, MKMapViewDelegate>{
     DescriptionImageView *descriptionPhotography;
     AudioImageView *audioDescription;
 
@@ -47,6 +48,8 @@
 }
 
 @property (nonatomic, assign) int idPicture;
+@property (nonatomic, strong) UIScrollView *mapView;
+@property (nonatomic, strong) UIImageView *map;
 
 - (void)addToFavorite;
 

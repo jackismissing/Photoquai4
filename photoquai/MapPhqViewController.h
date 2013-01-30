@@ -12,7 +12,7 @@
 #import "SMCalloutView.h"
 #import "NavigationViewController.h"
 
-@interface MapPhqViewController : UIViewController <UIScrollViewDelegate, MKMapViewDelegate, SMCalloutViewDelegate>
+@interface MapPhqViewController : UIViewController <UIScrollViewDelegate, MKMapViewDelegate, MKAnnotation, SMCalloutViewDelegate>
 
 @property (nonatomic, strong) UIScrollView *mapView;
 @property (nonatomic, strong) NSMutableArray *pins;

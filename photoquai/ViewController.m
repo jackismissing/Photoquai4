@@ -87,9 +87,9 @@
     
 
     UIImage* image = [UIImage imageNamed:@"menu.png"];
-    CGRect frame = CGRectMake(0, 0, image.size.width, image.size.height);
+    CGRect frame = CGRectMake(0, 0, image.size.width + 20, image.size.height);
     UIButton *menuButton = [[UIButton alloc] initWithFrame:frame];
-    [menuButton setBackgroundImage:image forState:UIControlStateNormal];
+    [menuButton setImage:image forState:UIControlStateNormal];
     //[menuButton setShowsTouchWhenHighlighted:YES];
     
     [menuButton addTarget:self action:@selector(showMenu) forControlEvents:UIControlEventTouchUpInside];
@@ -257,7 +257,7 @@
     // This is where you wrap the view up nicely in a navigation controller
     UINavigationController *navigationController = [[UINavigationController alloc] initWithRootViewController:mainMenu];
     
-    [navigationController setNavigationBarHidden:YES animated:NO];
+    [navigationController setNavigationBarHidden:NO animated:NO];
     
     // You can even set the style of stuff before you show it
     //navigationController.navigationBar.barStyle = UIBarStyleBlackTranslucent;
