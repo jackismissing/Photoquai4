@@ -126,7 +126,7 @@
     NSInteger idPhotographer = [[[appdelegate getElementsFromJSON:appendLink] valueForKeyPath:@"picture.photographer.id"] integerValue];
     linkImg = [[appdelegate getElementsFromJSON:appendLink] valueForKeyPath:@"picture.link_iphone"];
     
-    NSLog(@"gref : %i", self.idPicture);
+    
     screenRect = [[UIScreen mainScreen] bounds];
     screenWidth = screenRect.size.width;
     screenHeight = screenRect.size.height;
@@ -137,7 +137,7 @@
     [self.view addSubview:picture];
     
     NSString *descriptionTextPhotography = @"Lorem ipsum dolor sit amet, consectetur adipiscing elit. In euismod leo at mi posuere mollis. Morbi lacinia, felis ac ultrices auctor, magna sem tempus mi, nec blandit felis purus ut metus. Donec dolor mauris, eleifend id fermentum eu, placerat eget felis. Proin suscipit bibendum tincidunt.";
-    titleTextPhotography = @"Gangnam Style";
+    titleTextPhotography = @"Titre de la photo";
     
     descriptionPhotography = [[DescriptionImageView alloc] initWithFrame:CGRectMake(0, 500, 320, 500) description:descriptionTextPhotography title:titleTextPhotography place:@"Maroc" withId:idPhotographer];
     descriptionPhotography.userInteractionEnabled = YES;
@@ -374,8 +374,8 @@
         
         UIImage *picturePHQMail = [UIImage imageWithData:[NSData dataWithContentsOfURL:[NSURL URLWithString:linkImg]]];
         NSData *imageData = UIImagePNGRepresentation(picturePHQMail);
-        [mailer addAttachmentData:imageData mimeType:@"image/png" fileName:@"PHQPhotography"];
-        NSString *emailBody = @"J'apprécie cette photo de l'exposition PHQ";
+        [mailer addAttachmentData:imageData mimeType:@"image/jpg" fileName:@"PHQPhotography"];
+        NSString *emailBody = @"J'apprécie cette photo de l'exposition PHQ.";
         [mailer setMessageBody:emailBody isHTML:NO];
         [self presentModalViewController:mailer animated:YES];
     }else{
@@ -386,13 +386,43 @@
                                   cancelButtonTitle:@"OK" otherButtonTitles:nil];
         [alert show];
     }
-    
 }
 
-//Annulation du mail
-- (void)mailComposeController:(MFMailComposeViewController*)controller
-          didFinishWithResult:(MFMailComposeResult)result
-                        error:(NSError*)error{
+- (void)mailComposeController:(MFMailComposeViewController*)controller didFinishWithResult:(MFMailComposeResult)result error:(NSError*)error
+{
+    switch (result)
+    {
+        case MFMailComposeResultCancelled:
+            NSLog(@"Mail cancelled: you cancelled the operation and no email message was queued.");
+            break;
+        case MFMailComposeResultSaved:
+            NSLog(@"Mail saved: you saved the email message in the drafts folder.");
+            break;
+        case MFMailComposeResultSent:
+        {
+            CustomAlertView *alert = [[CustomAlertView alloc]
+                                      initWithTitle:nil
+                                      message:@"Votre mail a été correctement envoyé"
+                                      delegate:self
+                                      cancelButtonTitle:@"OK" otherButtonTitles:nil];
+            [alert show];
+        }
+            break;
+        case MFMailComposeResultFailed:
+        {
+            CustomAlertView *alert = [[CustomAlertView alloc]
+                                      initWithTitle:nil
+                                      message:@"Une erreur a été rencontrée, veuillez essayer plus tard."
+                                      delegate:self
+                                      cancelButtonTitle:@"OK" otherButtonTitles:nil];
+            [alert show];
+        }
+            break;
+        default:
+            NSLog(@"Mail not sent.");
+            break;
+    }
+    // Remove the mail view
     [UIView animateWithDuration:0.5
                           delay:0
                         options: UIViewAnimationCurveEaseOut
@@ -400,10 +430,11 @@
                          popOver.transform = CGAffineTransformRotate(CGAffineTransformIdentity, 3);
                          popOver.alpha = 0;
                          shareIsHidden = YES;
-                    }completion:^(BOOL finished){}];
+                     }completion:^(BOOL finished){}];
     [self dismissModalViewControllerAnimated:YES];
     return;
 }
+
 
 - (void) accessPhotographerPage:(NSNotification *)notification{
     
