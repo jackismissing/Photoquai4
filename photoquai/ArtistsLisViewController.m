@@ -10,6 +10,7 @@
 #import "AppDelegate.h"
 #import "Reachability.h"
 #import "NavigationViewController.h"
+#import "PhotographerViewController.h"
 
 #define NAME_TAG 1
 
@@ -72,6 +73,16 @@
     
     [self.view addSubview:tableMenuScrollView];
     
+    UIImageView *leftCornerMenu = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"shadow-scroll-left.png"]];
+    
+    [self.view addSubview:leftCornerMenu];
+    
+    UIImageView *rightCornerMenu = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"shadow-scroll-right.png"]];
+    
+    rightCornerMenu.center = CGPointMake(self.view.frame.size.width - rightCornerMenu.frame.size.width / 2, rightCornerMenu.frame.size.height / 2);
+    
+    [self.view addSubview:rightCornerMenu];
+    
     // petit triangle
     
     UIImageView *petitTriange = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"triangleblanc.png"]];
@@ -86,7 +97,7 @@
     
     cellNumber = 0;
     
-    self.artistsTable = [[UITableView alloc] initWithFrame:CGRectMake(0, self.tableMenuScrollView.frame.size.height, self.view.frame.size.width, self.view.frame.size.height - self.navigationController.navigationBar.frame.size.height - self.tableMenuScrollView.frame.size.height) style:UITableViewStylePlain];
+    self.artistsTable = [[UITableView alloc] initWithFrame:CGRectMake(0, self.tableMenuScrollView.frame.size.height, self.view.frame.size.width, self.view.frame.size.height - self.navigationController.navigationBar.frame.size.height - self.tableMenuScrollView.frame.size.height ) style:UITableViewStylePlain];
     
     self.artistsTable.delegate = self;
     self.artistsTable.dataSource = self;
@@ -94,6 +105,8 @@
     [artistsTable reloadData];
     
     [self.view addSubview:artistsTable];
+    
+
     
     [NSThread detachNewThreadSelector:@selector(loadingViewAsync) toTarget:self withObject:nil];
     
@@ -107,9 +120,9 @@
     [self.navigationController.navigationBar setBackgroundImage:[UIImage imageNamed:@"navigationBar.png"] forBarMetrics:UIBarMetricsDefault];
     
     UIImage* image = [UIImage imageNamed:@"menu.png"];
-    CGRect frame = CGRectMake(0, 0, image.size.width, image.size.height);
+    CGRect frame = CGRectMake(0, 0, image.size.width + 20, image.size.height);
     UIButton *menuButton = [[UIButton alloc] initWithFrame:frame];
-    [menuButton setBackgroundImage:image forState:UIControlStateNormal];
+    [menuButton setImage:image forState:UIControlStateNormal];
     //[menuButton setShowsTouchWhenHighlighted:YES];
     
     [menuButton addTarget:self action:@selector(showMenu) forControlEvents:UIControlEventTouchUpInside];
@@ -119,7 +132,7 @@
     
     // Custom menu Scroll View
     
-    self.tableMenuScrollView.backgroundColor = [UIColor blackColor];
+    tableMenuScrollView.backgroundColor = [[UIColor alloc] initWithPatternImage:[UIImage imageNamed:@"fondnoirtexture.png"]];
     
     // Table View
     
@@ -353,9 +366,24 @@
         
         // Custon disclosure
         
-        //cell.accessoryView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"disclosure.png"]];  ;
+        
+
+        
+        // Artist Cover
+        
+        artistCover = [[UIImageView alloc] initWithFrame:CGRectMake(15, 0, 290, 60)];
+        
+        [cell.contentView addSubview:artistCover];
+        
+        // Background
+        
+        UIImageView *artistListBg = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"artist-list-bg.png"]];
+        
+        artistListBg.center = CGPointMake(cell.contentView.frame.size.width / 2, 91);
         
         
+        [cell.contentView addSubview:artistListBg];
+
         
         
         
@@ -389,15 +417,10 @@
         
         [cell.contentView addSubview:firstNameLabel];
         
-        // Artist Cover
-        
-        artistCover = [[UIImageView alloc] initWithFrame:CGRectMake(15, 0, 290, 60)];
-        
-        [cell.contentView addSubview:artistCover];
-        
+                
         // Artist avatar
         
-        artistAvatar = [[UIImageView alloc] initWithFrame:CGRectMake(25, 50, 73, 73)];
+        artistAvatar = [[UIImageView alloc] initWithFrame:CGRectMake(25, 45, 73, 73)];
         
         [cell.contentView addSubview:artistAvatar];
         
@@ -459,8 +482,45 @@
     
     cell.selectionStyle = UITableViewCellSelectionStyleNone;
     
+
+    
     return cell;
 }
+
+// Au select d'une cellule, on load la page artistes
+
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+    
+    [tableView deselectRowAtIndexPath:indexPath animated:NO];
+    
+    UITableViewCell *cell = [tableView cellForRowAtIndexPath:indexPath];
+    
+    cell.contentView.alpha = 0.3;
+    
+
+    
+    NSDictionary *artistInfos = [[self.sections valueForKey:[[[self.sections allKeys] sortedArrayUsingSelector:@selector(localizedCaseInsensitiveCompare:)] objectAtIndex:indexPath.section]] objectAtIndex:indexPath.row];
+    
+    NSInteger artistId = [[artistInfos objectForKey:@"artistId"] integerValue];
+    
+    double delayInSeconds = 0.05;
+    dispatch_time_t popTime = dispatch_time(DISPATCH_TIME_NOW, delayInSeconds * NSEC_PER_SEC);
+    dispatch_after(popTime, dispatch_get_main_queue(), ^(void){
+    
+    [self showArtistPage:artistId];
+    cell.contentView.alpha = 1;
+        
+    });
+    
+
+    
+
+    
+
+    
+}
+
+
 
 
 
@@ -612,7 +672,7 @@
     // This is where you wrap the view up nicely in a navigation controller
     UINavigationController *navigationController = [[UINavigationController alloc] initWithRootViewController:mainMenu];
     
-    [navigationController setNavigationBarHidden:YES animated:NO];
+    [navigationController setNavigationBarHidden:NO animated:NO];
     
     // You can even set the style of stuff before you show it
     //navigationController.navigationBar.barStyle = UIBarStyleBlackTranslucent;
@@ -637,11 +697,11 @@
         // reposition offset to show image 10 that is on the right in the scroll view
         [tableMenuScrollView scrollRectToVisible:CGRectMake(b*30 + j*15,0,self.view.frame.size.width, 40) animated:NO];
     }
-    else if (tableMenuScrollView.contentOffset.x == b*30 + j*30) {
+    else if (tableMenuScrollView.contentOffset.x == b*30 + j*30 + e*30 - self.view.frame.size.width) {
         
         // user is scrolling to the right from image 10 to image 1.
         // reposition offset to show image 1 that is on the left in the scroll view
-        [tableMenuScrollView scrollRectToVisible:CGRectMake(30,0,self.view.frame.size.width, 50) animated:NO];
+        [tableMenuScrollView scrollRectToVisible:CGRectMake(b*15 + 40 ,0,self.view.frame.size.width, 50) animated:NO];
     }
     
         if (sender == tableMenuScrollView){
@@ -715,4 +775,14 @@
     
 }
 
+// Show artist page
+
+
+-(void)showArtistPage : (NSInteger)idPhotographer {
+
+    PhotographerViewController *imageViewController = [[PhotographerViewController alloc] initWithNibName:@"PhotographerViewController" bundle:nil];
+    imageViewController.idPhotographer = idPhotographer;
+    [self.navigationController pushViewController:imageViewController animated:YES];
+
+}
 @end

@@ -40,6 +40,8 @@ static float maxAlphavalue = 1.0;
         // 3 - Draw wheel
         self.currentSector = 0;
         [self drawWheel];
+
+        
          
 	}
     return self;
@@ -71,18 +73,20 @@ static float maxAlphavalue = 1.0;
         
         im.transform = CGAffineTransformMakeRotation(angleSize*i + M_PI/2);
         
-        im.alpha = minAlphavalue;
+        //im.alpha = minAlphavalue;
         
         im.tag = i;
         
         if (i == 0) {
             
-            im.alpha = maxAlphavalue;
+           // im.alpha = maxAlphavalue;
+            
+            [im setImage:[UIImage imageNamed:@"selection.png"]];
             
         }
 		// 5 - Set sector image
         
-        UIImageView *sectorImage = [[UIImageView alloc] initWithFrame:CGRectMake(18, 43, 23, 23)];
+        UIImageView *sectorImage = [[UIImageView alloc] initWithFrame:CGRectMake(18, 43, 23, 30)];
         
         sectorImage.image = [UIImage imageNamed:[NSString stringWithFormat:@"icon%i.png", i]];
         
@@ -117,7 +121,7 @@ static float maxAlphavalue = 1.0;
     // 8 - Initialize sectors
     sectors = [NSMutableArray arrayWithCapacity:numberOfSections];
     
-    NSLog(@"%d", numberOfSections);
+    //NSLog(@"%d", numberOfSections);
     
     if (numberOfSections % 2 == 0) {
         [self buildSectorsEven];
@@ -125,8 +129,10 @@ static float maxAlphavalue = 1.0;
         [self buildSectorsOdd];
     }
     
-    [self.delegate wheelDidChangeValue:[NSString stringWithFormat:@"value is %i", self.currentSector]:
+    [self.delegate wheelDidChangeValue:[NSString stringWithFormat:@"Photoquai 4"]:
      self.currentSector];
+    
+   
     
 }
 
@@ -161,12 +167,14 @@ static float maxAlphavalue = 1.0;
     // 3 - Calculate arctangent value
     deltaAngle = atan2(dy,dx);
     
-    NSLog(@"%f", deltaAngle);
+    //NSLog(@"%f", deltaAngle);
     // 4 - Save current transform
     startTransform = container.transform;
     // 5 - Set current sector's alpha value to the minimum value
 	UIImageView *im = [self getSectorByValue:currentSector];
-	im.alpha = minAlphavalue;
+	//im.alpha = minAlphavalue;
+    
+    [im setImage:[UIImage imageNamed:@"wheel_bottom.png"]];
     return YES;
 }
 
@@ -183,45 +191,91 @@ static float maxAlphavalue = 1.0;
     
     if (dist < 40 || dist > 175)
     {
-        // forcing a tap to be on the ferrule
-        NSLog(@"ignoring tap (%f,%f)", pt.x, pt.y);
-        // 1 - Get current container rotation in radians
-        CGFloat radians = atan2f(container.transform.b, container.transform.a);
-        // 2 - Initialize new value
-        CGFloat newVal = 0.0;
-        // 3 - Iterate through all the sectors
-        for (wheelSector *s in sectors) {
-            // 4 - See if the current sector contains the radian value
-            if (radians > s.minValue && radians < s.maxValue) {
-                // 5 - Set new value
-                newVal = radians - s.midValue;
-                // 6 - Get sector number
-                currentSector = s.sector;
-                break;
-            }
-        }
-        // 7 - Set up animation for final rotation
-        [UIView beginAnimations:nil context:NULL];
-        [UIView setAnimationDuration:0.2];
-        CGAffineTransform t = CGAffineTransformRotate(container.transform, -newVal);
-        container.transform = t;
-        [UIView commitAnimations];
         
-        [self.delegate wheelDidChangeValue:[NSString stringWithFormat:@"value is %i", self.currentSector]:
-         self.currentSector];
+        // a drag path too close to the center
+        NSLog(@"drag path too close to the center (%f,%f)", pt.x, pt.y);
         
-        // 10 - Highlight selected sector
-        UIImageView *im = [self getSectorByValue:currentSector];
-        im.alpha = maxAlphavalue;
-        
-        return NO;
+        // here you might want to implement your solution when the drag
+        // is too close to the center
+        // You might go back to the clove previously selected
+        // or you might calculate the clove corresponding to
+        // the "exit point" of the drag.
     }
+    
+    
+
     
     
     float dx = pt.x  - container.center.x;
     float dy = pt.y  - container.center.y;
     float ang = atan2(dy,dx);
     float angleDifference = deltaAngle - ang;
+    
+    
+    /////////////////////    /////////////////////    /////////////////////    ///////////////////// BATARD ! CONVERTI LES RADIANS EN DEG PUIS TESTE POUR AFFICHER LES LABELS EN FONCTION DU DÉPLACEMENT !! BG !!
+    
+    CGFloat radians = atan2f(container.transform.b, container.transform.a);
+    
+    CGFloat deg = radians * 57.2957795 ;
+    
+    // ON REMET TOUT DANS UN SYSTEME A 360 DEGRES !!
+    
+    if(deg < 0 ) {
+        
+        deg += 360;
+    }
+    
+    
+    
+    if(deg < 330 && deg >= 270) {
+        
+        
+        
+            [self.delegate wheelDidChangeValue:[NSString stringWithFormat:@"Catalogue"]:
+             self.currentSector];
+            
+
+        
+    } else if(deg < 270 && deg >= 210){
+        
+        
+            [self.delegate wheelDidChangeValue:[NSString stringWithFormat:@"Photographes"]:
+             self.currentSector];
+            
+
+        
+    } else if(deg < 210 && deg >= 150){
+        
+       
+            [self.delegate wheelDidChangeValue:[NSString stringWithFormat:@"Favoris"]:
+             self.currentSector];
+            
+
+        
+    } else if(deg < 150 && deg >= 90){
+        
+       
+            [self.delegate wheelDidChangeValue:[NSString stringWithFormat:@"Carte"]:
+             self.currentSector];
+            
+
+    } else if(deg < 90 && deg >= 30){
+        
+       
+            [self.delegate wheelDidChangeValue:[NSString stringWithFormat:@"Informations"]:
+             self.currentSector];
+            
+
+        
+    } else {
+        
+        [self.delegate wheelDidChangeValue:[NSString stringWithFormat:@"Photoquai 4"]:
+         self.currentSector];
+        
+    }
+   
+
+    
     container.transform = CGAffineTransformRotate(startTransform, -angleDifference);
     return YES;
 }
@@ -253,7 +307,7 @@ static float maxAlphavalue = 1.0;
         }
 		// 5 - Add sector to array
         [sectors addObject:sector];
-		NSLog(@"cl is %@", sector);
+		//NSLog(@"cl is %@", sector);
     }
 }
 
@@ -279,7 +333,7 @@ static float maxAlphavalue = 1.0;
             
         }
         mid -= fanWidth;
-        NSLog(@"cl is %@", sector);
+        //NSLog(@"cl is %@", sector);
         // 5 - Add sector to array
         [sectors addObject:sector];
     }
@@ -330,12 +384,83 @@ static float maxAlphavalue = 1.0;
     container.transform = t;
     [UIView commitAnimations];
     
-    [self.delegate wheelDidChangeValue:[NSString stringWithFormat:@"value is %i", self.currentSector]:
-     self.currentSector];
+    /////////////////////    /////////////////////    /////////////////////    ///////////////////// BATARD ! CONVERTI LES RADIANS EN DEG PUIS TESTE POUR AFFICHER LES LABELS EN FONCTION DU DÉPLACEMENT !! BG !!
+    
+
+    
+    CGFloat deg = radians * 57.2957795 ;
+    
+    // ON REMET TOUT DANS UN SYSTEME A 360 DEGRES !!
+    
+    if(deg < 0 ) {
+        
+        deg += 360;
+    }
+    
+
+    
+    if(deg < 330 && deg >= 270) {
+        
+        
+        double delayInSeconds = 0.5;
+        dispatch_time_t popTime = dispatch_time(DISPATCH_TIME_NOW, delayInSeconds * NSEC_PER_SEC);
+        dispatch_after(popTime, dispatch_get_main_queue(), ^(void){
+            [self.delegate wheelDidChangeValue:[NSString stringWithFormat:@"Catalogue"]:
+             self.currentSector];
+            
+        });
+        
+    } else if(deg < 270 && deg >= 210){
+        
+        double delayInSeconds = 0.5;
+        dispatch_time_t popTime = dispatch_time(DISPATCH_TIME_NOW, delayInSeconds * NSEC_PER_SEC);
+        dispatch_after(popTime, dispatch_get_main_queue(), ^(void){
+            [self.delegate wheelDidChangeValue:[NSString stringWithFormat:@"Photographes"]:
+             self.currentSector];
+            
+        });
+        
+    } else if(deg < 210 && deg >= 150){
+        
+        double delayInSeconds = 0.5;
+        dispatch_time_t popTime = dispatch_time(DISPATCH_TIME_NOW, delayInSeconds * NSEC_PER_SEC);
+        dispatch_after(popTime, dispatch_get_main_queue(), ^(void){
+            [self.delegate wheelDidChangeValue:[NSString stringWithFormat:@"Favoris"]:
+             self.currentSector];
+            
+        });
+        
+    } else if(deg < 150 && deg >= 90){
+        
+        double delayInSeconds = 0.5;
+        dispatch_time_t popTime = dispatch_time(DISPATCH_TIME_NOW, delayInSeconds * NSEC_PER_SEC);
+        dispatch_after(popTime, dispatch_get_main_queue(), ^(void){
+            [self.delegate wheelDidChangeValue:[NSString stringWithFormat:@"Carte"]:
+             self.currentSector];
+            
+        });
+    } else if(deg < 90 && deg >= 30){
+        
+        double delayInSeconds = 0.5;
+        dispatch_time_t popTime = dispatch_time(DISPATCH_TIME_NOW, delayInSeconds * NSEC_PER_SEC);
+        dispatch_after(popTime, dispatch_get_main_queue(), ^(void){
+            [self.delegate wheelDidChangeValue:[NSString stringWithFormat:@"Informations"]:
+             self.currentSector];
+            
+        });
+        
+    } else {
+        
+        [self.delegate wheelDidChangeValue:[NSString stringWithFormat:@"Photoquai 4"]:
+         self.currentSector];
+        
+    }
     
     // 10 - Highlight selected sector
 	UIImageView *im = [self getSectorByValue:currentSector];
-	im.alpha = maxAlphavalue;
+    
+    [im setImage:[UIImage imageNamed:@"selection.png"]];
+
     
 }
 

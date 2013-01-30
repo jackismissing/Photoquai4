@@ -394,20 +394,45 @@
         [alert show];
     }
 
-    
-//    UIImage *picturePHQMail = [UIImage imageWithData:[NSData dataWithContentsOfURL:[NSURL URLWithString:linkImg]]];
-//    NSData *imageData = UIImagePNGRepresentation(picturePHQMail);
-//    [mailer addAttachmentData:imageData mimeType:@"image/png" fileName:@"PHQPhotography"];
-//    NSString *emailBody = @"J'apprécie cette photo de l'exposition PHQ";
-//    [mailer setMessageBody:emailBody isHTML:NO];
-//    [self presentModalViewController:mailer animated:YES];
 }
 
 
 //Annulation du mail
-- (void)mailComposeController:(MFMailComposeViewController*)controller
-          didFinishWithResult:(MFMailComposeResult)result
-                        error:(NSError*)error{
+- (void)mailComposeController:(MFMailComposeViewController*)controller didFinishWithResult:(MFMailComposeResult)result error:(NSError*)error
+{
+    switch (result)
+    {
+        case MFMailComposeResultCancelled:
+            NSLog(@"Mail cancelled: you cancelled the operation and no email message was queued.");
+            break;
+        case MFMailComposeResultSaved:
+            NSLog(@"Mail saved: you saved the email message in the drafts folder.");
+            break;
+        case MFMailComposeResultSent:
+        {
+            CustomAlertView *alert = [[CustomAlertView alloc]
+                                      initWithTitle:nil
+                                      message:@"Votre mail a été correctement envoyé"
+                                      delegate:self
+                                      cancelButtonTitle:@"OK" otherButtonTitles:nil];
+            [alert show];
+        }
+            break;
+        case MFMailComposeResultFailed:
+        {
+            CustomAlertView *alert = [[CustomAlertView alloc]
+                                      initWithTitle:nil
+                                      message:@"Une erreur a été rencontrée, veuillez essayer plus tard."
+                                      delegate:self
+                                      cancelButtonTitle:@"OK" otherButtonTitles:nil];
+            [alert show];
+        }
+            break;
+        default:
+            NSLog(@"Mail not sent.");
+            break;
+    }
+    // Remove the mail view
     [UIView animateWithDuration:0.5
                           delay:0
                         options: UIViewAnimationCurveEaseOut

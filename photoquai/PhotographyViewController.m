@@ -9,12 +9,18 @@
 
 #import "PhotographyViewController.h"
 
-@interface PhotographyViewController ()
+#import "MapPhqViewController.h"
+
+@interface PhotographyViewController (){
+        MKPinAnnotationView *pinView;
+}
 
 @end
 
 
 @implementation PhotographyViewController
+@synthesize map;
+@synthesize mapView;
 
 
 
@@ -153,6 +159,67 @@
     [self.view addSubview:audioDescription];
     
     imageLocation = [[ImageLocation alloc] initWithFrame:CGRectMake(0, 500, screenWidth, 300)];
+    
+    
+    ////////////////////////////////////////////////////////////////////////////////////// MAP ///////
+    
+    
+    
+    map = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"MAP_ok.png"]];
+    
+    map.userInteractionEnabled = YES;
+    
+    
+    // Sroll view init
+    
+    mapView = [[UIScrollView alloc] initWithFrame:CGRectMake(0, 1, screenWidth, 299)];
+    self.mapView.minimumZoomScale=0.2;
+    self.mapView.maximumZoomScale=1.0;
+    
+    self.mapView.contentSize=CGSizeMake(3951, 3396);
+    self.mapView.clipsToBounds = YES;
+    self.mapView.delegate=self;
+    
+    [mapView scrollRectToVisible:CGRectMake(880, 570, self.view.frame.size.width, self.view.frame.size.height) animated:NO];
+    
+    [mapView addSubview:map];
+    self.mapView.zoomScale=0.4;
+    
+    
+    
+    /* MapViewWrapper : usefull to add UIViews over the map (so it doesn't rescale)
+     
+     UIView *mapViewWrapper = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 2070, 1508)];
+     
+     [mapViewWrapper addSubview:mapView];
+     */
+    
+    pinView = [[MKPinAnnotationView alloc] initWithAnnotation:nil reuseIdentifier:@""];
+    pinView.center = CGPointMake(1035, 954);
+    
+    UIImage *pinImg = [UIImage imageNamed:@"localiser.png"];
+    
+    
+    
+    pinView.image = pinImg;
+    
+    
+    
+    
+    // Add frame
+    
+    // pinView.frame = CGRectMake(50 + 100*i, 100 + 100*i, 32, 39);
+    
+    
+    
+    
+
+    [map addSubview:pinView];
+
+    
+    [imageLocation addSubview:mapView];
+
+    
     [self.view addSubview:imageLocation];
     
 #pragma mark - Favoris 
@@ -591,6 +658,15 @@
 //    //return YES;
 //}
 
+- (UIView *)viewForZoomingInScrollView:(UIScrollView *)scrollView
+{
+    
+    
+    
+    
+    return self.map;
+    
+}
 
 
 

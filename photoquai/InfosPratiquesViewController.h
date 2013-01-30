@@ -31,6 +31,8 @@
 
 @property(strong, nonatomic) UIView *metroView;
 
+@property(strong, nonatomic) UIScrollView *metroViewScroll;
+
 @property(strong, nonatomic) UIView *rerView;
 
 @property(strong, nonatomic) UIView *busView;

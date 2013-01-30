@@ -37,4 +37,6 @@
 
 -(void)scrollToSection : (NSInteger)sectionNumber;
 
+-(void)showArtistPage : (NSInteger)idPhotographer;
+
 @end

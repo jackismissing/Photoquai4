@@ -55,7 +55,7 @@
     
     UIImageView *daImage = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"da.png"]];
     
-    scrollView.contentSize = CGSizeMake(daImage.frame.size.width, daImage.frame.size.height);
+    scrollView.contentSize = CGSizeMake(daImage.frame.size.width, daImage.frame.size.height + self.navigationController.navigationBar.frame.size.height);
     
     
     [scrollView addSubview:daImage];

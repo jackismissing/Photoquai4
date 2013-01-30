@@ -16,6 +16,7 @@
 #import "FavoritePhotographerViewController.h"
 #import "FavorisPageViewController.h"
 
+
 @interface NavigationViewController ()
 
 @end
@@ -37,26 +38,62 @@
 {
     // 1 - Call super method
     [super viewDidLoad];
+    
+        [self setTitle:@"PHQ4"];
+    
+    // Pattern
+    
+    self.view.backgroundColor = [[UIColor alloc] initWithPatternImage:[UIImage imageNamed:@"fondnoirtexture.png"]];
+    
     // 2 - Create sector label
-	sectorLabel = [[UILabel alloc] initWithFrame:CGRectMake(100, 350, 120, 30)];
+	sectorLabel = [[UILabel alloc] initWithFrame:CGRectMake(85, 30, 150, 30)];
 	sectorLabel.textAlignment = UITextAlignmentCenter;
+    
+    sectorLabel.font = [UIFont fontWithName:@"Parisine" size:18];
+    
+    sectorLabel.textColor = [UIColor whiteColor];
+    
+    sectorLabel.backgroundColor = [UIColor clearColor];
+    
+    // Separator
+    
+    UIImageView *separator = [[UIImageView alloc]initWithImage:[UIImage imageNamed:@"filetRougeAgenda.png"]];
+    
+    separator.center = CGPointMake(self.view.frame.size.width/2, sectorLabel.frame.origin.y + 65);
+    
+    [self.view addSubview:separator];
+    
 	[self.view addSubview:sectorLabel];
     // 3 - Set up rotary wheel
-    rotaryWheel *wheel = [[rotaryWheel alloc] initWithFrame:CGRectMake(0, 0, 240, 320)
+    rotaryWheel *wheel = [[rotaryWheel alloc] initWithFrame:CGRectMake(0, 0, 227, 227)
                                                 andDelegate:self
                                                withSections:6];
-    wheel.center = CGPointMake(160, 120);
-    wheel.backgroundColor = [UIColor grayColor];
+    wheel.center = CGPointMake(self.view.frame.size.width / 2, self.view.frame.size.height/2 + 30);
+
     // 4 - Add wheel to view
     [self.view addSubview:wheel];
     
-    // Add cancel button
+    UIImageView *contours = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"contours.png"]];
     
-    UIButton *cancelBtn = [[UIButton alloc] initWithFrame:CGRectMake(20, 250, 150, 20)];
-    [cancelBtn addTarget:self action:@selector(dismissPage) forControlEvents:UIControlEventTouchUpInside];
-    [cancelBtn setTitle:@"Annuler" forState:UIControlStateNormal];
-    [cancelBtn setBackgroundColor:[UIColor redColor]];
-    [self.view addSubview:cancelBtn];
+    contours.center = CGPointMake(self.view.frame.size.width / 2, self.view.frame.size.height/2 + 30);
+    
+    [self.view addSubview:contours];
+    
+    
+
+    [self.navigationController.navigationBar setBackgroundImage:[UIImage imageNamed:@"navigationBar.png"] forBarMetrics:UIBarMetricsDefault];
+    
+    UIImage *buttonImage = [UIImage imageNamed:@"closeMap.png"];
+    
+    UIButton *button = [UIButton buttonWithType:UIButtonTypeCustom];
+    [button setImage:buttonImage forState:UIControlStateNormal];
+    button.frame = CGRectMake(0, 0, buttonImage.size.width + 20, buttonImage.size.height);
+    [button addTarget:self action:@selector(dismissPage
+                                            ) forControlEvents:UIControlEventTouchUpInside];
+    
+    UIBarButtonItem *customBarItem = [[UIBarButtonItem alloc] initWithCustomView:button];
+    self.navigationItem.rightBarButtonItem = customBarItem;
+
 }
 
 
@@ -77,12 +114,12 @@
     if(selectedSection == 1) {
         
         //NSLog(@"test");
-                
+        
         ViewController *catalogueView = [[ViewController alloc] init];
         [self.navigationController pushViewController:catalogueView animated:YES];
     }
     
-    if(selectedSection == 2) {
+    if(selectedSection == 5) {
         
         //NSLog(@"2");
         
@@ -103,6 +140,15 @@
     
     if(selectedSection == 3) {
         
+        FavorisPageViewController *FavorisPageView = [[FavorisPageViewController alloc] init];
+
+        
+        
+        [self.navigationController pushViewController:FavorisPageView animated:YES];
+    }
+    
+    if(selectedSection == 4) {
+        
         MapPhqViewController *mapView = [[MapPhqViewController alloc] init];
         
         //UINavigationController *agendaNavigationController = [[UINavigationController alloc] initWithRootViewController:agendaView];
@@ -116,23 +162,20 @@
         [self.navigationController pushViewController:mapView animated:YES];
     }
     
-    if (selectedSection == 4) {
-//        FavoritesPicturesViewController *favoritesPictures = [[FavoritesPicturesViewController alloc] init];
-//        [self.navigationController pushViewController:favoritesPictures animated:YES];
+    if (selectedSection == 2) {
+        //FavoritesPicturesViewController *favoritesPictures = [[FavoritesPicturesViewController alloc] init];
+        //[self.navigationController pushViewController:favoritesPictures animated:YES];
         
-        //ArtistsLisViewController *artistsView = [[ArtistsLisViewController alloc] init];
-        //[self.navigationController pushViewController:artistsView animated:YES];
+        ArtistsLisViewController *artistsView = [[ArtistsLisViewController alloc] init];
+        [self.navigationController pushViewController:artistsView animated:YES];
         
-        //#import "FavorisPageViewController.h"
+        // FavoritePhotographerViewController *favoritePhotograhers = [[FavoritePhotographerViewController alloc] init];
+        // [self.navigationController pushViewController:favoritePhotograhers animated:YES];
         
-        FavorisPageViewController *favoritesPage = [[FavorisPageViewController alloc] init];
-        [self.navigationController pushViewController:favoritesPage animated:YES];
-
-//        FavoritePhotographerViewController  *favoritePhotograhers = [[FavoritePhotographerViewController alloc] init];
-//        [self.navigationController pushViewController:favoritePhotograhers animated:YES];
-
-
-
+        
+        // FavoritePhotographerViewController *favoritePhotograhers = [[FavoritePhotographerViewController alloc] init];
+        //[self.navigationController pushViewController:favoritePhotograhers animated:YES];
+        
     }
      
      

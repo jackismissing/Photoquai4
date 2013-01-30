@@ -7,6 +7,7 @@
 //
 
 #import "MapPhqViewController.h"
+#import "PhotographyViewController.h"
 
 
 @interface MapPhqViewController ()
@@ -53,7 +54,7 @@
     // Map image init
     
     
-    map = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"MAP_ok.png"]];
+    map = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"MAP_ok"]];
     
     map.userInteractionEnabled = YES;
     [map addGestureRecognizer:[[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(marsTapped)]];
@@ -61,15 +62,17 @@
     // Sroll view init
     
     mapView = [[UIScrollView alloc] initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, self.view.frame.size.height)];
-    self.mapView.minimumZoomScale=0.4;
-    self.mapView.maximumZoomScale=6.0;
-    self.mapView.contentSize=CGSizeMake(2070, 1508);
+    self.mapView.minimumZoomScale=1.0;
+    self.mapView.maximumZoomScale=2.0;
+
+    self.mapView.contentSize=CGSizeMake(2000, 1719);
     self.mapView.clipsToBounds = YES;
     self.mapView.delegate=self;
     
-    [mapView scrollRectToVisible:CGRectMake(1035, 754, self.view.frame.size.width, self.view.frame.size.height) animated:NO];
+    [mapView scrollRectToVisible:CGRectMake(950, 754, self.view.frame.size.width, self.view.frame.size.height) animated:NO];
     
     [mapView addSubview:map];
+        self.mapView.zoomScale=0.2;
     
     /* MapViewWrapper : usefull to add UIViews over the map (so it doesn't rescale)
      
@@ -98,9 +101,9 @@
     [self.navigationController.navigationBar setBackgroundImage:[UIImage imageNamed:@"navigationBar.png"] forBarMetrics:UIBarMetricsDefault];
     
     UIImage* image = [UIImage imageNamed:@"menu.png"];
-    CGRect frame = CGRectMake(0, 0, image.size.width, image.size.height);
+    CGRect frame = CGRectMake(0, 0, image.size.width + 20, image.size.height);
     UIButton *menuButton = [[UIButton alloc] initWithFrame:frame];
-    [menuButton setBackgroundImage:image forState:UIControlStateNormal];
+    [menuButton setImage:image forState:UIControlStateNormal];
     //[menuButton setShowsTouchWhenHighlighted:YES];
     
     [menuButton addTarget:self action:@selector(showMenu) forControlEvents:UIControlEventTouchUpInside];
@@ -130,14 +133,22 @@
          */
         
         pinView = [[MKPinAnnotationView alloc] initWithAnnotation:nil reuseIdentifier:@""];
-        pinView.center = CGPointMake(50 + 100*i, 100 + 100*i);
+        pinView.center = CGPointMake(250 + 100*i, 250 - 10*i);
+        
+        UIImage *pinImg = [UIImage imageNamed:@"localiser.png"];
+        
+        
+        
+        pinView.image = pinImg;
+        
+
         
         
         // Add frame
         
         // pinView.frame = CGRectMake(50 + 100*i, 100 + 100*i, 32, 39);
         
-        NSLog(@"%@", NSStringFromCGRect(pinView.frame));
+        
         
         
         [pinView addGestureRecognizer:[[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(topPinTapped:)]];
@@ -149,15 +160,108 @@
          [pins insertObject:pinView atIndex:i];
          */
         
-        UIButton *topDisclosure = [UIButton buttonWithType:UIButtonTypeDetailDisclosure];
-        [topDisclosure addGestureRecognizer:[[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(disclosureTapped)]];
+        
+        
         
         calloutView = [SMCalloutView new];
         calloutView.delegate = self;
-        calloutView.title = @"Artist";
-        calloutView.rightAccessoryView = topDisclosure;
-        calloutView.calloutOffset = pinView.calloutOffset;
+        
+                
+        /*
+        calloutView.title = @"Spring-Summer collection 2018";
+        calloutView.subtitle = @"2011, Maroc";
+        
+         
+         */
+        
+        //calloutView.rightAccessoryView = topDisclosure;
+        //calloutView.calloutOffset = pinView.calloutOffset;
+        
+        ///////////////////////////////////////////////////////////////////////////////////////////// Customize callout view //////
+        
+        UIView *calloutCustomView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 260, 83)];
+        
+        UIImageView *calloutBg = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"calloutBg.png"]];
+        
+        UIImageView *artistPic = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"mapArtistPic.png"]];
+        
+        // Décallage de l'image
+        
+        artistPic.center = CGPointMake(artistPic.frame.size.width / 2 + 5 , artistPic.frame.size.height / 2 + 5);
+        
+        // Label
+        
+        UILabel *pinLabel = [[UILabel alloc] initWithFrame:CGRectMake(81, 15, 150, 35)];
+        
+        pinLabel.backgroundColor = [UIColor clearColor];
+                             
+        pinLabel.text = @"Spring-Summer collection 2018 (3)";
+        
+        pinLabel.numberOfLines = 2;
+        
+
+        
+        pinLabel.font = [UIFont fontWithName:@"Parisine-Bold" size:15];
+        
+        pinLabel.textColor = [UIColor whiteColor];
+        
+        // Label subtitle
+        
+        UILabel *pinSubtitle = [[UILabel alloc] initWithFrame:CGRectMake(81, pinLabel.frame.size.height + 15, 150, 20)];
+        
+        pinSubtitle.backgroundColor = [UIColor clearColor];
+        
+        pinSubtitle.text = @"2011, Maroc";
+        
+        pinSubtitle.numberOfLines = 1;
+        
+        
+        
+        pinSubtitle.font = [UIFont fontWithName:@"Parisine-Italic" size:12];
+        
+        pinSubtitle.textColor = [UIColor grayColor];
+        
+        // Disclosure buton
+        
+        UIImageView *disclosure = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"disclosure.png"]];
+        
+        disclosure.center = CGPointMake(240, 41);
+        
+        
+        UIButton *displayPhoto = [[UIButton alloc]initWithFrame:CGRectMake(0, 0, 40, 83)];
+        
+        [displayPhoto setBackgroundImage:[UIImage imageNamed:@"calloutBg.png"] forState:UIControlStateNormal];
+        
+        [displayPhoto setImage:[UIImage imageNamed:@"disclosure.png"] forState:UIControlStateNormal];
+        
+        [displayPhoto addGestureRecognizer:[[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(popUpTapped:)]];
+
+    
+
+        
+        
+        [calloutCustomView addSubview:calloutBg];
+        
+        [calloutCustomView addSubview:artistPic];
+        
+        [calloutCustomView addSubview:pinLabel];
+        
+        [calloutCustomView addSubview:pinSubtitle];
+        
+        
+        
+
+        
+        calloutView.contentView = calloutCustomView;
+        
+        calloutView.rightAccessoryView = displayPhoto;
+
+    
+    
+        
     }
+    
+    
     
     
     for(id pin in pins)
@@ -172,9 +276,14 @@
     
 }
 
+
+
 - (UIView *)viewForZoomingInScrollView:(UIScrollView *)scrollView
 {
-    [self displayPins];
+
+    
+    
+    
     return self.map;
     
 }
@@ -187,6 +296,7 @@
     pinView = (MKPinAnnotationView *)sender.view;
     if (!calloutView.window)
         [self performSelector:@selector(popupCalloutView) withObject:nil afterDelay:1.0/3.0];
+    
 }
 
 - (void)popupCalloutView {
@@ -200,6 +310,10 @@
                       constrainedToView:mapView
                permittedArrowDirections:SMCalloutArrowDirectionDown
                                animated:YES];
+    
+
+    
+
     
     
     // Here's an alternate method that adds the callout *inside* the pin view. This may seem strange, but it's how MKMapView
@@ -220,7 +334,7 @@
 
 - (void)mapView:(MKMapView *)mapView didSelectAnnotationView:(MKAnnotationView *)view
 {
-    NSLog(@"tapped");
+
 }
 
 - (NSTimeInterval)calloutView:(SMCalloutView *)theCalloutView delayForRepositionWithSize:(CGSize)offset {
@@ -233,10 +347,13 @@
     return kSMCalloutViewRepositionDelayForUIScrollView;
 }
 
-- (void)disclosureTapped {
-    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Tap!" message:@"You tapped the disclosure button."
-                                                   delegate:nil cancelButtonTitle:nil otherButtonTitles:@"Whatevs",nil];
-    [alert show];
+- (void)popUpTapped : (id)sender {
+    
+    NSLog(@"J'aime le caca");
+    PhotographyViewController *imageViewController = [[PhotographyViewController alloc] initWithNibName:@"PhotographyViewController" bundle:nil];
+    imageViewController.idPicture = 13;
+    [self.navigationController pushViewController:imageViewController animated:YES];
+
 }
 
 - (void)marsTapped {
@@ -245,7 +362,7 @@
 }
 
 - (void)dismissCallout {
-    [calloutView dismissCalloutAnimated:NO];
+    [calloutView dismissCalloutAnimated:YES];
 }
 
 - (void)showMenu
@@ -257,7 +374,7 @@
     // This is where you wrap the view up nicely in a navigation controller
     UINavigationController *navigationController = [[UINavigationController alloc] initWithRootViewController:mainMenu];
     
-    [navigationController setNavigationBarHidden:YES animated:NO];
+    [navigationController setNavigationBarHidden:NO animated:NO];
     
     // You can even set the style of stuff before you show it
     //navigationController.navigationBar.barStyle = UIBarStyleBlackTranslucent;
