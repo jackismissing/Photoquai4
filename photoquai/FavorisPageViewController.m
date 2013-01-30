@@ -22,9 +22,9 @@
     [self.navigationController.navigationBar setBackgroundImage:[UIImage imageNamed:@"navigationBar.png"] forBarMetrics:UIBarMetricsDefault];
     
     UIImage* image = [UIImage imageNamed:@"menu.png"];
-    CGRect frame = CGRectMake(0, 0, image.size.width, image.size.height);
+    CGRect frame = CGRectMake(0, 0, image.size.width + 20, image.size.height);
     UIButton *menuButton = [[UIButton alloc] initWithFrame:frame];
-    [menuButton setBackgroundImage:image forState:UIControlStateNormal];
+    [menuButton setImage:image forState:UIControlStateNormal];
     //[menuButton setShowsTouchWhenHighlighted:YES];
     
     [menuButton addTarget:self action:@selector(showMenu) forControlEvents:UIControlEventTouchUpInside];
@@ -40,7 +40,6 @@
     
     UIBarButtonItem *removeButtonItem = [[UIBarButtonItem alloc] initWithCustomView:removeButton];
     self.navigationItem.rightBarButtonItem = removeButtonItem;
-    
 }
 
 - (void)viewDidLoad
@@ -73,7 +72,7 @@
     //Notification de la supression des favoris
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(removeFavorites) name:@"removeFavorites" object:nil];
     
-    if ([favoritesPictures count] == 0 ) {
+    if ([favoritesPictures count] == 0 && [favoritesPhotographers count] == 0) {
         CustomAlertView *alert = [[CustomAlertView alloc]
                                   initWithTitle:nil
                                   message:@"Vous n'avez pas de favoris pour le moment."
@@ -109,6 +108,7 @@
 
 #pragma mark - Suppression des élements
 
+//Active la possibilité de supprimer des vues
 - (void) suppfavoris{
     if(removeEnabled == NO){
         [fakeActionSheet show];
@@ -185,6 +185,7 @@
     switch (idToolBarItem) {
         case 0: //Description volet
         {
+            
             toolbarFavorites.photographersFavoritesImage.image = [UIImage imageNamed:@"favoris-artistes-off"];
             toolbarFavorites.photosFavoritesImage.image = [UIImage imageNamed:@"favoris-photos-on"];
             toolbarFavorites.photographersFavoritesLabel.textColor = [UIColor r:109 g:109 b:109 alpha:1];
@@ -201,18 +202,20 @@
                                      view.alpha = 0;
                                  }
                                  completion:^(BOOL finished){
-                                     for (UIView *view in myScrollView.subviews) {
+                                     [view removeFromSuperview];
+                                     //for (UIView *view in myScrollView.subviews) {
                                          //[[view viewWithTag:[[favoritesToRemove objectAtIndex:i] intValue]] removeFromSuperview];
-                                         [view removeFromSuperview];
-                                     }
-                                     [self loadFavoritesPictures];
-                                     
+                                         
+                                     //}
+                                     //[self loadFavoritesPictures];
                                  }];
                 
             }
+            [self loadFavoritesPictures];
         }break;
         case 1:
         {
+            
             toolbarFavorites.photographersFavoritesImage.image = [UIImage imageNamed:@"favoris-artistes-on"];
             toolbarFavorites.photosFavoritesImage.image = [UIImage imageNamed:@"favoris-photos-off"];
             toolbarFavorites.photographersFavoritesLabel.textColor = [UIColor whiteColor];
@@ -230,13 +233,13 @@
                                      view.alpha = 0;
                                  }
                                  completion:^(BOOL finished){
-                                     for (UIView *view in myScrollView.subviews) {
-                                         //[[view viewWithTag:[[favoritesToRemove objectAtIndex:i] intValue]] removeFromSuperview];
+                                     //for (UIView *view in myScrollView.subviews) {
                                          [view removeFromSuperview];
-                                     }
-                                     [self loadFavoritesPhotographers];
+                                         //}
+                                     //[self loadFavoritesPhotographers];
                                  }];
-            }
+                
+            }[self loadFavoritesPhotographers];
         }break;
     }
 }
@@ -358,9 +361,10 @@
 
 
 
-#pragma mark - Gestion des pages
+#pragma mark - Affichage des pages
 
 - (void) loadFavoritesPictures{
+    
     AppDelegate *appdelegate = (AppDelegate *)[[UIApplication sharedApplication] delegate];
     
     int xPosition = 0;
@@ -415,7 +419,7 @@
         for (int heightColumn = 0; heightColumn < 2 ; heightColumn++) {
             
             int hauteurColonne = 0;
-            for(ImageWall *view in myScrollView.subviews){
+            for(FavoriteElement *view in myScrollView.subviews){
                 
                 int idColonne = [[view idColonne] integerValue];
                 if (idColonne == heightColumn) {
@@ -435,6 +439,7 @@
 }
 
 - (void) loadFavoritesPhotographers{
+    NSLog(@"loadFavoritesPhotographers");
     int yPosition = 0, xPosition = 0;
     
     for (int i = 0; i < [favoritesPhotographers count]; i++) {
@@ -447,7 +452,7 @@
             yPosition++;
         }
         
-        artistFavoriteElement = [[ArtistFavoriteElement alloc] initWithFrame:CGRectMake(xPosition * 150 + 13, (yPosition * 189) + 15, 145, 200) withId:[[favoritesPhotographers objectAtIndex:i] intValue]];
+        artistFavoriteElement = [[ArtistFavoriteElement alloc] initWithFrame:CGRectMake(xPosition * 150 + 5, (yPosition * 189) + 5, 145, 200) withId:[[favoritesPhotographers objectAtIndex:i] intValue]];
         [artistFavoriteElement setIdColonne:xPosition];
         
         [myScrollView addSubview:artistFavoriteElement];
@@ -508,7 +513,7 @@
     // This is where you wrap the view up nicely in a navigation controller
     UINavigationController *navigationController = [[UINavigationController alloc] initWithRootViewController:mainMenu];
     
-    [navigationController setNavigationBarHidden:YES animated:NO];
+    [navigationController setNavigationBarHidden:NO animated:NO];
     
     // You can even set the style of stuff before you show it
     //navigationController.navigationBar.barStyle = UIBarStyleBlackTranslucent;
@@ -519,7 +524,6 @@
     
     // [self presentModalViewController:mainMenu animated:YES];
 }
-
 
 
 - (void)didReceiveMemoryWarning

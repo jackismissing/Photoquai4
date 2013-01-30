@@ -67,7 +67,7 @@
     photosFavoritesLabel.shadowColor = [UIColor blackColor];
     photosFavoritesLabel.shadowOffset = CGSizeMake(0, -1);
     photosFavoritesLabel.backgroundColor = [UIColor clearColor];
-    photosFavoritesLabel.frame = CGRectMake((photosFavoritesView.frame.size.width - photosFavoritesLabel.frame.size.width) / 2, photosFavoritesLabelY, 55, 15);
+    photosFavoritesLabel.frame = CGRectMake(((photosFavoritesView.frame.size.width - photosFavoritesLabel.frame.size.width) / 2) - 10, photosFavoritesLabelY, 55, 15);
     [photosFavoritesLabel sizeToFit];
     
     UITapGestureRecognizer *favoritesPhotographiesPage = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(selectFavoriteType:)];
@@ -92,7 +92,7 @@
     //NSString *myText = @"Informations";
     float photographersFavoritesLabelY = photographersFavoritesImage.frame.origin.y + photographersFavoritesImage.frame.size.height + 10;
     photographersFavoritesLabel = [[UILabel alloc] initWithFrame:labelFrame];
-    photographersFavoritesLabel.text = @"Photographies";
+    photographersFavoritesLabel.text = @"Photographes";
     photographersFavoritesLabel.font = formatLabels;
     photographersFavoritesLabel.textColor = [UIColor r:109 g:109 b:109 alpha:1];
     photographersFavoritesLabel.shadowColor = [UIColor blackColor];
