@@ -173,17 +173,17 @@
     // Sroll view init
     
     mapView = [[UIScrollView alloc] initWithFrame:CGRectMake(0, 1, screenWidth, 299)];
-    self.mapView.minimumZoomScale=0.2;
-    self.mapView.maximumZoomScale=1.0;
+    self.mapView.minimumZoomScale=0.7;
+    self.mapView.maximumZoomScale=2.0;
     
-    self.mapView.contentSize=CGSizeMake(3951, 3396);
+    self.mapView.contentSize=CGSizeMake(2000, 1719);
     self.mapView.clipsToBounds = YES;
     self.mapView.delegate=self;
     
-    [mapView scrollRectToVisible:CGRectMake(880, 570, self.view.frame.size.width, self.view.frame.size.height) animated:NO];
+    [mapView scrollRectToVisible:CGRectMake(170, -50, self.view.frame.size.width, self.view.frame.size.height) animated:NO];
     
     [mapView addSubview:map];
-    self.mapView.zoomScale=0.4;
+    self.mapView.zoomScale=0.7;
     
     
     
@@ -195,7 +195,7 @@
      */
     
     pinView = [[MKPinAnnotationView alloc] initWithAnnotation:nil reuseIdentifier:@""];
-    pinView.center = CGPointMake(1035, 954);
+    pinView.center = CGPointMake(350, 230);
     
     UIImage *pinImg = [UIImage imageNamed:@"localiser.png"];
     

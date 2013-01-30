@@ -20,6 +20,8 @@
 
 #import "CommissaryViewController.h"
 
+#import "PartenairesViewController.h"
+
 #define MAINLABEL_TAG 1
 
 #define NUMBERLABEL_TAG 1
@@ -375,6 +377,24 @@
         // [self presentViewController:navigationController animated:YES completion:nil];
         
         [self.navigationController pushViewController:creditsView animated:YES];
+        
+        
+        
+        
+    }
+    if(indexPath.row == 4) {
+        
+        
+        
+        PartenairesViewController *partenairesView = [[PartenairesViewController alloc] init] ;
+        
+        UINavigationController *navigationController = [[UINavigationController alloc] initWithRootViewController:partenairesView];
+        
+        [navigationController setNavigationBarHidden:NO];
+        
+        // [self presentViewController:navigationController animated:YES completion:nil];
+        
+        [self.navigationController pushViewController:partenairesView animated:YES];
         
         
         

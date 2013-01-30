@@ -107,7 +107,7 @@
     
     // Init table
     
-    self.infosTableView = [[UITableView alloc] initWithFrame:CGRectMake(self.view.frame.origin.x, 40, self.view.frame.size.width, self.view.frame.size.height) style:UITableViewStylePlain];
+    self.infosTableView = [[UITableView alloc] initWithFrame:CGRectMake(self.view.frame.origin.x, 40, self.view.frame.size.width, self.view.frame.size.height - 50) style:UITableViewStylePlain];
     
     UIView *v = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 320, 10)];
     v.backgroundColor = [UIColor clearColor];

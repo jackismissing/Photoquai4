@@ -69,10 +69,10 @@
     self.mapView.clipsToBounds = YES;
     self.mapView.delegate=self;
     
-    [mapView scrollRectToVisible:CGRectMake(950, 754, self.view.frame.size.width, self.view.frame.size.height) animated:NO];
+    [mapView scrollRectToVisible:CGRectMake(250, 150, self.view.frame.size.width, self.view.frame.size.height) animated:NO];
     
     [mapView addSubview:map];
-        self.mapView.zoomScale=0.2;
+        self.mapView.zoomScale=1;
     
     /* MapViewWrapper : usefull to add UIViews over the map (so it doesn't rescale)
      

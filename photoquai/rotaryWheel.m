@@ -129,7 +129,7 @@ static float maxAlphavalue = 1.0;
         [self buildSectorsOdd];
     }
     
-    [self.delegate wheelDidChangeValue:[NSString stringWithFormat:@"Photoquai 4"]:
+    [self.delegate wheelDidChangeValue:[NSString stringWithFormat:@"PHQ4"]:
      self.currentSector];
     
    
@@ -239,7 +239,7 @@ static float maxAlphavalue = 1.0;
     } else if(deg < 270 && deg >= 210){
         
         
-            [self.delegate wheelDidChangeValue:[NSString stringWithFormat:@"Photographes"]:
+            [self.delegate wheelDidChangeValue:[NSString stringWithFormat:@"Artistes"]:
              self.currentSector];
             
 
@@ -255,7 +255,7 @@ static float maxAlphavalue = 1.0;
     } else if(deg < 150 && deg >= 90){
         
        
-            [self.delegate wheelDidChangeValue:[NSString stringWithFormat:@"Carte"]:
+            [self.delegate wheelDidChangeValue:[NSString stringWithFormat:@"Plan"]:
              self.currentSector];
             
 
@@ -269,7 +269,7 @@ static float maxAlphavalue = 1.0;
         
     } else {
         
-        [self.delegate wheelDidChangeValue:[NSString stringWithFormat:@"Photoquai 4"]:
+        [self.delegate wheelDidChangeValue:[NSString stringWithFormat:@"PHQ4"]:
          self.currentSector];
         
     }
@@ -415,7 +415,7 @@ static float maxAlphavalue = 1.0;
         double delayInSeconds = 0.5;
         dispatch_time_t popTime = dispatch_time(DISPATCH_TIME_NOW, delayInSeconds * NSEC_PER_SEC);
         dispatch_after(popTime, dispatch_get_main_queue(), ^(void){
-            [self.delegate wheelDidChangeValue:[NSString stringWithFormat:@"Photographes"]:
+            [self.delegate wheelDidChangeValue:[NSString stringWithFormat:@"Artistes"]:
              self.currentSector];
             
         });
@@ -435,7 +435,7 @@ static float maxAlphavalue = 1.0;
         double delayInSeconds = 0.5;
         dispatch_time_t popTime = dispatch_time(DISPATCH_TIME_NOW, delayInSeconds * NSEC_PER_SEC);
         dispatch_after(popTime, dispatch_get_main_queue(), ^(void){
-            [self.delegate wheelDidChangeValue:[NSString stringWithFormat:@"Carte"]:
+            [self.delegate wheelDidChangeValue:[NSString stringWithFormat:@"Plan"]:
              self.currentSector];
             
         });
@@ -451,7 +451,7 @@ static float maxAlphavalue = 1.0;
         
     } else {
         
-        [self.delegate wheelDidChangeValue:[NSString stringWithFormat:@"Photoquai 4"]:
+        [self.delegate wheelDidChangeValue:[NSString stringWithFormat:@"PHQ4"]:
          self.currentSector];
         
     }

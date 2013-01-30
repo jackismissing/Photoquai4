@@ -39,7 +39,7 @@
     // 1 - Call super method
     [super viewDidLoad];
     
-        [self setTitle:@"PHQ4"];
+        [self setTitle:@"Photoquai 2013"];
     
     // Pattern
     
@@ -92,7 +92,7 @@
                                             ) forControlEvents:UIControlEventTouchUpInside];
     
     UIBarButtonItem *customBarItem = [[UIBarButtonItem alloc] initWithCustomView:button];
-    self.navigationItem.rightBarButtonItem = customBarItem;
+    self.navigationItem.leftBarButtonItem = customBarItem;
 
 }
 
