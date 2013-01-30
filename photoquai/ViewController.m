@@ -39,7 +39,7 @@
     oldFavorites = [[NSArray alloc] initWithArray: [preferencesUser objectForKey:@"favorisImages"]];
     [preferencesUser synchronize];
     
-    [self setTitle:@"Catalogue"];
+    [self setTitle:@"Galerie"];
     self.view.backgroundColor = [UIColor whiteColor];
     
     CGRect screenRect = [[UIScreen mainScreen] bounds];

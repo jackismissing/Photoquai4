@@ -370,10 +370,6 @@
     }
 }
 
-
-
-
-
 #pragma mark - Affichage des pages
 
 - (void) loadFavoritesPictures{
@@ -469,29 +465,29 @@
         [artistFavoriteElement setIdColonne:xPosition];
         
         [myScrollView addSubview:artistFavoriteElement];
+        int heightMax = (int) ([favoritesPhotographers count] * 200) / 2;
+//        //Calcul de la hauteur de la scrollview
+//        int heightMax = 0;
+//        //heightColumn récupère la hauteur de chaque colonne
+//        for (int heightColumn = 0; heightColumn < 1 ; heightColumn++) {
+//            
+//            int hauteurColonne = 0;
+//            for(ArtistFavoriteElement *view in myScrollView.subviews){
+//                
+//                int idColonne = [view idColonne];
+//                if (idColonne == heightColumn) {
+//                    
+//                    hauteurColonne += view.frame.size.height + 15;
+//                }
+//            }
+//            
+//            if (hauteurColonne > heightMax) {
+//                
+//                heightMax = hauteurColonne + 5;
+//            }
+//        }
         
-        //Calcul de la hauteur de la scrollview
-        int heightMax = 0;
-        //heightColumn récupère la hauteur de chaque colonne
-        for (int heightColumn = 0; heightColumn < 1 ; heightColumn++) {
-            
-            int hauteurColonne = 0;
-            for(ArtistFavoriteElement *view in myScrollView.subviews){
-                
-                int idColonne = [view idColonne];
-                if (idColonne == heightColumn) {
-                    
-                    hauteurColonne += view.frame.size.height + 15;
-                }
-            }
-            
-            if (hauteurColonne > heightMax) {
-                
-                heightMax = hauteurColonne + 5;
-            }
-        }
-        
-        [myScrollView setContentSize:CGSizeMake(320, heightMax + 70)];
+        [myScrollView setContentSize:CGSizeMake(320, heightMax)];
     }
     
     [self.view addSubview:myScrollView];

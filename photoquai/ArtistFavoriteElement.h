@@ -19,6 +19,7 @@
 }
 
 - (id)initWithFrame:(CGRect)frame withId:(int)anId;
+//- (id)initWithFrame:(CGRect)frame withId:(int)anId colonne:(int)column;
 
 - (int) idColonne;
 

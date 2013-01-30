@@ -14,6 +14,7 @@
 {
     self = [super initWithFrame:frame];
     if (self) {
+        
 
         AppDelegate *appdelegate = (AppDelegate *)[[UIApplication sharedApplication] delegate];
         
