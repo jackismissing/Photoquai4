@@ -487,7 +487,7 @@
 //            }
 //        }
         
-        [myScrollView setContentSize:CGSizeMake(320, heightMax)];
+        [myScrollView setContentSize:CGSizeMake(320, heightMax + 70)];
     }
     
     [self.view addSubview:myScrollView];

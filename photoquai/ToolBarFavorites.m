@@ -98,7 +98,7 @@
     photographersFavoritesLabel.shadowColor = [UIColor blackColor];
     photographersFavoritesLabel.shadowOffset = CGSizeMake(0, -1);
     photographersFavoritesLabel.backgroundColor = [UIColor clearColor];
-    photographersFavoritesLabel.frame = CGRectMake(15 - (photographersFavoritesImage.frame.size.width - photographersFavoritesLabel.frame.size.width) / 2, photographersFavoritesLabelY, 55, 15);
+    photographersFavoritesLabel.frame = CGRectMake(20 - ((photographersFavoritesImage.frame.size.width - photographersFavoritesLabel.frame.size.width) / 2), photographersFavoritesLabelY, 55, 15);
     [photographersFavoritesLabel sizeToFit];
     
     
